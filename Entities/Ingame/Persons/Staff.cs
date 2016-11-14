@@ -1,0 +1,47 @@
+﻿using System;
+using FMScoutFramework.Core.Managers;
+using FMScoutFramework.Core.Offsets;
+using FMScoutFramework.Core.Entities.GameVersions;
+using FMScoutFramework.Core.Entities.InGame.Interfaces;
+
+namespace FMScoutFramework.Core.Entities.InGame
+{
+    public class Staff : Person, IStaff
+    {
+        private StaffOffsets StaffOffsets;
+        public Staff (int memoryAddress, IVersion version)
+            : base (memoryAddress, version)
+        {
+            this.StaffOffsets = new StaffOffsets (version);
+        }
+        public Staff (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+            : base (memoryAddress, originalBytes, version)
+        {
+            this.StaffOffsets = new StaffOffsets (version);
+        }
+
+        protected override Int64 PersonAddress {
+            get {
+                return StaffAddress + StaffOffsets.PersonAddress;
+            }
+        }
+
+        private Int64 StaffAddress {
+            get {
+                return MemoryAddress + Version.PersonOffsets.Staff;
+            }
+        }
+
+        public Int32 ID {
+            get {
+                return PropertyInvoker.Get<Int32> (StaffOffsets.ID, OriginalBytes, StaffAddress, DatabaseMode);
+            }
+        }
+
+        public Int32 RowID {
+            get {
+                return PropertyInvoker.Get<Int32> (StaffOffsets.RowID, OriginalBytes, StaffAddress, DatabaseMode);
+            }
+        }
+    }
+}

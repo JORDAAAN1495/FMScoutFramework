@@ -1,0 +1,290 @@
+﻿using System;
+using FMScoutFramework.Core.Managers;
+using FMScoutFramework.Core.Attributes;
+using FMScoutFramework.Core.Offsets;
+using FMScoutFramework.Core.Entities.GameVersions;
+using FMScoutFramework.Core.Entities.InGame.Interfaces;
+using FMScoutFramework.Core.Utilities;
+
+namespace FMScoutFramework.Core.Entities.InGame
+{
+    public class Player : Person, IPlayer
+    {
+        private PlayerOffsets PlayerOffsets;
+        public Player (int memoryAddress, IVersion version)
+            : base (memoryAddress, version)
+        {
+            this.PlayerOffsets = new PlayerOffsets (version);
+        }
+        public Player (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+            : base (memoryAddress, originalBytes, version)
+        {
+            this.PlayerOffsets = new PlayerOffsets (version);
+        }
+
+        private Int64 PlayerAddress {
+            get {
+                return (MemoryAddress + Version.PersonOffsets.Player);
+            }
+        }
+
+        public int RowID {
+            get {
+                return PropertyInvoker.Get<Int32> (PlayerOffsets.RowID, OriginalBytes, PersonAddress, DatabaseMode);
+            }
+        }
+
+        public int ID {
+            get {
+                return PropertyInvoker.Get<Int32> (PlayerOffsets.UID, OriginalBytes, PersonAddress, DatabaseMode);
+            }
+        }
+
+        public PlayerAttributes PlayerAttributes {
+            get {
+                Int64 startAddress = PlayerAddress + PlayerOffsets.PlayerAttributes;
+                return new PlayerAttributes (startAddress, Version);
+            }
+        }
+
+        public Int32 InjuriesAddress {
+            get {
+                return PropertyInvoker.Get<Int32> (PlayerOffsets.Injuries, OriginalBytes, PlayerAddress, DatabaseMode);
+            }
+        }
+
+        public Injury [] Injuries {
+            get {
+                int numberOfInjuries = ProcessManager.ReadArrayLength (InjuriesAddress);
+                Injury [] retVal = new Injury [numberOfInjuries];
+                for (int i = 0; i < numberOfInjuries; i++) {
+                    int injuryAddress = PropertyInvoker.Get<Int32> ((i * 4), OriginalBytes, InjuriesAddress, DatabaseMode);
+                    injuryAddress = PropertyInvoker.Get<Int32> (0x0, OriginalBytes, injuryAddress, DatabaseMode);
+                    retVal [i] = PropertyInvoker.GetPointer<Injury> (0x8, OriginalBytes, injuryAddress, DatabaseMode, Version);
+                }
+
+                return retVal;
+            }
+        }
+
+        public bool isInjured {
+            get {
+                return (Injuries.Length > 0);
+            }
+        }
+
+        public void Heal ()
+        {
+            ProcessManager.ResizeArray (InjuriesAddress, 0);
+        }
+
+        public Int32 BansAddress {
+            get {
+                return PropertyInvoker.Get<Int32> (PlayerOffsets.BansOffset, OriginalBytes, InjuriesAddress, DatabaseMode);
+            }
+        }
+
+        public bool isBanned {
+            get {
+                return ProcessManager.ReadArrayLength (BansAddress) > 0;
+            }
+        }
+
+        public Team Team {
+            get {
+                return PropertyInvoker.GetPointer<Team> (PlayerOffsets.Team, OriginalBytes, PlayerAddress, DatabaseMode, Version);
+            }
+        }
+
+        public int Value {
+            get {
+                return PropertyInvoker.Get<Int32> (PlayerOffsets.Value, OriginalBytes, PlayerAddress, DatabaseMode);
+            }
+        }
+
+        public int AskingPrice {
+            get {
+                return PropertyInvoker.Get<Int32> (PlayerOffsets.AskingPrice, OriginalBytes, PlayerAddress, DatabaseMode);
+            }
+        }
+
+        public short Fitness {
+            get {
+                return PropertyInvoker.Get<short> (PlayerOffsets.Fitness, OriginalBytes, PlayerAddress, DatabaseMode);
+            }
+        }
+
+        public short Jadedness {
+            get {
+                return PropertyInvoker.Get<short> (PlayerOffsets.Jadedness, OriginalBytes, PlayerAddress, DatabaseMode);
+            }
+        }
+
+        public short Condition {
+            get {
+                return PropertyInvoker.Get<short> (PlayerOffsets.Condition, OriginalBytes, PlayerAddress, DatabaseMode);
+            }
+        }
+
+        public short HomeReputation {
+            get {
+                return PropertyInvoker.Get<short> (PlayerOffsets.HomeReputation, OriginalBytes, PlayerAddress, DatabaseMode);
+            }
+            set {
+                PropertyInvoker.Set<short> (PlayerOffsets.HomeReputation, OriginalBytes, PlayerAddress, DatabaseMode, value);
+            }
+        }
+
+        public short CurrentReputation {
+            get {
+                return PropertyInvoker.Get<short> (PlayerOffsets.CurrentReputation, OriginalBytes, PlayerAddress, DatabaseMode);
+            }
+            set {
+                PropertyInvoker.Set<short> (PlayerOffsets.CurrentReputation, OriginalBytes, PlayerAddress, DatabaseMode, value);
+            }
+        }
+
+        public short WorldReputation {
+            get {
+                return PropertyInvoker.Get<short> (PlayerOffsets.WorldReputation, OriginalBytes, PlayerAddress, DatabaseMode);
+            }
+            set {
+                PropertyInvoker.Set<short> (PlayerOffsets.WorldReputation, OriginalBytes, PlayerAddress, DatabaseMode, value);
+            }
+        }
+
+        public ushort CA {
+            get {
+                int rotateAmount = (int)((PlayerAddress + PlayerOffsets.CA) & 15);
+                uint encryptedVal = PropertyInvoker.Get<ushort> (PlayerOffsets.CA, OriginalBytes, PlayerAddress, DatabaseMode);
+                encryptedVal = encryptedVal ^ 0x542e;
+                encryptedVal = BitwiseOperations.rol_short (encryptedVal, 2);
+                encryptedVal = encryptedVal ^ 0xdf2c;
+                encryptedVal = ~encryptedVal & 0xffff;
+                encryptedVal = BitwiseOperations.ror_short (encryptedVal, rotateAmount);
+
+                return (ushort)encryptedVal;
+            }
+            set {
+                int rotateAmount = (int)((PlayerAddress + PlayerOffsets.CA) & 0xf);
+                uint encryptedVal = value;
+                encryptedVal = BitwiseOperations.rol_short (encryptedVal, rotateAmount);
+                encryptedVal = ~encryptedVal & 0xffff;
+                encryptedVal = encryptedVal ^ 0xdf2c;
+                encryptedVal = BitwiseOperations.ror_short (encryptedVal, 2);
+                encryptedVal = encryptedVal ^ 0x542e;
+
+                PropertyInvoker.Set<ushort> (PlayerOffsets.CA, OriginalBytes, PlayerAddress, DatabaseMode, (ushort)encryptedVal);
+            }
+        }
+
+        public ushort PA {
+            get {
+                int rotateAmount = (int)((PlayerAddress + PlayerOffsets.PA) & 15);
+                uint encryptedVal = (uint)PropertyInvoker.Get<ushort> (PlayerOffsets.PA, OriginalBytes, PlayerAddress, DatabaseMode);
+                encryptedVal = BitwiseOperations.ror_short (encryptedVal, rotateAmount);
+                encryptedVal = encryptedVal ^ 0x4B3F;
+                encryptedVal = BitwiseOperations.ror_short (encryptedVal, 11);
+                encryptedVal = ~encryptedVal & 0xFFFF;
+                encryptedVal = BitwiseOperations.rol_short (encryptedVal, rotateAmount);
+
+                return (ushort)encryptedVal;
+            }
+            set {
+                uint encryptedVal = value;
+                int rotateAmount = (int)((PlayerAddress + PlayerOffsets.PA) & 0xf);
+                encryptedVal = BitwiseOperations.ror_short (encryptedVal, rotateAmount);
+                encryptedVal = ~encryptedVal & 0xFFFF;
+                encryptedVal = BitwiseOperations.rol_short (encryptedVal, 11);
+                encryptedVal = encryptedVal ^ 0x4B3F;
+                encryptedVal = BitwiseOperations.rol_short (encryptedVal, rotateAmount);
+
+                PropertyInvoker.Set<ushort> (PlayerOffsets.PA, OriginalBytes, PlayerAddress, DatabaseMode, (ushort)encryptedVal);
+            }
+        }
+
+        public ushort Weight {
+            get {
+                return PropertyInvoker.Get<ushort> (PlayerOffsets.Weight, OriginalBytes, PlayerAddress, DatabaseMode);
+            }
+            set {
+                PropertyInvoker.Set<ushort> (PlayerOffsets.Weight, OriginalBytes, PlayerAddress, DatabaseMode, value);
+            }
+        }
+
+        public ushort Height {
+            get {
+                return PropertyInvoker.Get<ushort> (PlayerOffsets.Height, OriginalBytes, PlayerAddress, DatabaseMode);
+            }
+            set {
+                PropertyInvoker.Set<ushort> (PlayerOffsets.Height, OriginalBytes, PlayerAddress, DatabaseMode, value);
+            }
+        }
+
+        public byte InternationalApps {
+            get {
+                return PropertyInvoker.Get<byte> (PlayerOffsets.InternationalApps, OriginalBytes, PersonAddress, DatabaseMode);
+            }
+        }
+
+        public byte U21InternationalApps {
+            get {
+                return PropertyInvoker.Get<byte> (PlayerOffsets.U21InternationalApps, OriginalBytes, PersonAddress, DatabaseMode);
+            }
+        }
+
+        public byte InternationalGoals {
+            get {
+                return PropertyInvoker.Get<byte> (PlayerOffsets.InternationalGoals, OriginalBytes, PersonAddress, DatabaseMode);
+            }
+        }
+
+        public byte U21InternationalGoals {
+            get {
+                return PropertyInvoker.Get<byte> (PlayerOffsets.U21InternationalGoals, OriginalBytes, PersonAddress, DatabaseMode);
+            }
+        }
+
+        public double GrowthPotential {
+            get {
+                if (PlayerAttributes != null && Attributes != null) {
+                    double DAP = (((PlayerAttributes.Determination / 5) * 0.05) + (Attributes.Ambition * 0.09) + (Attributes.Professionalism * 0.115));
+                    if (Age < 24) {
+                        if (PA <= (CA + 10)) {
+                            DAP -= 0.5;
+                        }
+                    } else if (Age >= 24 && Age < 29) {
+                        DAP -= 0.5;
+                        if (PA <= (CA + 10)) {
+                            DAP -= 0.5;
+                        }
+                    } else if (Age >= 29 && Age < 34) {
+                        DAP -= 1.0;
+                        if (PA <= (CA + 10)) {
+                            DAP -= 0.5;
+                        }
+                    } else if (Age >= 34) {
+                        if (PA <= (CA + 10) && PlayerAttributes.Goalkeeper >= 15) {
+                            DAP = 0.5;
+                        } else {
+                            DAP = 0.0;
+                        }
+                    }
+
+                    DAP *= 2.0;
+                    DAP = Math.Round (DAP, MidpointRounding.AwayFromZero);
+                    DAP /= 2.0;
+
+                    return DAP;
+                }
+
+                return 0.0;
+            }
+        }
+
+        public override string ToString ()
+        {
+            return Firstname + " " + Lastname;
+        }
+    }
+}
