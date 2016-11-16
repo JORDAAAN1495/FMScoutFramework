@@ -80,7 +80,6 @@
     <Compile Include="Defines\Offsets\InjuryOffsets.cs" />
     <Compile Include="Defines\Offsets\NationOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonOffsets.cs" />
-    <Compile Include="VirtualMemory\Managers\TeamOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\PlayerOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\StaffOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\ContractBonusOffsets.cs" />
@@ -105,11 +104,8 @@
     <Compile Include="Entities\Ingame\Interfaces\INationTaxRule.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IPerson.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IPersonAttributes.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IPlayer.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IPlayerStaff.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IPlayerAttributes.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IRivalNation.cs" />
-    <Compile Include="Entities\Ingame\Interfaces\IStaff.cs" />
     <Compile Include="Entities\Ingame\Interfaces\ITeam.cs" />
     <Compile Include="Entities\Ingame\City.cs" />
     <Compile Include="Entities\Ingame\Club.cs" />
@@ -129,6 +125,43 @@
     <Compile Include="Entities\Ingame\Sub-Entities\NationTaxRule.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\RivalNation.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\ClubFinances.cs" />
+    <Compile Include="Defines\Offsets\TeamOffsets.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IAward.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\ICompetition.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\ICurrency.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IMediaSource.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\ILanguage.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\ILocalRegion.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IStadium.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IWeather.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IDerby.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IAgreement.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IFirstName.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\ILastName.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\ICommonName.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IPlayer.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IPlayerStaff.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IStaff.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IHumanManager.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IOfficial.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\INonPlayer.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IRetired.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\ISpokesperson.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IAgent.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IJournalist.cs" />
+    <Compile Include="Entities\Ingame\Award.cs" />
+    <Compile Include="Entities\Ingame\Competition.cs" />
+    <Compile Include="Entities\Ingame\Currency.cs" />
+    <Compile Include="Entities\Ingame\MediaSource.cs" />
+    <Compile Include="Entities\Ingame\Language.cs" />
+    <Compile Include="Entities\Ingame\LocalRegion.cs" />
+    <Compile Include="Entities\Ingame\Stadium.cs" />
+    <Compile Include="Entities\Ingame\Weather.cs" />
+    <Compile Include="Entities\Ingame\Derby.cs" />
+    <Compile Include="Entities\Ingame\Agreement.cs" />
+    <Compile Include="Entities\Ingame\FirstName.cs" />
+    <Compile Include="Entities\Ingame\LastName.cs" />
+    <Compile Include="Entities\Ingame\CommonName.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Attributes\" />
@@ -148,6 +181,7 @@
     <Folder Include="Entities\Ingame\Persons\" />
     <Folder Include="Entities\Ingame\Persons\Sub-Entities\" />
     <Folder Include="Entities\Ingame\Sub-Entities\" />
+    <Folder Include="Entities\Ingame\Interfaces\PersonTypes\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="libprocessmemoryapi.dylib">
