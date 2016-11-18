@@ -5,7 +5,7 @@
         Nation BasedNation { get; }
         ClubFinances ClubFinances { get; }
         int ClubFinancesAddress { get; }
-        int ID { get; }
+        int UID { get; }
         string Name { get; }
         Nation Nation { get; }
         string ShortName { get; }
