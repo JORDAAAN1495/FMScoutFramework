@@ -67,15 +67,15 @@ namespace FMScoutFramework.Core.Managers
             // Unknown 9
 
             // Debug some main objects
-            RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown1);
-            RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown2);
-            RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown3);
-            RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown4);
-            RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown5);
-            RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown6);
-            RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown7);
-            RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown8);
-            RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown9);
+            //RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown1);
+            //RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown2);
+            //RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown3);
+            //RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown4);
+            //RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown5);
+            //RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown6);
+            //RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown7);
+            //RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown8);
+            //RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown9);
 
             //#region People
             //ObjectStore.Add (typeof (Player), RetrieveObjects<Player> (staffAddresses.PlayerAddresses));
@@ -84,9 +84,40 @@ namespace FMScoutFramework.Core.Managers
             //#endregion
         }
 
-        List<Int64> RetrieveObjects<T> (Int64 offset)
+        Dictionary<Int64, T> RetrieveObjects<T>(Int64 offset)
         {
+            List<Int64> memoryAddresses = GetMemoryAddresses<T>(offset);
+
+            #region CreateConstryctorDelegate
+            ConstructorInfo constructor = typeof(T).GetConstructor(new[] { typeof(Int64), typeof(IVersion) });
+            ParameterExpression expPointer = Expression.Parameter(typeof(Int64), "memoryAddress");
+            ParameterExpression vPointer = Expression.Parameter(typeof(IVersion), "version");
+            Expression createNew = Expression.New(constructor, expPointer, vPointer);
+            LambdaExpression lambda = Expression.Lambda(createNew, new[] { expPointer, vPointer });
+            Func<Int64, IVersion, T> constructInvoker = (Func<Int64, IVersion, T>)lambda.Compile();
+            #endregion
+
+            var outputList = new Dictionary<Int64, T>(memoryAddresses.Count);
+            Parallel.ForEach(memoryAddresses, (address) =>
+            {
+                var obj = constructInvoker.Invoke(address, GameManager.Version);
+                try
+                {
+                    outputList.Add(address, obj);
+                }
+                catch { }
+            });
+
+            return outputList;
+        }
+
+        List<Int64> GetMemoryAddresses<T> (Int64 offset)
+        {
+#if MAC
             Int64 memoryAddress = ProcessManager.ReadInt64 (ProcessManager.fmProcess.BaseAddress + GameManager.Version.MemoryAddresses.MainAddress);
+#elif WINDOWS
+            Int64 memoryAddress = ProcessManager.fmProcess.BaseAddress + GameManager.Version.MemoryAddresses.MainAddress;
+#endif
             memoryAddress = ProcessManager.ReadInt64 (memoryAddress + offset);
             memoryAddress = ProcessManager.ReadInt64 (memoryAddress + GameManager.Version.MemoryAddresses.XorDistance);
             int objectCount = ProcessManager.ReadArrayLength (memoryAddress);
@@ -96,11 +127,11 @@ namespace FMScoutFramework.Core.Managers
                 return null;
             }
 
-            List<Int64> pointers = GetMemoryAddresses (memoryAddress, objectCount);
+            List<Int64> pointers = GetMemoryAddressList (memoryAddress, objectCount);
             return pointers;
         }
 
-        List<Int64> GetMemoryAddresses (Int64 memoryAddress, int length)
+        List<Int64> GetMemoryAddressList (Int64 memoryAddress, int length)
         {
             List<Int64> res = new List<Int64> (length);
             List<Int64> pointers = new List<Int64> (length);
