@@ -6,10 +6,10 @@ namespace FMScoutFramework.Core.Entities.InGame
 {
     public class Continent : BaseObject, IContinent
     {
-        public Continent (int memoryAddress, IVersion version)
+        public Continent (Int64 memoryAddress, IVersion version)
             : base (memoryAddress, version)
         { }
-        public Continent (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+        public Continent (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
             : base (memoryAddress, originalBytes, version)
         { }
     }
