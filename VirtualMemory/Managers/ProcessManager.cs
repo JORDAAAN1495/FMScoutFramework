@@ -20,10 +20,10 @@ namespace FMScoutFramework.Core.Managers
         }
 
 #if WINDOWS
-        public static int GetProcessEndPoint(IntPtr process) {
-            int bytesRead = 0;
-            int memoryAddress = 0x7fffffff;
-            int num3 = 0x1000000;
+        public static Int64 GetProcessEndPoint(IntPtr process) {
+            Int64 bytesRead = 0;
+            Int64 memoryAddress = 0x7fffffff;
+            Int64 num3 = 0x1000000;
             for (int i = 1; i <= 7; i++) {
                 ReadProcessMemory (process, memoryAddress, 1, out bytesRead);
                 while (bytesRead == 0) {
@@ -67,31 +67,47 @@ namespace FMScoutFramework.Core.Managers
         #region ReadProcessMemoryExtensions
 
 #if WINDOWS
-        private static byte[] ReadProcessMemory(IntPtr process, int memoryAddress, uint bytesToRead, out int bytesRead)
+        private static byte[] ReadProcessMemory(IntPtr process, Int64 memoryAddress, uint bytesToRead, out Int64 bytesRead)
         {
             IntPtr ptr;
             byte[] buffer = new byte[bytesToRead];
             ProcessMemoryAPI.ReadProcessMemory(process, (IntPtr)memoryAddress, buffer, bytesToRead, out ptr);
-            bytesRead = ptr.ToInt32 ();
+            if (IntPtr.Size == 4)
+            {
+                bytesRead = ptr.ToInt32();
+            }
+            else
+            {
+                bytesRead = ptr.ToInt64();
+            }
+            
             return buffer;
         }
 
-        public static byte[] ReadProcessMemory(int memoryAddress, uint bytesToRead)
+        public static byte[] ReadProcessMemory(Int64 memoryAddress, uint bytesToRead)
         {
             if (memoryAddress > 0) {
-                int num;
+                Int64 num;
                 if (bytesToRead <= (32 * 1024 * 1024))
                     return ReadProcessMemory (memoryAddress, bytesToRead, out num);
             }
-            return new byte[4];
+            return new byte[8];
         }
 
-        public static byte[] ReadProcessMemory(int memoryAddress, uint bytesToRead, out int bytesRead)
+        public static byte[] ReadProcessMemory(Int64 memoryAddress, uint bytesToRead, out Int64 bytesRead)
         {
             IntPtr ptr;
             byte[] buffer = new byte[bytesToRead];
             ProcessMemoryAPI.ReadProcessMemory(FMProcess.Pointer, (IntPtr)memoryAddress, buffer, bytesToRead, out ptr);
-            bytesRead = ptr.ToInt32();
+            if (IntPtr.Size == 4)
+            {
+                bytesRead = ptr.ToInt32();
+            }
+            else
+            {
+                bytesRead = ptr.ToInt64();
+            }
+            
             return buffer;
         }
 #endif
@@ -261,20 +277,17 @@ namespace FMScoutFramework.Core.Managers
                 if (!isRead)
                     currentAddress = ProcessManager.ReadInt32 (currentAddress);
 
-                if (addBufferIndex >= 0)
+                if (addBufferIndex > 0)
                     currentAddress = ProcessManager.ReadInt32 (currentAddress + (int)addBufferIndex);
 
                 string str = "";
 
-                // Skip the first byte
-                currentAddress += 0x1;
                 // Get the string Length
-                int length = (int)ProcessManager.ReadInt16 (currentAddress);
+                int length = (int)ProcessManager.ReadInt32 (currentAddress);
                 if (length <= 0) {
                     return "-";
                 }
-                length = length * 2;
-                currentAddress += 0x3;
+                currentAddress += 0x4;
 
 #if WINDOWS
                 byte[] buffer = ProcessManager.ReadProcessMemory(currentAddress, (uint)length);
@@ -286,7 +299,7 @@ namespace FMScoutFramework.Core.Managers
                 if (buffer.Length < length) {
                     return "";
                 }
-                str = UnicodeEncoding.Unicode.GetString (buffer);
+                str = UnicodeEncoding.UTF8.GetString(buffer);
 
                 readStringCache.Add (cacheKey, str);
             }
@@ -388,7 +401,7 @@ namespace FMScoutFramework.Core.Managers
 
         #region WriteProcessMemory
 #if WINDOWS
-        public static int WriteProcessMemory(int memoryaddress, byte[] buffer, uint bytesToWrite)
+        public static int WriteProcessMemory(Int64 memoryaddress, byte[] buffer, uint bytesToWrite)
         {
             IntPtr ptr;
             ProcessMemoryAPI.WriteProcessMemory(FMProcess.Pointer, (IntPtr)memoryaddress, buffer, bytesToWrite, out ptr);
