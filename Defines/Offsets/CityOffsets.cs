@@ -1,8 +1,4 @@
 ﻿using FMScoutFramework.Core.Entities.GameVersions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace FMScoutFramework.Defines.Offsets
 {
