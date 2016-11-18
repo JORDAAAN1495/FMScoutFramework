@@ -80,9 +80,9 @@ namespace FMScoutFramework.Core.Managers
                 Process activeProcess = fmProcesses [0];
 
                 fmProcess.Pointer = ProcessMemoryAPI.OpenProcess (0x001F0FFF, 1, (uint)activeProcess.Id);
-                fmProcess.EndPoint = ProcessManager.GetProcessEndPoint (fmProcess.Pointer);
+                // fmProcess.EndPoint = ProcessManager.GetProcessEndPoint (fmProcess.Pointer);
                 fmProcess.Process = activeProcess;
-                fmProcess.BaseAddress = activeProcess.MainModule.BaseAddress.ToInt32();
+                fmProcess.BaseAddress = activeProcess.MainModule.BaseAddress.ToInt64();
 
                 ProcessManager.fmProcess = fmProcess;
                 fmProcess.VersionDescription = fmProcess.Process.MainModule.FileVersionInfo.ProductVersion;
@@ -115,38 +115,11 @@ namespace FMScoutFramework.Core.Managers
         {
             #region WINDOWS
 #if WINDOWS
-            int memoryAddress = ProcessManager.ReadInt32(address);
-            Debug.WriteLine("Base 0x{0:X} -> 0x{1:X}", address, memoryAddress);
-            if (memoryAddress > fmProcess.BaseAddress && memoryAddress < fmProcess.EndPoint)
-            {
-                memoryAddress = ProcessManager.ReadInt32(memoryAddress);
-                if (memoryAddress < fmProcess.BaseAddress || memoryAddress > fmProcess.EndPoint)
-                    return 0;
-
-                string[] splitVersion = fmProcess.VersionDescription.Split('.');
-                if (splitVersion[0] == "14")
-                {
-                    int xorValueOne = ProcessManager.ReadInt32(memoryAddress + offset + 0x4);
-                    int xorValueTwo = ProcessManager.ReadInt32(memoryAddress + offset);
-                    memoryAddress = xorValueTwo ^ xorValueOne;
-                    if (memoryAddress < fmProcess.BaseAddress || memoryAddress > fmProcess.EndPoint)
-                        return 0;
-                    memoryAddress = ProcessManager.ReadInt32(memoryAddress + 0x54);
-                }
-                else
-                {
-                    memoryAddress = ProcessManager.ReadInt32(memoryAddress + offset);
-                    if (memoryAddress < fmProcess.BaseAddress || memoryAddress > fmProcess.EndPoint)
-                        return 0;
-                    memoryAddress = ProcessManager.ReadInt32(memoryAddress + 0x40);
-                }
-                
-                if (memoryAddress < fmProcess.BaseAddress || memoryAddress > fmProcess.EndPoint)
-                    return 0;
-
-                int numberOfObjects = ProcessManager.ReadArrayLength(memoryAddress);
-                return numberOfObjects;
-            }
+            Int64 memoryAddress = fmProcess.BaseAddress + address;
+            memoryAddress = ProcessManager.ReadInt64(memoryAddress + offset);
+            memoryAddress = ProcessManager.ReadInt64(memoryAddress + xor);
+            int numberOfObjects = ProcessManager.ReadArrayLength(memoryAddress);
+            return numberOfObjects;
 #endif
             #endregion
             #region MAC
