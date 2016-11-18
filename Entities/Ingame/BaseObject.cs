@@ -2,9 +2,38 @@
 using System.Collections.Generic;
 using System.Text;
 using FMScoutFramework.Core.Entities.GameVersions;
+using System.ComponentModel;
 
 namespace FMScoutFramework.Core.Entities.InGame
 {
+    public enum Formation
+    {
+        [Description("Not Set")]
+        NotSet = 0,
+        [Description("4-4-2")]
+        F442 = 3,
+        [Description("3-5-2")]
+        F352 = 6,
+        [Description("4-4-2 Diamond Narrow")]
+        F442DiamondNarrow = 7,
+        [Description("3-4-3")]
+        F343 = 9,
+        [Description("3-4-1-2")]
+        F3412 = 10,
+        [Description("4-2-3-1 Wide")]
+        F4231Wide = 21,
+        [Description("4-2-2-2 DM Narrow")]
+        F4222DMNarrow = 24,
+        [Description("4-4-2 Diamond Wide")]
+        F442DiamondWide = 25,
+        [Description("4-1-2-3 DM Wide")]
+        F4123DMWide = 28,
+        [Description("4-2-4 Wide")]
+        F424Wide = 34,
+        [Description("4-1-2-3 DM Narrow")]
+        F4123DMNarrow = 51
+    }
+
     public class BaseObject
     {
         public Int64 MemoryAddress;
