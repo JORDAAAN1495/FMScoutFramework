@@ -28,6 +28,7 @@ namespace FMScoutFramework.Core
         }
 
         #region Objects
+        public IEnumerable<Award> Awards { get { return GetListFromStore<Award>(); } }
         public IEnumerable<Continent> Continents { get { return GetListFromStore<Continent> (); } }
         public IEnumerable<City> Cities { get { return GetListFromStore<City> (); } }
         public IEnumerable<Club> Clubs { get { return GetListFromStore<Club> (); } }
@@ -38,7 +39,7 @@ namespace FMScoutFramework.Core
 
         private IQueryable<T> GetListFromStore<T> ()
         {
-            return ((Dictionary<int, T>)objectManager.ObjectStore [typeof (T)]).Values.AsQueryable ();
+            return ((Dictionary<Int64, T>)objectManager.ObjectStore [typeof (T)]).Values.AsQueryable ();
         }
         #endregion
 
