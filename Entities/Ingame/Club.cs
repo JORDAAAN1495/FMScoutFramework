@@ -4,18 +4,19 @@ using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Core.Offsets;
 using FMScoutFramework.Core.Attributes;
 using FMScoutFramework.Core.Entities.InGame.Interfaces;
+using System.Collections.Generic;
 
 namespace FMScoutFramework.Core.Entities.InGame
 {
     public class Club : BaseObject, IClub
     {
         public ClubOffsets ClubOffsets;
-        public Club (int memoryAddress, IVersion version)
+        public Club (Int64 memoryAddress, IVersion version)
             : base (memoryAddress, version)
         {
             this.ClubOffsets = new ClubOffsets (Version);
         }
-        public Club (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+        public Club (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
             : base (memoryAddress, originalBytes, version)
         {
             this.ClubOffsets = new ClubOffsets (Version);
@@ -27,7 +28,7 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
-        public Int32 ID {
+        public Int32 UID {
             get {
                 return PropertyInvoker.Get<Int32> (ClubOffsets.ID, OriginalBytes, MemoryAddress, DatabaseMode);
             }
@@ -105,6 +106,34 @@ namespace FMScoutFramework.Core.Entities.InGame
         public ClubFinances ClubFinances {
             get {
                 return PropertyInvoker.GetPointer<ClubFinances> (ClubOffsets.ClubFinances, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+            }
+        }
+
+        public List<ClubSponsorshipDeal>sponsorshipDeals
+        {
+            get
+            {
+                return new List<ClubSponsorshipDeal>();
+            }
+        }
+
+        public City city
+        {
+            get
+            {
+                return null;
+            }
+        }
+
+        public int cityID
+        {
+            get
+            {
+                return 0;
+            }
+            set
+            {
+                cityID = value;
             }
         }
 
