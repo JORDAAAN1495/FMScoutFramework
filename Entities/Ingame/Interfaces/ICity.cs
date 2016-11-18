@@ -4,7 +4,7 @@
     {
         short Altitude { get; }
         short Attraction { get; }
-        int ID { get; }
+        int UID { get; }
         float Latitude { get; }
         float Longitude { get; }
         string Name { get; }
