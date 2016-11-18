@@ -1,7 +1,13 @@
-﻿namespace FMScoutFramework.Core.Entities.InGame.Interfaces
+﻿using System.Windows.Media;
+
+namespace FMScoutFramework.Core.Entities.InGame.Interfaces
 {
     public interface IAward
     {
-        
+        int RowID { get; }
+        int UID { get; }
+        string Name { get; }
+        Color colour { get; }
+        int voting { get; set; }
     }
 }
