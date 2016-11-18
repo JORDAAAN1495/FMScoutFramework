@@ -6,9 +6,22 @@ using FMScoutFramework.Core.Offsets;
 using FMScoutFramework.Core.Attributes;
 using FMScoutFramework.Core.Entities.InGame.Interfaces;
 using FMScoutFramework.Core.Utilities;
+using System.ComponentModel;
 
 namespace FMScoutFramework.Core.Entities.InGame
 {
+    public enum SugarDaddyType
+    {
+        [Description("None")]
+        SDT_NONE = 0,
+        [Description("Foreground")]
+        SDT_FOREGROUND = 1,
+        [Description("Background")]
+        SDT_BACKGROUND = 2,
+        [Description("Underwriter")]
+        SDT_UNDERWRITER = 3
+    }
+
     public class ClubFinances : BaseObject, IClubFinances
     {
         public ClubFinancesOffsets ClubFinancesOffsets;
