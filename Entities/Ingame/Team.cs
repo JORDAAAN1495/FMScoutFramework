@@ -11,12 +11,12 @@ namespace FMScoutFramework.Core.Entities.InGame
     public class Team : BaseObject, ITeam
     {
         public TeamOffsets TeamOffsets;
-        public Team (int memoryAddress, IVersion version)
+        public Team (Int64 memoryAddress, IVersion version)
             : base (memoryAddress, version)
         {
             this.TeamOffsets = new TeamOffsets (version);
         }
-        public Team (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+        public Team (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
             : base (memoryAddress, originalBytes, version)
         {
             this.TeamOffsets = new TeamOffsets (version);

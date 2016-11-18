@@ -10,12 +10,12 @@ namespace FMScoutFramework.Core.Entities.InGame
     public class Nation : BaseObject, INation
     {
         public NationOffsets NationOffsets;
-        public Nation (int memoryAddress, IVersion version)
+        public Nation (Int64 memoryAddress, IVersion version)
             : base (memoryAddress, version)
         {
             this.NationOffsets = new NationOffsets (Version);
         }
-        public Nation (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+        public Nation (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
             : base (memoryAddress, originalBytes, version)
         {
             this.NationOffsets = new NationOffsets (Version);
