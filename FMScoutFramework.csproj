@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -18,6 +18,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -31,7 +32,7 @@
     <DebugSymbols>true</DebugSymbols>
     <Optimize>false</Optimize>
     <OutputPath>bin\Mac\Debug</OutputPath>
-    <DefineConstants>DEBUG;MAC;</DefineConstants>
+    <DefineConstants>DEBUG;WINDOWS;</DefineConstants>
     <WarningLevel>4</WarningLevel>
     <CustomCommands>
       <CustomCommands>
@@ -52,13 +53,40 @@
     <DefineConstants>MAC;</DefineConstants>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;WINDOWS;</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>WINDOWS;</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="CoreCompat.System.Drawing">
       <HintPath>..\..\MacAssistantRT17.Mac\packages\CoreCompat.System.Drawing.1.0.0-beta006\lib\net45\CoreCompat.System.Drawing.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xaml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Defines\Offsets\AwardOffsets.cs" />
+    <Compile Include="Defines\Versions\Steam_17_1_2_Windows.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IClubFinanceRevenueRecord.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IClubSponsorshipDeal.cs" />
+    <Compile Include="Entities\Ingame\Sub-Entities\ClubFinanceRevenueRecord.cs" />
+    <Compile Include="Entities\Ingame\Sub-Entities\ClubSponsorshipDeal.cs" />
+    <Compile Include="Extensions\EnumBindingSourceExtension.cs" />
+    <Compile Include="Extensions\FMSFExtensions.cs" />
     <Compile Include="FMCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Attributes\MemoryAddressAttribute.cs" />
@@ -163,26 +191,7 @@
     <Compile Include="Entities\Ingame\LastName.cs" />
     <Compile Include="Entities\Ingame\CommonName.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Attributes\" />
-    <Folder Include="Converters\" />
-    <Folder Include="Defines\" />
-    <Folder Include="Defines\Versions\" />
-    <Folder Include="Utilities\" />
-    <Folder Include="VirtualMemory\" />
-    <Folder Include="VirtualMemory\Managers\" />
-    <Folder Include="Defines\Offsets\" />
-    <Folder Include="Defines\Offsets\PersonTypes\" />
-    <Folder Include="Defines\Offsets\PersonTypes\Sub-Entities\" />
-    <Folder Include="Defines\Offsets\Sub-Entities\" />
-    <Folder Include="Entities\" />
-    <Folder Include="Entities\Ingame\" />
-    <Folder Include="Entities\Ingame\Interfaces\" />
-    <Folder Include="Entities\Ingame\Persons\" />
-    <Folder Include="Entities\Ingame\Persons\Sub-Entities\" />
-    <Folder Include="Entities\Ingame\Sub-Entities\" />
-    <Folder Include="Entities\Ingame\Interfaces\PersonTypes\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="libprocessmemoryapi.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
