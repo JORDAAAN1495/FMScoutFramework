@@ -5,6 +5,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Linq.Expressions;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace FMScoutFramework.Core.Managers
 {
@@ -254,6 +255,22 @@ namespace FMScoutFramework.Core.Managers
             return new DateTime (1900, 1, 1);
         }
 
+        public static Color ReadColour(Int64 address) {
+            byte[] buffer = ProcessManager.ReadProcessMemory(address, 0x4);
+
+            if (buffer == null) {
+                return Color.FromArgb(0, 0, 0, 0);
+            }
+
+            byte alpha = buffer[3];
+            byte red = buffer[2];
+            byte green = buffer[1];
+            byte blue = buffer[0];
+
+            Color colour = Color.FromArgb(alpha, red, green, blue);
+            return colour;
+        }
+
         public static string ReadString (int currentAddress, int? addBufferIndex, bool isRead)
         {
             return ReadString ((Int64)currentAddress, (Int64)addBufferIndex, 0, isRead);
@@ -459,6 +476,17 @@ namespace FMScoutFramework.Core.Managers
         public static void ResizeArray (int currentAddress, int newLength)
         {
             ResizeArray (currentAddress, 0x4, newLength);
+        }
+
+        public static void WriteColour(Color newColour, Int64 address) {
+            byte[] buffer = new byte[4];
+
+            buffer[0] = newColour.B;
+            buffer[1] = newColour.G;
+            buffer[2] = newColour.R;
+            buffer[3] = newColour.A;
+
+            WriteProcessMemory(address, buffer, 4);
         }
 
         public static void ResizeArray (int currentAddress, int objectLength, int newLength)
