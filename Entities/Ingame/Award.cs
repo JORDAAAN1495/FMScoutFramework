@@ -251,6 +251,46 @@ namespace FMScoutFramework.Core.Entities.InGame {
         public Award(Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
             : base(memoryAddress, originalBytes, version) { }
 
+        public void SaveAward() {
+            PropertyInvoker.Set<DateTime>(AwardOffsets.AwardDate, OriginalBytes, MemoryAddress, DatabaseMode, _awardDate);
+            PropertyInvoker.Set<DateTime>(AwardOffsets.AnnouncementDate, OriginalBytes, MemoryAddress, DatabaseMode, _announcementDate);
+            PropertyInvoker.Set<short>(AwardOffsets.Position, OriginalBytes, MemoryAddress, DatabaseMode, _position);
+            PropertyInvoker.Set<byte>(AwardOffsets.RunBy, OriginalBytes, MemoryAddress, DatabaseMode, _runBy);
+            PropertyInvoker.Set<byte>(AwardOffsets.Period, OriginalBytes, MemoryAddress, DatabaseMode, _period);
+            PropertyInvoker.Set<byte>(AwardOffsets.Voting, OriginalBytes, MemoryAddress, DatabaseMode, _voting);
+            PropertyInvoker.Set<byte>(AwardOffsets.Based, OriginalBytes, MemoryAddress, DatabaseMode, _based);
+            PropertyInvoker.Set<byte>(AwardOffsets.VotingFormat, OriginalBytes, MemoryAddress, DatabaseMode, _votingFormat);
+            PropertyInvoker.Set<byte>(AwardOffsets.RecipientType, OriginalBytes, MemoryAddress, DatabaseMode, _recipientType);
+            PropertyInvoker.Set<byte>(AwardOffsets.Formation, OriginalBytes, MemoryAddress, DatabaseMode, _formation);
+            PropertyInvoker.Set<Color>(AwardOffsets.ForegroundColour, OriginalBytes, MemoryAddress, DatabaseMode, _foregroundColour);
+            PropertyInvoker.Set<Color>(AwardOffsets.BackgroundColour, OriginalBytes, MemoryAddress, DatabaseMode, _backgroundColour);
+            PropertyInvoker.Set<Color>(AwardOffsets.TrimColour, OriginalBytes, MemoryAddress, DatabaseMode, _trimColour);
+            PropertyInvoker.Set<byte>(AwardOffsets.AwardReputation, OriginalBytes, MemoryAddress, DatabaseMode, _awardReputation);
+            PropertyInvoker.Set<sbyte>(AwardOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode, _type);
+            PropertyInvoker.Set<byte>(AwardOffsets.MinimumAge, OriginalBytes, MemoryAddress, DatabaseMode, _minimumAge);
+            PropertyInvoker.Set<byte>(AwardOffsets.MaximumAge, OriginalBytes, MemoryAddress, DatabaseMode, _maximumAge);
+            PropertyInvoker.Set<byte>(AwardOffsets.WinnerHomeReputation, OriginalBytes, MemoryAddress, DatabaseMode, _winnerHomeReputation);
+            PropertyInvoker.Set<byte>(AwardOffsets.WinnerWorldReputation, OriginalBytes, MemoryAddress, DatabaseMode, _winnerWorldReputation);
+            PropertyInvoker.Set<byte>(AwardOffsets.Placings, OriginalBytes, MemoryAddress, DatabaseMode, _placings);
+            PropertyInvoker.Set<byte>(AwardOffsets.Side, OriginalBytes, MemoryAddress, DatabaseMode, _side);
+            PropertyInvoker.Set<byte>(AwardOffsets.UseStatsFrom, OriginalBytes, MemoryAddress, DatabaseMode, _useStatsFrom);
+            PropertyInvoker.Set<byte>(AwardOffsets.MinimumPercentageOfGamesPlayed, OriginalBytes, MemoryAddress, DatabaseMode, _minimumPercentageOfGamesPlayed);
+            PropertyInvoker.Set<byte>(AwardOffsets.AllowPreviousWinner, OriginalBytes, MemoryAddress, DatabaseMode, _allowPreviousWinner);
+        }
+
+        private bool _isDirty = false;
+        public bool isDirty {
+            get {
+                return _isDirty;
+            }
+            set {
+                if (value) {
+                    Version.gameManager.RaiseObjectEdited(this);
+                }
+                _isDirty = value;
+            }
+        }
+
         public int RowID {
             get {
                 return PropertyInvoker.Get<Int32>(AwardOffsets.RowID, OriginalBytes, MemoryAddress, DatabaseMode);
@@ -291,219 +331,316 @@ namespace FMScoutFramework.Core.Entities.InGame {
             }
         }
 
+        private DateTime _awardDate;
         public DateTime AwardDate {
             get {
-                return PropertyInvoker.Get<DateTime>(AwardOffsets.AwardDate, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_awardDate.Year < 1900) {
+                    _awardDate = PropertyInvoker.Get<DateTime>(AwardOffsets.AwardDate, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _awardDate;
             }
             set {
-                PropertyInvoker.Set<DateTime>(AwardOffsets.AwardDate, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _awardDate = value;
             }
         }
 
+        private DateTime _announcementDate;
         public DateTime AnnouncementDate {
             get {
-                return PropertyInvoker.Get<DateTime>(AwardOffsets.AnnouncementDate, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_announcementDate.Year < 1900) {
+                    _announcementDate = PropertyInvoker.Get<DateTime>(AwardOffsets.AnnouncementDate, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _announcementDate;
             }
             set {
-                PropertyInvoker.Set<DateTime>(AwardOffsets.AnnouncementDate, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _announcementDate = value;
             }
         }
 
+        private short _position = -1;
         public short Position {
             get {
-                return PropertyInvoker.Get<short>(AwardOffsets.Position, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_position == -1) {
+                    _position = PropertyInvoker.Get<short>(AwardOffsets.Position, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _position;
             }
             set {
-                PropertyInvoker.Set<short>(AwardOffsets.Position, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _position = value;
             }
         }
 
+        private byte _runBy = 0;
         public byte RunBy {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.RunBy, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_runBy == 0) {
+                    _runBy = PropertyInvoker.Get<byte>(AwardOffsets.RunBy, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _runBy;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.RunBy, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                isDirty = true;
+                _runBy = value;
             }
         }
 
+        private byte _period = 0;
         public byte Period {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.Period, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_period == 0) {
+                    _period = PropertyInvoker.Get<byte>(AwardOffsets.Period, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _period;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.Period, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _period = value;
             }
         }
 
+        private byte _voting = 0;
         public byte Voting {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.Voting, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_voting == 0) {
+                    _voting = PropertyInvoker.Get<byte>(AwardOffsets.Voting, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _voting;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.Voting, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _voting = value;
             }
         }
 
+        private byte _based = 0;
         public byte Based {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.Based, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_based == 0) {
+                    _based = PropertyInvoker.Get<byte>(AwardOffsets.Based, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _based;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.Based, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _based = value;
             }
         }
 
+        private byte _votingFormat = 0;
         public byte VotingFormat {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.VotingFormat, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_votingFormat == 0) {
+                    _votingFormat = PropertyInvoker.Get<byte>(AwardOffsets.VotingFormat, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _votingFormat;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.VotingFormat, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _votingFormat = value;
             }
         }
 
+        private byte _recipientType = 0;
         public byte RecipientType {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.RecipientType, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_recipientType == 0) {
+                    _recipientType = PropertyInvoker.Get<byte>(AwardOffsets.RecipientType, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _recipientType;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.RecipientType, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _recipientType = value;
             }
         }
 
+        private byte _formation = 0;
         public byte Formation {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.Formation, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_formation == 0) {
+                    _formation = PropertyInvoker.Get<byte>(AwardOffsets.Formation, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _formation;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.Formation, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _formation = value;
             }
         }
 
+        private Color _foregroundColour;
         public Color ForegroundColour {
             get {
-                return PropertyInvoker.Get<Color>(AwardOffsets.ForegroundColour, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_foregroundColour == Color.Empty) {
+                    _foregroundColour = PropertyInvoker.Get<Color>(AwardOffsets.ForegroundColour, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _foregroundColour;
             }
             set {
-                PropertyInvoker.Set<Color>(AwardOffsets.ForegroundColour, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _foregroundColour = value;
             }
         }
 
+        private Color _backgroundColour;
         public Color BackgroundColour {
             get {
-                return PropertyInvoker.Get<Color>(AwardOffsets.BackgroundColour, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_backgroundColour == Color.Empty) {
+                    _backgroundColour = PropertyInvoker.Get<Color>(AwardOffsets.BackgroundColour, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _backgroundColour;
             }
             set {
-                PropertyInvoker.Set<Color>(AwardOffsets.BackgroundColour, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _backgroundColour = value;
             }
         }
 
+        private Color _trimColour;
         public Color TrimColour {
             get {
-                return PropertyInvoker.Get<Color>(AwardOffsets.TrimColour, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_trimColour == Color.Empty) {
+                    _trimColour = PropertyInvoker.Get<Color>(AwardOffsets.TrimColour, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _trimColour;
             }
             set {
-                PropertyInvoker.Set<Color>(AwardOffsets.TrimColour, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _trimColour = value;
             }
         }
 
+        private byte _awardReputation = 0;
         public byte AwardReputation {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.AwardReputation, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_awardReputation == 0) {
+                    _awardReputation = PropertyInvoker.Get<byte>(AwardOffsets.AwardReputation, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _awardReputation;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.AwardReputation, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _awardReputation = value;
             }
         }
 
+        private sbyte _type = -1;
         public sbyte Type {
             get {
-                return PropertyInvoker.Get<sbyte>(AwardOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_type == -1) {
+                    _type = PropertyInvoker.Get<sbyte>(AwardOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _type;
             }
             set {
-                PropertyInvoker.Set<sbyte>(AwardOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _type = value;
             }
         }
 
+        private byte _minimumAge = 0;
         public byte MinimumAge {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.MinimumAge, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_minimumAge == 0) {
+                    _minimumAge = PropertyInvoker.Get<byte>(AwardOffsets.MinimumAge, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _minimumAge;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.MinimumAge, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _minimumAge = value;
             }
         }
 
+        private byte _maximumAge = 0;
         public byte MaximumAge {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.MaximumAge, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_maximumAge == 0) {
+                    _maximumAge = PropertyInvoker.Get<byte>(AwardOffsets.MaximumAge, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _maximumAge;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.MaximumAge, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _maximumAge = value;
             }
         }
 
+        private byte _winnerHomeReputation = 0;
         public byte WinnerHomeReputation {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.WinnerHomeReputation, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_winnerHomeReputation == 0) {
+                    _winnerHomeReputation = PropertyInvoker.Get<byte>(AwardOffsets.WinnerHomeReputation, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _winnerHomeReputation;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.WinnerHomeReputation, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _winnerHomeReputation = value;
             }
         }
 
+        private byte _winnerWorldReputation = 0;
         public byte WinnerWorldReputation {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.WinnerWorldReputation, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_winnerWorldReputation == 0) {
+                    _winnerWorldReputation = PropertyInvoker.Get<byte>(AwardOffsets.WinnerWorldReputation, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _winnerWorldReputation;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.WinnerWorldReputation, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _winnerWorldReputation = value;
             }
         }
 
+        private byte _placings = 0;
         public byte Placings {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.Placings, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_placings == 0) {
+                    _placings = PropertyInvoker.Get<byte>(AwardOffsets.Placings, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _placings;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.Placings, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _placings = value;
             }
         }
 
+        private byte _side = 0;
         public byte Side {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.Side, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_side == 0) {
+                    _side = PropertyInvoker.Get<byte>(AwardOffsets.Side, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _side;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.Side, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _side = value;
             }
         }
 
+        private byte _useStatsFrom = 0;
         public byte UseStatsFrom {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.UseStatsFrom, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_useStatsFrom == 0) {
+                    _useStatsFrom = PropertyInvoker.Get<byte>(AwardOffsets.UseStatsFrom, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _useStatsFrom;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.UseStatsFrom, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _useStatsFrom = value;
             }
         }
 
+        private byte _minimumPercentageOfGamesPlayed = 0;
         public byte MinimumPercentageOfGamesPlayed {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.MinimumPercentageOfGamesPlayed, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_minimumPercentageOfGamesPlayed == 0) {
+                    _minimumPercentageOfGamesPlayed = PropertyInvoker.Get<byte>(AwardOffsets.MinimumPercentageOfGamesPlayed, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _minimumPercentageOfGamesPlayed;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.MinimumPercentageOfGamesPlayed, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _minimumPercentageOfGamesPlayed = value;
             }
         }
 
+        private byte _allowPreviousWinner = 0;
         public byte AllowPreviousWinner {
             get {
-                return PropertyInvoker.Get<byte>(AwardOffsets.AllowPreviousWinner, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_allowPreviousWinner == 0) {
+                    _allowPreviousWinner = PropertyInvoker.Get<byte>(AwardOffsets.AllowPreviousWinner, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _allowPreviousWinner;
             }
             set {
-                PropertyInvoker.Set<byte>(AwardOffsets.AllowPreviousWinner, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                _allowPreviousWinner = value;
             }
         }
 
