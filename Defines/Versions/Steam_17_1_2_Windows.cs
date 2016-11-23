@@ -9,12 +9,14 @@ namespace FMScoutFramework.Core.Entities.GameVersions
         public IVersionMemoryAddresses MemoryAddresses { get; private set; }
         public IVersionPersonEnumPointers PersonEnum { get; private set; }
         public IPersonVersionOffsets PersonOffsets { get; private set; }
+        public GameManager gameManager { get; set; }
 
-        public Steam_17_1_2_Windows ()
+        public Steam_17_1_2_Windows (GameManager gm)
         {
             MemoryAddresses = new VersionMemoryAddresses ();
             PersonEnum = new VersionPersonEnumPointers ();
             PersonOffsets = new PersonVersionOffsets ();
+            gameManager = gm;
         }
 
         public string Description {
@@ -38,7 +40,7 @@ namespace FMScoutFramework.Core.Entities.GameVersions
             FMCore.logger.LogWrite("Continent Count match!");
 
             FMCore.logger.LogWrite("Getting in-game date...");
-            DateTime dt = ProcessManager.ReadDateTime(MemoryAddresses.CurrentDateTime);
+            DateTime dt = ProcessManager.ReadDateTime(process.BaseAddress + MemoryAddresses.CurrentDateTime);
             if (dt.Year < 2015 || dt.Year > 2150)
             {
                 FMCore.logger.LogWrite("In-game date is invalid!");
@@ -64,7 +66,7 @@ namespace FMScoutFramework.Core.Entities.GameVersions
             public Int64 MainOffset { get { return 0x0; } }
             public Int64 XorDistance { get { return 0x80; } }
             public Int64 StringOffset { get { return 0x0; } }
-            public Int64 CurrentDateTime { get { return 0x13DAE0; } } // 0x13DAE0, 0x140134, 0x360A3E0, 0x360A5D0, 0x360A7C0
+            public Int64 CurrentDateTime { get { return 0x39C18B6; } } // At BaseAddress + offset
             public Int64 ActiveObject { get { return 0x10428D968; } }
 
             [MemoryAddressAttribute (CountLength = 4, BytesToSkip = 0x10)]

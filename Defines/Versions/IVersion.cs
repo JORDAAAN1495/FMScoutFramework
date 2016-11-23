@@ -1,4 +1,6 @@
-﻿namespace FMScoutFramework.Core.Entities.GameVersions
+﻿using FMScoutFramework.Core.Managers;
+
+namespace FMScoutFramework.Core.Entities.GameVersions
 {
     public interface IVersion
     {
@@ -6,6 +8,7 @@
         IVersionMemoryAddresses MemoryAddresses { get; }
         IVersionPersonEnumPointers PersonEnum { get; }
         IPersonVersionOffsets PersonOffsets { get; }
+        GameManager gameManager { get; set; }
     }
 
     internal interface IIVersion : IVersion

@@ -9,12 +9,14 @@ namespace FMScoutFramework.Core.Entities.GameVersions
         public IVersionMemoryAddresses MemoryAddresses { get; private set; }
         public IVersionPersonEnumPointers PersonEnum { get; private set; }
         public IPersonVersionOffsets PersonOffsets { get; private set; }
+        public GameManager gameManager { get; set; }
 
-        public Steam_17_1_2_Mac ()
+        public Steam_17_1_2_Mac (GameManager gm)
         {
             MemoryAddresses = new VersionMemoryAddresses ();
             PersonEnum = new VersionPersonEnumPointers ();
             PersonOffsets = new PersonVersionOffsets ();
+            gameManager = gm;
         }
 
         public string Description {

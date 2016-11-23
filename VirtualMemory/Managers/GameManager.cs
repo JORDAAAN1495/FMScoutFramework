@@ -100,7 +100,7 @@ namespace FMScoutFramework.Core.Managers
                 foreach (var versionType in Assembly.GetCallingAssembly().GetTypes().Where(t => typeof(IIVersion).IsAssignableFrom(t))) {
                     if (versionType.IsInterface)
                         continue;
-                    var instance = (IIVersion)Activator.CreateInstance (versionType);
+                    var instance = (IIVersion)Activator.CreateInstance (versionType, this);
 
                     logger.LogWrite("Trying " + instance.Description);
                     if (instance.SupportsProcess (fmProcess, null)) {
@@ -146,5 +146,14 @@ namespace FMScoutFramework.Core.Managers
 #endif
             #endregion
         }
+
+        #region Events
+        public delegate void ObjectEditedDelegate(object item);
+        public event ObjectEditedDelegate ObjectEdited;
+
+        internal void RaiseObjectEdited(object item) {
+            this.ObjectEdited(item);
+        }
+        #endregion
     }
 }
