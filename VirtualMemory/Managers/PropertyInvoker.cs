@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using FMScoutFramework.Core.Entities;
 using FMScoutFramework.Core.Entities.GameVersions;
+using System.Drawing;
 
 namespace FMScoutFramework.Core.Managers
 {
@@ -12,50 +13,54 @@ namespace FMScoutFramework.Core.Managers
         {
             Int64 offsetToFind = memoryAddress + offset;
 
-            if (typeof (Int16) == typeof (T))
-                return (T)(object)ProcessManager.ReadInt16 (offsetToFind);
-            else if (typeof (Byte) == typeof (T))
-                return (T)(object)ProcessManager.ReadByte (offsetToFind);
-            else if (typeof (DateTime) == typeof (T))
-                return (T)(object)ProcessManager.ReadDateTime (offsetToFind);
-            else if (typeof (Int32) == typeof (T))
-                return (T)(object)ProcessManager.ReadInt32 (offsetToFind);
-            else if (typeof (SByte) == typeof (T))
-                return (T)(object)ProcessManager.ReadSByte (offsetToFind);
-            else if (typeof (float) == typeof (T))
-                return (T)(object)ProcessManager.ReadFloat (offsetToFind);
-            else if (typeof (UInt32) == typeof (T))
-                return (T)(object)ProcessManager.ReadUInt32 (offsetToFind);
-            else if (typeof (ushort) == typeof (T))
-                return (T)(object)ProcessManager.ReadUInt16 (offsetToFind);
-            else if (typeof (Int64) == typeof (T))
-                return (T)(object)ProcessManager.ReadInt64 (offsetToFind);
-            else if (typeof (UInt64) == typeof (T))
-                return (T)(object)ProcessManager.ReadUInt64 (offsetToFind);
+            if (typeof(Int16) == typeof(T))
+                return (T)(object)ProcessManager.ReadInt16(offsetToFind);
+            else if (typeof(Byte) == typeof(T))
+                return (T)(object)ProcessManager.ReadByte(offsetToFind);
+            else if (typeof(DateTime) == typeof(T))
+                return (T)(object)ProcessManager.ReadDateTime(offsetToFind);
+            else if (typeof(Int32) == typeof(T))
+                return (T)(object)ProcessManager.ReadInt32(offsetToFind);
+            else if (typeof(SByte) == typeof(T))
+                return (T)(object)ProcessManager.ReadSByte(offsetToFind);
+            else if (typeof(float) == typeof(T))
+                return (T)(object)ProcessManager.ReadFloat(offsetToFind);
+            else if (typeof(UInt32) == typeof(T))
+                return (T)(object)ProcessManager.ReadUInt32(offsetToFind);
+            else if (typeof(ushort) == typeof(T))
+                return (T)(object)ProcessManager.ReadUInt16(offsetToFind);
+            else if (typeof(Int64) == typeof(T))
+                return (T)(object)ProcessManager.ReadInt64(offsetToFind);
+            else if (typeof(UInt64) == typeof(T))
+                return (T)(object)ProcessManager.ReadUInt64(offsetToFind);
+            else if (typeof(Color) == typeof(T))
+                return (T)(object)ProcessManager.ReadColour(offsetToFind);
             else
-                return default (T);
+                return default(T);
         }
 
         public static void Set<T> (Int64 offset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode, T value)
         {
             Int64 offsetToFind = memoryAddress + offset;
 
-            if (typeof (Int16) == typeof (T))
-                ProcessManager.WriteInt16 ((short)(object)value, offsetToFind);
-            else if (typeof (Byte) == typeof (T))
-                ProcessManager.WriteByte ((byte)(object)value, offsetToFind);
-            else if (typeof (DateTime) == typeof (T))
-                ProcessManager.WriteDateTime ((DateTime)(object)value, offsetToFind);
-            else if (typeof (Int32) == typeof (T))
-                ProcessManager.WriteInt32 ((int)(object)value, offsetToFind);
-            else if (typeof (SByte) == typeof (T))
-                ProcessManager.WriteSByte ((sbyte)(object)value, offsetToFind);
-            else if (typeof (float) == typeof (T))
-                ProcessManager.WriteFloat ((float)(object)value, offsetToFind);
-            else if (typeof (UInt32) == typeof (T))
-                ProcessManager.WriteInt32 ((int)(object)value, offsetToFind);
-            else if (typeof (ushort) == typeof (T))
-                ProcessManager.WriteInt16 ((ushort)(object)value, offsetToFind);
+            if (typeof(Int16) == typeof(T))
+                ProcessManager.WriteInt16((short)(object)value, offsetToFind);
+            else if (typeof(Byte) == typeof(T))
+                ProcessManager.WriteByte((byte)(object)value, offsetToFind);
+            else if (typeof(DateTime) == typeof(T))
+                ProcessManager.WriteDateTime((DateTime)(object)value, offsetToFind);
+            else if (typeof(Int32) == typeof(T))
+                ProcessManager.WriteInt32((int)(object)value, offsetToFind);
+            else if (typeof(SByte) == typeof(T))
+                ProcessManager.WriteSByte((sbyte)(object)value, offsetToFind);
+            else if (typeof(float) == typeof(T))
+                ProcessManager.WriteFloat((float)(object)value, offsetToFind);
+            else if (typeof(UInt32) == typeof(T))
+                ProcessManager.WriteInt32((int)(object)value, offsetToFind);
+            else if (typeof(ushort) == typeof(T))
+                ProcessManager.WriteInt16((ushort)(object)value, offsetToFind);
+            else if (typeof(Color) == typeof(T))
+                ProcessManager.WriteColour((Color)(object)value, offsetToFind);
         }
 
 
