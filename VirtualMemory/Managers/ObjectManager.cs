@@ -88,7 +88,7 @@ namespace FMScoutFramework.Core.Managers
         {
             List<Int64> memoryAddresses = GetMemoryAddresses<T>(offset);
 
-            #region CreateConstryctorDelegate
+            #region CreateConstructorDelegate
             ConstructorInfo constructor = typeof(T).GetConstructor(new[] { typeof(Int64), typeof(IVersion) });
             ParameterExpression expPointer = Expression.Parameter(typeof(Int64), "memoryAddress");
             ParameterExpression vPointer = Expression.Parameter(typeof(IVersion), "version");
@@ -98,15 +98,18 @@ namespace FMScoutFramework.Core.Managers
             #endregion
 
             var outputList = new Dictionary<Int64, T>(memoryAddresses.Count);
-            Parallel.ForEach(memoryAddresses, (address) =>
-            {
+            foreach(Int64 address in memoryAddresses) {
                 var obj = constructInvoker.Invoke(address, GameManager.Version);
-                try
-                {
-                    outputList.Add(address, obj);
+                if (obj != null) {
+                    try {
+                        outputList.Add(address, obj);
+                    }
+                    catch { }
                 }
-                catch { }
-            });
+                else {
+                    Console.WriteLine("WTF!");
+                }
+            }
 
             return outputList;
         }
@@ -127,24 +130,21 @@ namespace FMScoutFramework.Core.Managers
                 return null;
             }
 
+            FMCore.logger.LogWrite("Loading " + objectCount.ToString() + " " + typeof(T).Name + " pointers");
             List<Int64> pointers = GetMemoryAddressList (memoryAddress, objectCount);
             return pointers;
         }
 
         List<Int64> GetMemoryAddressList (Int64 memoryAddress, int length)
         {
-            List<Int64> res = new List<Int64> (length);
             List<Int64> pointers = new List<Int64> (length);
+            
             for (Int64 i = memoryAddress; i < (memoryAddress + (length * 0x8)); i += 0x8) {
-                pointers.Add (i);
+                Int64 pointer = ProcessManager.ReadInt64(i);
+                pointers.Add(pointer);
             }
 
-            Parallel.ForEach (pointers, (i) => {
-                Int64 pointer = ProcessManager.ReadInt64 (i);
-                res.Add (pointer);
-            });
-
-            return res;
+            return pointers;
         }
     }
 }
