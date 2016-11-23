@@ -7,7 +7,6 @@ namespace FMScoutFramework.Core.Entities.InGame.Interfaces
         int RowID { get; }
         int UID { get; }
         string Name { get; }
-        Color colour { get; }
-        int voting { get; set; }
+        byte Voting { get; set; }
     }
 }
