@@ -12,6 +12,7 @@ namespace FMScoutFramework.Core.Managers
     {
         private bool fmLoaded;
         private bool fmLoading;
+        public LogWriter logger { get; set; }
 
         public GameManager ()
         {
@@ -26,6 +27,10 @@ namespace FMScoutFramework.Core.Managers
         public bool FMLoading {
             get { return fmLoading; }
             set { fmLoading = value; }
+        }
+
+        public static string LastErrorMessage {
+            get; set;
         }
 
         public IVersion Version {
@@ -77,10 +82,13 @@ namespace FMScoutFramework.Core.Managers
             Process[] fmProcesses = Process.GetProcessesByName ("fm");
 
             if (fmProcesses.Length > 0) {
+                logger.LogWrite("Found > 0 FM Processes.");
                 Process activeProcess = fmProcesses [0];
 
+                logger.LogWrite("Opening Process for r/w.");
                 fmProcess.Pointer = ProcessMemoryAPI.OpenProcess (0x001F0FFF, 1, (uint)activeProcess.Id);
                 // fmProcess.EndPoint = ProcessManager.GetProcessEndPoint (fmProcess.Pointer);
+                logger.LogWrite("Process is now open.");
                 fmProcess.Process = activeProcess;
                 fmProcess.BaseAddress = activeProcess.MainModule.BaseAddress.ToInt64();
 
@@ -88,14 +96,20 @@ namespace FMScoutFramework.Core.Managers
                 fmProcess.VersionDescription = fmProcess.Process.MainModule.FileVersionInfo.ProductVersion;
 
                 // Search for the current version
+                logger.LogWrite("Searching for a suitable version definition...");
                 foreach (var versionType in Assembly.GetCallingAssembly().GetTypes().Where(t => typeof(IIVersion).IsAssignableFrom(t))) {
                     if (versionType.IsInterface)
                         continue;
                     var instance = (IIVersion)Activator.CreateInstance (versionType);
 
+                    logger.LogWrite("Trying " + instance.Description);
                     if (instance.SupportsProcess (fmProcess, null)) {
                         Version = instance;
+                        logger.LogWrite("Matched!");
                         break;
+                    }
+                    else {
+                        logger.LogWrite("Not a match.");
                     }
                 }
 
