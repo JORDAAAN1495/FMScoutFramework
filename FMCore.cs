@@ -12,6 +12,7 @@ namespace FMScoutFramework.Core
     {
         public GameManager gameManager = null;
         public ObjectManager objectManager = null;
+        public static LogWriter logger = new LogWriter("FMSF Private v1.0.0 Initialising...\n");
 
         public DatabaseModeEnum DatabaseMode { get; private set; }
 
@@ -58,10 +59,15 @@ namespace FMScoutFramework.Core
         {
             if (gameManager == null) { 
                 gameManager = new GameManager ();
+                gameManager.logger = logger;
                 gameManager.FMLoading = true;
-                gameManager.findFMProcess ();
+                logger.LogWrite("Searching for FM Process...");
+                gameManager.findFMProcess();
+                logger.LogWrite("FM Process search finished.");
                 gameManager.FMLoading = false;
             }
+
+            logger.LogWrite("Load result is " + gameManager.FMLoaded.ToString());
 
             return gameManager.FMLoaded;
         }

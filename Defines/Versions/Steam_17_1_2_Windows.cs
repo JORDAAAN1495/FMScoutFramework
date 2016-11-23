@@ -27,17 +27,26 @@ namespace FMScoutFramework.Core.Entities.GameVersions
         {
             #region WINDOWS
 #if WINDOWS
+            FMCore.logger.LogWrite("Getting Continents count...");
             int numberOfObjects = GameManager.TryGetPointerObjects(MemoryAddresses.MainAddress, MemoryAddresses.Continent, ProcessManager.fmProcess, MemoryAddresses.XorDistance);
             if (numberOfObjects != 7)
             {
+                FMCore.logger.LogWrite("Continents Count is wrong, returning false");
+                GameManager.LastErrorMessage = "Could not find Base Object offsets.";
+                return false;
+            }
+            FMCore.logger.LogWrite("Continent Count match!");
+
+            FMCore.logger.LogWrite("Getting in-game date...");
+            DateTime dt = ProcessManager.ReadDateTime(MemoryAddresses.CurrentDateTime);
+            if (dt.Year < 2015 || dt.Year > 2150)
+            {
+                FMCore.logger.LogWrite("In-game date is invalid!");
+                GameManager.LastErrorMessage = "Invalid main date at offset.";
                 return false;
             }
 
-            DateTime dt = ProcessManager.ReadDateTime(process.BaseAddress + MemoryAddresses.CurrentDateTime);
-            if (dt.Year < 2015 || dt.Year > 2150)
-            {
-                return false;
-            }
+            FMCore.logger.LogWrite("In-game date correct! Version is a match!");
 
             process.VersionDescription = "17.1.2f903034 (m.e v1700)";
             return true;
@@ -55,7 +64,7 @@ namespace FMScoutFramework.Core.Entities.GameVersions
             public Int64 MainOffset { get { return 0x0; } }
             public Int64 XorDistance { get { return 0x80; } }
             public Int64 StringOffset { get { return 0x0; } }
-            public Int64 CurrentDateTime { get { return 0x39BD34A; } }
+            public Int64 CurrentDateTime { get { return 0x13DAE0; } } // 0x13DAE0, 0x140134, 0x360A3E0, 0x360A5D0, 0x360A7C0
             public Int64 ActiveObject { get { return 0x10428D968; } }
 
             [MemoryAddressAttribute (CountLength = 4, BytesToSkip = 0x10)]
