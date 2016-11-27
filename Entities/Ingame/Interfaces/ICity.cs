@@ -8,6 +8,6 @@
         float Latitude { get; }
         float Longitude { get; }
         string Name { get; }
-        Nation Nation { get; }
+        int NationPtr { get; }
     }
 }
