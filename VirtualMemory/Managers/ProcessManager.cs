@@ -331,7 +331,7 @@ namespace FMScoutFramework.Core.Managers
         public static Int64 ReadArrayLength (Int64 currentAddress, int objectLength)
         {
             Int64 addressOne = ProcessManager.ReadInt64 (currentAddress);
-            Int64 addressTwo = ProcessManager.ReadInt64 (currentAddress + 0x8);
+            Int64 addressTwo = ProcessManager.ReadInt64 (currentAddress + objectLength);
 
             return ((addressTwo - addressOne) / objectLength);
         }
