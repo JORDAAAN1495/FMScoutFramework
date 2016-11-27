@@ -30,112 +30,84 @@ namespace FMScoutFramework.Core.Entities.InGame
 
         public Int32 UID {
             get {
-                return PropertyInvoker.Get<Int32> (ClubOffsets.ID, OriginalBytes, MemoryAddress, DatabaseMode);
+                return PropertyInvoker.Get<Int32> (ClubOffsets.UID, OriginalBytes, MemoryAddress, DatabaseMode);
             }
         }
 
-        public Team [] Teams {
-            get {
-                int teamCount = ProcessManager.ReadArrayLength (MemoryAddress + ClubOffsets.Teams);
-                Team [] result = new Team [teamCount];
+        // TEMP
+        public int cityID { get; set; }
+        public List<ClubSponsorshipDeal> sponsorshipDeals = new List<ClubSponsorshipDeal>();
+        public City city { get; set; }
 
-                for (int i = 0; i < teamCount; i++) {
-                    int teamAddress = PropertyInvoker.Get<Int32> (ClubOffsets.Teams, OriginalBytes, MemoryAddress, DatabaseMode);
-                    result [i] = PropertyInvoker.GetPointer<Team> (0x0, OriginalBytes, (teamAddress + (i * 4)), DatabaseMode, Version);
+        private List<Team> _teams = new List<Team>();
+        public List<Team> Teams {
+            get {
+                if (_teams.Count == 0) {
+                    // Try and get the teams if it's 0
+                    int teamCount = ProcessManager.ReadArrayLength(MemoryAddress + ClubOffsets.Teams);
+                    Int64 TeamArrayAddress = PropertyInvoker.Get<Int64>(ClubOffsets.Teams, OriginalBytes, MemoryAddress, DatabaseMode);
+                    if (teamCount > 0) {
+                        for (int i = 0; i < teamCount; i++) {
+                            _teams.Add(PropertyInvoker.GetPointer<Team>(0x0, OriginalBytes, (TeamArrayAddress + (i * 0x8)), DatabaseMode, Version));
+                        }
+                    }
                 }
 
-                return result;
+                return _teams;
+            }
+        }
+
+        private ClubInfoOne _infoOne;
+        public ClubInfoOne InfoOne {
+            get {
+                if (_infoOne == null) {
+                    _infoOne = PropertyInvoker.GetPointer<ClubInfoOne>(ClubOffsets.ClubInfoOne, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+                }
+                return _infoOne;
+            }
+        }
+
+        private ClubInfoTwo _infoTwo;
+        public ClubInfoTwo InfoTwo {
+            get {
+                if (_infoTwo == null) {
+                    _infoTwo = PropertyInvoker.GetPointer<ClubInfoTwo>(ClubOffsets.ClubInfoTwo, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+                }
+
+                return _infoTwo;
+            }
+        }
+
+        public string Fullname {
+            get {
+                return PropertyInvoker.GetString(ClubOffsets.Fullname, -1, OriginalBytes, MemoryAddress, DatabaseMode);
             }
         }
 
         public string Name {
             get {
-                return PropertyInvoker.GetString (ClubOffsets.Name, -1, OriginalBytes, MemoryAddress, DatabaseMode);
+                return PropertyInvoker.GetString(ClubOffsets.Name, 0x0, OriginalBytes, MemoryAddress, DatabaseMode);
+            }
+        }
+
+        private City _city;
+        public City City {
+            get {
+                if (_city == null) {
+                    _city = PropertyInvoker.GetPointer<City>(ClubOffsets.City, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+                }
+
+                return _city;
             }
         }
 
         public string ShortName {
             get {
-                return PropertyInvoker.GetString (ClubOffsets.ShortName, -1, OriginalBytes, MemoryAddress, DatabaseMode);
+                return PropertyInvoker.GetString(ClubOffsets.ShortName, -1, OriginalBytes, MemoryAddress, DatabaseMode);
             }
         }
 
-        /*
-        private int SixLetterNameAddress {
-            get {
-                return PropertyInvoker.Get<Int32> (ClubOffsets.SixLetterName, OriginalBytes, MemoryAddress, DatabaseMode);
-            }
-        }
 
-        public string SixLetterName {
-            get {
-                return PropertyInvoker.GetString (0x0, 0, OriginalBytes, this.SixLetterNameAddress, DatabaseMode);
-            }
-        } */
-
-        private int NationAddress {
-            get {
-                return PropertyInvoker.Get<Int32> (ClubOffsets.Nation, OriginalBytes, MemoryAddress, DatabaseMode);
-            }
-        }
-
-        public Nation Nation {
-            get {
-                return PropertyInvoker.GetPointer<Nation> (ClubOffsets.Nation, OriginalBytes, MemoryAddress, DatabaseMode, Version);
-            }
-        }
-
-        private int BasedNationAddress {
-            get {
-                return PropertyInvoker.Get<Int32> (ClubOffsets.BasedNation, OriginalBytes, MemoryAddress, DatabaseMode);
-            }
-        }
-
-        public Nation BasedNation {
-            get {
-                return PropertyInvoker.GetPointer<Nation> (ClubOffsets.BasedNation, OriginalBytes, MemoryAddress, DatabaseMode, Version);
-            }
-        }
-
-        public int ClubFinancesAddress {
-            get {
-                return PropertyInvoker.Get<Int32> (ClubOffsets.ClubFinances, OriginalBytes, MemoryAddress, DatabaseMode);
-            }
-        }
-
-        public ClubFinances ClubFinances {
-            get {
-                return PropertyInvoker.GetPointer<ClubFinances> (ClubOffsets.ClubFinances, OriginalBytes, MemoryAddress, DatabaseMode, Version);
-            }
-        }
-
-        public List<ClubSponsorshipDeal>sponsorshipDeals
-        {
-            get
-            {
-                return new List<ClubSponsorshipDeal>();
-            }
-        }
-
-        public City city
-        {
-            get
-            {
-                return null;
-            }
-        }
-
-        public int cityID
-        {
-            get
-            {
-                return 0;
-            }
-            set
-            {
-                cityID = value;
-            }
-        }
 
         public override string ToString ()
         {
