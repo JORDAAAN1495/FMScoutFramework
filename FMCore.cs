@@ -51,8 +51,11 @@ namespace FMScoutFramework.Core
 
         public void LoadData (bool refreshPersonCache)
         {
-            CheckProcessAndGame ();
-            LoadDataForCheckedGame (refreshPersonCache);
+            if (CheckProcessAndGame ()) {
+                LoadDataForCheckedGame(refreshPersonCache);
+            }
+
+            GameLoaded();
         }
 
         public bool CheckProcessAndGame ()
@@ -78,7 +81,6 @@ namespace FMScoutFramework.Core
                 objectManager = new ObjectManager (gameManager, DatabaseMode);
 
             objectManager.Load (refreshPersonCache);
-            GameLoaded ();
         }
 
         public MetaDataCls MetaData { get { return new MetaDataCls (this, this.objectManager, gameManager); } }
