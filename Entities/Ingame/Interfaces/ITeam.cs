@@ -2,8 +2,7 @@
 {
     public interface ITeam
     {
-        int ID { get; }
+        int UID { get; }
         ushort Reputation { get; }
-        TeamType TeamType { get; }
     }
 }

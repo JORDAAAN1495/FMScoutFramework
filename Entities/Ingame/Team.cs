@@ -5,9 +5,55 @@ using FMScoutFramework.Core.Offsets;
 using FMScoutFramework.Core.Attributes;
 using FMScoutFramework.Core.Entities.InGame.Interfaces;
 using FMScoutFramework.Core.Utilities;
+using System.ComponentModel;
 
 namespace FMScoutFramework.Core.Entities.InGame
 {
+    public enum TeamType {
+        [Description("First")]
+        TTFirst         = 0,
+        [Description("Reserves")]
+        TTReserves      = 1,
+        [Description("A")]
+        TTA             = 2,
+        [Description("B")]
+        TTB             = 3,
+        [Description("Superdraft A")]
+        TTSuperdraftA   = 4,
+        [Description("Superdraft B")]
+        TTSuperdraftB   = 5,
+        [Description("Superdraft C")]
+        TTSuperdraftC   = 6,
+        [Description("Superdraft D")]
+        TTSuperdraftD   = 7,
+        [Description("Waivers")]
+        TTWaivers       = 8,
+        [Description("U23")]
+        TTU23           = 9,
+        [Description("U21")]
+        TTU21           = 10,
+        [Description("U19")]
+        TTU19           = 11,
+        [Description("U18")]
+        TTU18           = 12,
+        [Description("C")]
+        TTC             = 13,
+        [Description("Amateur")]
+        TTAmateur       = 14,
+        [Description("II")]
+        TTII            = 15,
+        [Description("Team 2")]
+        TTTeam2         = 16,
+        [Description("Team 3")]
+        TTTeam3         = 17,
+        [Description("U20")]
+        TTU20           = 18,
+        [Description("Youth Evaluation")]
+        TTYouthEvaluation = 22,
+        [Description("Dutch Reserves")]
+        TTDutchReserves = 30
+    }
+
     public class Team : BaseObject, ITeam
     {
         public TeamOffsets TeamOffsets;
@@ -22,19 +68,45 @@ namespace FMScoutFramework.Core.Entities.InGame
             this.TeamOffsets = new TeamOffsets (version);
         }
 
+        public void Save() {
+            PropertyInvoker.Set<short>(TeamOffsets.PreviousReputation, OriginalBytes, MemoryAddress, DatabaseMode, _previousReputation);
+            PropertyInvoker.Set<byte>(TeamOffsets.TeamType, OriginalBytes, MemoryAddress, DatabaseMode, _teamType);
+
+            int rotateAmount = (int)((MemoryAddress + TeamOffsets.Reputation) & 0xf);
+            uint decryptedRep = _reputation;
+            decryptedRep = BitwiseOperations.rol_short(decryptedRep, rotateAmount);
+            decryptedRep = decryptedRep ^ 0x20D3;
+            decryptedRep = BitwiseOperations.ror_short(decryptedRep, 0x2);
+            decryptedRep = decryptedRep ^ 0x542E;
+            PropertyInvoker.Set<ushort>(TeamOffsets.Reputation, OriginalBytes, MemoryAddress, DatabaseMode, (ushort)decryptedRep);
+        }
+
+        private bool _isDirty = false;
+        public bool isDirty {
+            get {
+                return _isDirty;
+            }
+            set {
+                if (value) {
+                    Version.gameManager.RaiseObjectEdited(this);
+                }
+                _isDirty = value;
+            }
+        }
+
         public int RowID {
             get {
                 return PropertyInvoker.Get<Int32> (TeamOffsets.RowID, OriginalBytes, MemoryAddress, DatabaseMode);
             }
         }
 
-        public int ID {
+        public int UID {
             get {
-                return PropertyInvoker.Get<Int32> (TeamOffsets.ID, OriginalBytes, MemoryAddress, DatabaseMode);
+                return PropertyInvoker.Get<Int32> (TeamOffsets.UID, OriginalBytes, MemoryAddress, DatabaseMode);
             }
         }
 
-        private int ClubAddress {
+        private Int64 ClubPtr {
             get {
                 return PropertyInvoker.Get<Int32> (TeamOffsets.Club, OriginalBytes, MemoryAddress, DatabaseMode);
             }
@@ -46,30 +118,58 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
+        private short _previousReputation = 0;
         private short PreviousReputation {
             get {
-                return PropertyInvoker.Get<Int16> (TeamOffsets.PreviousReputation, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_previousReputation == 0) {
+                    _previousReputation = PropertyInvoker.Get<Int16>(TeamOffsets.PreviousReputation, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _previousReputation;
+            }
+            set {
+                if (_previousReputation != value) {
+                    _previousReputation = value;
+                    isDirty = true;
+                }
             }
         }
 
-        public TeamType TeamType {
+        private byte _teamType = 0;
+        public byte TeamType {
             get {
-                return (TeamType)PropertyInvoker.Get<byte> (TeamOffsets.TeamType, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_teamType == 0) {
+                    _teamType = PropertyInvoker.Get<byte>(TeamOffsets.TeamType, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _teamType;
+            }
+            set {
+                if (_teamType != value) {
+                    _teamType = value;
+                    isDirty = true;
+                }
             }
         }
 
+        private ushort _reputation = 0;
         public ushort Reputation {
             get {
-                int rotateAmount = (int)((MemoryAddress + TeamOffsets.Reputation) & 0xf);
-                uint encryptedRep = PropertyInvoker.Get<ushort> (TeamOffsets.Reputation, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_reputation == 0) {
+                    int rotateAmount = (int)((MemoryAddress + TeamOffsets.Reputation) & 0xf);
+                    uint encryptedRep = PropertyInvoker.Get<ushort>(TeamOffsets.Reputation, OriginalBytes, MemoryAddress, DatabaseMode);
+                    encryptedRep = encryptedRep ^ 0x542E;
+                    encryptedRep = BitwiseOperations.rol_short(encryptedRep, 0x2);
+                    encryptedRep = encryptedRep ^ 0x20D3;
+                    encryptedRep = BitwiseOperations.ror_short(encryptedRep, rotateAmount);
 
-                encryptedRep = BitwiseOperations.rol_short (encryptedRep, rotateAmount) & 0xffff;
-                encryptedRep = (encryptedRep ^ 0x9634);
-                encryptedRep = BitwiseOperations.ror_short (encryptedRep, 5) & 0xffff;
-                encryptedRep = ~encryptedRep & 0xffff;
-                encryptedRep = (encryptedRep ^ 0x144b);
-
-                return (ushort)encryptedRep;
+                    _reputation = (ushort)encryptedRep;
+                }
+                return _reputation;
+            }
+            set {
+                if (_reputation != value) {
+                    _reputation = value;
+                    isDirty = true;
+                }
             }
         }
 
@@ -80,30 +180,5 @@ namespace FMScoutFramework.Core.Entities.InGame
             else
                 return "-";
         }
-    }
-
-    public enum TeamType
-    {
-        First = 0,
-        Reserves = 1,
-        A = 2,
-        B = 3,
-        SuperdraftA = 4,
-        SuperdraftB = 5,
-        SuperdraftC = 6,
-        SuperdraftD = 7,
-        Waivers = 8,
-        U23 = 9,
-        U21 = 10,
-        U19 = 11,
-        U18 = 12,
-        C = 13,
-        Amateur = 14,
-        II = 15,
-        Team2 = 16,
-        Team3 = 17,
-        U20 = 18,
-        YouthEvaluation = 22,
-        DutchReserves = 30
     }
 }
