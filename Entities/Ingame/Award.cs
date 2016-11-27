@@ -251,7 +251,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
         public Award(Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
             : base(memoryAddress, originalBytes, version) { }
 
-        public void SaveAward() {
+        public void Save() {
             PropertyInvoker.Set<DateTime>(AwardOffsets.AwardDate, OriginalBytes, MemoryAddress, DatabaseMode, _awardDate);
             PropertyInvoker.Set<DateTime>(AwardOffsets.AnnouncementDate, OriginalBytes, MemoryAddress, DatabaseMode, _announcementDate);
             PropertyInvoker.Set<short>(AwardOffsets.Position, OriginalBytes, MemoryAddress, DatabaseMode, _position);
@@ -276,6 +276,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
             PropertyInvoker.Set<byte>(AwardOffsets.UseStatsFrom, OriginalBytes, MemoryAddress, DatabaseMode, _useStatsFrom);
             PropertyInvoker.Set<byte>(AwardOffsets.MinimumPercentageOfGamesPlayed, OriginalBytes, MemoryAddress, DatabaseMode, _minimumPercentageOfGamesPlayed);
             PropertyInvoker.Set<byte>(AwardOffsets.AllowPreviousWinner, OriginalBytes, MemoryAddress, DatabaseMode, _allowPreviousWinner);
+            _isDirty = false;
         }
 
         private bool _isDirty = false;
@@ -340,7 +341,10 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _awardDate;
             }
             set {
-                _awardDate = value;
+                if (_awardDate != value) {
+                    isDirty = true;
+                    _awardDate = value;
+                }
             }
         }
 
@@ -353,6 +357,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _announcementDate;
             }
             set {
+                isDirty = true;
                 _announcementDate = value;
             }
         }
@@ -366,6 +371,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _position;
             }
             set {
+                isDirty = true;
                 _position = value;
             }
         }
@@ -393,6 +399,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _period;
             }
             set {
+                isDirty = true;
                 _period = value;
             }
         }
@@ -406,6 +413,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _voting;
             }
             set {
+                isDirty = true;
                 _voting = value;
             }
         }
@@ -419,6 +427,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _based;
             }
             set {
+                isDirty = true;
                 _based = value;
             }
         }
@@ -432,6 +441,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _votingFormat;
             }
             set {
+                isDirty = true;
                 _votingFormat = value;
             }
         }
@@ -445,6 +455,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _recipientType;
             }
             set {
+                isDirty = true;
                 _recipientType = value;
             }
         }
@@ -458,6 +469,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _formation;
             }
             set {
+                isDirty = true;
                 _formation = value;
             }
         }
@@ -471,7 +483,10 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _foregroundColour;
             }
             set {
-                _foregroundColour = value;
+                if (_foregroundColour != value) {
+                    isDirty = true;
+                    _foregroundColour = value;
+                }
             }
         }
 
@@ -484,7 +499,10 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _backgroundColour;
             }
             set {
-                _backgroundColour = value;
+                if (_backgroundColour != value) {
+                    isDirty = true;
+                    _backgroundColour = value;
+                }
             }
         }
 
@@ -497,7 +515,10 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _trimColour;
             }
             set {
-                _trimColour = value;
+                if (_trimColour != value) {
+                    isDirty = true;
+                    _trimColour = value;
+                }
             }
         }
 
@@ -510,6 +531,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _awardReputation;
             }
             set {
+                isDirty = true;
                 _awardReputation = value;
             }
         }
@@ -523,6 +545,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _type;
             }
             set {
+                isDirty = true;
                 _type = value;
             }
         }
@@ -536,6 +559,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _minimumAge;
             }
             set {
+                isDirty = true;
                 _minimumAge = value;
             }
         }
@@ -549,6 +573,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _maximumAge;
             }
             set {
+                isDirty = true;
                 _maximumAge = value;
             }
         }
@@ -562,6 +587,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _winnerHomeReputation;
             }
             set {
+                isDirty = true;
                 _winnerHomeReputation = value;
             }
         }
@@ -575,6 +601,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _winnerWorldReputation;
             }
             set {
+                isDirty = true;
                 _winnerWorldReputation = value;
             }
         }
@@ -588,6 +615,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _placings;
             }
             set {
+                isDirty = true;
                 _placings = value;
             }
         }
@@ -601,6 +629,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _side;
             }
             set {
+                isDirty = true;
                 _side = value;
             }
         }
@@ -614,6 +643,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _useStatsFrom;
             }
             set {
+                isDirty = true;
                 _useStatsFrom = value;
             }
         }
@@ -627,6 +657,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _minimumPercentageOfGamesPlayed;
             }
             set {
+                isDirty = true;
                 _minimumPercentageOfGamesPlayed = value;
             }
         }
@@ -640,7 +671,26 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return _allowPreviousWinner;
             }
             set {
+                isDirty = true;
                 _allowPreviousWinner = value;
+            }
+        }
+
+        public int NationID {
+            get {
+                return 0;
+            }
+        }
+
+        public int CompetitionID {
+            get {
+                return 0;
+            }
+        }
+
+        public int ContinentID {
+            get {
+                return 0;
             }
         }
 
