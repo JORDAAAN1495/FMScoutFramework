@@ -12,7 +12,7 @@ namespace FMScoutFramework.Core.Offsets {
         public const short YearFounded = 0xA0;
         public const short YouthImportance = 0xBD;
         public const short TrainingFacilities = 0xEC;
-        public const short ChairmanStatus = 0xEF;
+        public const short ChairmanStatus = 0xA6;
         public const short YouthFacilities = 0xF7;
         public const short YouthAcademy = 0xF8;
         public const short YouthRecruitment = 0xF9;
