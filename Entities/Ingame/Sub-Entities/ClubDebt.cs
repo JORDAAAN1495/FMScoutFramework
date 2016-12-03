@@ -17,6 +17,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
             PropertyInvoker.Set<byte>(ClubDebtsOffsets.Source, OriginalBytes, MemoryAddress, DatabaseMode, _source);
             PropertyInvoker.Set<DateTime>(ClubDebtsOffsets.StartDate, OriginalBytes, MemoryAddress, DatabaseMode, _startDate);
             PropertyInvoker.Set<DateTime>(ClubDebtsOffsets.EndDate, OriginalBytes, MemoryAddress, DatabaseMode, _endDate);
+            _isDirty = false;
         }
 
         private bool _isDirty = false;
