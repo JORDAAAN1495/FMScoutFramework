@@ -84,6 +84,7 @@
     <Compile Include="Defines\Offsets\Sub-Entities\ClubDebtsOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\ClubInfoOneOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\ClubInfoTwoOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\ClubSponsorshipDealsOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\KitOffsets.cs" />
     <Compile Include="Defines\Versions\Steam_17_1_2_Windows.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IClubDebt.cs" />
