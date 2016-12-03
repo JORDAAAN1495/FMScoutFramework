@@ -17,6 +17,13 @@ namespace FMScoutFramework.Core.Entities.InGame {
             this.ClubInfoOneOffsets = new ClubInfoOneOffsets(version);
         }
 
+        public void Save() {
+            PropertyInvoker.Set<int>(ClubInfoOneOffsets.AverageAttendance, OriginalBytes, MemoryAddress, DatabaseMode, _averageAttendance);
+            PropertyInvoker.Set<int>(ClubInfoOneOffsets.MinimumAttendance, OriginalBytes, MemoryAddress, DatabaseMode, _minimumAttendance);
+            PropertyInvoker.Set<int>(ClubInfoOneOffsets.MaximumAttendance, OriginalBytes, MemoryAddress, DatabaseMode, _maximumAttendance);
+            _isDirty = false;
+        }
+
         private bool _isDirty = false;
         public bool isDirty {
             get {
@@ -92,6 +99,34 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 }
 
                 return _kits;
+            }
+        }
+
+        public Kit TextKit {
+            get {
+                Kit result = null;
+                foreach (Kit kit in Kits) {
+                    if ((KitType)kit.Type == KitType.KTHome && (KitRecordType)kit.RecordType == KitRecordType.KRTText) {
+                        result = kit;
+                        break;
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        public Kit MainKit {
+            get {
+                Kit result = null;
+                foreach (Kit kit in Kits) {
+                    if ((KitType)kit.Type == KitType.KTHome && (KitRecordType)kit.RecordType == KitRecordType.KRTShirt && kit.OutfieldPlayer == 1) {
+                        result = kit;
+                        break;
+                    }
+                }
+
+                return result;
             }
         }
     }

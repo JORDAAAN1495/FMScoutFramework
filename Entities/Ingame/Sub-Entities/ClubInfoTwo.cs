@@ -17,6 +17,18 @@ namespace FMScoutFramework.Core.Entities.InGame {
             ClubInfoTwoOffsets = new ClubInfoTwoOffsets(version);
         }
 
+        public void Save() {
+            PropertyInvoker.Set<short>(ClubInfoTwoOffsets.YearFounded, OriginalBytes, MemoryAddress, DatabaseMode, _yearFounded);
+            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.YouthImportance, OriginalBytes, MemoryAddress, DatabaseMode, _youthImportance);
+            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.YouthFacilities, OriginalBytes, MemoryAddress, DatabaseMode, _youthFacilities);
+            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.YouthRecruitment, OriginalBytes, MemoryAddress, DatabaseMode, _youthRecruitment);
+            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.YouthAcademy, OriginalBytes, MemoryAddress, DatabaseMode, _youthAcademy);
+            PropertyInvoker.Set<short>(ClubInfoTwoOffsets.ChairmanStatus, OriginalBytes, MemoryAddress, DatabaseMode, _chairmanStatus);
+            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.TrainingFacilities, OriginalBytes, MemoryAddress, DatabaseMode, _trainingFacilities);
+            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.Morale, OriginalBytes, MemoryAddress, DatabaseMode, _morale);
+            _isDirty = false;
+        }
+
         private bool _isDirty = false;
         public bool isDirty {
             get {
