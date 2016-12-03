@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using FMScoutFramework.Core.Entities.GameVersions;
 using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Core.Offsets;
-using FMScoutFramework.Core.Attributes;
 using FMScoutFramework.Core.Entities.InGame.Interfaces;
 using FMScoutFramework.Core.Utilities;
 using System.ComponentModel;
@@ -25,122 +23,368 @@ namespace FMScoutFramework.Core.Entities.InGame
     public class ClubFinances : BaseObject, IClubFinances
     {
         public ClubFinancesOffsets ClubFinancesOffsets;
-        public ClubFinances (int memoryAddress, IVersion version)
+        public ClubFinances (Int64 memoryAddress, IVersion version)
             : base (memoryAddress, version)
         {
             this.ClubFinancesOffsets = new ClubFinancesOffsets (version);
         }
-        public ClubFinances (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+        public ClubFinances (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
             : base (memoryAddress, originalBytes, version)
         {
             this.ClubFinancesOffsets = new ClubFinancesOffsets (version);
         }
 
+        public void Save() {
+            #region Balance Encrypter
+            int rotateAmount = (int)(MemoryAddress + ClubFinancesOffsets.Balance) & 0x1F;
+            uint decryptedBalance = (uint)_balance;
+            decryptedBalance = BitwiseOperations.rol(decryptedBalance, rotateAmount);
+            decryptedBalance = decryptedBalance ^ 0x16F175CB;
+            decryptedBalance = BitwiseOperations.ror(decryptedBalance, 0x16);
+            decryptedBalance = ~decryptedBalance;
+            #endregion
+            PropertyInvoker.Set<uint>(ClubFinancesOffsets.Balance, OriginalBytes, MemoryAddress, DatabaseMode, decryptedBalance);
+            PropertyInvoker.Set<float>(ClubFinancesOffsets.AverageTicketPrice, OriginalBytes, MemoryAddress, DatabaseMode, _averageTicketPrice);
+            PropertyInvoker.Set<float>(ClubFinancesOffsets.AverageSeasonTicketPrice, OriginalBytes, MemoryAddress, DatabaseMode, _averageSeasonTicketPrice);
+            PropertyInvoker.Set<float>(ClubFinancesOffsets.MatchTicketPriceRatio, OriginalBytes, MemoryAddress, DatabaseMode, _matchTicketPriceRatio);
+            PropertyInvoker.Set<float>(ClubFinancesOffsets.SeasonTicketPriceRatio, OriginalBytes, MemoryAddress, DatabaseMode, _seasonTicketPriceRatio);
+            PropertyInvoker.Set<DateTime>(ClubFinancesOffsets.EmbargoStartDate, OriginalBytes, MemoryAddress, DatabaseMode, _embargoStartDate);
+            PropertyInvoker.Set<DateTime>(ClubFinancesOffsets.EmbargoEndDate, OriginalBytes, MemoryAddress, DatabaseMode, _embargoEndDate);
+            PropertyInvoker.Set<DateTime>(ClubFinancesOffsets.EmbargoAppealDate, OriginalBytes, MemoryAddress, DatabaseMode, _embargoAppealDate);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.RemainingBudget, OriginalBytes, MemoryAddress, DatabaseMode, _remainingBudget);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.SeasonTransferFunds, OriginalBytes, MemoryAddress, DatabaseMode, _seasonTransferFunds);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.TransferIncomePercentage, OriginalBytes, MemoryAddress, DatabaseMode, _transferIncomePercentage);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.YouthGrantIncome, OriginalBytes, MemoryAddress, DatabaseMode, _youthGrantIncome);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.WeeklyWageBudget, OriginalBytes, MemoryAddress, DatabaseMode, _weeklyWageBudget);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.HighestWage, OriginalBytes, MemoryAddress, DatabaseMode, _highestWage);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.WeeklyWageBudgetUsed, OriginalBytes, MemoryAddress, DatabaseMode, _weeklyWageBudgetUsed);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.HighestWagePaid, OriginalBytes, MemoryAddress, DatabaseMode, _highestWagePaid);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.HighestNonPlayerWagePaid, OriginalBytes, MemoryAddress, DatabaseMode, _highestNonPlayerWagePaid);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.LatestSeasonTicketSales, OriginalBytes, MemoryAddress, DatabaseMode, _latestSeasonTickets);
+            PropertyInvoker.Set<byte>(ClubFinancesOffsets.SugarDaddy, OriginalBytes, MemoryAddress, DatabaseMode, _sugarDaddy);
+            _isDirty = false;
+        }
+
+        private bool _isDirty = false;
+        public bool isDirty {
+            get {
+                return _isDirty;
+            }
+            set {
+                if (value) {
+                    Version.gameManager.RaiseObjectEdited(this);
+                }
+                _isDirty = value;
+            }
+        }
+
+        private int _balance = 0;
         public int Balance {
             get {
-                int rotateAmount = (int)((MemoryAddress + ClubFinancesOffsets.Balance) & 0x1f);
-                uint encryptedBalance = (uint)ProcessManager.ReadInt32 (MemoryAddress + ClubFinancesOffsets.Balance);
+                if (_balance == 0) {
+                    int rotateAmount = (int)(MemoryAddress + ClubFinancesOffsets.Balance) & 0x1F;
+                    uint encryptedBalance = PropertyInvoker.Get<uint>(ClubFinancesOffsets.Balance, OriginalBytes, MemoryAddress, DatabaseMode);
+                    encryptedBalance = ~encryptedBalance;
+                    encryptedBalance = BitwiseOperations.rol(encryptedBalance, 0x16);
+                    encryptedBalance = encryptedBalance ^ 0x16F175CB;
+                    encryptedBalance = BitwiseOperations.ror(encryptedBalance, rotateAmount);
 
-                encryptedBalance = BitwiseOperations.rol (encryptedBalance, rotateAmount);
-                encryptedBalance = (encryptedBalance ^ 0xFAECECF1);
-                encryptedBalance = ~encryptedBalance;
-                encryptedBalance = BitwiseOperations.ror (encryptedBalance, 0x17);
-                encryptedBalance = ~encryptedBalance;
-
-                return (int)encryptedBalance;
+                    _balance = (int)encryptedBalance;
+                }
+                return _balance;
             }
             set {
-                int rotateAmount = (int)((MemoryAddress + ClubFinancesOffsets.Balance) & 0x1f);
-                uint encryptedBalance = (uint)value;
-
-                encryptedBalance = ~encryptedBalance;
-                encryptedBalance = BitwiseOperations.rol (encryptedBalance, 0x17);
-                encryptedBalance = ~encryptedBalance;
-                encryptedBalance = (encryptedBalance ^ 0xFAECECF1);
-                encryptedBalance = BitwiseOperations.ror (encryptedBalance, rotateAmount);
-
-                PropertyInvoker.Set<int> (ClubFinancesOffsets.Balance, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_balance != value) {
+                    _balance = value;
+                    isDirty = true;
+                }
             }
         }
 
+        private float _averageTicketPrice = 0.0f;
+        public float AverageTicketPrice {
+            get {
+                if (_averageTicketPrice == 0.0f) {
+                    _averageTicketPrice = PropertyInvoker.Get<float>(ClubFinancesOffsets.AverageTicketPrice, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _averageTicketPrice;
+            }
+            set {
+                if (_averageTicketPrice != value) {
+                    _averageTicketPrice = value;
+                    isDirty = true;
+                }
+            }
+        }
+
+        private float _averageSeasonTicketPrice = 0.0f;
+        public float AverageSeasonTicketPrice {
+            get {
+                if (_averageSeasonTicketPrice == 0.0f) {
+                    _averageSeasonTicketPrice = PropertyInvoker.Get<float>(ClubFinancesOffsets.AverageSeasonTicketPrice, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _averageSeasonTicketPrice;
+            }
+            set {
+                if (_averageSeasonTicketPrice != value) {
+                    _averageSeasonTicketPrice = value;
+                    isDirty = true;
+                }
+            }
+        }
+
+        private float _matchTicketPriceRatio = 0.0f;
+        public float MatchTicketPriceRatio {
+            get {
+                if (_matchTicketPriceRatio == 0.0f) {
+                    _matchTicketPriceRatio = PropertyInvoker.Get<float>(ClubFinancesOffsets.MatchTicketPriceRatio, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _matchTicketPriceRatio;
+            }
+            set {
+                if (_matchTicketPriceRatio != value) {
+                    _matchTicketPriceRatio = value;
+                    isDirty = true;
+                }
+            }
+        }
+
+        private float _seasonTicketPriceRatio = 0.0f;
+        public float SeasonTicketPriceRatio {
+            get {
+                if (_seasonTicketPriceRatio == 0.0f) {
+                    _seasonTicketPriceRatio = PropertyInvoker.Get<float>(ClubFinancesOffsets.SeasonTicketPriceRatio, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _seasonTicketPriceRatio;
+            }
+            set {
+                if (_seasonTicketPriceRatio != value) {
+                    _seasonTicketPriceRatio = value;
+                }
+            }
+        }
+
+        private DateTime _embargoStartDate;
+        public DateTime EmbargoStartDate {
+            get {
+                if (_embargoStartDate.Year < 1970) {
+                    _embargoStartDate = PropertyInvoker.Get<DateTime>(ClubFinancesOffsets.EmbargoStartDate, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _embargoStartDate;
+            }
+            set {
+                if (_embargoStartDate != value) {
+                    _embargoStartDate = value;
+                    isDirty = true;
+                }
+            }
+        }
+
+        private DateTime _embargoEndDate;
+        public DateTime EmbargoEndDate {
+            get {
+                if (_embargoEndDate.Year < 1970) {
+                    _embargoEndDate = PropertyInvoker.Get<DateTime>(ClubFinancesOffsets.EmbargoEndDate, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _embargoEndDate;
+            }
+            set {
+                if (_embargoEndDate != value) {
+                    _embargoEndDate = value;
+                    isDirty = true;
+                }
+            }
+        }
+
+        private DateTime _embargoAppealDate;
+        public DateTime EmbargoAppealDate {
+            get {
+                if (_embargoAppealDate.Year < 1970) {
+                    _embargoAppealDate = PropertyInvoker.Get<DateTime>(ClubFinancesOffsets.EmbargoAppealDate, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _embargoAppealDate;
+            }
+            set {
+                if (_embargoAppealDate != value) {
+                    _embargoAppealDate = value;
+                    isDirty = true;
+                }
+            }
+        }
+
+        private int _remainingBudget = 0;
         public int RemainingBudget {
             get {
-                return PropertyInvoker.Get<Int32> (ClubFinancesOffsets.RemainingBudget, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_remainingBudget == 0) {
+                    _remainingBudget = PropertyInvoker.Get<int>(ClubFinancesOffsets.RemainingBudget, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _remainingBudget;
             }
             set {
-                PropertyInvoker.Set<Int32> (ClubFinancesOffsets.RemainingBudget, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_remainingBudget != value) {
+                    _remainingBudget = value;
+                    isDirty = true;
+                }
             }
         }
 
+        private int _seasonTransferFunds = 0;
         public int SeasonTransferFunds {
             get {
-                return PropertyInvoker.Get<Int32> (ClubFinancesOffsets.SeasonTransferFunds, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_seasonTransferFunds == 0) {
+                    _seasonTransferFunds = PropertyInvoker.Get<int>(ClubFinancesOffsets.SeasonTransferFunds, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _seasonTransferFunds;
             }
             set {
-                PropertyInvoker.Set<Int32> (ClubFinancesOffsets.SeasonTransferFunds, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_seasonTransferFunds != value) {
+                    _seasonTransferFunds = value;
+                    isDirty = true;
+                }
             }
         }
 
+        private int _transferIncomePercentage = 0;
         public int TransferIncomePercentage {
             get {
-                return PropertyInvoker.Get<Int32> (ClubFinancesOffsets.TransferIncomePercentage, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_transferIncomePercentage == 0) {
+                    _transferIncomePercentage = PropertyInvoker.Get<int>(ClubFinancesOffsets.TransferIncomePercentage, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _transferIncomePercentage;
             }
             set {
-                PropertyInvoker.Set<Int32> (ClubFinancesOffsets.TransferIncomePercentage, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_transferIncomePercentage != value) {
+                    _transferIncomePercentage = value;
+                    isDirty = true;
+                }
             }
         }
 
+        private int _youthGrantIncome = 0;
         public int YouthGrantIncome {
             get {
-                return PropertyInvoker.Get<Int32> (ClubFinancesOffsets.YouthGrantIncome, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_youthGrantIncome == 0) {
+                    _youthGrantIncome = PropertyInvoker.Get<int>(ClubFinancesOffsets.YouthGrantIncome, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _youthGrantIncome;
             }
             set {
-                PropertyInvoker.Set<Int32> (ClubFinancesOffsets.YouthGrantIncome, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_youthGrantIncome != value) {
+                    _youthGrantIncome = value;
+                    isDirty = true;
+                }
             }
         }
 
+        private int _weeklyWageBudget = 0;
         public int WeeklyWageBudget {
             get {
-                return PropertyInvoker.Get<Int32> (ClubFinancesOffsets.WeeklyWageBudget, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_weeklyWageBudget == 0) {
+                    _weeklyWageBudget = PropertyInvoker.Get<int>(ClubFinancesOffsets.WeeklyWageBudget, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _weeklyWageBudget;
             }
             set {
-                PropertyInvoker.Set<Int32> (ClubFinancesOffsets.WeeklyWageBudget, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_weeklyWageBudget != value) {
+                    _weeklyWageBudget = value;
+                    isDirty = true;
+                }
             }
         }
 
+        private int _highestWage = 0;
         public int HighestWage {
             get {
-                return PropertyInvoker.Get<Int32> (ClubFinancesOffsets.HighestWage, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_highestWage == 0) {
+                    _highestWage = PropertyInvoker.Get<int>(ClubFinancesOffsets.HighestWage, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _highestWage;
             }
             set {
-                PropertyInvoker.Set<Int32> (ClubFinancesOffsets.HighestWage, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_highestWage != value) {
+                    _highestWage = value;
+                    isDirty = true;
+                }
             }
         }
 
+        private int _weeklyWageBudgetUsed = 0;
+        public int WeeklyWageBudgetUsed {
+            get {
+                if (_weeklyWageBudgetUsed == 0) {
+                    _weeklyWageBudgetUsed = PropertyInvoker.Get<int>(ClubFinancesOffsets.WeeklyWageBudgetUsed, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _weeklyWageBudgetUsed;
+            }
+            set {
+                if (_weeklyWageBudgetUsed != value) {
+                    _weeklyWageBudgetUsed = value;
+                    isDirty = true;
+                }
+            }
+        }
+
+        private int _highestWagePaid = 0;
         public int HighestWagePaid {
             get {
-                return PropertyInvoker.Get<Int32> (ClubFinancesOffsets.HighestWagePaid, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_highestWagePaid == 0) {
+                    _highestWagePaid = PropertyInvoker.Get<int>(ClubFinancesOffsets.HighestWagePaid, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _highestWagePaid;
             }
             set {
-                PropertyInvoker.Set<Int32> (ClubFinancesOffsets.HighestWagePaid, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_highestWagePaid != value) {
+                    _highestWagePaid = value;
+                    isDirty = true;
+                }
             }
         }
 
-        public int LatestSeasonTicketsAddress {
+        private int _highestNonPlayerWagePaid = 0;
+        public int HighestNonPlayerWagePaid {
             get {
-                return PropertyInvoker.Get<Int32> (ClubFinancesOffsets.LatestSeasonTicketSales, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_highestNonPlayerWagePaid == 0) {
+                    _highestNonPlayerWagePaid = PropertyInvoker.Get<int>(ClubFinancesOffsets.HighestNonPlayerWagePaid, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _highestNonPlayerWagePaid;
             }
             set {
-                PropertyInvoker.Set<Int32> (ClubFinancesOffsets.LatestSeasonTicketSales, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_highestNonPlayerWagePaid != value) {
+                    _highestNonPlayerWagePaid = value;
+                    isDirty = true;
+                }
             }
         }
 
-        public int LastestSeasonTickets {
+        private int _latestSeasonTickets = 0;
+        public int LatestSeasonTickets {
             get {
-                return PropertyInvoker.Get<Int32> (0x0, OriginalBytes, this.LatestSeasonTicketsAddress, DatabaseMode);
+                if (_latestSeasonTickets == 0) {
+                    _latestSeasonTickets = PropertyInvoker.Get<int>(ClubFinancesOffsets.LatestSeasonTicketSales, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _latestSeasonTickets;
             }
             set {
-                PropertyInvoker.Set<Int32> (0x0, OriginalBytes, this.LatestSeasonTicketsAddress, DatabaseMode, value);
+                if (_latestSeasonTickets != value) {
+                    _latestSeasonTickets = value;
+                    isDirty = true;
+                }
+            }
+        }
+
+        private byte _sugarDaddy = 0;
+        public byte SugarDaddy {
+            get {
+                if (_sugarDaddy == 0) {
+                    _sugarDaddy = PropertyInvoker.Get<byte>(ClubFinancesOffsets.SugarDaddy, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _sugarDaddy;
+            }
+            set {
+                if (_sugarDaddy != value) {
+                    _sugarDaddy = value;
+                    isDirty = true;
+                }
             }
         }
     }
