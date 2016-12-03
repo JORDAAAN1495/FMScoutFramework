@@ -1,9 +1,4 @@
 ﻿using FMScoutFramework.Core.Entities.GameVersions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FMScoutFramework.Core.Offsets {
     public sealed class ClubDebtsOffsets {
