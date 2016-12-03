@@ -27,9 +27,9 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
-        public Int32 ID {
+        public Int32 UID {
             get {
-                return ProcessManager.ReadInt32 (MemoryAddress + NationOffsets.ID);
+                return ProcessManager.ReadInt32 (MemoryAddress + NationOffsets.UID);
             }
         }
 

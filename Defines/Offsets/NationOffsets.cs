@@ -13,17 +13,19 @@ namespace FMScoutFramework.Core.Offsets
         }
 
         public const short RowID = 0x4;
-        public const short ID = 0x8;
-        public const short Teams = 0x10;
-        public const short RivalNations = 0x28;
+        public const short UID = 0xC;
+        public const short Teams = 0x18;
+        public const short RivalNations = 0x48;
 
         public short Name {
-            get { return 0x68; }
+            get { return 0xA0; }
         }
 
-        public const short ShortName = 0x58;
-        public const short ThreeLetterName = 0x60;
-        public const short Nationality = 0x64;
+        public const short ShortName = 0xA8;
+        public const short ThreeLetterName = 0xB0;
+        public const short Nationality = 0xB8;
+
+        // The Rest are OFF for now
         public const short SpokenLanguages = 0x6C;
         public const short UnknownList1 = 0x74;     // Points to list of UIDs
         public const short TaxRules = 0x78;

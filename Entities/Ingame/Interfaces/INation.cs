@@ -2,7 +2,7 @@
 {
     public interface INation
     {
-        int ID { get; }
+        int UID { get; }
         string Name { get; }
         string NationalityName { get; }
         RivalNation [] RivalNations { get; }
