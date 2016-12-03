@@ -18,17 +18,17 @@ namespace FMScoutFramework.Core.Offsets
         public const short Teams = 0x18;
         public const short ClubInfoOne = 0x98;
 
-        public short Fullname {
+        public short Name {
             get { return 0xA0; }
         }
 
-        public short Name {
+        public short ShortName {
             get { return 0xA8; }
         }
 
-        public short ShortName {
-            get { return 0xB0; }
-        }
+        //public short ShortName {
+        //    get { return 0xB0; }
+        //}
 
         public short Nation {
             get { return 0xB8; }
