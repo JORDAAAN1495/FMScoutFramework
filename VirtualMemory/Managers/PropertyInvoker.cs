@@ -51,6 +51,8 @@ namespace FMScoutFramework.Core.Managers
                 ProcessManager.WriteDateTime((DateTime)(object)value, offsetToFind);
             else if (typeof(Int32) == typeof(T))
                 ProcessManager.WriteInt32((int)(object)value, offsetToFind);
+            else if (typeof(Int64) == typeof(T))
+                ProcessManager.WriteInt64((Int64)(object)value, offsetToFind);
             else if (typeof(SByte) == typeof(T))
                 ProcessManager.WriteSByte((sbyte)(object)value, offsetToFind);
             else if (typeof(float) == typeof(T))

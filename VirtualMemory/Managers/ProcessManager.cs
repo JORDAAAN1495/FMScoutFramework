@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Linq.Expressions;
 using System.Diagnostics;
 using System.Drawing;
+using FMScoutFramework.Extensions;
 
 namespace FMScoutFramework.Core.Managers
 {
@@ -110,6 +111,22 @@ namespace FMScoutFramework.Core.Managers
             }
             
             return buffer;
+        }
+
+        public static Int64 AllocateProcessBytes(int memorySize) {
+            if (memorySize > 0) {
+                IntPtr alloc = ProcessMemoryAPI.VirtualAllocEx(FMProcess.Pointer, IntPtr.Zero, (IntPtr)memorySize, AllocationType.Reserve | AllocationType.Commit, MemoryProtection.ExecuteReadWrite);
+                if (alloc != null) {
+                    if (IntPtr.Size == 4) {
+                        return alloc.ToInt32();
+                    }
+                    else {
+                        return alloc.ToInt64();
+                    }
+                }
+            }
+
+            return 0;
         }
 #endif
 #if MAC
@@ -323,6 +340,21 @@ namespace FMScoutFramework.Core.Managers
             return readStringCache [cacheKey];
         }
 
+        public static byte[] GetFMStringBytes(string text) {
+            List<byte> result = new List<byte>();
+            if (text.Length > 0) {
+                int length = text.Length;
+
+                // Let's add the length
+                result.AddRange(length.GetFMBytes());
+
+                // Now add the string bytes to the array
+                result.AddRange(UnicodeEncoding.UTF8.GetBytes(text));
+            }
+
+            return result.ToArray();
+        }
+
         public static int ReadArrayLength (Int64 currentAddress)
         {
             return (int)ReadArrayLength (currentAddress, 0x8);
@@ -422,6 +454,7 @@ namespace FMScoutFramework.Core.Managers
         {
             IntPtr ptr;
             ProcessMemoryAPI.WriteProcessMemory(FMProcess.Pointer, (IntPtr)memoryaddress, buffer, bytesToWrite, out ptr);
+
             return ptr.ToInt32();
         }
 #endif
@@ -454,6 +487,11 @@ namespace FMScoutFramework.Core.Managers
         {
             byte [] buffer = BitConverter.GetBytes (value);
             WriteProcessMemory (address, buffer, 4);
+        }
+
+        public static void WriteInt64 (Int64 value, Int64 address) {
+            byte[] buffer = BitConverter.GetBytes(value);
+            WriteProcessMemory(address, buffer, 8);
         }
 
         public static void WriteFloat (float value, Int64 address)
