@@ -75,6 +75,7 @@
       <HintPath>..\FMSE.Core\packages\CoreCompat.System.Drawing.1.0.0-beta006\lib\net45\CoreCompat.System.Drawing.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Xaml" />
