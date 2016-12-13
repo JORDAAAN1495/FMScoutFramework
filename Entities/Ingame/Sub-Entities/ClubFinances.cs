@@ -160,6 +160,23 @@ namespace FMScoutFramework.Core.Entities.InGame
             set {
                 if (_seasonTicketPriceRatio != value) {
                     _seasonTicketPriceRatio = value;
+                    _isDirty = true;
+                }
+            }
+        }
+
+        private float _ratioForChangeInSeasonTicketHolders = 0.0f;
+        public float RatioForChangeInSeasonTicketHolders {
+            get {
+                if (_ratioForChangeInSeasonTicketHolders == 0.0f) {
+                    _ratioForChangeInSeasonTicketHolders = PropertyInvoker.Get<float>(ClubFinancesOffsets.RatioForChangeInSeasonTicketHolders, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _ratioForChangeInSeasonTicketHolders;
+            }
+            set {
+                if (_ratioForChangeInSeasonTicketHolders != value) {
+                    _ratioForChangeInSeasonTicketHolders = value;
+                    isDirty = true;
                 }
             }
         }
