@@ -3,8 +3,44 @@ using FMScoutFramework.Core.Entities.InGame.Interfaces;
 using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Core.Offsets;
 using System;
+using System.ComponentModel;
 
 namespace FMScoutFramework.Core.Entities.InGame {
+    public enum DebtType {
+        [Description("None")]
+        DTNone                                  = 0,
+        [Description("Bank")]
+        DTBank                                  = 1,
+        [Description("Chairman")]
+        DTChairman                              = 2,
+        [Description("CVA")]
+        DTCVA                                   = 3,
+        [Description("PFA")]
+        DTPFA                                   = 4,
+        [Description("State")]
+        DTState                                 = 5,
+        [Description("Supporters Trust")]
+        DTSupportersTrust                       = 6,
+        [Description("Gift Repayable When Profitable")]
+        DTGiftRepayableWhenProfitable           = 7,
+        [Description("Gift Repayable on Departure")]
+        DTGiftRepayableOnDeparture              = 8,
+        [Description("GiftNonRepayable")]
+        DTGiftNonRepayable                      = 9,
+        [Description("Loan Repayable on Promotion to Top Division")]
+        DTLoanRepayableOnPromotionToTopDivision = 10,
+        [Description("Loan Repayable when Established in Top Division")]
+        DTLoanRepayableWhenEstablishedInTopDiv  = 11,
+        [Description("Director")]
+        DTDirector                              = 12,
+        [Description("PIK Loan (Total Amount of Loan Repayable on Maturity)")]
+        DTPIKLoan                               = 13,
+        [Description("Lump Sum Paid on Promotion to Top Division")]
+        DTLumpSumPaidOnPromotionToTopDiv        = 14,
+        [Description("Miscellaneous")]
+        DTMiscellaneous                         = 15
+    }
+
     public class ClubDebt : BaseObject, IClubDebt {
 
         public ClubDebt(Int64 memoryAddress, IVersion version)
