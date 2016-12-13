@@ -30,6 +30,11 @@ namespace FMScoutFramework.Extensions
             return value.ToString();
         }
 
+        public static byte[] GetFMBytes<T>(this T value) {
+            dynamic obj = value;
+            return BitConverter.GetBytes(obj);
+        }
+
         public static int ConvertToInt(this object value)
         {
             return (int)value;
