@@ -21,6 +21,73 @@ namespace FMScoutFramework.Core.Entities.InGame
             this.ClubOffsets = new ClubOffsets (Version);
         }
 
+        public void Save() {
+            #region String Save Experiments
+
+            /*
+            // If we're changing the name, we need to allocate a new region.
+            // If we allocated previously, make sure to dealloc first
+            // TODO: Dealloc
+
+            // Let's first get the name in bytes. We'll need to know how much data to allocate
+            byte[] newName = ProcessManager.GetFMStringBytes(_name);
+
+            // Allocate memory for the bytes
+            Int64 newAddress = ProcessManager.AllocateProcessBytes(newName.Length);
+            Int64 address = newAddress;
+
+            // Prepend an int
+            PropertyInvoker.Set<int>(0x0, OriginalBytes, address, DatabaseMode, 1);
+            address += 0x4;
+
+            // Write the bytes at the location
+            ProcessManager.WriteProcessMemory(address, newName, (uint)newName.Length);
+            Int64 namePtr = address;
+            address += newName.Length;
+
+            // Append some extra bytes at the end
+            byte[] extras = new byte[] {
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0xF,
+                0x0,
+                0x0,
+                0x0                
+            };
+            ProcessManager.WriteProcessMemory(address, extras, (uint)extras.Length);
+
+            // And replace the pointer in the club object
+            PropertyInvoker.Set<Int64>(ClubOffsets.Name, OriginalBytes, MemoryAddress, DatabaseMode, namePtr);
+            */
+            #endregion
+
+            isDirty = false;
+        }
+
+        private bool _isDirty = false;
+        public bool isDirty {
+            get {
+                return _isDirty;
+            }
+            set {
+                if (value) {
+                    Version.gameManager.RaiseObjectEdited(this);
+                }
+                _isDirty = value;
+            }
+        }
+
         public string Offset {
             get {
                 return "0x" + MemoryAddress.ToString("X");
@@ -84,9 +151,19 @@ namespace FMScoutFramework.Core.Entities.InGame
         //    }
         //}
 
+        private string _name;
         public string Name {
             get {
-                return PropertyInvoker.GetString(ClubOffsets.Name, 0x0, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (String.IsNullOrEmpty(_name)) {
+                    _name = PropertyInvoker.GetString(ClubOffsets.Name, 0x0, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _name;
+            }
+            set {
+                if (_name != value) {
+                    _name = value;
+                    isDirty = true;
+                }
             }
         }
 
@@ -141,11 +218,14 @@ namespace FMScoutFramework.Core.Entities.InGame
         public List<ClubSponsorshipDeal> SponsorshipDeals {
             get {
                 if (_sponsorshipDeals.Count == 0) {
-                    int sponsorshipCount = ProcessManager.ReadArrayLength(MemoryAddress + ClubOffsets.ClubSponshorshipDeals);
-                    if (sponsorshipCount > 0) {
-                        Int64 sponsorshipsAddress = PropertyInvoker.Get<Int64>(ClubOffsets.ClubSponshorshipDeals, OriginalBytes, MemoryAddress, DatabaseMode);
-                        for (int i = 0; i < sponsorshipCount; i++) {
-                            _sponsorshipDeals.Add(PropertyInvoker.GetPointer<ClubSponsorshipDeal>(0x0, OriginalBytes, (sponsorshipsAddress + (i * 0x8)), DatabaseMode, Version));
+                    Int64 sponsorshipArrayPtr = PropertyInvoker.Get<Int64>(ClubOffsets.ClubSponshorshipDeals, OriginalBytes, MemoryAddress, DatabaseMode);
+                    if (sponsorshipArrayPtr > 0x0) {
+                        int sponsorshipCount = ProcessManager.ReadArrayLength(sponsorshipArrayPtr);
+                        if (sponsorshipCount > 0) {
+                            Int64 sponsorshipsAddress = PropertyInvoker.Get<Int64>(0x0, OriginalBytes, sponsorshipArrayPtr, DatabaseMode);
+                            for (int i = 0; i < sponsorshipCount; i++) {
+                                _sponsorshipDeals.Add(PropertyInvoker.GetPointer<ClubSponsorshipDeal>(0x0, OriginalBytes, (sponsorshipsAddress + (i * 0x8)), DatabaseMode, Version));
+                            }
                         }
                     }
                 }
