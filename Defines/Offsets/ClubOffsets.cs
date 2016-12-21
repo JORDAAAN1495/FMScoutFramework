@@ -47,11 +47,21 @@ namespace FMScoutFramework.Core.Offsets
         }
 
         public short ClubSponshorshipDeals {
-            get { return 0x110; }
+            get {
+                if (Version.GetType() == typeof(Steam_17_2_0_Windows)) {
+                    return 0x118;
+                }
+                return 0x110;
+            }
         }
 
         public short ClubFinances {
-            get { return 0x130; }
+            get {
+                if (Version.GetType() == typeof(Steam_17_2_0_Windows)) {
+                    return 0x138;
+                }
+                return 0x130;
+            }
         }
     }
 }

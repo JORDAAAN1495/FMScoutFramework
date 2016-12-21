@@ -38,10 +38,12 @@ namespace FMScoutFramework.Core.Entities.InGame
             #region Balance Encrypter
             int rotateAmount = (int)(MemoryAddress + ClubFinancesOffsets.Balance) & 0x1F;
             uint decryptedBalance = (uint)_balance;
-            decryptedBalance = BitwiseOperations.rol(decryptedBalance, rotateAmount);
-            decryptedBalance = decryptedBalance ^ 0x16F175CB;
-            decryptedBalance = BitwiseOperations.ror(decryptedBalance, 0x16);
-            decryptedBalance = ~decryptedBalance;
+            if (Version.GetType() != typeof(Steam_17_2_0_Windows)) {
+                decryptedBalance = BitwiseOperations.rol(decryptedBalance, rotateAmount);
+                decryptedBalance = decryptedBalance ^ 0x16F175CB;
+                decryptedBalance = BitwiseOperations.ror(decryptedBalance, 0x16);
+                decryptedBalance = ~decryptedBalance;
+            }
             #endregion
             PropertyInvoker.Set<uint>(ClubFinancesOffsets.Balance, OriginalBytes, MemoryAddress, DatabaseMode, decryptedBalance);
             PropertyInvoker.Set<float>(ClubFinancesOffsets.AverageTicketPrice, OriginalBytes, MemoryAddress, DatabaseMode, _averageTicketPrice);
@@ -84,10 +86,13 @@ namespace FMScoutFramework.Core.Entities.InGame
                 if (_balance == 0) {
                     int rotateAmount = (int)(MemoryAddress + ClubFinancesOffsets.Balance) & 0x1F;
                     uint encryptedBalance = PropertyInvoker.Get<uint>(ClubFinancesOffsets.Balance, OriginalBytes, MemoryAddress, DatabaseMode);
-                    encryptedBalance = ~encryptedBalance;
-                    encryptedBalance = BitwiseOperations.rol(encryptedBalance, 0x16);
-                    encryptedBalance = encryptedBalance ^ 0x16F175CB;
-                    encryptedBalance = BitwiseOperations.ror(encryptedBalance, rotateAmount);
+
+                    if (Version.GetType() != typeof(Steam_17_2_0_Windows)) {
+                        encryptedBalance = ~encryptedBalance;
+                        encryptedBalance = BitwiseOperations.rol(encryptedBalance, 0x16);
+                        encryptedBalance = encryptedBalance ^ 0x16F175CB;
+                        encryptedBalance = BitwiseOperations.ror(encryptedBalance, rotateAmount);
+                    }
 
                     _balance = (int)encryptedBalance;
                 }

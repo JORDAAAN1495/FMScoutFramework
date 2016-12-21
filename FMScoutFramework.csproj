@@ -88,6 +88,7 @@
     <Compile Include="Defines\Offsets\Sub-Entities\ClubSponsorshipDealsOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\KitOffsets.cs" />
     <Compile Include="Defines\Versions\Steam_17_1_2_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_17_2_0_Windows.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IClubDebt.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IClubFinanceRevenueRecord.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IClubInfoOne.cs" />

@@ -84,7 +84,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         private Color _backgroundColour;
-        public Color BackgroundColor {
+        public Color BackgroundColour {
             get {
                 if (_backgroundColour.IsEmpty) {
                     _backgroundColour = PropertyInvoker.Get<Color>(KitOffsets.BackgroundColour, OriginalBytes, MemoryAddress, DatabaseMode);
