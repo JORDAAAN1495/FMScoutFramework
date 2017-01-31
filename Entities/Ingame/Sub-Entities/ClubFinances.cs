@@ -38,7 +38,8 @@ namespace FMScoutFramework.Core.Entities.InGame
             #region Balance Encrypter
             int rotateAmount = (int)(MemoryAddress + ClubFinancesOffsets.Balance) & 0x1F;
             uint decryptedBalance = (uint)_balance;
-            if (Version.GetType() != typeof(Steam_17_2_0_Windows)) {
+            if (Version.GetType() != typeof(Steam_17_2_0_Windows) &&
+                Version.GetType() != typeof(Steam_17_2_1_Windows)) {
                 decryptedBalance = BitwiseOperations.rol(decryptedBalance, rotateAmount);
                 decryptedBalance = decryptedBalance ^ 0x16F175CB;
                 decryptedBalance = BitwiseOperations.ror(decryptedBalance, 0x16);
@@ -87,7 +88,8 @@ namespace FMScoutFramework.Core.Entities.InGame
                     int rotateAmount = (int)(MemoryAddress + ClubFinancesOffsets.Balance) & 0x1F;
                     uint encryptedBalance = PropertyInvoker.Get<uint>(ClubFinancesOffsets.Balance, OriginalBytes, MemoryAddress, DatabaseMode);
 
-                    if (Version.GetType() != typeof(Steam_17_2_0_Windows)) {
+                    if (Version.GetType() != typeof(Steam_17_2_0_Windows) &&
+                        Version.GetType() != typeof(Steam_17_2_1_Windows)) {
                         encryptedBalance = ~encryptedBalance;
                         encryptedBalance = BitwiseOperations.rol(encryptedBalance, 0x16);
                         encryptedBalance = encryptedBalance ^ 0x16F175CB;
