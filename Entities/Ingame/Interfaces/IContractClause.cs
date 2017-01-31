@@ -3,7 +3,7 @@
     public interface IContractClause
     {
         byte Info { get; }
-        ClauseType Type { get; }
+        byte Type { get; }
         int Value { get; }
     }
 }

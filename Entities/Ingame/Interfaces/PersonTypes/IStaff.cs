@@ -2,6 +2,6 @@
 {
     public interface IStaff
     {
-        int ID { get; }
+        
     }
 }
