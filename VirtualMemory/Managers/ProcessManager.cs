@@ -306,13 +306,26 @@ namespace FMScoutFramework.Core.Managers
         private static Dictionary<string, string> readStringCache = new Dictionary<string, string> ();
         public static string ReadString (Int64 currentAddress, Int64? addBufferIndex, Int64 offset, bool isRead)
         {
-            string cacheKey = string.Format ("{0}.{1}.{2}.{3}", currentAddress, addBufferIndex ?? -1, offset, isRead);
-            if (!readStringCache.ContainsKey (cacheKey)) {
-                if (!isRead)
-                    currentAddress = ProcessManager.ReadInt32 (currentAddress);
+            //string cacheKey = string.Format ("{0}.{1}.{2}.{3}", currentAddress, addBufferIndex ?? -1, offset, isRead);
+            //if (!readStringCache.ContainsKey (cacheKey)) {
+                if (!isRead) {
+                    if (IntPtr.Size == 4) {
+                        currentAddress = ProcessManager.ReadInt32(currentAddress);
+                    }
+                    else {
+                        currentAddress = ProcessManager.ReadInt64(currentAddress);
+                    }
+                }
 
-                if (addBufferIndex > 0)
-                    currentAddress = ProcessManager.ReadInt32 (currentAddress + (int)addBufferIndex);
+
+                if (addBufferIndex > -1) {
+                    if (IntPtr.Size == 4) {
+                        currentAddress = ProcessManager.ReadInt32(currentAddress + (int)addBufferIndex);
+                    }
+                    else {
+                        currentAddress = ProcessManager.ReadInt64(currentAddress + (int)addBufferIndex);
+                    }
+                }
 
                 string str = "";
 
@@ -335,9 +348,10 @@ namespace FMScoutFramework.Core.Managers
                 }
                 str = UnicodeEncoding.UTF8.GetString(buffer);
 
-                readStringCache.Add (cacheKey, str);
-            }
-            return readStringCache [cacheKey];
+            // readStringCache.Add (cacheKey, str);
+            //}
+            // return readStringCache [cacheKey];
+            return str;
         }
 
         public static byte[] GetFMStringBytes(string text) {
