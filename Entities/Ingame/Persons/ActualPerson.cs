@@ -184,15 +184,17 @@ namespace FMScoutFramework.Core.Entities.InGame {
             }
         }
 
+        private Contract _contract = null;
         public Contract Contract {
             get {
-                Int64 pointerAddress = ProcessManager.ReadInt64((MemoryAddress + ActualPersonOffsets.Contract));
-                if (pointerAddress > 0) {
-                    return PropertyInvoker.GetPointer<Contract>(ActualPersonOffsets.Contract, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+                if (_contract == null) {
+                    Int64 pointerAddress = ProcessManager.ReadInt64((MemoryAddress + ActualPersonOffsets.Contract));
+                    if (pointerAddress > 0) {
+                        _contract = PropertyInvoker.GetPointer<Contract>(ActualPersonOffsets.Contract, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+                    }
                 }
-                else {
-                    return null;
-                }
+
+                return _contract;
             }
         }
 
