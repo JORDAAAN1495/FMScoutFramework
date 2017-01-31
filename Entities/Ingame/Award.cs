@@ -312,7 +312,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
 
         public string Name {
             get {
-                string name = PropertyInvoker.GetString(AwardOffsets.Name, 0x0, OriginalBytes, MemoryAddress, DatabaseMode);
+                string name = PropertyInvoker.GetString(AwardOffsets.Name, -1, OriginalBytes, MemoryAddress, DatabaseMode);
                 if (string.IsNullOrEmpty(name)) {
                     name = "-";
                 }
@@ -323,7 +323,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
 
         public string ShortName {
             get {
-                string shortname = PropertyInvoker.GetString(AwardOffsets.ShortName, 0x0, OriginalBytes, MemoryAddress, DatabaseMode);
+                string shortname = PropertyInvoker.GetString(AwardOffsets.ShortName, -1, OriginalBytes, MemoryAddress, DatabaseMode);
                 if (string.IsNullOrEmpty(shortname)) {
                     shortname = "-";
                 }
