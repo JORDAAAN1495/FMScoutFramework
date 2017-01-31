@@ -36,6 +36,8 @@ namespace FMScoutFramework.Core.Managers
         {
             ObjectStore.Clear ();
 
+            PersonMemoryAddressesWrapper staffAddresses = SortPersonMemoryAddresses();
+
             ObjectStore.Add(typeof(Award), RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Award));
             ObjectStore.Add(typeof(City), RetrieveObjects<City>(GameManager.Version.MemoryAddresses.City));
             ObjectStore.Add(typeof(Club), RetrieveObjects<Club>(GameManager.Version.MemoryAddresses.Club));
@@ -59,6 +61,8 @@ namespace FMScoutFramework.Core.Managers
             // Unknown 6
             ObjectStore.Add(typeof(Derby), RetrieveObjects<Derby>(GameManager.Version.MemoryAddresses.Derby));
             ObjectStore.Add(typeof(Agreement), RetrieveObjects<Agreement>(GameManager.Version.MemoryAddresses.Agreement));
+
+
             // ObjectStore.Add(typeof(FirstName), RetrieveObjects<FirstName>(GameManager.Version.MemoryAddresses.FirstName));
             // ObjectStore.Add(typeof(LastName), RetrieveObjects<LastName>(GameManager.Version.MemoryAddresses.LastName));
             // ObjectStore.Add(typeof(CommonName), RetrieveObjects<CommonName>(GameManager.Version.MemoryAddresses.CommonName));
@@ -78,15 +82,65 @@ namespace FMScoutFramework.Core.Managers
             //RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown9);
 
             //#region People
-            //ObjectStore.Add (typeof (Player), RetrieveObjects<Player> (staffAddresses.PlayerAddresses));
+            ObjectStore.Add (typeof (Player), RetrieveObjects<Player> (staffAddresses.PlayerAddresses));
             //ObjectStore.Add (typeof (Staff), RetrieveObjects<Staff> (staffAddresses.StaffAddresses));
             //ObjectStore.Add (typeof (PlayerStaff), RetrieveObjects<PlayerStaff> (staffAddresses.PlayerStaffAddresses));
             //#endregion
         }
 
-        Dictionary<Int64, T> RetrieveObjects<T>(Int64 offset)
+        private PersonMemoryAddressesWrapper SortPersonMemoryAddresses() {
+            var memoryAddresses = new PersonMemoryAddressesWrapper();
+            memoryAddresses.PlayerAddresses = new List<Int64>();
+            memoryAddresses.StaffAddresses = new List<Int64>();
+            memoryAddresses.PlayerStaffAddresses = new List<Int64>();
+            memoryAddresses.HumanManagerAddresses = new List<Int64>();
+
+            List<Int64> addresses = GetMemoryAddresses<Person>(GameManager.Version.MemoryAddresses.Person);
+            List<Int64> unknownaddresses = new List<Int64>();
+
+            foreach(Int64 personAddress in addresses) {
+                Int64 type = ProcessManager.ReadInt64(personAddress);
+                if (type == GameManager.Version.PersonEnum.Player) {
+                    memoryAddresses.PlayerAddresses.Add(personAddress + GameManager.Version.PersonOffsets.Player);
+                }
+                else if (type == GameManager.Version.PersonEnum.Staff) {
+                    memoryAddresses.StaffAddresses.Add(personAddress + GameManager.Version.PersonOffsets.Staff);
+                }
+                else if (type == GameManager.Version.PersonEnum.PlayerStaff) {
+                    memoryAddresses.PlayerStaffAddresses.Add(personAddress + GameManager.Version.PersonOffsets.PlayerStaff);
+                }
+                else if (type == GameManager.Version.PersonEnum.HumanManager) {
+                    memoryAddresses.HumanManagerAddresses.Add(personAddress + GameManager.Version.PersonOffsets.HumanManager);
+                }
+                else {
+                    // Handle unknown person types
+                    if (unknownaddresses.IndexOf(type) < 0) {
+                        unknownaddresses.Add(type);
+                        short personIDOffset = 0x8;
+                        if (IntPtr.Size == 8) {
+                            personIDOffset = 0xC;
+                        }
+                        int personID = ProcessManager.ReadInt32(personAddress + personIDOffset);
+
+                        Console.WriteLine("Unknown Person Type: 0x" + type.ToString("X") + " Address: 0x" + personAddress.ToString("X") + " UID: " + personID.ToString());
+                    }
+                }
+            }
+
+            return memoryAddresses;
+        }
+
+        Dictionary<Int64, T> RetrieveObjects<T>(List<Int64> addressesCollection) {
+            return RetrieveObjects<T>(-1, addressesCollection);
+        }
+
+        Dictionary<Int64, T> RetrieveObjects<T>(Int64 offset) {
+            return RetrieveObjects<T>(offset, new List<Int64>());
+        }
+
+        Dictionary<Int64, T> RetrieveObjects<T>(Int64 offset, List<Int64> addressesCollection)
         {
-            List<Int64> memoryAddresses = GetMemoryAddresses<T>(offset);
+            List<Int64> memoryAddresses = offset > -1 ? GetMemoryAddresses<T>(offset) : addressesCollection;
 
             #region CreateConstructorDelegate
             ConstructorInfo constructor = typeof(T).GetConstructor(new[] { typeof(Int64), typeof(IVersion) });
@@ -126,10 +180,6 @@ namespace FMScoutFramework.Core.Managers
             int objectCount = ProcessManager.ReadArrayLength (memoryAddress);
             memoryAddress = ProcessManager.ReadInt64 (memoryAddress);
 
-            if (typeof (T) == typeof (Person)) {
-                return null;
-            }
-
             FMCore.logger.LogWrite("Loading " + objectCount.ToString() + " " + typeof(T).Name + " pointers");
             List<Int64> pointers = GetMemoryAddressList (memoryAddress, objectCount);
             return pointers;
@@ -146,5 +196,12 @@ namespace FMScoutFramework.Core.Managers
 
             return pointers;
         }
+    }
+
+    public class PersonMemoryAddressesWrapper {
+        public List<Int64> PlayerAddresses { get; set; }
+        public List<Int64> StaffAddresses { get; set; }
+        public List<Int64> PlayerStaffAddresses { get; set; }
+        public List<Int64> HumanManagerAddresses { get; set; }
     }
 }
