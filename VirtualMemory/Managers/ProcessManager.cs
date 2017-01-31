@@ -497,10 +497,20 @@ namespace FMScoutFramework.Core.Managers
             WriteProcessMemory (address, buffer, 2);
         }
 
+        public static void WriteUInt16 (ushort value, Int64 address) {
+            byte[] buffer = BitConverter.GetBytes(value);
+            WriteProcessMemory(address, buffer, 2);
+        }
+
         public static void WriteInt32 (int value, Int64 address)
         {
             byte [] buffer = BitConverter.GetBytes (value);
             WriteProcessMemory (address, buffer, 4);
+        }
+
+        public static void WriteUInt32 (uint value, Int64 address) {
+            byte[] buffer = BitConverter.GetBytes(value);
+            WriteProcessMemory(address, buffer, 4);
         }
 
         public static void WriteInt64 (Int64 value, Int64 address) {
