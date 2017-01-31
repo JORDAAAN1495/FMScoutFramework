@@ -43,10 +43,13 @@ namespace FMScoutFramework.Core.Entities.InGame
 
         public void HealPlayer() {
             if (InjuriesPtr > 0) {
-                PropertyInvoker.Set<Int64>(PlayerOffsets.Injuries, OriginalBytes, Address, DatabaseMode, 0);
+                PropertyInvoker.Set<Int64>(0x0, OriginalBytes, InjuriesPtr, DatabaseMode, 0);
+                PropertyInvoker.Set<Int64>(0x8, OriginalBytes, InjuriesPtr, DatabaseMode, 0);
+                PropertyInvoker.Set<Int64>(0xF, OriginalBytes, InjuriesPtr, DatabaseMode, 0);
                 PropertyInvoker.Set<short>(PlayerOffsets.Fitness, OriginalBytes, Address, DatabaseMode, 10000);
                 PropertyInvoker.Set<short>(PlayerOffsets.Condition, OriginalBytes, Address, DatabaseMode, 10000);
                 PropertyInvoker.Set<short>(PlayerOffsets.Jadedness, OriginalBytes, Address, DatabaseMode, -500);
+                IsInjured = false;
             }
         }
 
@@ -61,6 +64,7 @@ namespace FMScoutFramework.Core.Entities.InGame
             PropertyInvoker.Set<Int64>(PlayerOffsets.BansPtr, OriginalBytes, InjuriesPtr, DatabaseMode, 0);
             PropertyInvoker.Set<Int64>(PlayerOffsets.BansPtr + 0x8, OriginalBytes, InjuriesPtr, DatabaseMode, 0);
             PropertyInvoker.Set<Int64>(PlayerOffsets.BansPtr + 0xF, OriginalBytes, InjuriesPtr, DatabaseMode, 0);
+            IsBanned = false;
         }
 
         public double PlayerGrowthPotential {
@@ -126,9 +130,20 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
+        private bool _isInjured = false;
         public bool IsInjured {
             get {
-                return InjuriesPtr > 0;
+                if (!_isInjured) {
+                    Int64 InjuryCount = ProcessManager.ReadArrayLength(InjuriesPtr, 0x8);
+                    _isInjured = InjuryCount > 0;
+                }
+
+                return _isInjured;
+            }
+            set {
+                if (_isInjured != value) {
+                    _isInjured = value;
+                }
             }
         }
 
@@ -138,9 +153,19 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
+        private bool _isBanned = false;
         public bool IsBanned {
             get {
-                return BansPtr > 0;
+                if (!_isBanned) {
+                    _isBanned = BansPtr > 0;
+                }
+
+                return _isBanned;
+            }
+            set {
+                if (_isBanned != value) {
+                    _isBanned = value;
+                }
             }
         }
 
