@@ -155,7 +155,7 @@ namespace FMScoutFramework.Core.Entities.InGame
         public string Name {
             get {
                 if (String.IsNullOrEmpty(_name)) {
-                    _name = PropertyInvoker.GetString(ClubOffsets.Name, 0x0, OriginalBytes, MemoryAddress, DatabaseMode);
+                    _name = PropertyInvoker.GetString(ClubOffsets.Name, -1, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _name;
             }
@@ -190,7 +190,7 @@ namespace FMScoutFramework.Core.Entities.InGame
 
         public string ShortName {
             get {
-                return PropertyInvoker.GetString(ClubOffsets.ShortName, 0x0, OriginalBytes, MemoryAddress, DatabaseMode);
+                return PropertyInvoker.GetString(ClubOffsets.ShortName, -1, OriginalBytes, MemoryAddress, DatabaseMode);
             }
         }
 
