@@ -4,46 +4,108 @@ using FMScoutFramework.Core.Entities.GameVersions;
 using FMScoutFramework.Core.Entities.InGame.Interfaces;
 using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Core.Offsets;
+using System.ComponentModel;
 
 namespace FMScoutFramework.Core.Entities.InGame
 {
+
+    public enum BonusType {
+        [Description("Appearance Fee")]
+        BTAppearanceFee = 0,
+        [Description("Goal Fee")]
+        BTGoalFee = 1,
+        [Description("Clean Sheet Fee")]
+        BTCleanSheetFee = 2,
+        [Description("Team of the Year")]
+        BTTeamOfTheYear = 3,
+        [Description("Top Goalscorer")]
+        BTTopGoalscorer = 4,
+        [Description("Promotion Fee")]
+        BTPromotionFee = 5,
+        [Description("Avoid Relegation Fee")]
+        BTAvoidRelegationFee = 6,
+        [Description("International Cap Fee")]
+        BTInternationalCapFee = 7,
+        [Description("Unused Substitute Fee")]
+        BTUnusedSubstituteFee = 8
+    }
+
     public class ContractBonus : BaseObject, IContractBonus
     {
-        public ContractBonus (int memoryAddress, IVersion version)
+        public ContractBonus (Int64 memoryAddress, IVersion version)
             : base (memoryAddress, version)
         { }
-        public ContractBonus (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+        public ContractBonus (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
             : base (memoryAddress, originalBytes, version)
         { }
 
-        public BonusType Type {
+        public void Save() {
+            PropertyInvoker.Set<byte>(ContractBonusOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode, _type);
+            PropertyInvoker.Set<int>(ContractBonusOffsets.Value, OriginalBytes, MemoryAddress, DatabaseMode, _value);
+            PropertyInvoker.Set<byte>(ContractBonusOffsets.Info, OriginalBytes, MemoryAddress, DatabaseMode, _info);
+            _isDirty = false;
+        }
+
+        private bool _isDirty = false;
+        public bool isDirty {
             get {
-                return (BonusType)PropertyInvoker.Get<byte> (ContractBonusOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode);
+                return _isDirty;
+            }
+            set {
+                if (value) {
+                    Version.gameManager.RaiseObjectEdited(this);
+                }
+                _isDirty = value;
             }
         }
 
-        public Int32 Value {
+        private byte _type = 0;
+        public byte Type {
             get {
-                return PropertyInvoker.Get<Int32> (ContractBonusOffsets.Value, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_type == 0) {
+                    _type = PropertyInvoker.Get<byte>(ContractBonusOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _type;
+            }
+            set {
+                if (_type != value) {
+                    isDirty = true;
+                    _type = value;
+                }
             }
         }
 
-        public override string ToString ()
-        {
-            return this.Value.ToString ("C0", CultureInfo.CreateSpecificCulture ("en-GB"));
+        private int _value = 0;
+        public int Value {
+            get {
+                if (_value == 0) {
+                    _value = PropertyInvoker.Get<Int32>(ContractBonusOffsets.Value, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _value;
+            }
+            set {
+                if (_value != value) {
+                    isDirty = true;
+                    _value = value;
+                }
+            }
         }
-    }
 
-    public enum BonusType
-    {
-        AppearanceFee = 0,
-        GoalFee = 1,
-        CleanSheetFee = 2,
-        TeamOfTheYear = 3,
-        TopGoalscorer = 4,
-        PromotionFee = 5,
-        AvoidRelegationFee = 6,
-        InternationalCapFee = 7,
-        UnusedSubstitutionFee = 8
+        private byte _info = 0;
+        public byte Info {
+            get {
+                if (_info == 0) {
+                    _info = PropertyInvoker.Get<byte>(ContractBonusOffsets.Info, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+
+                return _info;
+            }
+            set {
+                if (_info != value) {
+                    isDirty = true;
+                    _info = value;
+                }
+            }
+        }
     }
 }

@@ -15,645 +15,1272 @@ namespace FMScoutFramework.Core.Entities.InGame
             : base (memoryAddress, originalBytes, version)
         { }
 
+        public void Save() {
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.GoalKeeper, OriginalBytes, MemoryAddress, DatabaseMode, _goalkeeper);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Sweeper, OriginalBytes, MemoryAddress, DatabaseMode, _sweeper);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.DefenderLeft, OriginalBytes, MemoryAddress, DatabaseMode, _defenderLeft);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.DefenderCenter, OriginalBytes, MemoryAddress, DatabaseMode, _defenderCenter);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.DefenderRight, OriginalBytes, MemoryAddress, DatabaseMode, _defenderRight);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.DefensiveMidfielder, OriginalBytes, MemoryAddress, DatabaseMode, _defensiveMidfielder);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.MidfielderLeft, OriginalBytes, MemoryAddress, DatabaseMode, _midfielderLeft);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.MidfielderCenter, OriginalBytes, MemoryAddress, DatabaseMode, _midfielderCenter);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.MidfielderRight, OriginalBytes, MemoryAddress, DatabaseMode, _midfielderRight);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.AttackingMidfielderLeft, OriginalBytes, MemoryAddress, DatabaseMode, _attackingMidfielderLeft);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.AttackingMidfielderCenter, OriginalBytes, MemoryAddress, DatabaseMode, _attackingMidfielderCenter);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.AttackingMidfielderRight, OriginalBytes, MemoryAddress, DatabaseMode, _attackingMidfielderRight);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Striker, OriginalBytes, MemoryAddress, DatabaseMode, _striker);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.WingbackLeft, OriginalBytes, MemoryAddress, DatabaseMode, _wingbackLeft);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.WingbackRight, OriginalBytes, MemoryAddress, DatabaseMode, _wingbackRight);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Crossing, OriginalBytes, MemoryAddress, DatabaseMode, _crossing);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Dribbling, OriginalBytes, MemoryAddress, DatabaseMode, _dribbling);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Finishing, OriginalBytes, MemoryAddress, DatabaseMode, _finishing);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Heading, OriginalBytes, MemoryAddress, DatabaseMode, _heading);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.LongShots, OriginalBytes, MemoryAddress, DatabaseMode, _longShots);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Marking, OriginalBytes, MemoryAddress, DatabaseMode, _marking);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.OffTheBall, OriginalBytes, MemoryAddress, DatabaseMode, _offTheBall);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Passing, OriginalBytes, MemoryAddress, DatabaseMode, _passing);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Penalties, OriginalBytes, MemoryAddress, DatabaseMode, _penalties);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Tackling, OriginalBytes, MemoryAddress, DatabaseMode, _tackling);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Creativity, OriginalBytes, MemoryAddress, DatabaseMode, _creativity);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Handling, OriginalBytes, MemoryAddress, DatabaseMode, _handling);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.AerialAbility, OriginalBytes, MemoryAddress, DatabaseMode, _aerialAbility);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.CommandOfArea, OriginalBytes, MemoryAddress, DatabaseMode, _commandOfArea);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Communication, OriginalBytes, MemoryAddress, DatabaseMode, _communication);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Kicking, OriginalBytes, MemoryAddress, DatabaseMode, _kicking);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Throwing, OriginalBytes, MemoryAddress, DatabaseMode, _throwing);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Anticipation, OriginalBytes, MemoryAddress, DatabaseMode, _anticipation);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Decisions, OriginalBytes, MemoryAddress, DatabaseMode, _decisions);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.OneOnOnes, OriginalBytes, MemoryAddress, DatabaseMode, _oneOnOnes);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Positioning, OriginalBytes, MemoryAddress, DatabaseMode, _positioning);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Reflexes, OriginalBytes, MemoryAddress, DatabaseMode, _reflexes);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.FirstTouch, OriginalBytes, MemoryAddress, DatabaseMode, _firstTouch);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Technique, OriginalBytes, MemoryAddress, DatabaseMode, _technique);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.LeftFoot, OriginalBytes, MemoryAddress, DatabaseMode, _leftFoot);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.RightFoot, OriginalBytes, MemoryAddress, DatabaseMode, _rightFoot);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Flair, OriginalBytes, MemoryAddress, DatabaseMode, _flair);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Corners, OriginalBytes, MemoryAddress, DatabaseMode, _corners);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Teamwork, OriginalBytes, MemoryAddress, DatabaseMode, _teamwork);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.WorkRate, OriginalBytes, MemoryAddress, DatabaseMode, _workrate);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.LongThrows, OriginalBytes, MemoryAddress, DatabaseMode, _longThrows);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Eccentricity, OriginalBytes, MemoryAddress, DatabaseMode, _eccentricity);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.RushingOut, OriginalBytes, MemoryAddress, DatabaseMode, _rushingOut);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.TendencyToPunch, OriginalBytes, MemoryAddress, DatabaseMode, _tendencyToPunch);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Acceleration, OriginalBytes, MemoryAddress, DatabaseMode, _acceleration);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.FreekickTaking, OriginalBytes, MemoryAddress, DatabaseMode, _freekickTaking);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Strength, OriginalBytes, MemoryAddress, DatabaseMode, _strength);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Stamina, OriginalBytes, MemoryAddress, DatabaseMode, _stamina);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Pace, OriginalBytes, MemoryAddress, DatabaseMode, _pace);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Jumping, OriginalBytes, MemoryAddress, DatabaseMode, _jumping);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Influence, OriginalBytes, MemoryAddress, DatabaseMode, _influence);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Dirtiness, OriginalBytes, MemoryAddress, DatabaseMode, _dirtiness);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Balance, OriginalBytes, MemoryAddress, DatabaseMode, _balance);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Bravery, OriginalBytes, MemoryAddress, DatabaseMode, _bravery);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Consistency, OriginalBytes, MemoryAddress, DatabaseMode, _consistency);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Aggression, OriginalBytes, MemoryAddress, DatabaseMode, _aggression);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Agility, OriginalBytes, MemoryAddress, DatabaseMode, _agility);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.ImportantMatches, OriginalBytes, MemoryAddress, DatabaseMode, _importantMatches);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.InjuryProneness, OriginalBytes, MemoryAddress, DatabaseMode, _injuryProneness);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Versatility, OriginalBytes, MemoryAddress, DatabaseMode, _versatility);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.NaturalFitness, OriginalBytes, MemoryAddress, DatabaseMode, _naturalFitness);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Determination, OriginalBytes, MemoryAddress, DatabaseMode, _determination);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Composure, OriginalBytes, MemoryAddress, DatabaseMode, _composure);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Concentration, OriginalBytes, MemoryAddress, DatabaseMode, _concentration);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Sweeper, OriginalBytes, MemoryAddress, DatabaseMode, _sweeper);
+
+            _isDirty = false;
+        }
+
+        private bool _isDirty = false;
+        public bool isDirty {
+            get {
+                return _isDirty;
+            }
+            set {
+                if (value) {
+                    Version.gameManager.RaiseObjectEdited(this);
+                }
+                _isDirty = value;
+            }
+        }
+
+        private byte _goalkeeper = 0;
         public byte Goalkeeper {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.GoalKeeper, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_goalkeeper == 0) {
+                    _goalkeeper = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.GoalKeeper, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _goalkeeper;
+            }
+            set {
+                if (_goalkeeper != value) {
+                    isDirty = true;
+                    _goalkeeper = value;
+                }
             }
         }
 
+        private byte _sweeper = 0;
         public byte Sweeper {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Sweeper, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_sweeper == 0) {
+                    _sweeper = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Sweeper, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _sweeper;
+            }
+            set {
+                if (_sweeper != value) {
+                    isDirty = true;
+                    _sweeper = value;
+                }
             }
         }
 
+        private byte _defenderLeft = 0;
         public byte DefenderLeft {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.DefenderLeft, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_defenderLeft == 0) {
+                    _defenderLeft = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.DefenderLeft, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _defenderLeft;
+            }
+            set {
+                if (_defenderLeft != value) {
+                    isDirty = true;
+                    _defenderLeft = value;
+                }
             }
         }
 
+        private byte _defenderCenter = 0;
         public byte DefenderCenter {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.DefenderCenter, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_defenderCenter == 0) {
+                    _defenderCenter = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.DefenderCenter, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _defenderCenter;
+            }
+            set {
+                if (_defenderCenter != value) {
+                    isDirty = true;
+                    _defenderCenter = value;
+                }
             }
         }
 
+        private byte _defenderRight = 0;
         public byte DefenderRight {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.DefenderRight, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_defenderRight == 0) {
+                    _defenderRight = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.DefenderRight, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _defenderRight;
+            }
+            set {
+                if (_defenderRight != value) {
+                    isDirty = true;
+                    _defenderRight = value;
+                }
             }
         }
 
+        private byte _defensiveMidfielder = 0;
         public byte DefensiveMidfielder {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.DefensiveMidfielder, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_defensiveMidfielder == 0) {
+                    _defensiveMidfielder = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.DefensiveMidfielder, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _defensiveMidfielder;
+            }
+            set {
+                if (_defensiveMidfielder != value) {
+                    isDirty = true;
+                    _defensiveMidfielder = value;
+                }
             }
         }
 
+        private byte _midfielderLeft = 0;
         public byte MidfielderLeft {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.MidfielderLeft, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_midfielderLeft == 0) {
+                    _midfielderLeft = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.MidfielderLeft, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _midfielderLeft;
+            }
+            set {
+                if (_midfielderLeft != value) {
+                    isDirty = true;
+                    _midfielderLeft = value;
+                }
             }
         }
 
+        private byte _midfielderCenter = 0;
         public byte MidfielderCenter {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.MidfielderCenter, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_midfielderCenter == 0) {
+                    _midfielderCenter = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.MidfielderCenter, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _midfielderCenter;
+            }
+            set {
+                if (_midfielderCenter != value) {
+                    isDirty = true;
+                    _midfielderCenter = value;
+                }
             }
         }
 
+        private byte _midfielderRight = 0;
         public byte MidfielderRight {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.MidfielderRight, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_midfielderRight == 0) {
+                    _midfielderRight = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.MidfielderRight, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+
+                return _midfielderRight;
+            }
+            set {
+                if (_midfielderRight != value) {
+                    isDirty = true;
+                    _midfielderRight = value;
+                }
             }
         }
 
+        private byte _attackingMidfielderLeft = 0;
         public byte AttackingMidfielderLeft {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.AttackingMidfielderLeft, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_attackingMidfielderLeft == 0) {
+                    _attackingMidfielderLeft = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.AttackingMidfielderLeft, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _attackingMidfielderLeft;
+            }
+            set {
+                if (_attackingMidfielderLeft != value) {
+                    isDirty = true;
+                    _attackingMidfielderLeft = value;
+                }
             }
         }
 
+        private byte _attackingMidfielderCenter = 0;
         public byte AttackingMidfielderCenter {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.AttackingMidfielderCenter, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_attackingMidfielderCenter == 0) {
+                    _attackingMidfielderCenter = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.AttackingMidfielderCenter, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _attackingMidfielderCenter;
+            }
+            set {
+                if (_attackingMidfielderCenter != value) {
+                    isDirty = true;
+                    _attackingMidfielderCenter = value;
+                }
             }
         }
 
+        private byte _attackingMidfielderRight = 0;
         public byte AttackingMidfielderRight {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.AttackingMidfielderRight, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_attackingMidfielderRight == 0) {
+                    _attackingMidfielderRight = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.AttackingMidfielderRight, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _attackingMidfielderRight;
+            }
+            set {
+                if (_attackingMidfielderRight != value) {
+                    isDirty = true;
+                    _attackingMidfielderRight = value;
+                }
             }
         }
 
+        private byte _striker = 0;
         public byte Striker {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Striker, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_striker == 0) {
+                    _striker = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Striker, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _striker;
+            }
+            set {
+                if (_striker != value) {
+                    isDirty = true;
+                    _striker = value;
+                }
             }
         }
 
+        private byte _wingbackLeft = 0;
         public byte WingbackLeft {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.WingbackLeft, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_wingbackLeft == 0) {
+                    _wingbackLeft = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.WingbackLeft, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _wingbackLeft;
+            }
+            set {
+                if (_wingbackLeft != value) {
+                    isDirty = true;
+                    _wingbackLeft = value;
+                }
             }
         }
 
+        private byte _wingbackRight = 0;
         public byte WingbackRight {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.WingbackRight, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_wingbackRight == 0) {
+                    _wingbackRight = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.WingbackRight, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _wingbackRight;
+            }
+            set {
+                isDirty = true;
+                _wingbackRight = value;
             }
         }
 
         public string Position {
             get {
                 string final = "";
-                if (Goalkeeper == 20) {
+                if (Goalkeeper > 15) {
                     if (final.Length > 0)
                         final += ", ";
                     final += "GK";
                 }
-                if (Sweeper == 20) {
+                if (Sweeper > 15) {
                     if (final.Length > 0)
                         final += ", ";
                     final += "SW";
                 }
-                if (DefenderLeft == 20 || DefenderCenter == 20 || DefenderRight == 20) {
+                if (DefenderLeft > 15 || DefenderCenter > 15 || DefenderRight > 15) {
                     if (final.Length > 0)
                         final += ", ";
-                    final += "D ";
-                    if (DefenderRight == 20)
+                    final += "D (";
+                    if (DefenderRight > 15)
                         final += "R";
-                    if (DefenderLeft == 20)
+                    if (DefenderLeft > 15)
                         final += "L";
-                    if (DefenderCenter == 20)
+                    if (DefenderCenter > 15)
                         final += "C";
+                    final += ")";
                 }
-                if (WingbackLeft == 20 || WingbackRight == 20) {
+                if (WingbackLeft > 15 || WingbackRight > 15) {
                     if (final.Length > 0)
                         final += ", ";
-                    final += "WB ";
-                    if (WingbackRight == 20)
+                    final += "WB (";
+                    if (WingbackRight > 15)
                         final += "R";
-                    if (WingbackLeft == 20)
+                    if (WingbackLeft > 15)
                         final += "L";
+                    final += ")";
                 }
-                if (DefensiveMidfielder == 20) {
+                if (DefensiveMidfielder > 15) {
                     if (final.Length > 0)
                         final += ", ";
                     final += "DM";
                 }
-                if (AttackingMidfielderLeft == 20 || AttackingMidfielderCenter == 20 || AttackingMidfielderRight == 20) {
+                if (AttackingMidfielderLeft > 15 || AttackingMidfielderCenter > 15 || AttackingMidfielderRight > 15) {
                     if (final.Length > 0)
                         final += ", ";
-                    final += "AM ";
-                } else if (MidfielderLeft == 20 || MidfielderCenter == 20 || MidfielderRight == 20) {
-                    if (final.Length > 0)
-                        final += ", ";
-                    final += "M ";
-                }
-                if (AttackingMidfielderLeft == 20 || AttackingMidfielderCenter == 20 || AttackingMidfielderRight == 20 ||
-                    MidfielderLeft == 20 || MidfielderCenter == 20 || MidfielderRight == 20) {
-                    if (AttackingMidfielderRight == 20 || MidfielderRight == 20)
-                        final += "R";
-                    if (AttackingMidfielderLeft == 20 || MidfielderLeft == 20)
+                    final += "AM (";
+                    if (AttackingMidfielderLeft > 15)
                         final += "L";
-                    if (AttackingMidfielderCenter == 20 || MidfielderCenter == 20)
+                    if (AttackingMidfielderRight > 15)
+                        final += "R";
+                    if (AttackingMidfielderCenter > 15)
                         final += "C";
+                    final += ")";
                 }
-                if (Striker == 20) {
+                if (MidfielderLeft > 15 || MidfielderCenter > 15 || MidfielderRight > 15) {
                     if (final.Length > 0)
                         final += ", ";
-                    final += "F C";
+                    final += "M (";
+                    if (MidfielderRight > 15)
+                        final += "R";
+                    if (MidfielderLeft > 15)
+                        final += "L";
+                    if (MidfielderCenter > 15)
+                        final += "C";
+                    final += ")";
+                }
+                if (Striker > 15) {
+                    if (final.Length > 0)
+                        final += ", ";
+                    final += "ST";
                 }
 
                 return final;
             }
         }
 
+        private byte _crossing = 0;
         public byte Crossing {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Crossing, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_crossing == 0) {
+                    _crossing = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Crossing, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _crossing;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Crossing, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_crossing != value) {
+                    isDirty = true;
+                    _crossing = value;
+                }
             }
         }
 
+        private byte _dribbling = 0;
         public byte Dribbling {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Dribbling, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_dribbling == 0) {
+                    _dribbling = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Dribbling, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _dribbling;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Dribbling, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_dribbling != value) {
+                    isDirty = true;
+                    _dribbling = value;
+                }
             }
         }
 
+        private byte _finishing = 0;
         public byte Finishing {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Finishing, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_finishing == 0) {
+                    _finishing = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Finishing, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _finishing;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Finishing, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_finishing != value) {
+                    isDirty = true;
+                    _finishing = value;
+                }
             }
         }
 
+        private byte _heading = 0;
         public byte Heading {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Heading, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_heading == 0) {
+                    _heading = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Heading, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _heading;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Heading, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_heading != value) {
+                    isDirty = true;
+                    _heading = value;
+                }
             }
         }
 
+        private byte _longShots = 0;
         public byte LongShots {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.LongShots, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_longShots == 0) {
+                    _longShots = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.LongShots, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _longShots;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.LongShots, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_longShots != value) {
+                    isDirty = true;
+                    _longShots = value;
+                }
             }
         }
 
+        private byte _marking = 0;
         public byte Marking {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Marking, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_marking == 0) {
+                    _marking = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Marking, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _marking;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Marking, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_marking != value) {
+                    isDirty = true;
+                    _marking = value;
+                }
             }
         }
 
+        private byte _offTheBall = 0;
         public byte OffTheBall {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.OffTheBall, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_offTheBall == 0) {
+                    _offTheBall = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.OffTheBall, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _offTheBall;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.OffTheBall, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_offTheBall != value) {
+                    isDirty = true;
+                    _offTheBall = value;
+                }
             }
         }
 
+        private byte _passing = 0;
         public byte Passing {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Passing, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_passing == 0) {
+                    _passing = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Passing, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _passing;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Passing, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_passing != value) {
+                    isDirty = true;
+                    _passing = value;
+                }
             }
         }
 
+        private byte _penalties = 0;
         public byte Penalties {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Penalties, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_penalties == 0) {
+                    _penalties = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Penalties, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _penalties;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Penalties, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_penalties != value) {
+                    isDirty = true;
+                    _penalties = value;
+                }
             }
         }
 
+        private byte _tackling = 0;
         public byte Tackling {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Tackling, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_tackling == 0) {
+                    _tackling = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Tackling, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _tackling;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Tackling, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_tackling != value) {
+                    isDirty = true;
+                    _tackling = value;
+                }
             }
         }
 
+        private byte _creativity = 0;
         public byte Creativity {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Creativity, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_creativity == 0) {
+                    _creativity = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Creativity, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _creativity;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Creativity, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_creativity != value) {
+                    isDirty = true;
+                    _creativity = value;
+                }
             }
         }
 
+        private byte _handling = 0;
         public byte Handling {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Handling, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_handling == 0) {
+                    _handling = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Handling, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _handling;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Handling, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_handling != value) {
+                    isDirty = true;
+                    _handling = value;
+                }
             }
         }
 
+        private byte _aerialAbility = 0;
         public byte AerialAbility {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.AerialAbility, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_aerialAbility == 0) {
+                    _aerialAbility = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.AerialAbility, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _aerialAbility;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.AerialAbility, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_aerialAbility != value) {
+                    isDirty = true;
+                    _aerialAbility = value;
+                }
             }
         }
 
+        private byte _commandOfArea = 0;
         public byte CommandOfArea {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.CommandOfArea, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_commandOfArea == 0) {
+                    _commandOfArea = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.CommandOfArea, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _commandOfArea;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.CommandOfArea, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_commandOfArea != value) {
+                    isDirty = true;
+                    _commandOfArea = value;
+                }
             }
         }
 
+        private byte _communication = 0;
         public byte Communication {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Communication, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_communication == 0) {
+                    _communication = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Communication, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _communication;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Communication, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_communication != value) {
+                    isDirty = true;
+                    _communication = value;
+                }
             }
         }
 
+        private byte _kicking = 0;
         public byte Kicking {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Kicking, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_kicking == 0) {
+                    _kicking = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Kicking, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _kicking;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Kicking, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_kicking != value) {
+                    isDirty = true;
+                    _kicking = value;
+                }
             }
         }
 
+        private byte _throwing = 0;
         public byte Throwing {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Throwing, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_throwing == 0) {
+                    _throwing = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Throwing, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _throwing;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Throwing, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_throwing != value) {
+                    isDirty = true;
+                    _throwing = value;
+                }
             }
         }
 
+        private byte _anticipation = 0;
         public byte Anticipation {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Anticipation, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_anticipation ==0) {
+                    _anticipation = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Anticipation, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _anticipation;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Anticipation, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_anticipation != value) {
+                    isDirty = true;
+                    _anticipation = value;
+                }
             }
         }
 
+        private byte _decisions = 0;
         public byte Decisions {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Decisions, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_decisions == 0) {
+                    _decisions = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Decisions, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _decisions;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Decisions, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_decisions != value) {
+                    isDirty = true;
+                    _decisions = value;
+                }
             }
         }
 
+        private byte _oneOnOnes = 0;
         public byte OneOnOnes {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.OneOnOnes, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_oneOnOnes == 0) {
+                    _oneOnOnes = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.OneOnOnes, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _oneOnOnes;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.OneOnOnes, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_oneOnOnes != value) {
+                    isDirty = true;
+                    _oneOnOnes = value;
+                }
             }
         }
 
+        private byte _positioning = 0;
         public byte Positioning {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Positioning, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_positioning == 0) {
+                    _positioning = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Positioning, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _positioning;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Positioning, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_positioning != value) {
+                    isDirty = true;
+                    _positioning = value;
+                }
             }
         }
 
+        private byte _reflexes = 0;
         public byte Reflexes {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Reflexes, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_reflexes == 0) {
+                    _reflexes = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Reflexes, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+
+                return _reflexes;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Reflexes, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_reflexes != value) {
+                    isDirty = true;
+                    _reflexes = value;
+                }
             }
         }
 
+        private byte _firstTouch = 0;
         public byte FirstTouch {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.FirstTouch, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_firstTouch == 0) {
+                    _firstTouch = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.FirstTouch, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _firstTouch;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.FirstTouch, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_firstTouch != value) {
+                    isDirty = true;
+                    _firstTouch = value;
+                }
             }
         }
 
+        private byte _technique = 0;
         public byte Technique {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Technique, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_technique == 0) {
+                    _technique = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Technique, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _technique;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Technique, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_technique != value) {
+                    isDirty = true;
+                    _technique = value;
+                }
             }
         }
 
+        private byte _leftFoot = 0;
         public byte LeftFoot {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.LeftFoot, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_leftFoot == 0) {
+                    _leftFoot = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.LeftFoot, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _leftFoot;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.LeftFoot, OriginalBytes, MemoryAddress, DatabaseMode, value);
+
+
+
+                if (_leftFoot != value) {
+                    isDirty = true;
+                    _leftFoot = value;
+                }
             }
         }
 
+        private byte _rightFoot = 0;
         public byte RightFoot {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.RightFoot, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_rightFoot == 0) {
+                    _rightFoot = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.RightFoot, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _rightFoot;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.RightFoot, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_rightFoot != value) {
+                    isDirty = true;
+                    _rightFoot = value;
+                }
             }
         }
 
+        private byte _flair = 0;
         public byte Flair {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Flair, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_flair == 0) {
+                    _flair = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Flair, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _flair;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Flair, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_flair != value) {
+                    isDirty = true;
+                    _flair = value;
+                }
             }
         }
 
+        private byte _corners = 0;
         public byte Corners {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Corners, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_corners == 0) {
+                    _corners = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Corners, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _corners;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Corners, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_corners != value) {
+                    isDirty = true;
+                    _corners = value;
+                }
             }
         }
 
+        private byte _teamwork = 0;
         public byte Teamwork {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Teamwork, OriginalBytes, MemoryAddress, DatabaseMode);
+               if (_teamwork == 0) {
+                    _teamwork = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Teamwork, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _teamwork;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Teamwork, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_teamwork != value) {
+                    isDirty = true;
+                    _teamwork = value;
+                }
             }
         }
 
+        private byte _workrate = 0;
         public byte Workrate {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.WorkRate, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_workrate == 0) {
+                    _workrate = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.WorkRate, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _workrate;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.WorkRate, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_workrate != value) {
+                    isDirty = true;
+                    _workrate = value;
+                }
             }
         }
 
+        private byte _longThrows = 0;
         public byte LongThrows {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.LongThrows, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_longThrows == 0) {
+                    _longThrows = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.LongThrows, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _longThrows;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.LongThrows, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_longThrows != value) {
+                    isDirty = true;
+                    _longThrows = value;
+                }
             }
         }
 
+        private byte _eccentricity = 0;
         public byte Eccentricity {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Eccentricity, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_eccentricity == 0) {
+                    _eccentricity = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Eccentricity, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _eccentricity;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Eccentricity, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_eccentricity != value) {
+                    isDirty = true;
+                    _eccentricity = value;
+                }
             }
         }
 
+        private byte _rushingOut = 0;
         public byte RushingOut {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.RushingOut, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_rushingOut == 0) {
+                    _rushingOut = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.RushingOut, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _rushingOut;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.RushingOut, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_rushingOut != value) {
+                    isDirty = true;
+                    _rushingOut = value;
+                }
             }
         }
 
+        private byte _tendencyToPunch = 0;
         public byte TendencyToPunch {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.TendencyToPunch, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_tendencyToPunch == 0) {
+                    _tendencyToPunch = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.TendencyToPunch, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _tendencyToPunch;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.TendencyToPunch, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_tendencyToPunch != value) {
+                    isDirty = true;
+                    _tendencyToPunch = value;
+                }
             }
         }
 
+        private byte _acceleration = 0;
         public byte Acceleration {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Acceleration, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_acceleration == 0) {
+                    _acceleration = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Acceleration, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _acceleration;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Acceleration, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_acceleration != value) {
+                    isDirty = true;
+                    _acceleration = value;
+                }
             }
         }
 
+        private byte _freekickTaking = 0;
         public byte FreekickTaking {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.FreekickTaking, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_freekickTaking == 0) {
+                    _freekickTaking = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.FreekickTaking, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _freekickTaking;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.FreekickTaking, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_freekickTaking != value) {
+                    isDirty = true;
+                    _freekickTaking = value;
+                }
             }
         }
 
+        private byte _strength = 0;
         public byte Strength {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Strength, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_strength == 0) {
+                    _strength = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Strength, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _strength;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Strength, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_strength != value) {
+                    isDirty = true;
+                    _strength = value;
+                }
             }
         }
 
+        private byte _stamina = 0;
         public byte Stamina {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Stamina, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_stamina == 0) {
+                    _stamina = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Stamina, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _stamina;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Stamina, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_stamina != value) {
+                    isDirty = true;
+                    _stamina = value;
+                }
             }
         }
 
+        private byte _pace = 0;
         public byte Pace {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Pace, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_pace == 0) {
+                    _pace = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Pace, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _pace;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Pace, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_pace != value) {
+                    isDirty = true;
+                    _pace = value;
+                }
             }
         }
 
+        private byte _jumping = 0;
         public byte Jumping {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Jumping, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_jumping == 0) {
+                    _jumping = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Jumping, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _jumping;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Jumping, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_jumping != value) {
+                    isDirty = true;
+                    _jumping = value;
+                }
             }
         }
 
+        private byte _influence = 0;
         public byte Influence {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Influence, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_influence == 0) {
+                    _influence = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Influence, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _influence;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Influence, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_influence != value) {
+                    isDirty = true;
+                    _influence = value;
+                }
             }
         }
 
+        private byte _dirtiness = 0;
         public byte Dirtiness {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Dirtiness, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_dirtiness == 0) {
+                    _dirtiness = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Dirtiness, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _dirtiness;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Dirtiness, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_dirtiness != value) {
+                    isDirty = true;
+                    _dirtiness = value;
+                }
             }
         }
 
+        private byte _balance = 0;
         public byte Balance {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Balance, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_balance == 0) {
+                    _balance = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Balance, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _balance;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Balance, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_balance != value) {
+                    isDirty = true;
+                    _balance = value;
+                }
             }
         }
 
+        private byte _bravery = 0;
         public byte Bravery {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Bravery, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_bravery == 0) {
+                    _bravery = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Bravery, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _bravery;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Bravery, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_bravery != value) {
+                    isDirty = true;
+                    _bravery = value;
+                }
             }
         }
 
+        private byte _consistency = 0;
         public byte Consistency {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Consistency, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_consistency == 0) {
+                    _consistency = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Consistency, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _consistency;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Consistency, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_consistency != value) {
+                    isDirty = true;
+                    _consistency = value;
+                }
             }
         }
 
+        private byte _aggression = 0;
         public byte Aggression {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Aggression, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_aggression == 0) {
+                    _aggression = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Aggression, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _aggression;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Aggression, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_aggression != value) {
+                    isDirty = true;
+                    _aggression = value;
+                }
             }
         }
 
+        private byte _agility = 0;
         public byte Agility {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Agility, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_agility == 0) {
+                    _agility = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Agility, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _agility;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Agility, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_agility != value) {
+                    isDirty = true;
+                    _agility = value;
+                }
             }
         }
 
+        private byte _importantMatches = 0;
         public byte ImportantMatches {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.ImportantMatches, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_importantMatches == 0) {
+                    _importantMatches = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.ImportantMatches, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _importantMatches;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.ImportantMatches, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_importantMatches != value) {
+                    isDirty = true;
+                    _importantMatches = value;
+                }
             }
         }
 
+        private byte _injuryProneness = 0;
         public byte InjuryProneness {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.InjuryProneness, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_injuryProneness == 0) {
+                    _injuryProneness = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.InjuryProneness, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _injuryProneness;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.InjuryProneness, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_injuryProneness != value) {
+                    isDirty = true;
+                    _injuryProneness = value;
+                }
             }
         }
 
+        private byte _versatility = 0;
         public byte Versatility {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Versatility, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_versatility == 0) {
+                    _versatility = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Versatility, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _versatility;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Versatility, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_versatility != value) {
+                    isDirty = true;
+                    _versatility = value;
+                }
             }
         }
 
+        private byte _naturalFitness = 0;
         public byte NaturalFitness {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.NaturalFitness, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_naturalFitness == 0) {
+                    _naturalFitness = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.NaturalFitness, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _naturalFitness;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.NaturalFitness, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_naturalFitness != value) {
+                    isDirty = true;
+                    _naturalFitness = value;
+                }
             }
         }
 
+        private byte _determination = 0;
         public byte Determination {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Determination, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_determination == 0) {
+                    _determination = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Determination, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _determination;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Determination, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_determination != value) {
+                    isDirty = true;
+                    _determination = value;
+                }
             }
         }
 
+        private byte _composure = 0;
         public byte Composure {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Composure, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_composure == 0) {
+                    _composure = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Composure, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _composure;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Composure, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_composure != value) {
+                    isDirty = true;
+                    _composure = value;
+                }
             }
         }
 
+        private byte _concentration = 0;
         public byte Concentration {
             get {
-                return PropertyInvoker.Get<byte> (PlayerAttributeOffsets.Concentration, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_concentration == 0) {
+                    _concentration = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Concentration, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _concentration;
             }
             set {
-                PropertyInvoker.Set<byte> (PlayerAttributeOffsets.Concentration, OriginalBytes, MemoryAddress, DatabaseMode, value);
+                if (_concentration != value) {
+                    isDirty = true;
+                    _concentration = value;
+                }
             }
         }
     }

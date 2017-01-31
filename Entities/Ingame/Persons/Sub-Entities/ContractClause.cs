@@ -4,97 +4,105 @@ using FMScoutFramework.Core.Entities.GameVersions;
 using FMScoutFramework.Core.Entities.InGame.Interfaces;
 using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Core.Offsets;
+using System.ComponentModel;
 
 namespace FMScoutFramework.Core.Entities.InGame
 {
-    public class ContractClause : BaseObject, IContractClause
-    {
-        public ContractClause (int memoryAddress, IVersion version)
-            : base (memoryAddress, version)
-        { }
-        public ContractClause (int memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
-            : base (memoryAddress, originalBytes, version)
-        { }
+    public enum ContractClauseType {
+        [Description("Minimum Fee Release")]
+        CCTMinFeeRelease                = 0,
+        [Description("Relegation Release")]
+        CCTRelegationRelease            = 1,
+        [Description("Non Promotion Release")]
+        CCTNonPromotionRelease          = 2,
+        [Description("Yearly Wage Rise (%)")]
+        CCTYearlyWageRisePercentage     = 3,
+        [Description("Promotion Wage Rise")]
+        CCTPromotionWageRise            = 4,
+        [Description("Relegation Wage Drop")]
+        CCTRelegationWageDrop           = 5,
+        [Description("Non-Playing Job Offser Release")]
+        CCTNonPlayingJobOfferRelease    = 6,
+        [Description("Sell On Fee (%)")]
+        CCTSellOnFeePercentage          = 7,
 
-        public Int32 Value {
-            get {
-                return PropertyInvoker.Get<Int32> (ContractClausesOffsets.Value, OriginalBytes, MemoryAddress, DatabaseMode);
-            }
-        }
-
-        public ClauseType Type {
-            get {
-                return (ClauseType)PropertyInvoker.Get<byte> (ContractClausesOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode);
-            }
-        }
-
-        public byte Info {
-            get {
-                return PropertyInvoker.Get<byte> (ContractClausesOffsets.Info, OriginalBytes, MemoryAddress, DatabaseMode);
-            }
-        }
-
-        public override string ToString ()
-        {
-            string result = "";
-            switch (this.Type) {
-            case ClauseType.YearlyWageRise:
-            case ClauseType.PromotionWageIncrease:
-            case ClauseType.RelegationWageDecrease:
-            case ClauseType.SellOnFeeProfit:
-            case ClauseType.TopDivisionPromotionWageRise:
-            case ClauseType.TopDivisionRelegationWageDrop:
-                result = string.Format ("{0}%", this.Value);
-                break;
-            case ClauseType.SellOnFee:
-                result = string.Format ("{0}%", this.Info);
-                break;
-            case ClauseType.OneYearExtensionAfterLeagueGamesFinalSeason:
-                result = string.Format ("{0} Games", this.Info);
-                break;
-            case ClauseType.SeasonalLandmarkGoalBonus:
-                result = string.Format ("{0} ({1})", this.Info, this.Value.ToString ("C0", CultureInfo.CreateSpecificCulture ("en-GB")));
-                break;
-            case ClauseType.WageAfterReachingInternationalCaps:
-            case ClauseType.WageAfterReachingClubCareerLeagueGames:
-                result = string.Format ("{0}/pw {1}", this.Value.ToString ("C0", CultureInfo.CreateSpecificCulture ("en-GB")), this.Info);
-                break;
-            case ClauseType.OptionalContractExtensionByClub:
-                result = string.Format ("{0} Year(s)", this.Info);
-                break;
-            default:
-                result = this.Value.ToString ("C0", CultureInfo.CreateSpecificCulture ("en-GB"));
-                break;
-            }
-
-            return result;
-        }
     }
 
-    public enum ClauseType
-    {
-        MinimumFeeRelease = 0,
-        RelegationFeeRelease = 1,
-        NonPromotionRelease = 2,
-        YearlyWageRise = 3,
-        PromotionWageIncrease = 4,
-        RelegationWageDecrease = 5,
-        StaffJobRelease = 6,
-        UnknownType7 = 7,
-        SellOnFee = 8,
-        SellOnFeeProfit = 9,
-        SeasonalLandmarkGoalBonus = 10,
-        OneYearExtensionAfterLeagueGamesFinalSeason = 11,
-        MatchHighestEarner = 12,
-        WageAfterReachingClubCareerLeagueGames = 13,
-        TopDivisionPromotionWageRise = 14,
-        TopDivisionRelegationWageDrop = 15,
-        MinimumFeeReleaseToForeignClubs = 16,
-        MinimumFeeReleaseToHigherDivisionClubs = 17,
-        MinimumFeeReleaseToDomesticClubs = 18,
-        WageAfterReachingInternationalCaps = 19,
-        UnknownType20 = 20,
-        UnknownType21 = 21,
-        OptionalContractExtensionByClub = 22
+    public class ContractClause : BaseObject, IContractClause {
+        public ContractClause(Int64 memoryAddress, IVersion version)
+            : base(memoryAddress, version) { }
+        public ContractClause(Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+            : base(memoryAddress, originalBytes, version) { }
+
+        public void Save() {
+            PropertyInvoker.Set<int>(ContractClausesOffsets.Value, OriginalBytes, MemoryAddress, DatabaseMode, _value);
+            PropertyInvoker.Set<byte>(ContractClausesOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode, _type);
+            PropertyInvoker.Set<byte>(ContractClausesOffsets.Info, OriginalBytes, MemoryAddress, DatabaseMode, _info);
+            _isDirty = false;
+        }
+
+        private bool _isDirty = false;
+        public bool isDirty {
+            get {
+                return _isDirty;
+            }
+            set {
+                if (value) {
+                    Version.gameManager.RaiseObjectEdited(this);
+                }
+                _isDirty = value;
+            }
+        }
+
+        private int _value = 0;
+        public int Value {
+            get {
+                if (_value == 0) {
+                    _value = PropertyInvoker.Get<int>(ContractClausesOffsets.Value, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+
+                return _value;
+            }
+            set {
+                if (_value != value) {
+                    isDirty = true;
+                    _value = value;
+                }
+            }
+        }
+
+        private byte _type = 0;
+        public byte Type {
+            get {
+                if (_type == 0) {
+                    _type = PropertyInvoker.Get<byte>(ContractClausesOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+
+                return _type;
+            }
+            set {
+                if (_type != value) {
+                    isDirty = true;
+                    _type = value;
+                }
+            }
+        }
+
+        private byte _info = 0;
+        public byte Info {
+            get {
+                if (_info == 0) {
+                    _info = PropertyInvoker.Get<byte>(ContractClausesOffsets.Info, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+
+                return _info;
+            }
+            set {
+                if (_info != value) {
+                    isDirty = true;
+                    _info = value;
+                }
+            }
+        }
     }
 }
