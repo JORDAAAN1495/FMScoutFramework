@@ -20,28 +20,6 @@ namespace FMScoutFramework.Core.Entities.InGame
             this.StaffOffsets = new StaffOffsets (version);
         }
 
-        protected override Int64 PersonAddress {
-            get {
-                return StaffAddress + StaffOffsets.PersonAddress;
-            }
-        }
-
-        private Int64 StaffAddress {
-            get {
-                return MemoryAddress + Version.PersonOffsets.Staff;
-            }
-        }
-
-        public Int32 ID {
-            get {
-                return PropertyInvoker.Get<Int32> (StaffOffsets.ID, OriginalBytes, StaffAddress, DatabaseMode);
-            }
-        }
-
-        public Int32 RowID {
-            get {
-                return PropertyInvoker.Get<Int32> (StaffOffsets.RowID, OriginalBytes, StaffAddress, DatabaseMode);
-            }
-        }
+        
     }
 }
