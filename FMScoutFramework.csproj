@@ -82,6 +82,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Defines\Offsets\AwardOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\ActualPersonOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\PreferredMovesOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\ClubDebtsOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\ClubInfoOneOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\ClubInfoTwoOffsets.cs" />
@@ -89,18 +91,24 @@
     <Compile Include="Defines\Offsets\Sub-Entities\KitOffsets.cs" />
     <Compile Include="Defines\Versions\Steam_17_1_2_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_17_2_0_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_17_2_1_Windows.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IClubDebt.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IClubFinanceRevenueRecord.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IClubInfoOne.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IClubInfoTwo.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IClubSponsorshipDeal.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IKit.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IPreferredMoves.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IActualPerson.cs" />
+    <Compile Include="Entities\Ingame\Persons\ActualPerson.cs" />
+    <Compile Include="Entities\Ingame\Persons\Sub-Entities\PreferredMoves.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\ClubDebt.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\ClubFinanceRevenueRecord.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\ClubInfoOne.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\ClubInfoTwo.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\ClubSponsorshipDeal.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\Kit.cs" />
+    <Compile Include="Extensions\DateTimeSpan.cs" />
     <Compile Include="Extensions\EnumBindingSourceExtension.cs" />
     <Compile Include="Extensions\FMSFExtensions.cs" />
     <Compile Include="FMCore.cs" />
