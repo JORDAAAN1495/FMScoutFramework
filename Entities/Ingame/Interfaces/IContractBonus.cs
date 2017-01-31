@@ -2,7 +2,8 @@
 {
     public interface IContractBonus
     {
-        BonusType Type { get; }
-        int Value { get; }
+        byte Type { get; set; }
+        int Value { get; set; }
+        byte Info { get; set; }
     }
 }
