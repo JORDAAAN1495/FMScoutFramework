@@ -12,44 +12,16 @@ namespace FMScoutFramework.Core.Offsets
             this.Version = version;
         }
 
-        public short DateOfBirth {
-            get { return 0x178; }
+        public short RowID {
+            get {
+                return 0x8;
+            }
         }
 
-        public short Fullname {
-            get { return 0x17C; }
-        }
-
-        public short Firstname {
-            get { return 0x184; }
-        }
-
-        public short Lastname {
-            get { return 0x188; }
-        }
-
-        public short Nickname {
-            get { return 0x180; }
-        }
-
-        public short CityOfBirth {
-            get { return 0x0; }
-        }
-
-        public short Nationality {
-            get { return 0x194; }
-        }
-
-        public short Attributes {
-            get { return 0x198; }
-        }
-
-        public short Contract {
-            get { return 0x1C4; }
-        }
-
-        public short Club {
-            get { return 0x22C; }
+        public short UID {
+            get {
+                return 0xC;
+            }
         }
     }
 }

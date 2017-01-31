@@ -3,13 +3,13 @@ using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Core.Attributes;
 
 namespace FMScoutFramework.Core.Entities.GameVersions {
-    internal class Steam_17_2_0_Windows : IIVersion {
+    internal class Steam_17_2_1_Windows : IIVersion {
         public IVersionMemoryAddresses MemoryAddresses { get; private set; }
         public IVersionPersonEnumPointers PersonEnum { get; private set; }
         public IPersonVersionOffsets PersonOffsets { get; private set; }
         public GameManager gameManager { get; set; }
 
-        public Steam_17_2_0_Windows(GameManager gm) {
+        public Steam_17_2_1_Windows(GameManager gm) {
             MemoryAddresses = new VersionMemoryAddresses();
             PersonEnum = new VersionPersonEnumPointers();
             PersonOffsets = new PersonVersionOffsets();
@@ -18,7 +18,7 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
 
         public string Description {
             get {
-                return "17.2.0 Steam (Windows)";
+                return "17.2.1 Steam (Windows)";
             }
         }
 
@@ -44,12 +44,12 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
 
             FMCore.logger.LogWrite("In-game date correct! Version is a match.");
             if (!string.IsNullOrEmpty(process.VersionDescription)) {
-                if (process.VersionDescription != "17.2.0f914093") {
+                if (process.VersionDescription != "17.2.1f919512") {
                     return false;
                 }
             }
             else {
-                process.VersionDescription = "17.2.0f914093";
+                process.VersionDescription = "17.2.1f919512";
             }
             return true;
 #endif
@@ -158,9 +158,9 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
         }
 
         public class VersionPersonEnumPointers : IVersionPersonEnumPointers {
-            public Int64 Player { get { return 0x14347D110; } }         // UID: 510
-            public Int64 Staff { get { return 0x14347A310; } }          // UID: 1
-            public Int64 PlayerStaff { get { return 0x1434921E8; } }    // UID: 5025
+            public Int64 Player { get { return 0x14347D400; } }         // UID: 510
+            public Int64 Staff { get { return 0x14347A600; } }          // UID: 1
+            public Int64 PlayerStaff { get { return 0x1434924D8; } }    // UID: 5025
             public Int64 HumanManager { get { return 0x0; } }     // NSY
             public Int64 Official { get { return 0x0; } }         // NSY
             public Int64 NonPlayer { get { return 0x0; } }        // NSY

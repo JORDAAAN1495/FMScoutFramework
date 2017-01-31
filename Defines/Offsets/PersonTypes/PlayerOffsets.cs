@@ -12,118 +12,27 @@ namespace FMScoutFramework.Core.Offsets
             this.Version = version;
         }
 
-        public short PlayerAttributes
-        {
-            get
-            { return 0x90; }
-        }
-
-        public short Injuries
-        {
-            get { return 0xDC;}
-        }
-
-        public short BansOffset
-        {
-            get
-            {
-                return 0xC;
+        public short ActualPerson {
+            get {
+                return 0x1F8;
             }
         }
 
-        public short Team
-        {
-            get { return 0xFC; }
-        }
-
-        public short Value
-        {
-            get { return 0x108; }
-        }
-
-        public short AskingPrice
-        {
-            get { return 0x10C; }
-        }
-
-        public short Fitness
-        {
-            get { return 0x130; }
-        }
-
-        public short Jadedness
-        {
-            get { return 0x132; }
-        }
-
-        public short Condition
-        {
-            get { return 0x134; }
-        }
-
-        public short HomeReputation
-        {
-            get { return 0x136; }
-        }
-
-        public short CurrentReputation
-        {
-            get { return 0x138; }
-        }
-
-        public short WorldReputation
-        {
-            get { return 0x13A; }
-        }
-
-        public short CA
-        {
-            get { return 0x13C; }
-        }
-
-        public short PA
-        {
-            get { return 0x13E; }
-        }
-
-        public short Weight
-        {
-            get { return 0x140; }
-        }
-
-        public short Height
-        {
-            get { return 0x142; }
-        }
-
-        public short InternationalApps
-        {
-            get { return 0x240; }
-        }
-
-        public short U21InternationalApps
-        {
-            get { return 0x241; }
-        }
-
-        public short InternationalGoals
-        {
-            get { return 0x242; }
-        }
-
-        public short U21InternationalGoals
-        {
-            get { return 0x243; }
-        }
-
-        public short RowID
-        {
-            get { return 0x154; }
-        }
-
-        public short UID
-        {
-            get { return 0x158;}
-        }
+        public const short Injuries = 0xE0;
+        public const short BansPtr = 0x10;
+        public const short Team = 0x120;
+        public const short Value = 0x138;
+        public const short AskingPrice = 0x140;
+        public const short Fitness = 0x15C;
+        public const short Jadedness = 0x15E;
+        public const short Condition = 0x160;
+        public const short HomeReputation = 0x162;
+        public const short CurrentReputation = 0x164;
+        public const short WorldReputation = 0x166;
+        public const short CA = 0x168;
+        public const short PA = 0x16A;
+        public const short Weight = 0x16C;
+        public const short Height = 0x16E;
+        public const short PlayerAttributes = 0x174;
     }
 }

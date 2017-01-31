@@ -12,20 +12,20 @@ namespace FMScoutFramework.Core.Offsets
             this.Version = Version;
         }
 
-        public const short Person = 0x4;
-        public const short Team = 0x8;
-        public const short JobType = 0xC;
-        public const short Wage = 0x14;
-        public const short DateStarted = 0x20;
-        public const short DateExpires = 0x24;
-        public const short SquadStatus = 0x30;
-        public const short TransferStatus = 0x32;
-        public const short Clauses = 0x3C;
-        public const short Bonuses = 0x48;
-        public const short Type = 0x5D;
-
-        public short SquadNumber {
-            get { return 0x35; }
-        }
+        public const short Person = 0x8;
+        public const short Team = 0x10;
+        public const short Wage = 0x18;
+        public const short JobType = 0x1C;
+        public const short Unhappinesses = 0x20;
+        public const short StartDate = 0x34;
+        public const short EndDate = 0x38;
+        public const short JoinDate = 0x3C;
+        public const short SquadStatus = 0x44;
+        public const short TransferStatus = 0x46;
+        public const short SquadNumber = 0x49;
+        public const short Clauses = 0x50;
+        public const short Bonuses = 0x68;
+        public const short LoyaltyBonus = 0xA0;
+        public const short Type = 0xAA;
     }
 }
