@@ -6,6 +6,7 @@ using FMScoutFramework.Core.Attributes;
 using FMScoutFramework.Core.Entities.InGame.Interfaces;
 using FMScoutFramework.Core.Utilities;
 using System.ComponentModel;
+using FMScoutFramework.Extensions;
 
 namespace FMScoutFramework.Core.Entities.InGame
 {
@@ -170,6 +171,12 @@ namespace FMScoutFramework.Core.Entities.InGame
                     _reputation = value;
                     isDirty = true;
                 }
+            }
+        }
+
+        public string Name {
+            get {
+                return string.Format("{0} ({1})", this.Club.Name, ((TeamType)this.TeamType).GetDescription());
             }
         }
 
