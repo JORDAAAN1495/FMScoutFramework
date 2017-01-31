@@ -19,7 +19,7 @@ namespace FMScoutFramework.Core.Offsets
         }
 
         public const short Injuries = 0xE0;
-        public const short BansPtr = 0x10;
+        public const short BansPtr = 0x18;
         public const short Team = 0x120;
         public const short Value = 0x138;
         public const short AskingPrice = 0x140;
