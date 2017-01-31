@@ -105,9 +105,6 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 if (!string.IsNullOrEmpty(this.CommonName) && this.CommonName.Length > 1) {
                     return this.CommonName;
                 }
-                else if (!string.IsNullOrEmpty(this.FullName) && this.FullName.Length > 1) {
-                    return this.FullName;
-                }
                 else {
                     return this.FirstName + " " + this.LastName;
                 }
