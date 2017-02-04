@@ -5,6 +5,7 @@ using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Core.Offsets;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System.Linq;
 using FMScoutFramework.Extensions;
 
 namespace FMScoutFramework.Core.Entities.InGame
@@ -330,14 +331,19 @@ namespace FMScoutFramework.Core.Entities.InGame
         public List<ContractClause> Clauses {
             get {
                 if (_clauses.Count == 0) {
+                    List<ContractClause> res = new List<ContractClause>();
                     Int64 address = ProcessManager.ReadInt64((MemoryAddress + ContractOffsets.Clauses));
                     if (address > 0) {
                         Int64 numberOfClauses = ProcessManager.ReadArrayLength((MemoryAddress + ContractOffsets.Clauses));
                         for (int i = 0; i < numberOfClauses; i++) {
                             ContractClause cc = new ContractClause((address + (i * 8)), Version);
-                            _clauses.Add(cc);
+                            if (cc != null) {
+                                res.Add(cc);
+                            }
                         }
                     }
+
+                    _clauses = res;
                 }
 
                 return _clauses;
@@ -348,12 +354,16 @@ namespace FMScoutFramework.Core.Entities.InGame
         public List<ContractBonus> Bonuses {
             get {
                 if (_bonuses.Count == 0) {
-                    Int64 address = ProcessManager.ReadInt64((MemoryAddress + ContractOffsets.Bonuses));
-                    if (address > 0) {
-                        Int64 numberOfBonuses = ProcessManager.ReadArrayLength((MemoryAddress + ContractOffsets.Bonuses));
-                        for (int i = 0; i < numberOfBonuses; i++) {
-                            ContractBonus cb = new ContractBonus((address + (i * 8)), Version);
-                            _bonuses.Add(cb);
+                    lock (_bonuses) {
+                        Int64 address = ProcessManager.ReadInt64((MemoryAddress + ContractOffsets.Bonuses));
+                        if (address > 0) {
+                            Int64 numberOfBonuses = ProcessManager.ReadArrayLength((MemoryAddress + ContractOffsets.Bonuses));
+                            for (int i = 0; i < numberOfBonuses; i++) {
+                                ContractBonus cb = new ContractBonus((address + (i * 8)), Version);
+                                if (cb != null) {
+                                    _bonuses.Add(cb);
+                                }
+                            }
                         }
                     }
                 }
@@ -419,6 +429,49 @@ namespace FMScoutFramework.Core.Entities.InGame
                 }
 
                 return false;
+            }
+        }
+
+        public bool HasRelegationReleaseClause {
+            get {
+                bool result = false;
+                foreach (ContractClause clause in this.Clauses) {
+                    if (clause == null) {
+                        continue;
+                    }
+                    if (clause.Type == (int)ContractClauseType.CCTRelegationRelease) {
+                        result = true;
+                        break;
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        public bool HasNonPromotionReleaseClause {
+            get {
+                bool result = false;
+                foreach (ContractClause clause in Clauses.ToList()) {
+                    if (clause.Type == (int)ContractClauseType.CCTNonPromotionRelease) {
+                        result = true;
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        public int MinFeeReleaseAmount {
+            get {
+                int result = 999999999;
+                foreach (ContractClause clause in Clauses.ToList()) {
+                    if (clause.Type == (int)ContractClauseType.CCTMinFeeRelease) {
+                        result = clause.Value;
+                    }
+                }
+
+                return result;
             }
         }
     }
