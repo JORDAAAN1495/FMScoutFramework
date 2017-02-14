@@ -67,7 +67,7 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
             public Int64 XorDistance { get { return 0x80; } }
             public Int64 StringOffset { get { return 0x0; } }
             public Int64 CurrentDateTime { get { return 0x39C1C26; } } // At BaseAddress + offset
-            public Int64 ActiveObject { get { return 0x10428D968; } }
+            public Int64 ActiveObject { get { return 0x3A0E850; } } // BaseAddress + offset
 
             [MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x10)]
             public Int64 Award { get { return 0x10; } }

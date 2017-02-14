@@ -20,6 +20,12 @@ namespace FMScoutFramework.Core.Entities
             get { return ProcessManager.ReadDateTime (ProcessManager.fmProcess.BaseAddress + _version.MemoryAddresses.CurrentDateTime); }
 #endif
         }
+
+        public int ActiveObjectID {
+            get {
+                return ProcessManager.ReadInt32(ProcessManager.fmProcess.BaseAddress + _version.MemoryAddresses.ActiveObject);
+            }
+        }
     }
 
     public enum DatabaseModeEnum { Realtime, Cached }

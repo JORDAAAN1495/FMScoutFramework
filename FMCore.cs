@@ -110,5 +110,9 @@ namespace FMScoutFramework.Core
         public DateTime InGameDate {
             get { return glob.InGameDate; }
         }
+
+        public int ActiveObjectID {
+            get { return glob.ActiveObjectID; }
+        }
     }
 }
