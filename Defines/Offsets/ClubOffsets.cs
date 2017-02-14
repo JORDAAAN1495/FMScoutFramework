@@ -49,7 +49,8 @@ namespace FMScoutFramework.Core.Offsets
         public short ClubSponshorshipDeals {
             get {
                 if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
-                    Version.GetType() == typeof(Steam_17_2_1_Windows)) {
+                    Version.GetType() == typeof(Steam_17_2_1_Windows) ||
+                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows)) {
                     return 0x118;
                 }
                 return 0x110;
@@ -59,7 +60,8 @@ namespace FMScoutFramework.Core.Offsets
         public short ClubFinances {
             get {
                 if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
-                    Version.GetType() == typeof(Steam_17_2_1_Windows)) {
+                    Version.GetType() == typeof(Steam_17_2_1_Windows) ||
+                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows)) {
                     return 0x138;
                 }
                 return 0x130;
