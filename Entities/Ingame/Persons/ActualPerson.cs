@@ -3,8 +3,104 @@ using FMScoutFramework.Core.Entities.InGame.Interfaces;
 using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Core.Offsets;
 using System;
+using System.ComponentModel;
 
 namespace FMScoutFramework.Core.Entities.InGame {
+    public enum APEthnicity {
+        [Description("Unknown")]
+        APEUnknown                      = 0,
+        [Description("Northern European")]
+        APENorthernEuropean             = 1,
+        [Description("Mediterranean Hispanic")]
+        APEMediterraneanHispanic        = 2,
+        [Description("North African/Middle Eastern")]
+        APENorthAfricanMiddleEastern    = 3,
+        [Description("African/Caribbean")]
+        APEAfricanCaribbean             = 4,
+        [Description("Asian")]
+        APEAsian                        = 5,
+        [Description("South East Asian")]
+        APESouthEastAsian               = 6,
+        [Description("Pacific Islander")]
+        APEPacificIslander              = 7,
+        [Description("Native American")]
+        APENativeAmerican               = 8,
+        [Description("Native Australian")]
+        APENativeAustralian             = 9,
+        [Description("Mixed Race (Black/White)")]
+        APEMixedRaceBlackWhite          = 10,
+        [Description("East Asian")]
+        APEEastAsian                    = 11
+    }
+
+    public enum APHairColour {
+        [Description("Unknown")]
+        APHUnknown              = 0,
+        [Description("Blonde")]
+        APHBlonde               = 1,
+        [Description("Light Brown")]
+        APHLightBrown           = 2,
+        [Description("Dark Brown")]
+        APHDarkBrown            = 3,
+        [Description("Red")]
+        APHRed                  = 4,
+        [Description("Black")]
+        APHBlack                = 5,
+        [Description("Grey")]
+        APHGrey                 = 6,
+        [Description("Bald")]
+        APHBald                 = 7,
+        [Description("Changeable (Normal)")]
+        APHChangeableNormal     = 8,
+        [Description("Changeable (Dramatic)")]
+        APHChangeableDramatic   = 9
+    }
+
+    public enum APSkinTone {
+        [Description("Unknown")]
+        APSUnknown   = 0,
+        [Description("Skin Tone 1")]
+        APSSkinTone1 = 1,
+        [Description("Skin Tone 2")]
+        APSSkinTone2 = 2,
+        [Description("Skin Tone 3")]
+        APSSkinTone3 = 3,
+        [Description("Skin Tone 4")]
+        APSSkinTone4 = 4,
+        [Description("Skin Tone 5")]
+        APSSkinTone5 = 5,
+        [Description("Skin Tone 6")]
+        APSSkinTone6 = 6,
+        [Description("Skin Tone 7")]
+        APSSkinTone7 = 7,
+        [Description("Skin Tone 8")]
+        APSSkinTone8 = 8,
+        [Description("Skin Tone 9")]
+        APSSkinTone9 = 9,
+        [Description("Skin Tone 10")]
+        APSSkinTone10 = 10,
+        [Description("Skin Tone 11")]
+        APSSkinTone11 = 11,
+        [Description("Skin Tone 12")]
+        APSSkinTone12 = 12,
+        [Description("Skin Tone 13")]
+        APSSkinTone13 = 13,
+        [Description("Skin Tone 14")]
+        APSSkinTone14 = 14,
+        [Description("Skin Tone 15")]
+        APSSkinTone15 = 15,
+        [Description("Skin Tone 16")]
+        APSSkinTone16 = 16,
+        [Description("Skin Tone 17")]
+        APSSkinTone17 = 17,
+        [Description("Skin Tone 18")]
+        APSSkinTone18 = 18,
+        [Description("Skin Tone 19")]
+        APSSkinTone19 = 19,
+        [Description("Skin Tone 20")]
+        APSSkinTone20 = 20
+    }
+
     public class ActualPerson : BaseObject, IActualPerson {
         public ActualPersonOffsets ActualPersonOffsets;
         public ActualPerson(Int64 memoryAddress, IVersion version)
