@@ -7,6 +7,7 @@ using FMScoutFramework.Core.Entities.InGame.Interfaces;
 using FMScoutFramework.Core.Utilities;
 using System.ComponentModel;
 using FMScoutFramework.Extensions;
+using System.Collections.Generic;
 
 namespace FMScoutFramework.Core.Entities.InGame
 {
@@ -181,6 +182,26 @@ namespace FMScoutFramework.Core.Entities.InGame
                     _reputation = value;
                     isDirty = true;
                 }
+            }
+        }
+
+        private List<Player> _players = new List<Player>();
+        public List<Player> Players {
+            get {
+                if (_players.Count == 0) {
+                    List<Player> result = new List<Player>();
+                    Int64 playerCount = ProcessManager.ReadArrayLength((MemoryAddress + TeamOffsets.Players));
+                    if (playerCount > 0) {
+                        Int64 arrayStartAddress = PropertyInvoker.Get<Int64>(TeamOffsets.Players, OriginalBytes, MemoryAddress, DatabaseMode);
+                        for (int i = 0; i < playerCount; i++) {
+                            Int64 playerAddress = PropertyInvoker.Get<Int64>((i * 0x8), OriginalBytes, arrayStartAddress, DatabaseMode);
+                            result.Add(new Player(playerAddress, Version));
+                        }
+                    }
+                    _players = result;
+                }
+
+                return _players;
             }
         }
 
