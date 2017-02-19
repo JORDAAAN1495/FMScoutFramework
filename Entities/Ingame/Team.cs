@@ -75,10 +75,15 @@ namespace FMScoutFramework.Core.Entities.InGame
 
             int rotateAmount = (int)((MemoryAddress + TeamOffsets.Reputation) & 0xf);
             uint decryptedRep = _reputation;
-            decryptedRep = BitwiseOperations.rol_short(decryptedRep, rotateAmount);
-            decryptedRep = decryptedRep ^ 0x20D3;
-            decryptedRep = BitwiseOperations.ror_short(decryptedRep, 0x2);
-            decryptedRep = decryptedRep ^ 0x542E;
+            if (Version.GetType() != typeof(Steam_17_2_0_Windows) &&
+                Version.GetType() != typeof(Steam_17_2_1_Windows) &&
+                Version.GetType() != typeof(Steam_Touch_17_2_0_Windows)) {
+                decryptedRep = BitwiseOperations.rol_short(decryptedRep, rotateAmount);
+                decryptedRep = decryptedRep ^ 0x20D3;
+                decryptedRep = BitwiseOperations.ror_short(decryptedRep, 0x2);
+                decryptedRep = decryptedRep ^ 0x542E;
+            }
+            
             PropertyInvoker.Set<ushort>(TeamOffsets.Reputation, OriginalBytes, MemoryAddress, DatabaseMode, (ushort)decryptedRep);
         }
 
@@ -157,10 +162,15 @@ namespace FMScoutFramework.Core.Entities.InGame
                 if (_reputation == 0) {
                     int rotateAmount = (int)((MemoryAddress + TeamOffsets.Reputation) & 0xf);
                     uint encryptedRep = PropertyInvoker.Get<ushort>(TeamOffsets.Reputation, OriginalBytes, MemoryAddress, DatabaseMode);
-                    encryptedRep = encryptedRep ^ 0x542E;
-                    encryptedRep = BitwiseOperations.rol_short(encryptedRep, 0x2);
-                    encryptedRep = encryptedRep ^ 0x20D3;
-                    encryptedRep = BitwiseOperations.ror_short(encryptedRep, rotateAmount);
+
+                    if (Version.GetType() != typeof(Steam_17_2_1_Windows) &&
+                        Version.GetType() != typeof(Steam_17_2_0_Windows) &&
+                        Version.GetType() != typeof(Steam_Touch_17_2_0_Windows)) {
+                        encryptedRep = encryptedRep ^ 0x542E;
+                        encryptedRep = BitwiseOperations.rol_short(encryptedRep, 0x2);
+                        encryptedRep = encryptedRep ^ 0x20D3;
+                        encryptedRep = BitwiseOperations.ror_short(encryptedRep, rotateAmount);
+                    }
 
                     _reputation = (ushort)encryptedRep;
                 }
