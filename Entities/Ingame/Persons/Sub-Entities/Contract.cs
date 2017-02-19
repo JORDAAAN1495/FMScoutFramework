@@ -474,5 +474,13 @@ namespace FMScoutFramework.Core.Entities.InGame
                 return result;
             }
         }
+
+        // Functions
+        public void RemoveUnhappy() {
+            if (UnhappinessPointer > 0x0) {
+                PropertyInvoker.Set<Int64>(ContractOffsets.Unhappinesses, OriginalBytes, MemoryAddress, DatabaseMode, 0);
+                _unhappinessPointer = 0;
+            }
+        }
     }
 }
