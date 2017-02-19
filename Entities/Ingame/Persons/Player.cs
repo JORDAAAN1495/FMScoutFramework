@@ -418,6 +418,12 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
+        public bool IsRegen {
+            get {
+                return (UID > 98041249);
+            }
+        }
+
         public string Offset {
             get {
                 return "0x" + this.MemoryAddress.ToString("X");
