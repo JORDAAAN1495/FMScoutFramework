@@ -46,17 +46,26 @@ namespace FMScoutFramework.Core.Entities.InGame
                 PropertyInvoker.Set<Int64>(0x0, OriginalBytes, InjuriesPtr, DatabaseMode, 0);
                 PropertyInvoker.Set<Int64>(0x8, OriginalBytes, InjuriesPtr, DatabaseMode, 0);
                 PropertyInvoker.Set<Int64>(0xF, OriginalBytes, InjuriesPtr, DatabaseMode, 0);
-                PropertyInvoker.Set<short>(PlayerOffsets.Fitness, OriginalBytes, Address, DatabaseMode, 10000);
-                PropertyInvoker.Set<short>(PlayerOffsets.Condition, OriginalBytes, Address, DatabaseMode, 10000);
-                PropertyInvoker.Set<short>(PlayerOffsets.Jadedness, OriginalBytes, Address, DatabaseMode, -500);
-                IsInjured = false;
             }
+
+            PropertyInvoker.Set<short>(PlayerOffsets.Fitness, OriginalBytes, Address, DatabaseMode, 10000);
+            PropertyInvoker.Set<short>(PlayerOffsets.Condition, OriginalBytes, Address, DatabaseMode, 10000);
+            PropertyInvoker.Set<short>(PlayerOffsets.Jadedness, OriginalBytes, Address, DatabaseMode, -500);
+
+            _fitness = 0;
+            _condition = 0;
+            _jadedness = 0;
+            IsInjured = false;
         }
 
         public void DestroyPlayer() {
             PropertyInvoker.Set<short>(PlayerOffsets.Condition, OriginalBytes, Address, DatabaseMode, 1);
             PropertyInvoker.Set<short>(PlayerOffsets.Fitness, OriginalBytes, Address, DatabaseMode, 1);
             PropertyInvoker.Set<short>(PlayerOffsets.Jadedness, OriginalBytes, Address, DatabaseMode, -500);
+
+            _fitness = 0;
+            _condition = 0;
+            _jadedness = 0;
         }
 
         public void RemoveBan() {
