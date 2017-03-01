@@ -78,6 +78,7 @@ namespace FMScoutFramework.Core.Entities.InGame
             uint decryptedRep = _reputation;
             if (Version.GetType() != typeof(Steam_17_2_0_Windows) &&
                 Version.GetType() != typeof(Steam_17_2_1_Windows) &&
+                Version.GetType() != typeof(Steam_17_3_0_Windows) &&
                 Version.GetType() != typeof(Steam_Touch_17_2_0_Windows)) {
                 decryptedRep = BitwiseOperations.rol_short(decryptedRep, rotateAmount);
                 decryptedRep = decryptedRep ^ 0x20D3;
@@ -166,6 +167,7 @@ namespace FMScoutFramework.Core.Entities.InGame
 
                     if (Version.GetType() != typeof(Steam_17_2_1_Windows) &&
                         Version.GetType() != typeof(Steam_17_2_0_Windows) &&
+                        Version.GetType() != typeof(Steam_17_3_0_Windows) &&
                         Version.GetType() != typeof(Steam_Touch_17_2_0_Windows)) {
                         encryptedRep = encryptedRep ^ 0x542E;
                         encryptedRep = BitwiseOperations.rol_short(encryptedRep, 0x2);

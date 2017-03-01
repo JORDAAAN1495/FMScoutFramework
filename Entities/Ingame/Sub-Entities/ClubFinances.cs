@@ -40,6 +40,7 @@ namespace FMScoutFramework.Core.Entities.InGame
             uint decryptedBalance = (uint)_balance;
             if (Version.GetType() != typeof(Steam_17_2_0_Windows) &&
                 Version.GetType() != typeof(Steam_17_2_1_Windows) &&
+                Version.GetType() != typeof(Steam_17_3_0_Windows) &&
                 Version.GetType() != typeof(Steam_Touch_17_2_0_Windows)) {
                 decryptedBalance = BitwiseOperations.rol(decryptedBalance, rotateAmount);
                 decryptedBalance = decryptedBalance ^ 0x16F175CB;
@@ -91,6 +92,7 @@ namespace FMScoutFramework.Core.Entities.InGame
 
                     if (Version.GetType() != typeof(Steam_17_2_0_Windows) &&
                         Version.GetType() != typeof(Steam_17_2_1_Windows) &&
+                        Version.GetType() != typeof(Steam_17_3_0_Windows) &&
                         Version.GetType() != typeof(Steam_Touch_17_2_0_Windows)) {
                         encryptedBalance = ~encryptedBalance;
                         encryptedBalance = BitwiseOperations.rol(encryptedBalance, 0x16);

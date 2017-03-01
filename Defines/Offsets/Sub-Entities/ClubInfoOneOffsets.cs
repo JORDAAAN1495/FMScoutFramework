@@ -13,6 +13,7 @@ namespace FMScoutFramework.Core.Offsets {
             get {
                 if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
                     Version.GetType() == typeof(Steam_17_2_1_Windows) ||
+                    Version.GetType() == typeof(Steam_17_3_0_Windows) ||
                     Version.GetType() == typeof(Steam_Touch_17_2_0_Windows)) {
                     return 0x68;
                 }
@@ -24,6 +25,7 @@ namespace FMScoutFramework.Core.Offsets {
             get {
                 if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
                     Version.GetType() == typeof(Steam_17_2_1_Windows) ||
+                    Version.GetType() == typeof(Steam_17_3_0_Windows) ||
                     Version.GetType() == typeof(Steam_Touch_17_2_0_Windows)) {
                     return 0x6C;
                 }
@@ -35,6 +37,7 @@ namespace FMScoutFramework.Core.Offsets {
             get {
                 if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
                     Version.GetType() == typeof(Steam_17_2_1_Windows) ||
+                    Version.GetType() == typeof(Steam_17_3_0_Windows) ||
                     Version.GetType() == typeof(Steam_Touch_17_2_0_Windows))  {
                     return 0x70;
                 }
@@ -46,6 +49,7 @@ namespace FMScoutFramework.Core.Offsets {
             get {
                 if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
                     Version.GetType() == typeof(Steam_17_2_1_Windows) ||
+                    Version.GetType() == typeof(Steam_17_3_0_Windows) ||
                     Version.GetType() == typeof(Steam_Touch_17_2_0_Windows)) {
                     return 0x74;
                 }
@@ -57,6 +61,7 @@ namespace FMScoutFramework.Core.Offsets {
             get {
                 if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
                     Version.GetType() == typeof(Steam_17_2_1_Windows) ||
+                    Version.GetType() == typeof(Steam_17_3_0_Windows) ||
                     Version.GetType() == typeof(Steam_Touch_17_2_0_Windows)) {
                     return 0x88;
                 }
