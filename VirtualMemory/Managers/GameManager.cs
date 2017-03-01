@@ -115,6 +115,11 @@ namespace FMScoutFramework.Core.Managers
 
                 fmLoaded = (Version != null);
             }
+
+            if (!fmLoaded) {
+                LastErrorMessage = "Could not find a compatible Football Manager version.";
+            }
+
             return fmLoaded;
         }
 #endif
