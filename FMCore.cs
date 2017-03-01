@@ -37,6 +37,7 @@ namespace FMScoutFramework.Core
         public IEnumerable<Player> Players { get { return GetListFromStore<Player> (); } }
         public IEnumerable<Staff> Staff { get { return GetListFromStore<Staff> (); } }
         public IEnumerable<PlayerStaff> PlayerStaff { get { return GetListFromStore<PlayerStaff> (); } }
+        public IEnumerable<Team> Teams { get { return GetListFromStore<Team>(); } }
 
         private IQueryable<T> GetListFromStore<T> ()
         {
@@ -83,11 +84,36 @@ namespace FMScoutFramework.Core
             objectManager.Load (refreshPersonCache);
         }
 
-        public MetaDataCls MetaData { get { return new MetaDataCls (this, this.objectManager, gameManager); } }
+        public void ReloadGameData() {
+            // Clean up
+            this.Dispose();
+
+            this.LoadData();
+        }
+
+        private MetaDataCls _metaData;
+        public MetaDataCls MetaData {
+            get {
+                if (_metaData == null) {
+                    _metaData = new MetaDataCls(this, this.objectManager, gameManager);
+                }
+
+                return _metaData;
+            }
+            set {
+                if (_metaData != value) {
+                    _metaData = value;
+                }
+            }
+        }
 
         #region IDisposable Members
-        public void Dispose ()
-        {
+        public void Dispose () {
+            objectManager.ClearObjectStore();
+
+            gameManager = null;
+            objectManager = null;
+            _metaData = null;
         }
         #endregion
     }
