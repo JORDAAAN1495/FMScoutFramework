@@ -32,6 +32,10 @@ namespace FMScoutFramework.Core.Managers
             GameManager = gameManager;
         }
 
+        public void ClearObjectStore() {
+            ObjectStore.Clear();
+        }
+
         public void Load (bool refreshPersonCache)
         {
             ObjectStore.Clear ();
