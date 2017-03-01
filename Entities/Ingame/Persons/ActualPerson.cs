@@ -3,6 +3,7 @@ using FMScoutFramework.Core.Entities.InGame.Interfaces;
 using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Core.Offsets;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace FMScoutFramework.Core.Entities.InGame {
@@ -226,6 +227,29 @@ namespace FMScoutFramework.Core.Entities.InGame {
                     _attributes = new PersonAttributes((MemoryAddress + ActualPersonOffsets.Attributes), Version);
                 }
                 return _attributes;
+            }
+        }
+
+        private List<Relationship> _relationships = new List<Relationship>();
+        public List<Relationship> Relationships {
+            get {
+                if (_relationships.Count == 0) {
+                    // It's a pointer to an array
+                    Int64 arrayStartAddress = PropertyInvoker.Get<Int64>(ActualPersonOffsets.Relationships, OriginalBytes, MemoryAddress, DatabaseMode);
+                    if (arrayStartAddress > 0x0) {
+                        List<Relationship> ret = new List<Relationship>();
+                        // Get the array length
+                        Int64 numOfRelationships = ProcessManager.ReadArrayLength(arrayStartAddress, 0x10);
+                        Int64 firstItemAddress = PropertyInvoker.Get<Int64>(0x0, OriginalBytes, arrayStartAddress, DatabaseMode);
+                        for (Int64 i = 0; i < numOfRelationships; i++) {
+                            ret.Add(new Relationship(firstItemAddress + (i * 0x10), Version));
+                        }
+
+                        _relationships = ret;
+                    }
+                }
+
+                return _relationships;
             }
         }
 
