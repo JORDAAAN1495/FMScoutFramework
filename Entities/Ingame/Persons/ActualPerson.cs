@@ -220,6 +220,19 @@ namespace FMScoutFramework.Core.Entities.InGame {
             }
         }
 
+        public string SearchableNationality {
+            get {
+                string res = Nation.Name;
+                foreach (Relationship rel in Relationships) {
+                    if ((RelationshipType)rel.Type == RelationshipType.RTHasNationality) {
+                        res += " " + ((Nation)rel.AssociatedObject).Name;
+                    }
+                }
+
+                return res;
+            }
+        }
+
         private PersonAttributes _attributes;
         public PersonAttributes Attributes {
             get {
