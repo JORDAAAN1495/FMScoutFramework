@@ -195,7 +195,9 @@ namespace FMScoutFramework.Core.Entities.InGame
                         Int64 arrayStartAddress = PropertyInvoker.Get<Int64>(TeamOffsets.Players, OriginalBytes, MemoryAddress, DatabaseMode);
                         for (int i = 0; i < playerCount; i++) {
                             Int64 playerAddress = PropertyInvoker.Get<Int64>((i * 0x8), OriginalBytes, arrayStartAddress, DatabaseMode);
-                            result.Add(new Player(playerAddress, Version));
+                            if (playerAddress > 0x0) {
+                                result.Add(new Player(playerAddress, Version));
+                            }
                         }
                     }
                     _players = result;
