@@ -216,7 +216,7 @@ namespace FMScoutFramework.Core.Entities.InGame
         public override string ToString ()
         {
             if (this.Club.Name != "-")
-                return string.Format ("{0} ({1})", this.Club.Name, this.TeamType.ToString ());
+                return string.Format("{0} ({1})", this.Club.Name, ((TeamType)this.TeamType).GetDescription());
             else
                 return "-";
         }
