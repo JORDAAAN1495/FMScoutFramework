@@ -56,6 +56,12 @@ namespace FMScoutFramework.Core.Offsets {
             }
         }
 
+        public short Relationships {
+            get {
+                return 0x60;
+            }
+        }
+
         public short Ethnicity {
             get {
                 return 0x68;
