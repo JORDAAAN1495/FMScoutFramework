@@ -14,43 +14,31 @@ namespace FMScoutFramework.Core.Offsets
         }
 
         public short StaffAttributes {
-            get { return 0x0; }
+            get { return 0x8; }
         }
 
         public short HomeReputation {
-            get { return 0x0; }
+            get { return 0xA4; }
         }
 
         public short CurrentReputation {
-            get { return 0x0; }
+            get { return 0xA6; }
         }
 
         public short WorldReputation {
-            get { return 0x0; }
+            get { return 0xA8; }
         }
 
         public short CurrentAbility {
-            get { return 0x0; }
+            get { return 0xAA; }
         }
 
         public short PotentialAbility {
-            get { return 0x0; }
+            get { return 0xAC; }
         }
 
-        public short RowID {
-            get { return 0x0; }
-        }
-
-        public short ID {
-            get { return 0x0; }
-        }
-
-        public short PersonAddress {
-            get { return 0x0; }
-        }
-
-        public short JobAttributes {
-            get { return 0x0; }
+        public short ActualPerson {
+            get { return 0xE8; }
         }
     }
 }

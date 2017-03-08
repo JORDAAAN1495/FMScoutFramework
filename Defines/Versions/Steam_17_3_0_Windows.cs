@@ -173,7 +173,7 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
         public class PersonVersionOffsets : IPersonVersionOffsets {
             public Int64 Person { get { return -0xC4; } }
             public Int64 Player { get { return -0x1D0; } }
-            public Int64 Staff { get { return -0x1F8; } }
+            public Int64 Staff { get { return -0xC0; } }
             public Int64 NonPlayer { get { return 0x0; } }
             public Int64 PlayerStaff { get { return -0x3B8; } }
             public Int64 Official { get { return 0x0; } }
