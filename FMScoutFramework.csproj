@@ -84,6 +84,7 @@
     <Compile Include="Defines\Offsets\AwardOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\ActualPersonOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\PreferredMovesOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\StaffAttributeOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\ClubDebtsOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\ClubInfoOneOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\ClubInfoTwoOffsets.cs" />
@@ -91,8 +92,10 @@
     <Compile Include="Defines\Offsets\Sub-Entities\KitOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\RelationshipOffsets.cs" />
     <Compile Include="Defines\Versions\Steam_17_1_2_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_17_3_1_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_17_3_0_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_17_3_0_Beta_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_Touch_17_3_0_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_Touch_17_2_0_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_17_2_0_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_17_2_1_Windows.cs" />
@@ -104,9 +107,11 @@
     <Compile Include="Entities\Ingame\Interfaces\IKit.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IPreferredMoves.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IRelationship.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IStaffAttributes.cs" />
     <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IActualPerson.cs" />
     <Compile Include="Entities\Ingame\Persons\ActualPerson.cs" />
     <Compile Include="Entities\Ingame\Persons\Sub-Entities\PreferredMoves.cs" />
+    <Compile Include="Entities\Ingame\Persons\Sub-Entities\StaffAttributes.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\ClubDebt.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\ClubFinanceRevenueRecord.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\ClubInfoOne.cs" />

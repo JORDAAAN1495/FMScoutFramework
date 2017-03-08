@@ -14,7 +14,9 @@ namespace FMScoutFramework.Core.Offsets {
                 if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
                     Version.GetType() == typeof(Steam_17_2_1_Windows) ||
                     Version.GetType() == typeof(Steam_17_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows)) {
+                    Version.GetType() == typeof(Steam_17_3_1_Windows) ||
+                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows) ||
+                    Version.GetType() == typeof(Steam_Touch_17_3_0_Windows)) {
                     return 0x68;
                 }
                 return 0x70;
@@ -26,7 +28,9 @@ namespace FMScoutFramework.Core.Offsets {
                 if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
                     Version.GetType() == typeof(Steam_17_2_1_Windows) ||
                     Version.GetType() == typeof(Steam_17_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows)) {
+                    Version.GetType() == typeof(Steam_17_3_1_Windows) ||
+                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows) ||
+                    Version.GetType() == typeof(Steam_Touch_17_3_0_Windows)) {
                     return 0x6C;
                 }
                 return 0x74;
@@ -38,7 +42,9 @@ namespace FMScoutFramework.Core.Offsets {
                 if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
                     Version.GetType() == typeof(Steam_17_2_1_Windows) ||
                     Version.GetType() == typeof(Steam_17_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows))  {
+                    Version.GetType() == typeof(Steam_17_3_1_Windows) ||
+                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows) ||
+                    Version.GetType() == typeof(Steam_Touch_17_3_0_Windows))  {
                     return 0x70;
                 }
                 return 0x78;
@@ -50,7 +56,9 @@ namespace FMScoutFramework.Core.Offsets {
                 if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
                     Version.GetType() == typeof(Steam_17_2_1_Windows) ||
                     Version.GetType() == typeof(Steam_17_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows)) {
+                    Version.GetType() == typeof(Steam_17_3_1_Windows) ||
+                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows) ||
+                    Version.GetType() == typeof(Steam_Touch_17_3_0_Windows)) {
                     return 0x74;
                 }
                 return 0x7C;
@@ -62,7 +70,9 @@ namespace FMScoutFramework.Core.Offsets {
                 if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
                     Version.GetType() == typeof(Steam_17_2_1_Windows) ||
                     Version.GetType() == typeof(Steam_17_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows)) {
+                    Version.GetType() == typeof(Steam_17_3_1_Windows) ||
+                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows) ||
+                    Version.GetType() == typeof(Steam_Touch_17_3_0_Windows)) {
                     return 0x88;
                 }
                 return 0x90;
