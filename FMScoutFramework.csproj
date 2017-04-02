@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="Defines\Offsets\AwardOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\ActualPersonOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\JobAttributesOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\PreferredMovesOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\StaffAttributeOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\ClubDebtsOffsets.cs" />
@@ -104,12 +105,14 @@
     <Compile Include="Entities\Ingame\Interfaces\IClubInfoOne.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IClubInfoTwo.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IClubSponsorshipDeal.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IJobAttributes.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IKit.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IPreferredMoves.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IRelationship.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IStaffAttributes.cs" />
     <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IActualPerson.cs" />
     <Compile Include="Entities\Ingame\Persons\ActualPerson.cs" />
+    <Compile Include="Entities\Ingame\Persons\Sub-Entities\JobAttributes.cs" />
     <Compile Include="Entities\Ingame\Persons\Sub-Entities\PreferredMoves.cs" />
     <Compile Include="Entities\Ingame\Persons\Sub-Entities\StaffAttributes.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\ClubDebt.cs" />
