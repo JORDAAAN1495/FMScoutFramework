@@ -342,6 +342,17 @@ namespace FMScoutFramework.Core.Entities.InGame {
             }
         }
 
+        private JobAttributes _jobAttributes;
+        public JobAttributes JobAttributes {
+            get {
+                if (_jobAttributes == null) {
+                    _jobAttributes = PropertyInvoker.GetPointer<JobAttributes>(ActualPersonOffsets.JobAttributes, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+                }
+
+                return _jobAttributes;
+            }
+        }
+
         private byte _internationalApps = 0;
         public byte InternationalApps {
             get {
