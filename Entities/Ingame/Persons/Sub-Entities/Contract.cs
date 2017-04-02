@@ -13,68 +13,78 @@ namespace FMScoutFramework.Core.Entities.InGame
     public enum JobType {
         [Description("Not Set")]
         JTNotSet                    = 0,
-        [Description("Manager")]
-        JTManager                   = 1,
-        [Description("Assistant Manager")]
-        JTAssistant                 = 2,
+        [Description("Player")]
+        JTPlayer                    = 1,
         [Description("Coach")]
-        JTCoach                     = 3,
-        [Description("Physio")]
-        JTPhysio                    = 4,
-        [Description("Scout")]
-        JTScout                     = 5,
-        [Description("Goalkeeper Coach")]
-        JTGoalkeeperCoach           = 6,
-        [Description("Fitness Coach")]
-        JTFitnessCoach              = 7,
+        JTCoach                     = 2,
+        [Description("Player/Coach")]
+        JTPlayerCoach               = 3,
         [Description("Chairman")]
-        JTChairman                  = 8,
-        [Description("Director of Football")]
-        JTDirectorOfFootball        = 9,
-        [Description("Head of Youth Development")]
-        JTHeadOfYouthDevelopment    = 10,
+        JTChairman                  = 4,
         [Description("Director")]
-        JTDirector                  = 11,
+        JTDirector                  = 6,
         [Description("Managing Director")]
-        JTManagingDirector          = 12,
-        [Description("Owner")]
-        JTOwner                     = 13,
-        [Description("President")]
-        JTPresident                 = 14,
-        [Description("Head of Physiotherapy")]
-        JTHeadOfPhysiotherapy       = 15,
-        [Description("Chief Scout")]
-        JTChiefScout                = 16,
+        JTManagingDirector          = 8,
+        [Description("Director of Football")]
+        JTDirectorOfFootball        = 10,
+        [Description("Physiotherapist")]
+        JTPhysiotherapist           = 12,
+        [Description("Scout")]
+        JTScout                     = 14,
+        [Description("Manager")]
+        JTManager                   = 16,
+        [Description("Player/Manager")]
+        JTPlayerManager             = 17,
+        [Description("Assistant Manager")]
+        JTAssistantManager          = 20,
+        [Description("Player/Assistant Manager")]
+        JTPlayerAssistantManager    = 21,
+        [Description("Media Pundit")]
+        JTMediaPundit               = 22,
         [Description("General Manager")]
-        JTGeneralManager            = 17,
-        [Description("Player / Assistant Manager")]
-        JTPlayerAssistantManager    = 18,
-        [Description("Player / Coach")]
-        JTPlayerCoach               = 19,
-        [Description("Player / Fitness Coach")]
-        JTPlayerFitnessCoach        = 20,
-        [Description("Player / Goalkeeper Coach")]
-        JTPlayerGoalkeeperCoach     = 21,
-        [Description("Player / Manager")]
-        JTPlayerManager             = 22,
-        [Description("Player / Youth Team Coach")]
-        JTPlayerYouthTeamCoach      = 23,
-        [Description("Player / Head of Youth Development")]
-        JTPlayerHeadOfYouthDev      = 24,
-        [Description("Player / Chief Scout")]
-        JTPlayerChiefScout          = 25,
-        [Description("U23 Sports Scientist")]
-        JTU23SportsScientist        = 26,
-        [Description("U18 Sports Scientist")]
-        JTU18SportsScientist        = 27,
-        [Description("U18 Data Analyst")]
-        JTU18DataAnalyst            = 28,
-        [Description("Head of Sports Science")]
-        JTHeadOfSportsScience       = 29,
-        [Description("Chief Doctor")]
-        JTChiefDoctor               = 30,
+        JTGeneralManager            = 24,
+        [Description("Fitness Coach")]
+        JTFitnessCoach              = 26,
+        [Description("Player/Fitness Coach")]
+        JTPlayerFitnessCoach        = 27,
+        [Description("Goalkeeper Coach")]
+        JTGoalkeeperCoach           = 34,
+        [Description("Player/Goalkeeper Coach")]
+        JTPlayerGoalkeeperCoach     = 35,
         [Description("Chief Data Analyst")]
-        JTChiefDataAnalyst          = 31
+        JTChiefDataAnalyst          = 36,
+        [Description("Chief Doctor")]
+        JTChiefDoctor               = 38,
+        [Description("Head of Sports Science")]
+        JTHeadOfSportsScience       = 40,
+        [Description("U18 Data Analyst")]
+        JTU18DataAnalyst            = 42,
+        [Description("Chief Scout")]
+        JTChiefScout                = 44,
+        [Description("Player/Chief Scout")]
+        JTPlayerChiefScout          = 45,
+        [Description("U18 Sports Scientist")]
+        JTU18SportsScientist        = 46,
+        [Description("U23 Sports Scientist")]
+        JTU23SportsScientist        = 48,
+        [Description("Player/Youth Team Coach")]
+        JTPlayerYouthTeamCoach      = 49,
+        [Description("Head of Physiotherapy")]
+        JTHeadOfPhysiotherapy       = 50,
+        [Description("U19 Manager")]
+        JTU19Manager                = 52,
+        [Description("First Team Coach")]
+        JTFirstTeamCoach            = 54,
+        [Description("Head of Youth Development")]
+        JTHeadOfYouthDevelopment    = 64,
+        [Description("Player/Head of Youth Development")]
+        JTPlayerHeadOfYouthDev      = 65,
+        [Description("Owner")]
+        JTOwner                     = 66,
+        [Description("President")]
+        JTPresident                 = 70,
+        [Description("Caretaker Manager")]
+        JTCaretakerManager          = 144
     }
 
     public enum SquadStatusType {
@@ -98,16 +108,28 @@ namespace FMScoutFramework.Core.Entities.InGame
 
     public enum TransferStatusType {
         [Description("Not Set")]
-        TSTNotSet                   = 0,
+        TSTNotSet                   = 4,
         [Description("Transfer Listed")]
-        TSTNotListed                = 1,
+        TSTListed                   = 5,      
         [Description("Listed for Loan")]
-        TSTListedForLoan            = 2,
+        TSTListedForLoan            = 6,
         [Description("Transfer and Loan Listed")]
-        TSTTransferAndLoanListed    = 3
+        TSTTransferAndLoanListed    = 7,
+        [Description("Transfer Lister by Request")]
+        TSTListedByRequest          = 12,
+        [Description("Listed by Request & Loan Listed")]
+        TSTByRequestAndLoanListed   = 15,
+        [Description("Not Available for Loan")]
+        TSTNotAvailableForLoan      = 68,
+        [Description("Transfer Listed / NA for Loan")]
+        TSTTransferListedNotForLoan = 69,
+        [Description("Listed by Request / NA for Loan")]
+        TSTByRequestNotLoan         = 76
     }
 
     public enum ContractType {
+        [Description(" ")]
+        CTNull          = -1,
         [Description("Part Time")]
         CTPartTime      = 0,
         [Description("Full Time")]
@@ -135,17 +157,17 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         public void Save() {
-            PropertyInvoker.Set<int>(ContractOffsets.Wage, OriginalBytes, MemoryAddress, DatabaseMode, _wage);
-            PropertyInvoker.Set<byte>(ContractOffsets.JobType, OriginalBytes, MemoryAddress, DatabaseMode, _jobType);
-            PropertyInvoker.Set<Int64>(ContractOffsets.Unhappinesses, OriginalBytes, MemoryAddress, DatabaseMode, _unhappinessPointer);
-            PropertyInvoker.Set<DateTime>(ContractOffsets.StartDate, OriginalBytes, MemoryAddress, DatabaseMode, _startDate);
-            PropertyInvoker.Set<DateTime>(ContractOffsets.EndDate, OriginalBytes, MemoryAddress, DatabaseMode, _endDate);
-            PropertyInvoker.Set<DateTime>(ContractOffsets.JoinDate, OriginalBytes, MemoryAddress, DatabaseMode, _joinDate);
-            PropertyInvoker.Set<byte>(ContractOffsets.SquadStatus, OriginalBytes, MemoryAddress, DatabaseMode, _squadStatus);
-            PropertyInvoker.Set<byte>(ContractOffsets.TransferStatus, OriginalBytes, MemoryAddress, DatabaseMode, _transferStatus);
-            PropertyInvoker.Set<byte>(ContractOffsets.SquadNumber, OriginalBytes, MemoryAddress, DatabaseMode, _squadNumber);
-            PropertyInvoker.Set<int>(ContractOffsets.LoyaltyBonus, OriginalBytes, MemoryAddress, DatabaseMode, _loyaltyBonus);
-            PropertyInvoker.Set<byte>(ContractOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode, _type);
+            PropertyInvoker.Set<int>(ContractOffsets.Wage, OriginalBytes, MemoryAddress, DatabaseMode, Wage);
+            PropertyInvoker.Set<byte>(ContractOffsets.JobType, OriginalBytes, MemoryAddress, DatabaseMode, JobType);
+            PropertyInvoker.Set<Int64>(ContractOffsets.Unhappinesses, OriginalBytes, MemoryAddress, DatabaseMode, UnhappinessPointer);
+            PropertyInvoker.Set<DateTime>(ContractOffsets.StartDate, OriginalBytes, MemoryAddress, DatabaseMode, StartDate);
+            PropertyInvoker.Set<DateTime>(ContractOffsets.EndDate, OriginalBytes, MemoryAddress, DatabaseMode, EndDate);
+            // PropertyInvoker.Set<DateTime>(ContractOffsets.JoinDate, OriginalBytes, MemoryAddress, DatabaseMode, _joinDate);
+            PropertyInvoker.Set<byte>(ContractOffsets.SquadStatus, OriginalBytes, MemoryAddress, DatabaseMode, SquadStatus);
+            PropertyInvoker.Set<byte>(ContractOffsets.TransferStatus, OriginalBytes, MemoryAddress, DatabaseMode, TransferStatus);
+            PropertyInvoker.Set<byte>(ContractOffsets.SquadNumber, OriginalBytes, MemoryAddress, DatabaseMode, SquadNumber);
+            PropertyInvoker.Set<int>(ContractOffsets.LoyaltyBonus, OriginalBytes, MemoryAddress, DatabaseMode, LoyaltyBonus);
+            PropertyInvoker.Set<byte>(ContractOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode, Type);
             _isDirty = false;
         }
 
