@@ -153,6 +153,25 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
+        public string ContractStatus {
+            get {
+                string res = "-";
+                if (ActualPerson.IsFreeAgent) {
+                    res = "Free Agent";
+                }
+
+                if (!ActualPerson.IsFreeAgent && ActualPerson.Contract.IsContractExpired) {
+                    res = "Expired";
+                }
+
+                if (!ActualPerson.IsFreeAgent && ActualPerson.Contract.IsContractExpiring) {
+                    res = "Expires (6m)";
+                }
+
+                return res;
+            }
+        }
+
         public string Offset {
             get {
                 return "0x" + Address.ToString("X");
