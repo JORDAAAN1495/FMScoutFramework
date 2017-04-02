@@ -411,7 +411,7 @@ namespace FMScoutFramework.Core.Entities.InGame
                 }
 
                 if (!ActualPerson.IsFreeAgent && ActualPerson.Contract.IsContractExpiring) {
-                    res = "Expiring (6m)";
+                    res = "Expires (6m)";
                 }
 
                 return res;
