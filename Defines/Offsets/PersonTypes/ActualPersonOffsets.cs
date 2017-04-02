@@ -92,6 +92,12 @@ namespace FMScoutFramework.Core.Offsets {
             }
         }
 
+        public short JobAttributes {
+            get {
+                return 0x100;
+            }
+        }
+
         public short InternationalApps {
             get {
                 return 0x140;
