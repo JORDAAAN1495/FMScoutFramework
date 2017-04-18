@@ -16,14 +16,14 @@ namespace FMScoutFramework.Core.Entities.InGame
         { }
 
         public void Save() {
-            PropertyInvoker.Set<byte>(PersonAttributeOffsets.Adaptability, OriginalBytes, MemoryAddress, DatabaseMode, _adaptability);
-            PropertyInvoker.Set<byte>(PersonAttributeOffsets.Ambition, OriginalBytes, MemoryAddress, DatabaseMode, _ambition);
-            PropertyInvoker.Set<byte>(PersonAttributeOffsets.Loyalty, OriginalBytes, MemoryAddress, DatabaseMode, _loyalty);
-            PropertyInvoker.Set<byte>(PersonAttributeOffsets.Pressure, OriginalBytes, MemoryAddress, DatabaseMode, _pressure);
-            PropertyInvoker.Set<byte>(PersonAttributeOffsets.Professionalism, OriginalBytes, MemoryAddress, DatabaseMode, _professionalism);
-            PropertyInvoker.Set<byte>(PersonAttributeOffsets.Sportsmanship, OriginalBytes, MemoryAddress, DatabaseMode, _sportsmanship);
-            PropertyInvoker.Set<byte>(PersonAttributeOffsets.Temperament, OriginalBytes, MemoryAddress, DatabaseMode, _temperament);
-            PropertyInvoker.Set<byte>(PersonAttributeOffsets.Controversy, OriginalBytes, MemoryAddress, DatabaseMode, _controversy);
+            PropertyInvoker.Set<byte>(PersonAttributeOffsets.Adaptability, OriginalBytes, MemoryAddress, DatabaseMode, Adaptability);
+            PropertyInvoker.Set<byte>(PersonAttributeOffsets.Ambition, OriginalBytes, MemoryAddress, DatabaseMode, Ambition);
+            PropertyInvoker.Set<byte>(PersonAttributeOffsets.Loyalty, OriginalBytes, MemoryAddress, DatabaseMode, Loyalty);
+            PropertyInvoker.Set<byte>(PersonAttributeOffsets.Pressure, OriginalBytes, MemoryAddress, DatabaseMode, Pressure);
+            PropertyInvoker.Set<byte>(PersonAttributeOffsets.Professionalism, OriginalBytes, MemoryAddress, DatabaseMode, Professionalism);
+            PropertyInvoker.Set<byte>(PersonAttributeOffsets.Sportsmanship, OriginalBytes, MemoryAddress, DatabaseMode, Sportsmanship);
+            PropertyInvoker.Set<byte>(PersonAttributeOffsets.Temperament, OriginalBytes, MemoryAddress, DatabaseMode, Temperament);
+            PropertyInvoker.Set<byte>(PersonAttributeOffsets.Controversy, OriginalBytes, MemoryAddress, DatabaseMode, Controversy);
 
             _isDirty = false;
         }

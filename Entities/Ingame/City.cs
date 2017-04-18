@@ -53,11 +53,11 @@ namespace FMScoutFramework.Core.Entities.InGame
         { }
 
         public void Save() {
-            PropertyInvoker.Set<short>(CityOffsets.Attraction, OriginalBytes, MemoryAddress, DatabaseMode, _attraction);
-            PropertyInvoker.Set<float>(CityOffsets.Latitude, OriginalBytes, MemoryAddress, DatabaseMode, _latitude);
-            PropertyInvoker.Set<float>(CityOffsets.Longitude, OriginalBytes, MemoryAddress, DatabaseMode, _longitude);
-            PropertyInvoker.Set<short>(CityOffsets.Altitude, OriginalBytes, MemoryAddress, DatabaseMode, _altitude);
-            PropertyInvoker.Set<short>(CityOffsets.InhabitantsRange, OriginalBytes, MemoryAddress, DatabaseMode, _inhabitantsRange);
+            PropertyInvoker.Set<short>(CityOffsets.Attraction, OriginalBytes, MemoryAddress, DatabaseMode, Attraction);
+            PropertyInvoker.Set<float>(CityOffsets.Latitude, OriginalBytes, MemoryAddress, DatabaseMode, Latitude);
+            PropertyInvoker.Set<float>(CityOffsets.Longitude, OriginalBytes, MemoryAddress, DatabaseMode, Longitude);
+            PropertyInvoker.Set<short>(CityOffsets.Altitude, OriginalBytes, MemoryAddress, DatabaseMode, Altitude);
+            PropertyInvoker.Set<short>(CityOffsets.InhabitantsRange, OriginalBytes, MemoryAddress, DatabaseMode, InhabitantsRange);
             _isDirty = false;
         }
 

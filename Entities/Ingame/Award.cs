@@ -252,30 +252,30 @@ namespace FMScoutFramework.Core.Entities.InGame {
             : base(memoryAddress, originalBytes, version) { }
 
         public void Save() {
-            PropertyInvoker.Set<DateTime>(AwardOffsets.AwardDate, OriginalBytes, MemoryAddress, DatabaseMode, _awardDate);
-            PropertyInvoker.Set<DateTime>(AwardOffsets.AnnouncementDate, OriginalBytes, MemoryAddress, DatabaseMode, _announcementDate);
-            PropertyInvoker.Set<short>(AwardOffsets.Position, OriginalBytes, MemoryAddress, DatabaseMode, _position);
-            PropertyInvoker.Set<byte>(AwardOffsets.RunBy, OriginalBytes, MemoryAddress, DatabaseMode, _runBy);
-            PropertyInvoker.Set<byte>(AwardOffsets.Period, OriginalBytes, MemoryAddress, DatabaseMode, _period);
-            PropertyInvoker.Set<byte>(AwardOffsets.Voting, OriginalBytes, MemoryAddress, DatabaseMode, _voting);
-            PropertyInvoker.Set<byte>(AwardOffsets.Based, OriginalBytes, MemoryAddress, DatabaseMode, _based);
-            PropertyInvoker.Set<byte>(AwardOffsets.VotingFormat, OriginalBytes, MemoryAddress, DatabaseMode, _votingFormat);
-            PropertyInvoker.Set<byte>(AwardOffsets.RecipientType, OriginalBytes, MemoryAddress, DatabaseMode, _recipientType);
-            PropertyInvoker.Set<byte>(AwardOffsets.Formation, OriginalBytes, MemoryAddress, DatabaseMode, _formation);
-            PropertyInvoker.Set<Color>(AwardOffsets.ForegroundColour, OriginalBytes, MemoryAddress, DatabaseMode, _foregroundColour);
-            PropertyInvoker.Set<Color>(AwardOffsets.BackgroundColour, OriginalBytes, MemoryAddress, DatabaseMode, _backgroundColour);
-            PropertyInvoker.Set<Color>(AwardOffsets.TrimColour, OriginalBytes, MemoryAddress, DatabaseMode, _trimColour);
-            PropertyInvoker.Set<byte>(AwardOffsets.AwardReputation, OriginalBytes, MemoryAddress, DatabaseMode, _awardReputation);
-            PropertyInvoker.Set<sbyte>(AwardOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode, _type);
-            PropertyInvoker.Set<byte>(AwardOffsets.MinimumAge, OriginalBytes, MemoryAddress, DatabaseMode, _minimumAge);
-            PropertyInvoker.Set<byte>(AwardOffsets.MaximumAge, OriginalBytes, MemoryAddress, DatabaseMode, _maximumAge);
-            PropertyInvoker.Set<byte>(AwardOffsets.WinnerHomeReputation, OriginalBytes, MemoryAddress, DatabaseMode, _winnerHomeReputation);
-            PropertyInvoker.Set<byte>(AwardOffsets.WinnerWorldReputation, OriginalBytes, MemoryAddress, DatabaseMode, _winnerWorldReputation);
-            PropertyInvoker.Set<byte>(AwardOffsets.Placings, OriginalBytes, MemoryAddress, DatabaseMode, _placings);
-            PropertyInvoker.Set<byte>(AwardOffsets.Side, OriginalBytes, MemoryAddress, DatabaseMode, _side);
-            PropertyInvoker.Set<byte>(AwardOffsets.UseStatsFrom, OriginalBytes, MemoryAddress, DatabaseMode, _useStatsFrom);
-            PropertyInvoker.Set<byte>(AwardOffsets.MinimumPercentageOfGamesPlayed, OriginalBytes, MemoryAddress, DatabaseMode, _minimumPercentageOfGamesPlayed);
-            PropertyInvoker.Set<byte>(AwardOffsets.AllowPreviousWinner, OriginalBytes, MemoryAddress, DatabaseMode, _allowPreviousWinner);
+            PropertyInvoker.Set<DateTime>(AwardOffsets.AwardDate, OriginalBytes, MemoryAddress, DatabaseMode, AwardDate);
+            PropertyInvoker.Set<DateTime>(AwardOffsets.AnnouncementDate, OriginalBytes, MemoryAddress, DatabaseMode, AnnouncementDate);
+            PropertyInvoker.Set<short>(AwardOffsets.Position, OriginalBytes, MemoryAddress, DatabaseMode, Position);
+            PropertyInvoker.Set<byte>(AwardOffsets.RunBy, OriginalBytes, MemoryAddress, DatabaseMode, RunBy);
+            PropertyInvoker.Set<byte>(AwardOffsets.Period, OriginalBytes, MemoryAddress, DatabaseMode, Period);
+            PropertyInvoker.Set<byte>(AwardOffsets.Voting, OriginalBytes, MemoryAddress, DatabaseMode, Voting);
+            PropertyInvoker.Set<byte>(AwardOffsets.Based, OriginalBytes, MemoryAddress, DatabaseMode, Based);
+            PropertyInvoker.Set<byte>(AwardOffsets.VotingFormat, OriginalBytes, MemoryAddress, DatabaseMode, VotingFormat);
+            PropertyInvoker.Set<byte>(AwardOffsets.RecipientType, OriginalBytes, MemoryAddress, DatabaseMode, RecipientType);
+            PropertyInvoker.Set<byte>(AwardOffsets.Formation, OriginalBytes, MemoryAddress, DatabaseMode, Formation);
+            PropertyInvoker.Set<Color>(AwardOffsets.ForegroundColour, OriginalBytes, MemoryAddress, DatabaseMode, ForegroundColour);
+            PropertyInvoker.Set<Color>(AwardOffsets.BackgroundColour, OriginalBytes, MemoryAddress, DatabaseMode, BackgroundColour);
+            PropertyInvoker.Set<Color>(AwardOffsets.TrimColour, OriginalBytes, MemoryAddress, DatabaseMode, TrimColour);
+            PropertyInvoker.Set<byte>(AwardOffsets.AwardReputation, OriginalBytes, MemoryAddress, DatabaseMode, AwardReputation);
+            PropertyInvoker.Set<sbyte>(AwardOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode, Type);
+            PropertyInvoker.Set<byte>(AwardOffsets.MinimumAge, OriginalBytes, MemoryAddress, DatabaseMode, MinimumAge);
+            PropertyInvoker.Set<byte>(AwardOffsets.MaximumAge, OriginalBytes, MemoryAddress, DatabaseMode, MaximumAge);
+            PropertyInvoker.Set<byte>(AwardOffsets.WinnerHomeReputation, OriginalBytes, MemoryAddress, DatabaseMode, WinnerHomeReputation);
+            PropertyInvoker.Set<byte>(AwardOffsets.WinnerWorldReputation, OriginalBytes, MemoryAddress, DatabaseMode, WinnerWorldReputation);
+            PropertyInvoker.Set<byte>(AwardOffsets.Placings, OriginalBytes, MemoryAddress, DatabaseMode, Placings);
+            PropertyInvoker.Set<byte>(AwardOffsets.Side, OriginalBytes, MemoryAddress, DatabaseMode, Side);
+            PropertyInvoker.Set<byte>(AwardOffsets.UseStatsFrom, OriginalBytes, MemoryAddress, DatabaseMode, UseStatsFrom);
+            PropertyInvoker.Set<byte>(AwardOffsets.MinimumPercentageOfGamesPlayed, OriginalBytes, MemoryAddress, DatabaseMode, MinimumPercentageOfGamesPlayed);
+            PropertyInvoker.Set<byte>(AwardOffsets.AllowPreviousWinner, OriginalBytes, MemoryAddress, DatabaseMode, AllowPreviousWinner);
             _isDirty = false;
         }
 

@@ -26,18 +26,18 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         public void Save() {
-            PropertyInvoker.Set<int>(PlayerOffsets.Value, OriginalBytes, Address, DatabaseMode, _value);
-            PropertyInvoker.Set<int>(PlayerOffsets.AskingPrice, OriginalBytes, Address, DatabaseMode, _askingPrice);
-            PropertyInvoker.Set<short>(PlayerOffsets.Fitness, OriginalBytes, Address, DatabaseMode, _fitness);
-            PropertyInvoker.Set<short>(PlayerOffsets.Jadedness, OriginalBytes, Address, DatabaseMode, _jadedness);
-            PropertyInvoker.Set<short>(PlayerOffsets.Condition, OriginalBytes, Address, DatabaseMode, _condition);
-            PropertyInvoker.Set<short>(PlayerOffsets.HomeReputation, OriginalBytes, Address, DatabaseMode, _homeReputation);
-            PropertyInvoker.Set<short>(PlayerOffsets.CurrentReputation, OriginalBytes, Address, DatabaseMode, _currentReputation);
-            PropertyInvoker.Set<short>(PlayerOffsets.WorldReputation, OriginalBytes, Address, DatabaseMode, _worldReputation);
-            PropertyInvoker.Set<short>(PlayerOffsets.CA, OriginalBytes, Address, DatabaseMode, _ca);
-            PropertyInvoker.Set<short>(PlayerOffsets.PA, OriginalBytes, Address, DatabaseMode, _pa);
-            PropertyInvoker.Set<short>(PlayerOffsets.Weight, OriginalBytes, Address, DatabaseMode, _weight);
-            PropertyInvoker.Set<short>(PlayerOffsets.Height, OriginalBytes, Address, DatabaseMode, _height);
+            PropertyInvoker.Set<int>(PlayerOffsets.Value, OriginalBytes, Address, DatabaseMode, Value);
+            PropertyInvoker.Set<int>(PlayerOffsets.AskingPrice, OriginalBytes, Address, DatabaseMode, AskingPrice);
+            PropertyInvoker.Set<short>(PlayerOffsets.Fitness, OriginalBytes, Address, DatabaseMode, Fitness);
+            PropertyInvoker.Set<short>(PlayerOffsets.Jadedness, OriginalBytes, Address, DatabaseMode, Jadedness);
+            PropertyInvoker.Set<short>(PlayerOffsets.Condition, OriginalBytes, Address, DatabaseMode, Condition);
+            PropertyInvoker.Set<short>(PlayerOffsets.HomeReputation, OriginalBytes, Address, DatabaseMode, HomeReputation);
+            PropertyInvoker.Set<short>(PlayerOffsets.CurrentReputation, OriginalBytes, Address, DatabaseMode, CurrentReputation);
+            PropertyInvoker.Set<short>(PlayerOffsets.WorldReputation, OriginalBytes, Address, DatabaseMode, WorldReputation);
+            PropertyInvoker.Set<short>(PlayerOffsets.CA, OriginalBytes, Address, DatabaseMode, CA);
+            PropertyInvoker.Set<short>(PlayerOffsets.PA, OriginalBytes, Address, DatabaseMode, PA);
+            PropertyInvoker.Set<short>(PlayerOffsets.Weight, OriginalBytes, Address, DatabaseMode, Weight);
+            PropertyInvoker.Set<short>(PlayerOffsets.Height, OriginalBytes, Address, DatabaseMode, Height);
             _isDirty = false;
         }
 

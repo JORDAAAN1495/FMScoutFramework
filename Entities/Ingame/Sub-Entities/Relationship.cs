@@ -210,7 +210,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
             PropertyInvoker.Set<sbyte>(RelationshipOffsets.Info, OriginalBytes, MemoryAddress, DatabaseMode, Info);
             PropertyInvoker.Set<byte>(RelationshipOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode, Type);
             PropertyInvoker.Set<byte>(RelationshipOffsets.Permanent, OriginalBytes, MemoryAddress, DatabaseMode, _permanent);
-            PropertyInvoker.Set<byte>(RelationshipOffsets.Level, OriginalBytes, MemoryAddress, DatabaseMode, _level);
+            PropertyInvoker.Set<byte>(RelationshipOffsets.Level, OriginalBytes, MemoryAddress, DatabaseMode, Level);
 
             _isDirty = false;
         }

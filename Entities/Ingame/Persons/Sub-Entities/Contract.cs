@@ -162,7 +162,7 @@ namespace FMScoutFramework.Core.Entities.InGame
             PropertyInvoker.Set<Int64>(ContractOffsets.Unhappinesses, OriginalBytes, MemoryAddress, DatabaseMode, UnhappinessPointer);
             PropertyInvoker.Set<DateTime>(ContractOffsets.StartDate, OriginalBytes, MemoryAddress, DatabaseMode, StartDate);
             PropertyInvoker.Set<DateTime>(ContractOffsets.EndDate, OriginalBytes, MemoryAddress, DatabaseMode, EndDate);
-            // PropertyInvoker.Set<DateTime>(ContractOffsets.JoinDate, OriginalBytes, MemoryAddress, DatabaseMode, _joinDate);
+            PropertyInvoker.Set<DateTime>(ContractOffsets.JoinDate, OriginalBytes, MemoryAddress, DatabaseMode, JoinDate);
             PropertyInvoker.Set<byte>(ContractOffsets.SquadStatus, OriginalBytes, MemoryAddress, DatabaseMode, SquadStatus);
             PropertyInvoker.Set<byte>(ContractOffsets.TransferStatus, OriginalBytes, MemoryAddress, DatabaseMode, TransferStatus);
             PropertyInvoker.Set<byte>(ContractOffsets.SquadNumber, OriginalBytes, MemoryAddress, DatabaseMode, SquadNumber);

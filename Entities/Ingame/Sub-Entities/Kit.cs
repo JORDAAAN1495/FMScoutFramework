@@ -42,15 +42,15 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         public void Save() {
-            PropertyInvoker.Set<Color>(KitOffsets.ForegroundColour, OriginalBytes, MemoryAddress, DatabaseMode, _foregroundColour);
-            PropertyInvoker.Set<Color>(KitOffsets.BackgroundColour, OriginalBytes, MemoryAddress, DatabaseMode, _backgroundColour);
-            PropertyInvoker.Set<Color>(KitOffsets.OutlineColour, OriginalBytes, MemoryAddress, DatabaseMode, _outlineColour);
-            PropertyInvoker.Set<Color>(KitOffsets.NumberColour, OriginalBytes, MemoryAddress, DatabaseMode, _numberColour);
-            PropertyInvoker.Set<Color>(KitOffsets.OutlineNumberColour, OriginalBytes, MemoryAddress, DatabaseMode, _outlineNumberColour);
-            PropertyInvoker.Set<byte>(KitOffsets.Outfield, OriginalBytes, MemoryAddress, DatabaseMode, _outfieldPlayer);
-            PropertyInvoker.Set<byte>(KitOffsets.Style, OriginalBytes, MemoryAddress, DatabaseMode, _style);
-            PropertyInvoker.Set<byte>(KitOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode, _type);
-            PropertyInvoker.Set<byte>(KitOffsets.RecordType, OriginalBytes, MemoryAddress, DatabaseMode, _recordType);
+            PropertyInvoker.Set<Color>(KitOffsets.ForegroundColour, OriginalBytes, MemoryAddress, DatabaseMode, ForegroundColour);
+            PropertyInvoker.Set<Color>(KitOffsets.BackgroundColour, OriginalBytes, MemoryAddress, DatabaseMode, BackgroundColour);
+            PropertyInvoker.Set<Color>(KitOffsets.OutlineColour, OriginalBytes, MemoryAddress, DatabaseMode, OutlineColour);
+            PropertyInvoker.Set<Color>(KitOffsets.NumberColour, OriginalBytes, MemoryAddress, DatabaseMode, NumberColour);
+            PropertyInvoker.Set<Color>(KitOffsets.OutlineNumberColour, OriginalBytes, MemoryAddress, DatabaseMode, OutlineNumberColour);
+            PropertyInvoker.Set<byte>(KitOffsets.Outfield, OriginalBytes, MemoryAddress, DatabaseMode, OutfieldPlayer);
+            PropertyInvoker.Set<byte>(KitOffsets.Style, OriginalBytes, MemoryAddress, DatabaseMode, Style);
+            PropertyInvoker.Set<byte>(KitOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode, Type);
+            PropertyInvoker.Set<byte>(KitOffsets.RecordType, OriginalBytes, MemoryAddress, DatabaseMode, RecordType);
             _isDirty = false;
         }
 

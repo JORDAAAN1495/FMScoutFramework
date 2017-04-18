@@ -114,14 +114,14 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         public void Save() {
-            PropertyInvoker.Set<DateTime>(ActualPersonOffsets.DateOfBirth, OriginalBytes, MemoryAddress, DatabaseMode, _dateOfBirth);
-            PropertyInvoker.Set<byte>(ActualPersonOffsets.Ethnicity, OriginalBytes, MemoryAddress, DatabaseMode, _ethnicity);
-            PropertyInvoker.Set<byte>(ActualPersonOffsets.HairColour, OriginalBytes, MemoryAddress, DatabaseMode, _hairColour);
-            PropertyInvoker.Set<byte>(ActualPersonOffsets.SkinTone, OriginalBytes, MemoryAddress, DatabaseMode, _skinTone);
-            PropertyInvoker.Set<byte>(ActualPersonOffsets.InternationalApps, OriginalBytes, MemoryAddress, DatabaseMode, _internationalApps);
-            PropertyInvoker.Set<byte>(ActualPersonOffsets.U21InternationalApps, OriginalBytes, MemoryAddress, DatabaseMode, _u21InternationalApps);
-            PropertyInvoker.Set<byte>(ActualPersonOffsets.InternationalGoals, OriginalBytes, MemoryAddress, DatabaseMode, _internationalGoals);
-            PropertyInvoker.Set<byte>(ActualPersonOffsets.U21InternationalGoals, OriginalBytes, MemoryAddress, DatabaseMode, _u21InternationalGoals);
+            PropertyInvoker.Set<DateTime>(ActualPersonOffsets.DateOfBirth, OriginalBytes, MemoryAddress, DatabaseMode, DateOfBirth);
+            PropertyInvoker.Set<byte>(ActualPersonOffsets.Ethnicity, OriginalBytes, MemoryAddress, DatabaseMode, Ethnicity);
+            PropertyInvoker.Set<byte>(ActualPersonOffsets.HairColour, OriginalBytes, MemoryAddress, DatabaseMode, HairColour);
+            PropertyInvoker.Set<byte>(ActualPersonOffsets.SkinTone, OriginalBytes, MemoryAddress, DatabaseMode, SkinTone);
+            PropertyInvoker.Set<byte>(ActualPersonOffsets.InternationalApps, OriginalBytes, MemoryAddress, DatabaseMode, InternationalApps);
+            PropertyInvoker.Set<byte>(ActualPersonOffsets.U21InternationalApps, OriginalBytes, MemoryAddress, DatabaseMode, U21InternationalApps);
+            PropertyInvoker.Set<byte>(ActualPersonOffsets.InternationalGoals, OriginalBytes, MemoryAddress, DatabaseMode, InternationalGoals);
+            PropertyInvoker.Set<byte>(ActualPersonOffsets.U21InternationalGoals, OriginalBytes, MemoryAddress, DatabaseMode, U21InternationalGoals);
             _isDirty = false;
         }
 

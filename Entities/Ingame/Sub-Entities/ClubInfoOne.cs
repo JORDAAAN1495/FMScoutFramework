@@ -18,9 +18,9 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         public void Save() {
-            PropertyInvoker.Set<int>(ClubInfoOneOffsets.AverageAttendance, OriginalBytes, MemoryAddress, DatabaseMode, _averageAttendance);
-            PropertyInvoker.Set<int>(ClubInfoOneOffsets.MinimumAttendance, OriginalBytes, MemoryAddress, DatabaseMode, _minimumAttendance);
-            PropertyInvoker.Set<int>(ClubInfoOneOffsets.MaximumAttendance, OriginalBytes, MemoryAddress, DatabaseMode, _maximumAttendance);
+            PropertyInvoker.Set<int>(ClubInfoOneOffsets.AverageAttendance, OriginalBytes, MemoryAddress, DatabaseMode, AverageAttendance);
+            PropertyInvoker.Set<int>(ClubInfoOneOffsets.MinimumAttendance, OriginalBytes, MemoryAddress, DatabaseMode, MinimumAttendance);
+            PropertyInvoker.Set<int>(ClubInfoOneOffsets.MaximumAttendance, OriginalBytes, MemoryAddress, DatabaseMode, MaximumAttendance);
             _isDirty = false;
         }
 

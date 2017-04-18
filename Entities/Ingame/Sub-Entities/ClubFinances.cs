@@ -37,7 +37,7 @@ namespace FMScoutFramework.Core.Entities.InGame
         public void Save() {
             #region Balance Encrypter
             int rotateAmount = (int)(MemoryAddress + ClubFinancesOffsets.Balance) & 0x1F;
-            uint decryptedBalance = (uint)_balance;
+            uint decryptedBalance = (uint)Balance;
             if (Version.GetType() != typeof(Steam_17_2_0_Windows) &&
                 Version.GetType() != typeof(Steam_17_2_1_Windows) &&
                 Version.GetType() != typeof(Steam_17_3_0_Windows) &&
@@ -51,24 +51,24 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
             #endregion
             PropertyInvoker.Set<uint>(ClubFinancesOffsets.Balance, OriginalBytes, MemoryAddress, DatabaseMode, decryptedBalance);
-            PropertyInvoker.Set<float>(ClubFinancesOffsets.AverageTicketPrice, OriginalBytes, MemoryAddress, DatabaseMode, _averageTicketPrice);
-            PropertyInvoker.Set<float>(ClubFinancesOffsets.AverageSeasonTicketPrice, OriginalBytes, MemoryAddress, DatabaseMode, _averageSeasonTicketPrice);
-            PropertyInvoker.Set<float>(ClubFinancesOffsets.MatchTicketPriceRatio, OriginalBytes, MemoryAddress, DatabaseMode, _matchTicketPriceRatio);
-            PropertyInvoker.Set<float>(ClubFinancesOffsets.SeasonTicketPriceRatio, OriginalBytes, MemoryAddress, DatabaseMode, _seasonTicketPriceRatio);
-            PropertyInvoker.Set<DateTime>(ClubFinancesOffsets.EmbargoStartDate, OriginalBytes, MemoryAddress, DatabaseMode, _embargoStartDate);
-            PropertyInvoker.Set<DateTime>(ClubFinancesOffsets.EmbargoEndDate, OriginalBytes, MemoryAddress, DatabaseMode, _embargoEndDate);
-            PropertyInvoker.Set<DateTime>(ClubFinancesOffsets.EmbargoAppealDate, OriginalBytes, MemoryAddress, DatabaseMode, _embargoAppealDate);
-            PropertyInvoker.Set<int>(ClubFinancesOffsets.RemainingBudget, OriginalBytes, MemoryAddress, DatabaseMode, _remainingBudget);
-            PropertyInvoker.Set<int>(ClubFinancesOffsets.SeasonTransferFunds, OriginalBytes, MemoryAddress, DatabaseMode, _seasonTransferFunds);
-            PropertyInvoker.Set<int>(ClubFinancesOffsets.TransferIncomePercentage, OriginalBytes, MemoryAddress, DatabaseMode, _transferIncomePercentage);
-            PropertyInvoker.Set<int>(ClubFinancesOffsets.YouthGrantIncome, OriginalBytes, MemoryAddress, DatabaseMode, _youthGrantIncome);
-            PropertyInvoker.Set<int>(ClubFinancesOffsets.WeeklyWageBudget, OriginalBytes, MemoryAddress, DatabaseMode, _weeklyWageBudget);
-            PropertyInvoker.Set<int>(ClubFinancesOffsets.HighestWage, OriginalBytes, MemoryAddress, DatabaseMode, _highestWage);
-            PropertyInvoker.Set<int>(ClubFinancesOffsets.WeeklyWageBudgetUsed, OriginalBytes, MemoryAddress, DatabaseMode, _weeklyWageBudgetUsed);
-            PropertyInvoker.Set<int>(ClubFinancesOffsets.HighestWagePaid, OriginalBytes, MemoryAddress, DatabaseMode, _highestWagePaid);
-            PropertyInvoker.Set<int>(ClubFinancesOffsets.HighestNonPlayerWagePaid, OriginalBytes, MemoryAddress, DatabaseMode, _highestNonPlayerWagePaid);
-            PropertyInvoker.Set<int>(ClubFinancesOffsets.LatestSeasonTicketSales, OriginalBytes, MemoryAddress, DatabaseMode, _latestSeasonTickets);
-            PropertyInvoker.Set<byte>(ClubFinancesOffsets.SugarDaddy, OriginalBytes, MemoryAddress, DatabaseMode, _sugarDaddy);
+            PropertyInvoker.Set<float>(ClubFinancesOffsets.AverageTicketPrice, OriginalBytes, MemoryAddress, DatabaseMode, AverageTicketPrice);
+            PropertyInvoker.Set<float>(ClubFinancesOffsets.AverageSeasonTicketPrice, OriginalBytes, MemoryAddress, DatabaseMode, AverageSeasonTicketPrice);
+            PropertyInvoker.Set<float>(ClubFinancesOffsets.MatchTicketPriceRatio, OriginalBytes, MemoryAddress, DatabaseMode, MatchTicketPriceRatio);
+            PropertyInvoker.Set<float>(ClubFinancesOffsets.SeasonTicketPriceRatio, OriginalBytes, MemoryAddress, DatabaseMode, SeasonTicketPriceRatio);
+            PropertyInvoker.Set<DateTime>(ClubFinancesOffsets.EmbargoStartDate, OriginalBytes, MemoryAddress, DatabaseMode, EmbargoStartDate);
+            PropertyInvoker.Set<DateTime>(ClubFinancesOffsets.EmbargoEndDate, OriginalBytes, MemoryAddress, DatabaseMode, EmbargoEndDate);
+            PropertyInvoker.Set<DateTime>(ClubFinancesOffsets.EmbargoAppealDate, OriginalBytes, MemoryAddress, DatabaseMode, EmbargoAppealDate);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.RemainingBudget, OriginalBytes, MemoryAddress, DatabaseMode, RemainingBudget);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.SeasonTransferFunds, OriginalBytes, MemoryAddress, DatabaseMode, SeasonTransferFunds);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.TransferIncomePercentage, OriginalBytes, MemoryAddress, DatabaseMode, TransferIncomePercentage);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.YouthGrantIncome, OriginalBytes, MemoryAddress, DatabaseMode, YouthGrantIncome);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.WeeklyWageBudget, OriginalBytes, MemoryAddress, DatabaseMode, WeeklyWageBudget);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.HighestWage, OriginalBytes, MemoryAddress, DatabaseMode, HighestWage);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.WeeklyWageBudgetUsed, OriginalBytes, MemoryAddress, DatabaseMode, WeeklyWageBudgetUsed);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.HighestWagePaid, OriginalBytes, MemoryAddress, DatabaseMode, HighestWagePaid);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.HighestNonPlayerWagePaid, OriginalBytes, MemoryAddress, DatabaseMode, HighestNonPlayerWagePaid);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.LatestSeasonTicketSales, OriginalBytes, MemoryAddress, DatabaseMode, LatestSeasonTickets);
+            PropertyInvoker.Set<byte>(ClubFinancesOffsets.SugarDaddy, OriginalBytes, MemoryAddress, DatabaseMode, SugarDaddy);
             _isDirty = false;
         }
 

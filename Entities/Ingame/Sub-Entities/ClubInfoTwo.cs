@@ -18,14 +18,14 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         public void Save() {
-            PropertyInvoker.Set<short>(ClubInfoTwoOffsets.YearFounded, OriginalBytes, MemoryAddress, DatabaseMode, _yearFounded);
-            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.YouthImportance, OriginalBytes, MemoryAddress, DatabaseMode, _youthImportance);
-            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.YouthFacilities, OriginalBytes, MemoryAddress, DatabaseMode, _youthFacilities);
-            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.YouthRecruitment, OriginalBytes, MemoryAddress, DatabaseMode, _youthRecruitment);
-            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.YouthAcademy, OriginalBytes, MemoryAddress, DatabaseMode, _youthAcademy);
-            PropertyInvoker.Set<short>(ClubInfoTwoOffsets.ChairmanStatus, OriginalBytes, MemoryAddress, DatabaseMode, _chairmanStatus);
-            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.TrainingFacilities, OriginalBytes, MemoryAddress, DatabaseMode, _trainingFacilities);
-            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.Morale, OriginalBytes, MemoryAddress, DatabaseMode, _morale);
+            PropertyInvoker.Set<short>(ClubInfoTwoOffsets.YearFounded, OriginalBytes, MemoryAddress, DatabaseMode, YearFounded);
+            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.YouthImportance, OriginalBytes, MemoryAddress, DatabaseMode, YouthImportance);
+            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.YouthFacilities, OriginalBytes, MemoryAddress, DatabaseMode, YouthFacilities);
+            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.YouthRecruitment, OriginalBytes, MemoryAddress, DatabaseMode, YouthRecruitment);
+            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.YouthAcademy, OriginalBytes, MemoryAddress, DatabaseMode, YouthAcademy);
+            PropertyInvoker.Set<short>(ClubInfoTwoOffsets.ChairmanStatus, OriginalBytes, MemoryAddress, DatabaseMode, ChairmanStatus);
+            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.TrainingFacilities, OriginalBytes, MemoryAddress, DatabaseMode, TrainingFacilities);
+            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.Morale, OriginalBytes, MemoryAddress, DatabaseMode, Morale);
             _isDirty = false;
         }
 

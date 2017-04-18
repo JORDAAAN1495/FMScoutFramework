@@ -49,10 +49,10 @@ namespace FMScoutFramework.Core.Entities.InGame {
             : base(memoryAddress, originalBytes, version) { }
 
         public void Save() {
-            PropertyInvoker.Set<int>(ClubDebtsOffsets.TotalAmount, OriginalBytes, MemoryAddress, DatabaseMode, _totalAmount);
-            PropertyInvoker.Set<byte>(ClubDebtsOffsets.Source, OriginalBytes, MemoryAddress, DatabaseMode, _source);
-            PropertyInvoker.Set<DateTime>(ClubDebtsOffsets.StartDate, OriginalBytes, MemoryAddress, DatabaseMode, _startDate);
-            PropertyInvoker.Set<DateTime>(ClubDebtsOffsets.EndDate, OriginalBytes, MemoryAddress, DatabaseMode, _endDate);
+            PropertyInvoker.Set<int>(ClubDebtsOffsets.TotalAmount, OriginalBytes, MemoryAddress, DatabaseMode, TotalAmount);
+            PropertyInvoker.Set<byte>(ClubDebtsOffsets.Source, OriginalBytes, MemoryAddress, DatabaseMode, Source);
+            PropertyInvoker.Set<DateTime>(ClubDebtsOffsets.StartDate, OriginalBytes, MemoryAddress, DatabaseMode, StartDate);
+            PropertyInvoker.Set<DateTime>(ClubDebtsOffsets.EndDate, OriginalBytes, MemoryAddress, DatabaseMode, EndDate);
             _isDirty = false;
         }
 

@@ -71,11 +71,11 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         public void Save() {
-            PropertyInvoker.Set<short>(TeamOffsets.PreviousReputation, OriginalBytes, MemoryAddress, DatabaseMode, _previousReputation);
-            PropertyInvoker.Set<byte>(TeamOffsets.TeamType, OriginalBytes, MemoryAddress, DatabaseMode, _teamType);
+            PropertyInvoker.Set<short>(TeamOffsets.PreviousReputation, OriginalBytes, MemoryAddress, DatabaseMode, PreviousReputation);
+            PropertyInvoker.Set<byte>(TeamOffsets.TeamType, OriginalBytes, MemoryAddress, DatabaseMode, TeamType);
 
             int rotateAmount = (int)((MemoryAddress + TeamOffsets.Reputation) & 0xf);
-            uint decryptedRep = _reputation;
+            uint decryptedRep = Reputation;
             if (Version.GetType() != typeof(Steam_17_2_0_Windows) &&
                 Version.GetType() != typeof(Steam_17_2_1_Windows) &&
                 Version.GetType() != typeof(Steam_17_3_0_Windows) &&

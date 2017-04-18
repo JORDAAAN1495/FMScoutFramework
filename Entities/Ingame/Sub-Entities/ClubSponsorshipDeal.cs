@@ -61,10 +61,10 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         public void Save() {
-            PropertyInvoker.Set<DateTime>(ClubSponsorshipDealsOffsets.StartDate, OriginalBytes, MemoryAddress, DatabaseMode, _startDate);
-            PropertyInvoker.Set<DateTime>(ClubSponsorshipDealsOffsets.EndDate, OriginalBytes, MemoryAddress, DatabaseMode, _endDate);
-            PropertyInvoker.Set<int>(ClubSponsorshipDealsOffsets.TotalIncome, OriginalBytes, MemoryAddress, DatabaseMode, _totalDealValue);
-            PropertyInvoker.Set<byte>(ClubSponsorshipDealsOffsets.SponsorshipType, OriginalBytes, MemoryAddress, DatabaseMode, _sponsorshipType);
+            PropertyInvoker.Set<DateTime>(ClubSponsorshipDealsOffsets.StartDate, OriginalBytes, MemoryAddress, DatabaseMode, StartDate);
+            PropertyInvoker.Set<DateTime>(ClubSponsorshipDealsOffsets.EndDate, OriginalBytes, MemoryAddress, DatabaseMode, EndDate);
+            PropertyInvoker.Set<int>(ClubSponsorshipDealsOffsets.TotalIncome, OriginalBytes, MemoryAddress, DatabaseMode, TotalDealValue);
+            PropertyInvoker.Set<byte>(ClubSponsorshipDealsOffsets.SponsorshipType, OriginalBytes, MemoryAddress, DatabaseMode, SponsorshipType);
             _isDirty = false;
         }
 

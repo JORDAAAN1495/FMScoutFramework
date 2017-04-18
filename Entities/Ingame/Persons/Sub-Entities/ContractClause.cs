@@ -35,9 +35,9 @@ namespace FMScoutFramework.Core.Entities.InGame
             : base(memoryAddress, originalBytes, version) { }
 
         public void Save() {
-            PropertyInvoker.Set<int>(ContractClausesOffsets.Value, OriginalBytes, MemoryAddress, DatabaseMode, _value);
-            PropertyInvoker.Set<byte>(ContractClausesOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode, _type);
-            PropertyInvoker.Set<byte>(ContractClausesOffsets.Info, OriginalBytes, MemoryAddress, DatabaseMode, _info);
+            PropertyInvoker.Set<int>(ContractClausesOffsets.Value, OriginalBytes, MemoryAddress, DatabaseMode, Value);
+            PropertyInvoker.Set<byte>(ContractClausesOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode, Type);
+            PropertyInvoker.Set<byte>(ContractClausesOffsets.Info, OriginalBytes, MemoryAddress, DatabaseMode, Info);
             _isDirty = false;
         }
 
