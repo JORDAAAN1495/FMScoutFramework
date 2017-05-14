@@ -125,8 +125,8 @@ namespace FMScoutFramework.Core.Managers
                             personIDOffset = 0xC;
                         }
                         int personID = ProcessManager.ReadInt32(personAddress + personIDOffset);
-
-                        Console.WriteLine("Unknown Person Type: 0x" + type.ToString("X") + " Address: 0x" + personAddress.ToString("X") + " UID: " + personID.ToString());
+                        
+                        Debug.WriteLine("Unknown Person Type: 0x" + type.ToString("X") + " Address: 0x" + personAddress.ToString("X") + " UID: " + personID.ToString());
                     }
                 }
             }
