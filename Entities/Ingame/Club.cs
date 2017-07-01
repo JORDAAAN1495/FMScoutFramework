@@ -72,6 +72,8 @@ namespace FMScoutFramework.Core.Entities.InGame
             */
             #endregion
 
+            PropertyInvoker.Set<Int64>(ClubOffsets.City, OriginalBytes, MemoryAddress, DatabaseMode, CityAddress);
+
             isDirty = false;
         }
 
@@ -177,11 +179,29 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
+        private Int64 _cityAddress;
+        public Int64 CityAddress {
+            get {
+                if (_cityAddress == 0x0) {
+                    _cityAddress = PropertyInvoker.Get<Int64>(ClubOffsets.City, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+
+                return _cityAddress;
+            }
+            set {
+                if (_cityAddress != value) {
+                    isDirty = true;
+                    _cityAddress = value;
+                    _city = null;
+                }
+            }
+        }
+
         private City _city;
         public City City {
             get {
                 if (_city == null) {
-                    _city = PropertyInvoker.GetPointer<City>(ClubOffsets.City, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+                    _city = new City(CityAddress, Version);
                 }
 
                 return _city;
