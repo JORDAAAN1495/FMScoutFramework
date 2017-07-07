@@ -92,6 +92,7 @@
     <Compile Include="Defines\Offsets\Sub-Entities\ClubSponsorshipDealsOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\KitOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\RelationshipOffsets.cs" />
+    <Compile Include="Defines\Versions\Steam_17_3_2_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_Touch_17_3_1_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_17_1_2_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_17_3_1_Windows.cs" />
