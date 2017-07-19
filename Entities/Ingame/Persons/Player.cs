@@ -11,7 +11,7 @@ namespace FMScoutFramework.Core.Entities.InGame
     public class Player : Person, IPlayer
     {
         private PlayerOffsets PlayerOffsets;
-        private Int64 Address;
+        public Int64 Address;
         public Player (Int64 memoryAddress, IVersion version)
             : base (memoryAddress + Math.Abs(version.PersonOffsets.Player), version)
         {
@@ -38,6 +38,7 @@ namespace FMScoutFramework.Core.Entities.InGame
             PropertyInvoker.Set<short>(PlayerOffsets.PA, OriginalBytes, Address, DatabaseMode, PA);
             PropertyInvoker.Set<short>(PlayerOffsets.Weight, OriginalBytes, Address, DatabaseMode, Weight);
             PropertyInvoker.Set<short>(PlayerOffsets.Height, OriginalBytes, Address, DatabaseMode, Height);
+            PropertyInvoker.Set<Int64>(PlayerOffsets.Team, OriginalBytes, Address, DatabaseMode, TeamAddress.GetValueOrDefault(0x0));
             _isDirty = false;
         }
 
@@ -178,9 +179,31 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
+        private Int64? _teamAddress = null;
+        public Int64? TeamAddress {
+            get {
+                if (_teamAddress == null) {
+                    _teamAddress = PropertyInvoker.Get<Int64>(PlayerOffsets.Team, OriginalBytes, Address, DatabaseMode);
+                }
+
+                return _teamAddress;
+            }
+            set {
+                if (_teamAddress != value) {
+                    isDirty = true;
+                    _teamAddress = value;
+                    _team = null;
+                }
+            }
+        }
+
+        private Team _team;
         public Team Team {
             get {
-                return PropertyInvoker.GetPointer<Team>(PlayerOffsets.Team, OriginalBytes, Address, DatabaseMode, Version);
+                if (_team == null && TeamAddress.HasValue) {
+                    _team = new Team(TeamAddress.Value, Version);
+                }
+                return _team;
             }
         }
 

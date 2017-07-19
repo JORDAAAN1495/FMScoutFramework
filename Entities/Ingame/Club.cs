@@ -179,7 +179,7 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
-        private Int64 _cityAddress;
+        private Int64 _cityAddress = 0x0;
         public Int64 CityAddress {
             get {
                 if (_cityAddress == 0x0) {

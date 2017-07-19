@@ -92,6 +92,14 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
             
             PropertyInvoker.Set<ushort>(TeamOffsets.Reputation, OriginalBytes, MemoryAddress, DatabaseMode, (ushort)decryptedRep);
+
+            // Save the playersArray
+            Int64 arrayStartAddress = PropertyInvoker.Get<Int64>(TeamOffsets.Players, OriginalBytes, MemoryAddress, DatabaseMode);
+            Int64 i = 0;
+            foreach (Int64 playerAddress in PlayersAddresses) {
+                PropertyInvoker.Set<Int64>((i * 0x8), OriginalBytes, arrayStartAddress, DatabaseMode, playerAddress);
+                i++;
+            }
         }
 
         private bool _isDirty = false;
@@ -197,6 +205,34 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
+        private List<Int64> _playersAddresses = new List<Int64>();
+        public List<Int64> PlayersAddresses {
+            get {
+                if (_playersAddresses.Count == 0) {
+                    List<Int64> result = new List<Int64>();
+                    Int64 playerCount = ProcessManager.ReadArrayLength((MemoryAddress + TeamOffsets.Players));
+                    if (playerCount > 0) {
+                        Int64 arrayStartAddress = PropertyInvoker.Get<Int64>(TeamOffsets.Players, OriginalBytes, MemoryAddress, DatabaseMode);
+                        for (int i = 0; i < playerCount; i++) {
+                            Int64 playerAddress = PropertyInvoker.Get<Int64>((i * 0x8), OriginalBytes, arrayStartAddress, DatabaseMode);
+                            result.Add(playerAddress);
+                        }
+                    }
+
+                    _playersAddresses = result;
+                }
+
+                return _playersAddresses;
+            }
+            set {
+                if (_playersAddresses != value) {
+                    isDirty = true;
+                    _playersAddresses = value;
+                    _players.Clear();
+                }
+            }
+        }
+
         private List<Player> _players = new List<Player>();
         public List<Player> Players {
             get {
@@ -204,12 +240,8 @@ namespace FMScoutFramework.Core.Entities.InGame
                     List<Player> result = new List<Player>();
                     Int64 playerCount = ProcessManager.ReadArrayLength((MemoryAddress + TeamOffsets.Players));
                     if (playerCount > 0) {
-                        Int64 arrayStartAddress = PropertyInvoker.Get<Int64>(TeamOffsets.Players, OriginalBytes, MemoryAddress, DatabaseMode);
-                        for (int i = 0; i < playerCount; i++) {
-                            Int64 playerAddress = PropertyInvoker.Get<Int64>((i * 0x8), OriginalBytes, arrayStartAddress, DatabaseMode);
-                            if (playerAddress > 0x0) {
-                                result.Add(new Player(playerAddress, Version));
-                            }
+                        foreach (Int64 pAddr in PlayersAddresses) {
+                            result.Add(new Player(pAddr, Version));
                         }
                     }
                     _players = result;
@@ -231,6 +263,19 @@ namespace FMScoutFramework.Core.Entities.InGame
                 return string.Format("{0} ({1})", this.Club.Name, ((TeamType)this.TeamType).GetDescription());
             else
                 return "-";
+        }
+
+        public void SwapPlayerAddresses(Int64 oldAddress, Int64 newAddress) {
+            // Find the oldAddress in the team array
+            List<Int64> newPlayerArray = new List<Int64>();
+            for (int i = 0; i < PlayersAddresses.Count; i++) {
+                if (PlayersAddresses[i] == oldAddress) {
+                    PlayersAddresses[i] = newAddress;
+                }
+                newPlayerArray.Add(PlayersAddresses[i]);
+            }
+
+            PlayersAddresses = newPlayerArray;
         }
     }
 }

@@ -122,6 +122,8 @@ namespace FMScoutFramework.Core.Entities.InGame {
             PropertyInvoker.Set<byte>(ActualPersonOffsets.U21InternationalApps, OriginalBytes, MemoryAddress, DatabaseMode, U21InternationalApps);
             PropertyInvoker.Set<byte>(ActualPersonOffsets.InternationalGoals, OriginalBytes, MemoryAddress, DatabaseMode, InternationalGoals);
             PropertyInvoker.Set<byte>(ActualPersonOffsets.U21InternationalGoals, OriginalBytes, MemoryAddress, DatabaseMode, U21InternationalGoals);
+            PropertyInvoker.Set<Int64>(ActualPersonOffsets.Nation, OriginalBytes, MemoryAddress, DatabaseMode, NationAddress);
+            PropertyInvoker.Set<Int64>(ActualPersonOffsets.Contract, OriginalBytes, MemoryAddress, DatabaseMode, ContractAddress.GetValueOrDefault(0x0));
             _isDirty = false;
         }
 
@@ -214,9 +216,31 @@ namespace FMScoutFramework.Core.Entities.InGame {
             }
         }
 
+        private Int64 _nationAddress = 0x0;
+        public Int64 NationAddress {
+            get {
+                if (_nationAddress == 0x0) {
+                    _nationAddress = PropertyInvoker.Get<Int64>(ActualPersonOffsets.Nation, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+
+                return _nationAddress;
+            }
+            set {
+                if (_nationAddress != value) {
+                    isDirty = true;
+                    _nationAddress = value;
+                    _nation = null;
+                }
+            }
+        }
+
+        private Nation _nation;
         public Nation Nation {
             get {
-                return PropertyInvoker.GetPointer<Nation>(ActualPersonOffsets.Nation, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+                if (_nation == null) {
+                    _nation = new Nation(NationAddress, Version);
+                }
+                return _nation;
             }
         }
 
@@ -317,13 +341,30 @@ namespace FMScoutFramework.Core.Entities.InGame {
             }
         }
 
+        private Int64? _contractAddress = null;
+        public Int64? ContractAddress {
+            get {
+                if (_contractAddress == null) {
+                    _contractAddress = PropertyInvoker.Get<Int64>(ActualPersonOffsets.Contract, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+
+                return _contractAddress;
+            }
+            set {
+                if (_contractAddress != value) {
+                    isDirty = true;
+                    _contractAddress = value;
+                    _contract = null;
+                }
+            }
+        }
+
         private Contract _contract = null;
         public Contract Contract {
             get {
                 if (_contract == null) {
-                    Int64 pointerAddress = ProcessManager.ReadInt64((MemoryAddress + ActualPersonOffsets.Contract));
-                    if (pointerAddress > 0) {
-                        _contract = PropertyInvoker.GetPointer<Contract>(ActualPersonOffsets.Contract, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+                    if (ContractAddress.HasValue) {
+                        _contract = new Contract(ContractAddress.Value, Version);
                     }
                 }
 

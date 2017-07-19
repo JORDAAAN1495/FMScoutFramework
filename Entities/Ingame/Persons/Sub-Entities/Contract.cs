@@ -168,6 +168,7 @@ namespace FMScoutFramework.Core.Entities.InGame
             PropertyInvoker.Set<byte>(ContractOffsets.SquadNumber, OriginalBytes, MemoryAddress, DatabaseMode, SquadNumber);
             PropertyInvoker.Set<int>(ContractOffsets.LoyaltyBonus, OriginalBytes, MemoryAddress, DatabaseMode, LoyaltyBonus);
             PropertyInvoker.Set<byte>(ContractOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode, Type);
+            PropertyInvoker.Set<Int64>(ContractOffsets.Team, OriginalBytes, MemoryAddress, DatabaseMode, TeamAddress.GetValueOrDefault(0x0));
             _isDirty = false;
         }
 
@@ -190,9 +191,32 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
+        private Int64? _teamAddress = null;
+        public Int64? TeamAddress {
+            get {
+                if (_teamAddress == null) {
+                    _teamAddress = PropertyInvoker.Get<Int64>(ContractOffsets.Team, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+
+                return _teamAddress;
+            }
+            set {
+                if (_teamAddress != value) {
+                    isDirty = true;
+                    _teamAddress = value;
+                    _team = null;
+                }
+            }
+        }
+
+        private Team _team;
         public Team Team {
             get {
-                return PropertyInvoker.GetPointer<Team>(ContractOffsets.Team, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+                if (_team == null && TeamAddress.HasValue) {
+                    _team = new Team(TeamAddress.Value, Version);
+                }
+
+                return _team;
             }
         }
 
