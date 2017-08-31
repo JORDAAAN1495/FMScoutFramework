@@ -1,6 +1,4 @@
-﻿using System.Windows.Media;
-
-namespace FMScoutFramework.Core.Entities.InGame.Interfaces
+﻿namespace FMScoutFramework.Core.Entities.InGame.Interfaces
 {
     public interface IAward
     {
