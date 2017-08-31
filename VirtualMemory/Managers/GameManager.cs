@@ -45,6 +45,7 @@ namespace FMScoutFramework.Core.Managers
             FMProcess fmProcess = new FMProcess ();
             Process [] fmProcesses = Process.GetProcessesByName ("fm");
             if (fmProcesses.Length > 0) {
+                logger.LogWrite("Found > 0 FM Processes");
                 Process activeProcess = fmProcesses [0];
                 // Try to get the pTask
                 uint ptask = ProcessMemoryAPI.GetProcessTaskForPID (activeProcess.Id);
@@ -59,7 +60,7 @@ namespace FMScoutFramework.Core.Managers
                 foreach (var versionType in Assembly.GetCallingAssembly ().GetTypes ().Where (t => typeof (IIVersion).IsAssignableFrom (t))) {
                     if (versionType.IsInterface)
                         continue;
-                    var instance = (IIVersion)Activator.CreateInstance (versionType);
+                    var instance = (IIVersion)Activator.CreateInstance (versionType, this);
 
                     if (instance.SupportsProcess (fmProcess, null)) {
                         Version = instance;
