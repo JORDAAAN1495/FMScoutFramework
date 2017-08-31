@@ -174,11 +174,7 @@ namespace FMScoutFramework.Core.Managers
 
         List<Int64> GetMemoryAddresses<T> (Int64 offset)
         {
-#if MAC
-            Int64 memoryAddress = ProcessManager.ReadInt64 (ProcessManager.fmProcess.BaseAddress + GameManager.Version.MemoryAddresses.MainAddress);
-#elif WINDOWS
             Int64 memoryAddress = ProcessManager.fmProcess.BaseAddress + GameManager.Version.MemoryAddresses.MainAddress;
-#endif
             memoryAddress = ProcessManager.ReadInt64 (memoryAddress + offset);
             memoryAddress = ProcessManager.ReadInt64 (memoryAddress + GameManager.Version.MemoryAddresses.XorDistance);
             int objectCount = ProcessManager.ReadArrayLength (memoryAddress);

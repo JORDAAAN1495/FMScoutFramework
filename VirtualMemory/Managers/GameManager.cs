@@ -133,24 +133,11 @@ namespace FMScoutFramework.Core.Managers
 
         public static int TryGetPointerObjects (Int64 address, Int64 offset, FMProcess fmProcess, Int64 xor)
         {
-            #region WINDOWS
-#if WINDOWS
             Int64 memoryAddress = fmProcess.BaseAddress + address;
             memoryAddress = ProcessManager.ReadInt64(memoryAddress + offset);
             memoryAddress = ProcessManager.ReadInt64(memoryAddress + xor);
             int numberOfObjects = ProcessManager.ReadArrayLength(memoryAddress);
             return numberOfObjects;
-#endif
-            #endregion
-            #region MAC
-#if MAC
-            Int64 memoryAddress = ProcessManager.ReadInt64 ((fmProcess.BaseAddress + address));
-            memoryAddress = ProcessManager.ReadInt64 (memoryAddress + offset);
-            memoryAddress = ProcessManager.ReadInt64 (memoryAddress + xor);
-            int numberOfObjects = ProcessManager.ReadArrayLength (memoryAddress);
-            return numberOfObjects;
-#endif
-            #endregion
         }
 
         #region Events
