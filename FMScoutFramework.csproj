@@ -232,12 +232,10 @@
     <Compile Include="Entities\Ingame\FirstName.cs" />
     <Compile Include="Entities\Ingame\LastName.cs" />
     <Compile Include="Entities\Ingame\CommonName.cs" />
+    <Compile Include="Defines\Versions\Steam_17_3_2_Mac.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="libprocessmemoryapi.dylib">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
