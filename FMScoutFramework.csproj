@@ -117,6 +117,8 @@
     <Compile Include="Entities\Ingame\Persons\ActualPerson.cs" />
     <Compile Include="Entities\Ingame\Persons\Sub-Entities\JobAttributes.cs" />
     <Compile Include="Entities\Ingame\Persons\Sub-Entities\PreferredMoves.cs" />
+    <Compile Include="Entities\Ingame\Persons\Sub-Entities\RoleRatings.cs" />
+    <Compile Include="Entities\Ingame\Persons\Sub-Entities\RoleRatingWeights.cs" />
     <Compile Include="Entities\Ingame\Persons\Sub-Entities\StaffAttributes.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\ClubDebt.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\ClubFinanceRevenueRecord.cs" />

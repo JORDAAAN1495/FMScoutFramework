@@ -441,6 +441,17 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
+        private RoleRatings _roleRatings = null;
+        public RoleRatings RoleRatings {
+            get {
+                if (_roleRatings == null) {
+                    _roleRatings = new RoleRatings(this);
+                }
+
+                return _roleRatings;
+            }
+        }
+
         public bool IsRegen {
             get {
                 return (UID > 98041249);
