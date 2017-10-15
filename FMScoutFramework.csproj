@@ -94,17 +94,7 @@
     <Compile Include="Defines\Offsets\Sub-Entities\Competitions\CompetitionInfosOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\KitOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\RelationshipOffsets.cs" />
-    <Compile Include="Defines\Versions\Steam_17_3_2_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_Touch_17_3_2_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_Touch_17_3_1_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_17_1_2_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_17_3_1_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_17_3_0_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_17_3_0_Beta_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_Touch_17_3_0_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_Touch_17_2_0_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_17_2_0_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_17_2_1_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_18_0_0_Windows.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IClubDebt.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IClubFinanceRevenueRecord.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IClubInfoOne.cs" />
@@ -142,7 +132,6 @@
     <Compile Include="Defines\Versions\IPersonVersionOffsets.cs" />
     <Compile Include="Defines\Versions\IVersionMemoryAddresses.cs" />
     <Compile Include="Defines\Versions\IVersionPersonEnumPointers.cs" />
-    <Compile Include="Defines\Versions\Steam_17_1_2_Mac.cs" />
     <Compile Include="Utilities\BitwiseOperations.cs" />
     <Compile Include="VirtualMemory\ProcessMemoryAPI.cs" />
     <Compile Include="VirtualMemory\Managers\GameManager.cs" />
@@ -236,7 +225,6 @@
     <Compile Include="Entities\Ingame\FirstName.cs" />
     <Compile Include="Entities\Ingame\LastName.cs" />
     <Compile Include="Entities\Ingame\CommonName.cs" />
-    <Compile Include="Defines\Versions\Steam_17_3_2_Mac.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

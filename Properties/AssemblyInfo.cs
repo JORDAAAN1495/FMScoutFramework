@@ -7,9 +7,9 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle ("FMScoutFramework")]
 [assembly: AssemblyDescription ("")]
 [assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany ("")]
+[assembly: AssemblyCompany("AppCake Limited")]
 [assembly: AssemblyProduct ("")]
-[assembly: AssemblyCopyright ("Thanos")]
+[assembly: AssemblyCopyright("AppCake Limited 2017-2018. All rights reserved.")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
 

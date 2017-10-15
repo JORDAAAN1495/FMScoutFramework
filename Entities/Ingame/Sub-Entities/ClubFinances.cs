@@ -38,20 +38,7 @@ namespace FMScoutFramework.Core.Entities.InGame
             #region Balance Encrypter
             int rotateAmount = (int)(MemoryAddress + ClubFinancesOffsets.Balance) & 0x1F;
             uint decryptedBalance = (uint)Balance;
-            if (Version.GetType() != typeof(Steam_17_2_0_Windows) &&
-                Version.GetType() != typeof(Steam_17_2_1_Windows) &&
-                Version.GetType() != typeof(Steam_17_3_0_Windows) &&
-                Version.GetType() != typeof(Steam_17_3_1_Windows) &&
-                Version.GetType() != typeof(Steam_17_3_2_Windows) &&
-                Version.GetType() != typeof(Steam_Touch_17_2_0_Windows) &&
-                Version.GetType() != typeof(Steam_Touch_17_3_0_Windows) &&
-                Version.GetType() != typeof(Steam_Touch_17_3_1_Windows) &&
-                Version.GetType() != typeof(Steam_Touch_17_3_2_Windows)) {
-                decryptedBalance = BitwiseOperations.rol(decryptedBalance, rotateAmount);
-                decryptedBalance = decryptedBalance ^ 0x16F175CB;
-                decryptedBalance = BitwiseOperations.ror(decryptedBalance, 0x16);
-                decryptedBalance = ~decryptedBalance;
-            }
+            //Encrypt here
             #endregion
             PropertyInvoker.Set<uint>(ClubFinancesOffsets.Balance, OriginalBytes, MemoryAddress, DatabaseMode, decryptedBalance);
             PropertyInvoker.Set<float>(ClubFinancesOffsets.AverageTicketPrice, OriginalBytes, MemoryAddress, DatabaseMode, AverageTicketPrice);
@@ -94,21 +81,7 @@ namespace FMScoutFramework.Core.Entities.InGame
                 if (_balance == 0) {
                     int rotateAmount = (int)(MemoryAddress + ClubFinancesOffsets.Balance) & 0x1F;
                     uint encryptedBalance = PropertyInvoker.Get<uint>(ClubFinancesOffsets.Balance, OriginalBytes, MemoryAddress, DatabaseMode);
-
-                    if (Version.GetType() != typeof(Steam_17_2_0_Windows) &&
-                        Version.GetType() != typeof(Steam_17_2_1_Windows) &&
-                        Version.GetType() != typeof(Steam_17_3_0_Windows) &&
-                        Version.GetType() != typeof(Steam_17_3_1_Windows) &&
-                        Version.GetType() != typeof(Steam_17_3_2_Windows) &&
-                        Version.GetType() != typeof(Steam_Touch_17_2_0_Windows) &&
-                        Version.GetType() != typeof(Steam_Touch_17_3_0_Windows) &&
-                        Version.GetType() != typeof(Steam_Touch_17_3_1_Windows) &&
-                        Version.GetType() != typeof(Steam_Touch_17_3_2_Windows)) {
-                        encryptedBalance = ~encryptedBalance;
-                        encryptedBalance = BitwiseOperations.rol(encryptedBalance, 0x16);
-                        encryptedBalance = encryptedBalance ^ 0x16F175CB;
-                        encryptedBalance = BitwiseOperations.ror(encryptedBalance, rotateAmount);
-                    }
+                    // Decrypt here
 
                     _balance = (int)encryptedBalance;
                 }

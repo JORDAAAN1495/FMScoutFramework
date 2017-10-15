@@ -11,86 +11,31 @@ namespace FMScoutFramework.Core.Offsets {
 
         public short AverageAttendance {
             get {
-                if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
-                    Version.GetType() == typeof(Steam_17_2_1_Windows) ||
-                    Version.GetType() == typeof(Steam_17_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_17_3_1_Windows) ||
-                    Version.GetType() == typeof(Steam_17_3_2_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_3_1_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_3_2_Windows)) {
-                    return 0x68;
-                }
-                return 0x70;
+                return 0x68;
             }
         }
 
         public short MinimumAttendance {
             get {
-                if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
-                    Version.GetType() == typeof(Steam_17_2_1_Windows) ||
-                    Version.GetType() == typeof(Steam_17_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_17_3_1_Windows) ||
-                    Version.GetType() == typeof(Steam_17_3_2_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_3_1_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_3_2_Windows)) {
-                    return 0x6C;
-                }
-                return 0x74;
+                return 0x6C;
             }
         }
 
         public short MaximumAttendance {
             get {
-                if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
-                    Version.GetType() == typeof(Steam_17_2_1_Windows) ||
-                    Version.GetType() == typeof(Steam_17_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_17_3_1_Windows) ||
-                    Version.GetType() == typeof(Steam_17_3_2_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_3_1_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_3_2_Windows))  {
-                    return 0x70;
-                }
-                return 0x78;
+                return 0x70;
             }
         }
 
         public short TacticalAttributes {
             get {
-                if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
-                    Version.GetType() == typeof(Steam_17_2_1_Windows) ||
-                    Version.GetType() == typeof(Steam_17_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_17_3_1_Windows) ||
-                    Version.GetType() == typeof(Steam_17_3_2_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_3_1_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_3_2_Windows)) {
-                    return 0x74;
-                }
-                return 0x7C;
+                return 0x74;
             }
         }
 
         public short Kits {
             get {
-                if (Version.GetType() == typeof(Steam_17_2_0_Windows) ||
-                    Version.GetType() == typeof(Steam_17_2_1_Windows) ||
-                    Version.GetType() == typeof(Steam_17_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_17_3_1_Windows) ||
-                    Version.GetType() == typeof(Steam_17_3_2_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_2_0_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_3_0_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_3_1_Windows) ||
-                    Version.GetType() == typeof(Steam_Touch_17_3_2_Windows)) {
-                    return 0x88;
-                }
-                return 0x90;
+                return 0x88;
             }
         }
     }
