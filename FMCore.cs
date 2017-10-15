@@ -38,6 +38,7 @@ namespace FMScoutFramework.Core
         public IEnumerable<Staff> Staff { get { return GetListFromStore<Staff> (); } }
         public IEnumerable<PlayerStaff> PlayerStaff { get { return GetListFromStore<PlayerStaff> (); } }
         public IEnumerable<Team> Teams { get { return GetListFromStore<Team>(); } }
+        public IEnumerable<Competition> Competitions { get { return GetListFromStore<Competition>(); } }
 
         private IQueryable<T> GetListFromStore<T> ()
         {

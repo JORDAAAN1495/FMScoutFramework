@@ -147,12 +147,6 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
-        //public string Fullname {
-        //    get {
-        //        return PropertyInvoker.GetString(ClubOffsets.Fullname, 0x0, OriginalBytes, MemoryAddress, DatabaseMode);
-        //    }
-        //}
-
         private string _name;
         public string Name {
             get {

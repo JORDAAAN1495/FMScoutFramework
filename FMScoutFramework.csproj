@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Defines\Offsets\AwardOffsets.cs" />
+    <Compile Include="Defines\Offsets\CompetitionOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\ActualPersonOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\JobAttributesOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\PreferredMovesOffsets.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Defines\Offsets\Sub-Entities\ClubInfoOneOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\ClubInfoTwoOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\ClubSponsorshipDealsOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\Competitions\CompetitionInfosOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\KitOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\RelationshipOffsets.cs" />
     <Compile Include="Defines\Versions\Steam_17_3_2_Windows.cs" />

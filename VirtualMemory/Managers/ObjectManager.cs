@@ -16,8 +16,6 @@ namespace FMScoutFramework.Core.Managers
     {
         public static Dictionary<DatabaseModeEnum, ObjectManager> ObjectManagers =
             new Dictionary<DatabaseModeEnum, ObjectManager> ();
-
-        // public static StaffMemoryAddressesWrapper StaffMemoryCache;
     }
 
     public class ObjectManager
