@@ -22,7 +22,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
             PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.YouthImportance, OriginalBytes, MemoryAddress, DatabaseMode, YouthImportance);
             PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.YouthFacilities, OriginalBytes, MemoryAddress, DatabaseMode, YouthFacilities);
             PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.YouthRecruitment, OriginalBytes, MemoryAddress, DatabaseMode, YouthRecruitment);
-            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.YouthAcademy, OriginalBytes, MemoryAddress, DatabaseMode, YouthAcademy);
+            PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.JuniorCoaching, OriginalBytes, MemoryAddress, DatabaseMode, JuniorCoaching);
             PropertyInvoker.Set<short>(ClubInfoTwoOffsets.ChairmanStatus, OriginalBytes, MemoryAddress, DatabaseMode, ChairmanStatus);
             PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.TrainingFacilities, OriginalBytes, MemoryAddress, DatabaseMode, TrainingFacilities);
             PropertyInvoker.Set<byte>(ClubInfoTwoOffsets.Morale, OriginalBytes, MemoryAddress, DatabaseMode, Morale);
@@ -112,17 +112,17 @@ namespace FMScoutFramework.Core.Entities.InGame {
             }
         }
 
-        private byte _youthAcademy = 0;
-        public byte YouthAcademy {
+        private byte _juniorCoaching = 0;
+        public byte JuniorCoaching {
             get {
-                if (_youthAcademy == 0) {
-                    _youthAcademy = PropertyInvoker.Get<byte>(ClubInfoTwoOffsets.YouthAcademy, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_juniorCoaching == 0) {
+                    _juniorCoaching = PropertyInvoker.Get<byte>(ClubInfoTwoOffsets.JuniorCoaching, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
-                return _youthAcademy;
+                return _juniorCoaching;
             }
             set {
-                if (_youthAcademy != value) {
-                    _youthAcademy = value;
+                if (_juniorCoaching != value) {
+                    _juniorCoaching = value;
                     isDirty = true;
                 }
             }

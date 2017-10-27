@@ -18,12 +18,12 @@ namespace FMScoutFramework.Core.Offsets
         public const short RivalNations = 0x48;
 
         public short Name {
-            get { return 0xA0; }
+            get { return 0xB8; }
         }
 
-        public const short ShortName = 0xA8;
-        public const short ThreeLetterName = 0xB0;
-        public const short Nationality = 0xB8;
+        public const short ShortName = 0xC0;
+        public const short ThreeLetterName = 0xD0;
+        public const short Nationality = 0xC8;
 
         // The Rest are OFF for now
         public const short SpokenLanguages = 0x6C;

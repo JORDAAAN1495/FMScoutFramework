@@ -17,7 +17,7 @@ namespace FMScoutFramework.Core.Entities.InGame.Interfaces
         byte TransferStatus { get; set; }
         byte SquadNumber { get; set; }
         List<ContractClause> Clauses { get; }
-        List<ContractBonus> Bonuses { get; }
+        // List<ContractBonus> Bonuses { get; }
         int LoyaltyBonus { get; set; }
         byte Type { get; set; }
     }

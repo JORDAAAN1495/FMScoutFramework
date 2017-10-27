@@ -241,7 +241,7 @@ namespace FMScoutFramework.Core.Managers
 
         public static UInt32 ReadUInt32 (Int64 address)
         {
-            byte [] buffer = ReadProcessMemory ((int)address, 4);
+            byte [] buffer = ReadProcessMemory (address, 4);
             return ReadUInt32 (buffer, 0);
         }
 

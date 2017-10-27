@@ -396,28 +396,6 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
-        private List<ContractBonus> _bonuses = new List<ContractBonus>();
-        public List<ContractBonus> Bonuses {
-            get {
-                if (_bonuses.Count == 0) {
-                    lock (_bonuses) {
-                        Int64 address = ProcessManager.ReadInt64((MemoryAddress + ContractOffsets.Bonuses));
-                        if (address > 0) {
-                            Int64 numberOfBonuses = ProcessManager.ReadArrayLength((MemoryAddress + ContractOffsets.Bonuses));
-                            for (int i = 0; i < numberOfBonuses; i++) {
-                                ContractBonus cb = new ContractBonus((address + (i * 8)), Version);
-                                if (cb != null) {
-                                    _bonuses.Add(cb);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                return _bonuses;
-            }
-        }
-
         private int _loyaltyBonus = 0;
         public int LoyaltyBonus {
             get {

@@ -76,7 +76,7 @@ namespace FMScoutFramework.Core.Offsets {
 
         public short SkinTone {
             get {
-                return 0x6A;
+                return 0x6B;
             }
         }
 

@@ -16,14 +16,14 @@ namespace FMScoutFramework.Core.Offsets
         public const short RowID = 0x8;
         public const short UID = 0xC;
         public const short Teams = 0x18;
-        public const short ClubInfoOne = 0x98;
+        public const short ClubInfoOne = 0xB0;
 
         public short Name {
-            get { return 0xA0; }
+            get { return 0xB8; }
         }
 
         public short ShortName {
-            get { return 0xA8; }
+            get { return 0xC0; }
         }
 
         //public short ShortName {
@@ -31,30 +31,30 @@ namespace FMScoutFramework.Core.Offsets
         //}
 
         public short Nation {
-            get { return 0xB8; }
-        }
-
-        public short BasedNation {
             get { return 0xD0; }
         }
 
-        public short City {
+        public short BasedNation {
             get { return 0xD8; }
         }
 
+        public short City {
+            get { return 0xF0; }
+        }
+
         public short ClubInfoTwo {
-            get { return 0xE0; }
+            get { return 0xF8; }
         }
 
         public short ClubSponshorshipDeals {
             get {
-                return 0x118;
+                return 0x128;
             }
         }
 
         public short ClubFinances {
             get {
-                return 0x138;
+                return 0x148;
             }
         }
     }

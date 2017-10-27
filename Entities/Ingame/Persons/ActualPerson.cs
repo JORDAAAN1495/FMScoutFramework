@@ -8,30 +8,28 @@ using System.ComponentModel;
 
 namespace FMScoutFramework.Core.Entities.InGame {
     public enum APEthnicity {
-        [Description("Unknown")]
-        APEUnknown                      = 0,
         [Description("Northern European")]
-        APENorthernEuropean             = 1,
+        APENorthernEuropean             = 0,
         [Description("Mediterranean Hispanic")]
-        APEMediterraneanHispanic        = 2,
+        APEMediterraneanHispanic        = 1,
         [Description("North African/Middle Eastern")]
-        APENorthAfricanMiddleEastern    = 3,
+        APENorthAfricanMiddleEastern    = 2,
         [Description("African/Caribbean")]
-        APEAfricanCaribbean             = 4,
+        APEAfricanCaribbean             = 3,
         [Description("Asian")]
-        APEAsian                        = 5,
+        APEAsian                        = 4,
         [Description("South East Asian")]
-        APESouthEastAsian               = 6,
+        APESouthEastAsian               = 5,
         [Description("Pacific Islander")]
-        APEPacificIslander              = 7,
+        APEPacificIslander              = 6,
         [Description("Native American")]
-        APENativeAmerican               = 8,
+        APENativeAmerican               = 7,
         [Description("Native Australian")]
-        APENativeAustralian             = 9,
+        APENativeAustralian             = 8,
         [Description("Mixed Race (Black/White)")]
-        APEMixedRaceBlackWhite          = 10,
+        APEMixedRaceBlackWhite          = 9,
         [Description("East Asian")]
-        APEEastAsian                    = 11
+        APEEastAsian                    = 10
     }
 
     public enum APHairColour {
@@ -58,48 +56,48 @@ namespace FMScoutFramework.Core.Entities.InGame {
     }
 
     public enum APSkinTone {
-        [Description("Unknown")]
-        APSUnknown   = 0,
+        [Description("Not Set (Defaults to 6)")]
+        APSSkinTone0 = -1,
         [Description("Skin Tone 1")]
-        APSSkinTone1 = 1,
+        APSSkinTone1 = 0,
         [Description("Skin Tone 2")]
-        APSSkinTone2 = 2,
+        APSSkinTone2 = 1,
         [Description("Skin Tone 3")]
-        APSSkinTone3 = 3,
+        APSSkinTone3 = 2,
         [Description("Skin Tone 4")]
-        APSSkinTone4 = 4,
+        APSSkinTone4 = 3,
         [Description("Skin Tone 5")]
-        APSSkinTone5 = 5,
+        APSSkinTone5 = 4,
         [Description("Skin Tone 6")]
-        APSSkinTone6 = 6,
+        APSSkinTone6 = 5,
         [Description("Skin Tone 7")]
-        APSSkinTone7 = 7,
+        APSSkinTone7 = 6,
         [Description("Skin Tone 8")]
-        APSSkinTone8 = 8,
+        APSSkinTone8 = 7,
         [Description("Skin Tone 9")]
-        APSSkinTone9 = 9,
+        APSSkinTone9 = 8,
         [Description("Skin Tone 10")]
-        APSSkinTone10 = 10,
+        APSSkinTone10 = 9,
         [Description("Skin Tone 11")]
-        APSSkinTone11 = 11,
+        APSSkinTone11 = 10,
         [Description("Skin Tone 12")]
-        APSSkinTone12 = 12,
+        APSSkinTone12 = 11,
         [Description("Skin Tone 13")]
-        APSSkinTone13 = 13,
+        APSSkinTone13 = 12,
         [Description("Skin Tone 14")]
-        APSSkinTone14 = 14,
+        APSSkinTone14 = 13,
         [Description("Skin Tone 15")]
-        APSSkinTone15 = 15,
+        APSSkinTone15 = 14,
         [Description("Skin Tone 16")]
-        APSSkinTone16 = 16,
+        APSSkinTone16 = 15,
         [Description("Skin Tone 17")]
-        APSSkinTone17 = 17,
+        APSSkinTone17 = 16,
         [Description("Skin Tone 18")]
-        APSSkinTone18 = 18,
+        APSSkinTone18 = 17,
         [Description("Skin Tone 19")]
-        APSSkinTone19 = 19,
+        APSSkinTone19 = 18,
         [Description("Skin Tone 20")]
-        APSSkinTone20 = 20
+        APSSkinTone20 = 19
     }
 
     public class ActualPerson : BaseObject, IActualPerson {
@@ -117,7 +115,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
             PropertyInvoker.Set<DateTime>(ActualPersonOffsets.DateOfBirth, OriginalBytes, MemoryAddress, DatabaseMode, DateOfBirth);
             PropertyInvoker.Set<byte>(ActualPersonOffsets.Ethnicity, OriginalBytes, MemoryAddress, DatabaseMode, Ethnicity);
             PropertyInvoker.Set<byte>(ActualPersonOffsets.HairColour, OriginalBytes, MemoryAddress, DatabaseMode, HairColour);
-            PropertyInvoker.Set<byte>(ActualPersonOffsets.SkinTone, OriginalBytes, MemoryAddress, DatabaseMode, SkinTone);
+            PropertyInvoker.Set<sbyte>(ActualPersonOffsets.SkinTone, OriginalBytes, MemoryAddress, DatabaseMode, SkinTone);
             PropertyInvoker.Set<byte>(ActualPersonOffsets.InternationalApps, OriginalBytes, MemoryAddress, DatabaseMode, InternationalApps);
             PropertyInvoker.Set<byte>(ActualPersonOffsets.U21InternationalApps, OriginalBytes, MemoryAddress, DatabaseMode, U21InternationalApps);
             PropertyInvoker.Set<byte>(ActualPersonOffsets.InternationalGoals, OriginalBytes, MemoryAddress, DatabaseMode, InternationalGoals);
@@ -324,11 +322,11 @@ namespace FMScoutFramework.Core.Entities.InGame {
             }
         }
 
-        private byte _skinTone = 0;
-        public byte SkinTone {
+        private sbyte _skinTone = 0;
+        public sbyte SkinTone {
             get {
                 if (_skinTone == 0) {
-                    _skinTone = PropertyInvoker.Get<byte>(ActualPersonOffsets.SkinTone, OriginalBytes, MemoryAddress, DatabaseMode);
+                    _skinTone = PropertyInvoker.Get<sbyte>(ActualPersonOffsets.SkinTone, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
 
                 return _skinTone;

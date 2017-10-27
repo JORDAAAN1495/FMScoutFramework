@@ -2,8 +2,8 @@
 {
     public interface IContractClause
     {
-        byte Info { get; }
-        byte Type { get; }
+        sbyte Info { get; }
+        sbyte Type { get; }
         int Value { get; }
     }
 }

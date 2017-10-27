@@ -59,6 +59,7 @@ namespace FMScoutFramework.Core.Entities.InGame
             PropertyInvoker.Set<int>(ClubFinancesOffsets.HighestNonPlayerWagePaid, OriginalBytes, MemoryAddress, DatabaseMode, HighestNonPlayerWagePaid);
             PropertyInvoker.Set<int>(ClubFinancesOffsets.LatestSeasonTicketSales, OriginalBytes, MemoryAddress, DatabaseMode, LatestSeasonTickets);
             PropertyInvoker.Set<byte>(ClubFinancesOffsets.SugarDaddy, OriginalBytes, MemoryAddress, DatabaseMode, SugarDaddy);
+            PropertyInvoker.Set<byte>(ClubFinancesOffsets.CorporateFacilities, OriginalBytes, MemoryAddress, DatabaseMode, CorporateFacilities);
             _isDirty = false;
         }
 
@@ -394,6 +395,23 @@ namespace FMScoutFramework.Core.Entities.InGame
             set {
                 if (_sugarDaddy != value) {
                     _sugarDaddy = value;
+                    isDirty = true;
+                }
+            }
+        }
+
+        private byte _corporateFacilities = 0;
+        public byte CorporateFacilities {
+            get {
+                if (_corporateFacilities == 0) {
+                    _corporateFacilities = PropertyInvoker.Get<byte>(ClubFinancesOffsets.CorporateFacilities, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+
+                return _corporateFacilities;
+            }
+            set {
+                if (_corporateFacilities != value) {
+                    _corporateFacilities = value;
                     isDirty = true;
                 }
             }

@@ -11,7 +11,7 @@ namespace FMScoutFramework.Core.Entities.InGame.Interfaces {
         PersonAttributes Attributes { get; }
         byte Ethnicity { get; set; }  
         byte HairColour { get; set; }
-        byte SkinTone { get; set; }
+        sbyte SkinTone { get; set; }
         Contract Contract { get; }
     }
 }

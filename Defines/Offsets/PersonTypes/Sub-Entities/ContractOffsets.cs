@@ -20,12 +20,12 @@ namespace FMScoutFramework.Core.Offsets
         public const short StartDate = 0x34;
         public const short EndDate = 0x38;
         public const short JoinDate = 0x3C;
-        public const short SquadStatus = 0x44;
-        public const short TransferStatus = 0x46;
-        public const short SquadNumber = 0x49;
-        public const short Clauses = 0x50;
-        public const short Bonuses = 0x68;
+        public const short SquadStatus = 0x48;
+        public const short TransferStatus = 0x4A;
+        public const short SquadNumber = 0x4D;
+        public const short Clauses = 0x58;
+        public const short Bonuses = 0x58;
         public const short LoyaltyBonus = 0xA0;
-        public const short Type = 0xAA;
+        public const short Type = 0x9A;
     }
 }

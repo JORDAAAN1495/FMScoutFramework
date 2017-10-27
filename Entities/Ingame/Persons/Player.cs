@@ -56,7 +56,7 @@ namespace FMScoutFramework.Core.Entities.InGame
             _fitness = 0;
             _condition = 0;
             _jadedness = 0;
-            IsInjured = false;
+            IsInjured = null;
         }
 
         public void DestroyPlayer() {
@@ -140,10 +140,10 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
-        private bool _isInjured = false;
-        public bool IsInjured {
+        private bool? _isInjured;
+        public bool? IsInjured {
             get {
-                if (!_isInjured) {
+                if (_isInjured == null) {
                     Int64 InjuryCount = ProcessManager.ReadArrayLength(InjuriesPtr, 0x8);
                     _isInjured = InjuryCount > 0;
                 }

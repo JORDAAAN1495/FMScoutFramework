@@ -25,7 +25,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
         DTGiftRepayableWhenProfitable           = 7,
         [Description("Gift Repayable on Departure")]
         DTGiftRepayableOnDeparture              = 8,
-        [Description("GiftNonRepayable")]
+        [Description("Gift Non Repayable")]
         DTGiftNonRepayable                      = 9,
         [Description("Loan Repayable on Promotion to Top Division")]
         DTLoanRepayableOnPromotionToTopDivision = 10,

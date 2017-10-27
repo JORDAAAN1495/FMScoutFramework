@@ -22,19 +22,19 @@ namespace FMScoutFramework.Core.Offsets
         public const short EmbargoEndDate = 0x34;
         public const short EmbargoAppealDate = 0x38;
         public const short SugarDaddy = 0x3D;
-        public const short RemainingBudget = 0x4C;
-        public const short SeasonTransferFunds = 0x50;
-        public const short TransferIncomePercentage = 0x54;
-        public const short YouthGrantIncome = 0x5C;
-        public const short StadiumRentalPerYear = 0x78;
-        public const short StartingLastYearsTurnover = 0x7C;
-        public const short WeeklyWageBudget = 0x84;
-        public const short HighestWage = 0x88;
-        public const short WeeklyWageBudgetUsed = 0x90;
-        public const short HighestWagePaid = 0xA4;
-        public const short HighestNonPlayerWagePaid = 0xA8;
-        public const short LatestSeasonTicketSales = 0xD0;
-        public const short FFPMaxWeeklyWageTotal = 0xC4;
+        public const short RemainingBudget = 0x67C;
+        public const short SeasonTransferFunds = 0x680;
+        public const short TransferIncomePercentage = 0x684;
+        public const short YouthGrantIncome = 0x68C;
+        public const short StadiumRentalPerYear = 0x6A8;
+        public const short StartingLastYearsTurnover = 0x6AC;
+        public const short WeeklyWageBudget = 0x6B4;
+        public const short HighestWage = 0x6B8;
+        public const short WeeklyWageBudgetUsed = 0x6C0;
+        public const short HighestWagePaid = 0x6D4;
+        public const short HighestNonPlayerWagePaid = 0x6D8;
+        public const short LatestSeasonTicketSales = 0x700;
+        public const short FFPMaxWeeklyWageTotal = 0x6F4;
         public const short EnteredFSBankruptState = 0x498;
         public const short TrainingExpansionFlag = 0x4A6;
         public const short YouthExpansionFlag = 0x4A7;
@@ -42,5 +42,6 @@ namespace FMScoutFramework.Core.Offsets
         public const short StadiumRentalPercentageOfGateReceipts = 0x4B1;
         public const short CorporateFacilitiesRevenueLevel = 0x4B2;
         public const short IncreateStaffWages = 0x4B3;
+        public const short CorporateFacilities = 0x751;
     }
 }
