@@ -33,15 +33,15 @@ namespace FMScoutFramework.Core.Offsets
         public const short WeeklyWageBudgetUsed = 0x6C0;
         public const short HighestWagePaid = 0x6D4;
         public const short HighestNonPlayerWagePaid = 0x6D8;
-        public const short LatestSeasonTicketSales = 0x700;
+        public const short LatestSeasonTicketSales = 0x70C;
         public const short FFPMaxWeeklyWageTotal = 0x6F4;
         public const short EnteredFSBankruptState = 0x498;
         public const short TrainingExpansionFlag = 0x4A6;
         public const short YouthExpansionFlag = 0x4A7;
-        public const short StateOfEmergency = 0x4AE;
+        public const short StateOfEmergency = 0x74D;
         public const short StadiumRentalPercentageOfGateReceipts = 0x4B1;
         public const short CorporateFacilitiesRevenueLevel = 0x4B2;
-        public const short IncreateStaffWages = 0x4B3;
+        public const short IncreaseStaffWages = 0x4B3;
         public const short CorporateFacilities = 0x751;
     }
 }

@@ -60,6 +60,8 @@ namespace FMScoutFramework.Core.Entities.InGame
             PropertyInvoker.Set<int>(ClubFinancesOffsets.LatestSeasonTicketSales, OriginalBytes, MemoryAddress, DatabaseMode, LatestSeasonTickets);
             PropertyInvoker.Set<byte>(ClubFinancesOffsets.SugarDaddy, OriginalBytes, MemoryAddress, DatabaseMode, SugarDaddy);
             PropertyInvoker.Set<byte>(ClubFinancesOffsets.CorporateFacilities, OriginalBytes, MemoryAddress, DatabaseMode, CorporateFacilities);
+            PropertyInvoker.Set<int>(ClubFinancesOffsets.StadiumRentalPerYear, OriginalBytes, MemoryAddress, DatabaseMode, StadiumRentalPerYear);
+            PropertyInvoker.Set<bool>(ClubFinancesOffsets.StateOfEmergency, OriginalBytes, MemoryAddress, DatabaseMode, StateOfEmergency);
             _isDirty = false;
         }
 
@@ -412,6 +414,39 @@ namespace FMScoutFramework.Core.Entities.InGame
             set {
                 if (_corporateFacilities != value) {
                     _corporateFacilities = value;
+                    isDirty = true;
+                }
+            }
+        }
+
+        private int _stadiumRentalPerYear = 0;
+        public int StadiumRentalPerYear {
+            get {
+                if (_stadiumRentalPerYear == 0) {
+                    _stadiumRentalPerYear = PropertyInvoker.Get<int>(ClubFinancesOffsets.StadiumRentalPerYear, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+
+                return _stadiumRentalPerYear;
+            }
+            set {
+                if (_stadiumRentalPerYear != value) {
+                    _stadiumRentalPerYear = value;
+                    isDirty = true;
+                }
+            }
+        }
+
+        private bool _stateOfEmergency = false;
+        public bool StateOfEmergency {
+            get {
+                if (_stateOfEmergency == false) {
+                    _stateOfEmergency = PropertyInvoker.Get<bool>(ClubFinancesOffsets.StateOfEmergency, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _stateOfEmergency;
+            }
+            set {
+                if (_stateOfEmergency != value) {
+                    _stateOfEmergency = value;
                     isDirty = true;
                 }
             }
