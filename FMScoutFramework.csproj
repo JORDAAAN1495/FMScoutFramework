@@ -96,6 +96,7 @@
     <Compile Include="Defines\Offsets\Sub-Entities\RelationshipOffsets.cs" />
     <Compile Include="Defines\Versions\Steam_18_0_1_Beta_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_18_0_1_Touch_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_18_0_2_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_18_0_1_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_18_0_0_Windows.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IClubDebt.cs" />
