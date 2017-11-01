@@ -21,7 +21,7 @@ namespace FMScoutFramework.Core.Entities.InGame
 
         public void Save() {
             PropertyInvoker.Set<Int16>(CompetitionOffsets.Reputation, OriginalBytes, MemoryAddress, DatabaseMode, Reputation.GetValueOrDefault(0));
-            PropertyInvoker.Set<Int16>(CompetitionOffsets.NationalReputation, OriginalBytes, MemoryAddress, DatabaseMode, NationalReputation.GetValueOrDefault(0));
+            PropertyInvoker.Set<Int16>(CompetitionOffsets.CurrentReputation, OriginalBytes, MemoryAddress, DatabaseMode, NationalReputation.GetValueOrDefault(0));
             isDirty = false;
         }
 
@@ -101,7 +101,7 @@ namespace FMScoutFramework.Core.Entities.InGame
         public Int16? NationalReputation {
             get {
                 if (_nationalReputation == null) {
-                    _nationalReputation = PropertyInvoker.Get<Int16>(CompetitionOffsets.NationalReputation, OriginalBytes, MemoryAddress, DatabaseMode);
+                    _nationalReputation = PropertyInvoker.Get<Int16>(CompetitionOffsets.CurrentReputation, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
 
                 return _nationalReputation;
@@ -182,25 +182,25 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
-        private List<Int64> _infoPointers = new List<Int64>();
-        public List<Int64> InfoPointers {
-            get {
-                if (_infoPointers.Count == 0) {
-                    Int64 pointersAddress = PropertyInvoker.Get<Int64>(CompetitionOffsets.SmallNumbersArray, OriginalBytes, MemoryAddress, DatabaseMode);
-                    int infosCount = ProcessManager.ReadArrayLength(pointersAddress);
-                    if (infosCount > 0) {
-                        Int64 startAddress = PropertyInvoker.Get<Int64>(0, OriginalBytes, pointersAddress, DatabaseMode);
-                        for (int i = 0; i < infosCount; i++) {
-                            Int64 pointer = PropertyInvoker.Get<Int64>((i * 0x8), OriginalBytes, startAddress, DatabaseMode);
-                            // First item in the array is a pointer to an array of three quads of numbers?
-                            // Second item is another pointer to an array of two quads of numbers
-                            // etc, etc
-                        }
-                    }
-                }
+        //private List<Int64> _infoPointers = new List<Int64>();
+        //public List<Int64> InfoPointers {
+        //    get {
+        //        if (_infoPointers.Count == 0) {
+        //            Int64 pointersAddress = PropertyInvoker.Get<Int64>(CompetitionOffsets.SmallNumbersArray, OriginalBytes, MemoryAddress, DatabaseMode);
+        //            int infosCount = ProcessManager.ReadArrayLength(pointersAddress);
+        //            if (infosCount > 0) {
+        //                Int64 startAddress = PropertyInvoker.Get<Int64>(0, OriginalBytes, pointersAddress, DatabaseMode);
+        //                for (int i = 0; i < infosCount; i++) {
+        //                    Int64 pointer = PropertyInvoker.Get<Int64>((i * 0x8), OriginalBytes, startAddress, DatabaseMode);
+        //                    // First item in the array is a pointer to an array of three quads of numbers?
+        //                    // Second item is another pointer to an array of two quads of numbers
+        //                    // etc, etc
+        //                }
+        //            }
+        //        }
 
-                return _infoPointers;
-            }
-        }
+        //        return _infoPointers;
+        //    }
+        //}
     }
 }

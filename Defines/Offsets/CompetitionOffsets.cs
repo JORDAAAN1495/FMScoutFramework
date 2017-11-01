@@ -41,34 +41,70 @@ namespace FMScoutFramework.Defines.Offsets {
             }
         }
 
+        public short ParentCompetition {
+            get {
+                return 0x80;
+            }
+        }
+
+        public short NorthCity {
+            get {
+                return 0x98;
+            }
+        }
+
+        public short SouthCity {
+            get {
+                return 0xA0;
+            }
+        }
+
+        public short WestCity {
+            get {
+                return 0xA8;
+            }
+        }
+
+        public short EastCity {
+            get {
+                return 0xB0;
+            }
+        }
+
         // Past Year Winner / Runner Up / Third Placed
-        public short PastWinners {
+        public short PastWinners { // Alternative Names?
             get {
                 return 0xB8;
             }
         }
 
-        public short MoreInfoContainer {
+        public short LastHistory {
             get {
                 return 0xC0;
             }
         }
 
-        public short SmallNumbersArray {
+        public short ActualCompetition {
+            get {
+                return 0xC8;
+            }
+        }
+
+        public short Champions {
             get {
                 return 0xD0;
             }
         }
 
-        public short Reputation {
+        public short ForegroundColour {
             get {
-                return 0x13E;
+                return 0xFC;
             }
         }
 
-        public short NationalReputation {
+        public short BackgroundColour {
             get {
-                return 0x140;
+                return 0x100;
             }
         }
 
@@ -96,9 +132,62 @@ namespace FMScoutFramework.Defines.Offsets {
             }
         }
 
-        public short CompInfos {
+        public short Reputation {
             get {
-                return 0x13C;
+                return 0x13E;
+            }
+        }
+
+        public short OriginalReputation {
+            get {
+                return 0x140;
+            }
+        }
+
+        public short LastReputationPos {
+            get {
+                return 0x142;
+            }
+        }
+
+        public short CurrentReputation {
+            get {
+                return 0x144;
+            }
+        }
+
+        public short PercentageOfTopDivisionReputation {
+            get {
+                return 0x146;
+            }
+        }
+
+        public short NameType {
+            get {
+                return 0x15A;
+            }
+        }
+
+        public short DivisionLevel {
+            get {
+                return 0x15C;
+            }
+        }
+
+        public short Type {
+            get {
+                return 0x15D;
+            }
+        }
+        public short UsesSeatedOnlyStadiums {
+            get {
+                return 0x15F;
+            }
+        }
+
+        public short WageBudgetTurnoverPercentage {
+            get {
+                return 0x160;
             }
         }
     }

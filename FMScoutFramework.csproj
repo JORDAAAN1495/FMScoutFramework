@@ -91,10 +91,11 @@
     <Compile Include="Defines\Offsets\Sub-Entities\ClubInfoOneOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\ClubInfoTwoOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\ClubSponsorshipDealsOffsets.cs" />
-    <Compile Include="Defines\Offsets\Sub-Entities\Competitions\CompetitionInfosOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\Competitions\ActualCompetition.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\KitOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\RelationshipOffsets.cs" />
     <Compile Include="Defines\Versions\Steam_18_0_1_Beta_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_18_0_2_Touch_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_18_0_1_Touch_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_18_0_2_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_18_0_1_Windows.cs" />
