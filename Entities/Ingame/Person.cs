@@ -30,5 +30,11 @@ namespace FMScoutFramework.Core.Entities.InGame
                 return PropertyInvoker.Get<int>(PersonOffsets.RowID, OriginalBytes, MemoryAddress, DatabaseMode);
             }
         }
+
+        public UInt64 DBUID {
+            get {
+                return PropertyInvoker.Get<UInt64>(PersonOffsets.UID, OriginalBytes, MemoryAddress, DatabaseMode);
+            }
+        }
     }
 }
