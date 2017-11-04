@@ -33,6 +33,8 @@ namespace FMScoutFramework.Core.Managers
                 return (T)(object)ProcessManager.ReadInt64(offsetToFind);
             else if (typeof(UInt64) == typeof(T))
                 return (T)(object)ProcessManager.ReadUInt64(offsetToFind);
+            else if (typeof(bool) == typeof(T))
+                return (T)(object)ProcessManager.ReadBool(offsetToFind);
             else if (typeof(Color) == typeof(T))
                 return (T)(object)ProcessManager.ReadColour(offsetToFind);
             else

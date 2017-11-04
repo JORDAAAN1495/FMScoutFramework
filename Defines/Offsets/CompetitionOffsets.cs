@@ -78,7 +78,7 @@ namespace FMScoutFramework.Defines.Offsets {
             }
         }
 
-        public short LastHistory {
+        public short LastHistory { // CompetitionHistory DB Entity
             get {
                 return 0xC0;
             }
@@ -105,6 +105,30 @@ namespace FMScoutFramework.Defines.Offsets {
         public short BackgroundColour {
             get {
                 return 0x100;
+            }
+        }
+
+        public short TrimColour {
+            get {
+                return 0x104;
+            }
+        }
+
+        public short WinterBallStartDate {
+            get {
+                return 0x11C;
+            }
+        }
+
+        public short WinterBallEndDate {
+            get {
+                return 0x120;
+            }
+        }
+
+        public short WinterBallColour {
+            get {
+                return 0x12C;
             }
         }
 
@@ -168,6 +192,12 @@ namespace FMScoutFramework.Defines.Offsets {
             }
         }
 
+        public short Flags {
+            get {
+                return 0x15B;
+            }
+        }
+
         public short DivisionLevel {
             get {
                 return 0x15C;
@@ -179,6 +209,13 @@ namespace FMScoutFramework.Defines.Offsets {
                 return 0x15D;
             }
         }
+
+        public short UsesExtraOfficials {
+            get {
+                return 0x15E;
+            }
+        }
+
         public short UsesSeatedOnlyStadiums {
             get {
                 return 0x15F;

@@ -166,6 +166,10 @@ namespace FMScoutFramework.Core.Managers
             return ReadProcessMemory (address, 1) [0];
         }
 
+        public static bool ReadBool (Int64 address) {
+            return (ReadProcessMemory(address, 1)[0] == 1) ? true : false;
+        }
+
         public static sbyte ReadSByte (int address)
         {
             return (sbyte)ReadProcessMemory (address, 1) [0];
