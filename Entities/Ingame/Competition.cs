@@ -126,8 +126,34 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         public void Save() {
+            PropertyInvoker.Set<Int64>(CompetitionOffsets.NorthCity, OriginalBytes, MemoryAddress, DatabaseMode, NorthCityAddress.GetValueOrDefault(0));
+            PropertyInvoker.Set<Int64>(CompetitionOffsets.SouthCity, OriginalBytes, MemoryAddress, DatabaseMode, SouthCityAddress.GetValueOrDefault(0));
+            PropertyInvoker.Set<Int64>(CompetitionOffsets.WestCity, OriginalBytes, MemoryAddress, DatabaseMode, WestCityAddress.GetValueOrDefault(0));
+            PropertyInvoker.Set<Int64>(CompetitionOffsets.EastCity, OriginalBytes, MemoryAddress, DatabaseMode, EastCityAddress.GetValueOrDefault(0));
+            PropertyInvoker.Set<Color>(CompetitionOffsets.ForegroundColour, OriginalBytes, MemoryAddress, DatabaseMode, ForegroundColour);
+            PropertyInvoker.Set<Color>(CompetitionOffsets.BackgroundColour, OriginalBytes, MemoryAddress, DatabaseMode, BackgroundColour);
+            PropertyInvoker.Set<Color>(CompetitionOffsets.TrimColour, OriginalBytes, MemoryAddress, DatabaseMode, TrimColour);
+            PropertyInvoker.Set<Int16>(CompetitionOffsets.MinimumPitchLength, OriginalBytes, MemoryAddress, DatabaseMode, MinimumPitchLength.GetValueOrDefault(0));
+            PropertyInvoker.Set<Int16>(CompetitionOffsets.MaximumPitchLength, OriginalBytes, MemoryAddress, DatabaseMode, MaximumPitchLength.GetValueOrDefault(0));
+            PropertyInvoker.Set<Int16>(CompetitionOffsets.MinimumPitchWidth, OriginalBytes, MemoryAddress, DatabaseMode, MinimumPitchWidth.GetValueOrDefault(0));
+            PropertyInvoker.Set<Int16>(CompetitionOffsets.MaximumPitchWidth, OriginalBytes, MemoryAddress, DatabaseMode, MaximumPitchWidth.GetValueOrDefault(0));
             PropertyInvoker.Set<Int16>(CompetitionOffsets.Reputation, OriginalBytes, MemoryAddress, DatabaseMode, Reputation.GetValueOrDefault(0));
+            PropertyInvoker.Set<Int16>(CompetitionOffsets.OriginalReputation, OriginalBytes, MemoryAddress, DatabaseMode, OriginalReputation.GetValueOrDefault(0));
+            PropertyInvoker.Set<Int16>(CompetitionOffsets.LastReputationPos, OriginalBytes, MemoryAddress, DatabaseMode, LastReputationPos.GetValueOrDefault(0));
             PropertyInvoker.Set<Int16>(CompetitionOffsets.CurrentReputation, OriginalBytes, MemoryAddress, DatabaseMode, CurrentReputation.GetValueOrDefault(0));
+            PropertyInvoker.Set<byte>(CompetitionOffsets.PercentageOfTopDivisionReputation, OriginalBytes, MemoryAddress, DatabaseMode, PercentageOfTopDivisionReputation.GetValueOrDefault(0));
+            PropertyInvoker.Set<byte>(CompetitionOffsets.NameType, OriginalBytes, MemoryAddress, DatabaseMode, NameType.GetValueOrDefault(0));
+            PropertyInvoker.Set<byte>(CompetitionOffsets.DivisionLevel, OriginalBytes, MemoryAddress, DatabaseMode, DivisionLevel.GetValueOrDefault(0));
+            PropertyInvoker.Set<byte>(CompetitionOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode, Type.GetValueOrDefault(0));
+            PropertyInvoker.Set<bool>(CompetitionOffsets.UsesSeatedOnlyStadiums, OriginalBytes, MemoryAddress, DatabaseMode, UsesSeatedOnlyStadiums.GetValueOrDefault(false));
+            PropertyInvoker.Set<byte>(CompetitionOffsets.WageBudgetTurnoverPercentage, OriginalBytes, MemoryAddress, DatabaseMode, WageBudgetTurnoverPercentage.GetValueOrDefault(0));
+            PropertyInvoker.Set<bool>(CompetitionOffsets.UsesExtraOfficials, OriginalBytes, MemoryAddress, DatabaseMode, UsesExtraOfficials.GetValueOrDefault(false));
+
+            byte newFlags = 0x0;
+            newFlags |= (IsExtinct.GetValueOrDefault(false) ? (byte)CompetitionFlags.CNTIsExtinct : (byte)0);
+            newFlags |= (UsesSquadNumbers.GetValueOrDefault(false) ? (byte)CompetitionFlags.CNTUsesSquadNumbers : (byte)0);
+            PropertyInvoker.Set<byte>(CompetitionOffsets.Flags, OriginalBytes, MemoryAddress, DatabaseMode, newFlags);
+
             isDirty = false;
         }
 
@@ -185,7 +211,7 @@ namespace FMScoutFramework.Core.Entities.InGame
                 return PropertyInvoker.GetPointer<Continent>(CompetitionOffsets.Continent, OriginalBytes, MemoryAddress, DatabaseMode, Version);
             }
         }
-
+        
         public Nation Nation {
             get {
                 return PropertyInvoker.GetPointer<Nation>(CompetitionOffsets.Nation, OriginalBytes, MemoryAddress, DatabaseMode, Version);
@@ -198,27 +224,127 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
+        private Int64? _northCityAddress;
+        public Int64? NorthCityAddress {
+            get {
+                if (_northCityAddress == null) {
+                    _northCityAddress = PropertyInvoker.Get<Int64>(CompetitionOffsets.NorthCity, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _northCityAddress;
+            }
+            set {
+                if (_northCityAddress != value) {
+                    _northCityAddress = value;
+                    isDirty = true;
+                }
+            }
+        }
+
+        private City _northCity;
         public City NorthCity {
             get {
-                return PropertyInvoker.GetPointer<City>(CompetitionOffsets.NorthCity, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+                if (_northCity == null) {
+                    _northCity = new City(NorthCityAddress.GetValueOrDefault(0), Version);
+                }
+                return _northCity;
+            }
+            set {
+                if (_northCity != value) {
+                    _northCity = value;
+                }
             }
         }
 
+        private Int64? _southCityAddress;
+        public Int64? SouthCityAddress {
+            get {
+                if (_southCityAddress == null) {
+                    _southCityAddress = PropertyInvoker.Get<Int64>(CompetitionOffsets.SouthCity, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _southCityAddress;
+            }
+            set {
+                if (_southCityAddress != value) {
+                    _southCityAddress = value;
+                    isDirty = true;
+                }
+            }
+        }
+
+        private City _southCity;
         public City SouthCity {
             get {
-                return PropertyInvoker.GetPointer<City>(CompetitionOffsets.SouthCity, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+                if (_southCity == null) {
+                    _southCity = new City(SouthCityAddress.GetValueOrDefault(0), Version);
+                }
+                return _southCity;
+            }
+            set {
+                if (_southCity != value) {
+                    _southCity = value;
+                }
             }
         }
 
+        private Int64? _westCityAddress;
+        public Int64? WestCityAddress {
+            get {
+                if (_westCityAddress == null) {
+                    _westCityAddress = PropertyInvoker.Get<Int64>(CompetitionOffsets.WestCity, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _westCityAddress;
+            }
+            set {
+                if (_westCityAddress != value) {
+                    _westCityAddress = value;
+                    isDirty = true;
+                }
+            }
+        }
+
+        private City _westCity;
         public City WestCity {
             get {
-                return PropertyInvoker.GetPointer<City>(CompetitionOffsets.WestCity, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+                if (_westCity == null) {
+                    _westCity = new City(WestCityAddress.GetValueOrDefault(0), Version);
+                }
+                return _westCity;
+            }
+            set {
+                if (_westCity != value) {
+                    _westCity = value;
+                }
             }
         }
 
+        private Int64? _eastCityAddress;
+        public Int64? EastCityAddress {
+            get {
+                if (_eastCityAddress == null) {
+                    _eastCityAddress = PropertyInvoker.Get<Int64>(CompetitionOffsets.EastCity, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _eastCityAddress;
+            }
+            set {
+                if (_eastCityAddress != value) {
+                    _eastCityAddress = value;
+                    isDirty = true;
+                }
+            }
+        }
+
+        private City _eastCity;
         public City EastCity {
             get {
-                return PropertyInvoker.GetPointer<City>(CompetitionOffsets.EastCity, OriginalBytes, MemoryAddress, DatabaseMode, Version);
+                if (_eastCity == null) {
+                    _eastCity = new City(EastCityAddress.GetValueOrDefault(0), Version);
+                }
+                return _eastCity;
+            }
+            set {
+                if (_eastCity != value) {
+                    _eastCity = value;
+                }
             }
         }
 
@@ -479,11 +605,11 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
-        private byte? _usesSeatedOnlyStadiums;
-        public byte? UsesSeatedOnlyStadiums {
+        private bool? _usesSeatedOnlyStadiums;
+        public bool? UsesSeatedOnlyStadiums {
             get {
                 if (_usesSeatedOnlyStadiums == null) {
-                    _usesSeatedOnlyStadiums = PropertyInvoker.Get<byte>(CompetitionOffsets.UsesSeatedOnlyStadiums, OriginalBytes, MemoryAddress, DatabaseMode);
+                    _usesSeatedOnlyStadiums = PropertyInvoker.Get<bool>(CompetitionOffsets.UsesSeatedOnlyStadiums, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _usesSeatedOnlyStadiums;
             }

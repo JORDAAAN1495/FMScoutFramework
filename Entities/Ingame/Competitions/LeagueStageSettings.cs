@@ -67,6 +67,11 @@ namespace FMScoutFramework.Core.Entities.InGame
                 }
                 return _stageName;
             }
+            set {
+                if (_stageName != value) {
+                    _stageName = value;
+                }
+            }
         }
 
         private bool? _ranksTeams;

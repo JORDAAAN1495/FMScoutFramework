@@ -54,11 +54,15 @@ namespace FMScoutFramework.Core.Entities.InGame
                         readStagesAtTwo = true;
                     }
 
+                    int masterCount = 1;
                     if (readStagesAtOne) {
                         Int64 startAddress = PropertyInvoker.Get<Int64>(Offsets.StagesOne, OriginalBytes, MemoryAddress, DatabaseMode);
                         if (startAddress > 0x0) {
                             for (Int64 i = 0; i < countOne; i++) {
-                                _leagueStages.Add(PropertyInvoker.GetPointer<LeagueStage>((i * 0x8), OriginalBytes, startAddress, DatabaseMode, Version));
+                                LeagueStage ls = PropertyInvoker.GetPointer<LeagueStage>((i * 0x8), OriginalBytes, startAddress, DatabaseMode, Version);
+                                ls.Name = "Stage " + masterCount;
+                                _leagueStages.Add(ls);
+                                masterCount++;
                             }
                         }
                     }
@@ -66,7 +70,10 @@ namespace FMScoutFramework.Core.Entities.InGame
                         Int64 startAddress = PropertyInvoker.Get<Int64>(Offsets.StagesTwo, OriginalBytes, MemoryAddress, DatabaseMode);
                         if (startAddress > 0x0) {
                             for (Int64 i = 0; i < countOne; i++) {
-                                _leagueStages.Add(PropertyInvoker.GetPointer<LeagueStage>((i * 0x8), OriginalBytes, startAddress, DatabaseMode, Version));
+                                LeagueStage ls = PropertyInvoker.GetPointer<LeagueStage>((i * 0x8), OriginalBytes, startAddress, DatabaseMode, Version);
+                                ls.Name = "Stage " + masterCount;
+                                _leagueStages.Add(ls);
+                                masterCount++;
                             }
                         }
                     }

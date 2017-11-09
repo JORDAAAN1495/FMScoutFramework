@@ -39,6 +39,13 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
+        public string Name { get; set; }
+        public string Type {
+            get {
+                return "LeagueStage";
+            }
+        }
+
         private List<LeagueTableEntry> _leagueTable = new List<LeagueTableEntry>();
         public List<LeagueTableEntry> LeagueTable {
             get {
