@@ -36,7 +36,7 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
 
             FMCore.logger.LogWrite("Getting in-game date...");
             DateTime dt = ProcessManager.ReadDateTime(process.BaseAddress + MemoryAddresses.CurrentDateTime);
-            if (dt.Year < 2017 || dt.Year > 2150) {
+            if (dt.Year < 2016 || dt.Year > 2150) {
                 FMCore.logger.LogWrite("In-game date is invalid.");
                 GameManager.LastErrorMessage = "Invalid main date at offset.";
                 return false;
