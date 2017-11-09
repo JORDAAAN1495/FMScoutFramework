@@ -30,7 +30,7 @@ namespace FMScoutFramework.Core.Offsets
         public const short Passing = 0x16;
         public const short Penalties = 0x17;
         public const short Tackling = 0x18;
-        public const short Creativity = 0x19;
+        public const short Vision = 0x19;
         public const short Handling = 0x1A;
         public const short AerialAbility = 0x1B;
         public const short CommandOfArea = 0x1C;

@@ -18,7 +18,7 @@
         byte Concentration { get; }
         byte Consistency { get; }
         byte Corners { get; }
-        byte Creativity { get; }
+        byte Vision { get; }
         byte Crossing { get; }
         byte Decisions { get; }
         byte DefenderCenter { get; }

@@ -41,7 +41,7 @@ namespace FMScoutFramework.Core.Entities.InGame
             PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Passing, OriginalBytes, MemoryAddress, DatabaseMode, Passing);
             PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Penalties, OriginalBytes, MemoryAddress, DatabaseMode, Penalties);
             PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Tackling, OriginalBytes, MemoryAddress, DatabaseMode, Tackling);
-            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Creativity, OriginalBytes, MemoryAddress, DatabaseMode, Creativity);
+            PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Vision, OriginalBytes, MemoryAddress, DatabaseMode, Vision);
             PropertyInvoker.Set<byte>(PlayerAttributeOffsets.Handling, OriginalBytes, MemoryAddress, DatabaseMode, Handling);
             PropertyInvoker.Set<byte>(PlayerAttributeOffsets.AerialAbility, OriginalBytes, MemoryAddress, DatabaseMode, AerialAbility);
             PropertyInvoker.Set<byte>(PlayerAttributeOffsets.CommandOfArea, OriginalBytes, MemoryAddress, DatabaseMode, CommandOfArea);
@@ -576,18 +576,18 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
-        private byte _creativity = 0;
-        public byte Creativity {
+        private byte _vision = 0;
+        public byte Vision {
             get {
-                if (_creativity == 0) {
-                    _creativity = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Creativity, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_vision == 0) {
+                    _vision = PropertyInvoker.Get<byte>(PlayerAttributeOffsets.Vision, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
-                return _creativity;
+                return _vision;
             }
             set {
-                if (_creativity != value) {
+                if (_vision != value) {
                     isDirty = true;
-                    _creativity = value;
+                    _vision = value;
                 }
             }
         }

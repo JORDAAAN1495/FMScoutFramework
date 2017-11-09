@@ -2289,7 +2289,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
             total += (CurrentPlayer.Attributes.OffTheBall / 5) * weights.OffTheBall;
             total += (CurrentPlayer.Attributes.Positioning / 5) * weights.Positioning;
             total += (CurrentPlayer.Attributes.Teamwork / 5) * weights.Teamwork;
-            total += (CurrentPlayer.Attributes.Creativity / 5) * weights.Vision;
+            total += (CurrentPlayer.Attributes.Vision / 5) * weights.Vision;
             total += (CurrentPlayer.Attributes.Workrate / 5) * weights.WorkRate;
             total += (CurrentPlayer.Attributes.Acceleration / 5) * weights.Acceleration;
             total += (CurrentPlayer.Attributes.Agility / 5) * weights.Agility;
