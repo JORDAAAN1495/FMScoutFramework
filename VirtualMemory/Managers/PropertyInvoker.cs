@@ -65,6 +65,8 @@ namespace FMScoutFramework.Core.Managers
                 ProcessManager.WriteUInt16((ushort)(object)value, offsetToFind);
             else if (typeof(Color) == typeof(T))
                 ProcessManager.WriteColour((Color)(object)value, offsetToFind);
+            else if (typeof(bool) == typeof(T))
+                ProcessManager.WriteBool((bool)(object)value, offsetToFind);
         }
 
 

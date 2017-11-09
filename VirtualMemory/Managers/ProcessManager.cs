@@ -534,6 +534,11 @@ namespace FMScoutFramework.Core.Managers
             WriteProcessMemory (address, buffer, 1);
         }
 
+        public static void WriteBool (bool value, Int64 address) {
+            byte[] buffer = new byte[] { (value == true ? (byte)1 : (byte)0) };
+            WriteProcessMemory(address, buffer, 1);
+        }
+
         public static void WriteString (byte [] value, Int64 address)
         {
             WriteProcessMemory (address, value, 4);
