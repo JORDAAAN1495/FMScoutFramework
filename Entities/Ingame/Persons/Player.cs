@@ -51,11 +51,9 @@ namespace FMScoutFramework.Core.Entities.InGame
 
             PropertyInvoker.Set<short>(PlayerOffsets.Fitness, OriginalBytes, Address, DatabaseMode, 10000);
             PropertyInvoker.Set<short>(PlayerOffsets.Condition, OriginalBytes, Address, DatabaseMode, 10000);
-            PropertyInvoker.Set<short>(PlayerOffsets.Jadedness, OriginalBytes, Address, DatabaseMode, -500);
 
             _fitness = 0;
             _condition = 0;
-            _jadedness = 0;
             IsInjured = null;
         }
 
