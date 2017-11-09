@@ -462,6 +462,9 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 if (Contract == null) {
                     return true;
                 }
+                else if (Contract.Team == null || Contract.TeamAddress == 0x0) {
+                    return true;
+                }
 
                 return false;
             }
