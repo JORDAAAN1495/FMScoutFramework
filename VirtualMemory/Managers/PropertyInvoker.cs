@@ -69,6 +69,44 @@ namespace FMScoutFramework.Core.Managers
                 ProcessManager.WriteBool((bool)(object)value, offsetToFind);
         }
 
+        public static void SetPersonName(string newName, ArraySegment<byte> baseObject, Int64 memoryAddress) {
+            // Convert the name to byte[]
+            byte[] newNameByte = ProcessManager.GetFMStringBytes(newName);
+            Int64 newAddress = ProcessManager.AllocateProcessBytes(newNameByte.Length + 22);
+            Int64 address = newAddress;
+
+            // Prepend an int
+            PropertyInvoker.Set<int>(0x0, baseObject, address, DatabaseModeEnum.Realtime, 1);
+            address += 0x4;
+
+            ProcessManager.WriteProcessMemory(address, newNameByte, (uint)newNameByte.Length);
+            Int64 newNamePtr = address;
+            address += newNameByte.Length;
+
+            byte[] extras = new byte[] {
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0x0,
+                0xE,
+                0x0,
+                0x0,
+                0x0
+            };
+            ProcessManager.WriteProcessMemory(address, extras, (uint)extras.Length);
+            PropertyInvoker.Set<Int64>(0x0, baseObject, memoryAddress, DatabaseModeEnum.Realtime, newNamePtr);
+        }
+
 
         public static string GetString (Int64 offset, Int64 additionalStringOffset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode)
         {

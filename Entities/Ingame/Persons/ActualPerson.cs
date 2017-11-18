@@ -112,6 +112,14 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         public void Save() {
+            // Changing the name
+            if (_hasChangedFirstName) {
+                PropertyInvoker.SetPersonName(FirstName, OriginalBytes, FirstNameContainerPtr);
+            }
+            if (_hasChangedLastName) {
+                PropertyInvoker.SetPersonName(LastName, OriginalBytes, LastNameContainerPtr);
+            }
+
             PropertyInvoker.Set<DateTime>(ActualPersonOffsets.DateOfBirth, OriginalBytes, MemoryAddress, DatabaseMode, DateOfBirth);
             PropertyInvoker.Set<byte>(ActualPersonOffsets.Ethnicity, OriginalBytes, MemoryAddress, DatabaseMode, Ethnicity);
             PropertyInvoker.Set<byte>(ActualPersonOffsets.HairColour, OriginalBytes, MemoryAddress, DatabaseMode, HairColour);
@@ -124,6 +132,9 @@ namespace FMScoutFramework.Core.Entities.InGame {
             PropertyInvoker.Set<Int64>(ActualPersonOffsets.Contract, OriginalBytes, MemoryAddress, DatabaseMode, ContractAddress.GetValueOrDefault(0x0));
             _isDirty = false;
         }
+
+        private bool _hasChangedFirstName = false;
+        private bool _hasChangedLastName = false;
 
         private bool _isDirty = false;
         public bool isDirty {
@@ -173,15 +184,87 @@ namespace FMScoutFramework.Core.Entities.InGame {
             }
         }
 
-        public string FirstName {
+        private Int64 _firstNameContainerPtr;
+        public Int64 FirstNameContainerPtr {
             get {
-                return PropertyInvoker.GetString(ActualPersonOffsets.FirstName, Version.MemoryAddresses.StringOffset, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (_firstNameContainerPtr == 0) {
+                    _firstNameContainerPtr = PropertyInvoker.Get<Int64>(ActualPersonOffsets.FirstName, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _firstNameContainerPtr;
             }
         }
 
+        private Int64 _firstNamePtr;
+        public Int64 FirstNamePtr {
+            get {
+                if (_firstNamePtr == 0) {
+                    _firstNamePtr = PropertyInvoker.Get<Int64>(0x0, OriginalBytes, FirstNameContainerPtr, DatabaseMode);
+                }
+                return _firstNamePtr;
+            }
+            set {
+                if (_firstNamePtr != value) {
+                    _firstNamePtr = value;
+                }
+            }
+        }
+
+        private string _firstName;
+        public string FirstName {
+            get {
+                if (String.IsNullOrEmpty(_firstName)) {
+                    _firstName = PropertyInvoker.GetString(ActualPersonOffsets.FirstName, Version.MemoryAddresses.StringOffset, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _firstName;
+            }
+            set {
+                if (_firstName != value) {
+                    _firstName = value;
+                    _hasChangedFirstName = true;
+                    isDirty = true;
+                }
+            }
+        }
+
+        private Int64 _lastNameContainerPtr;
+        public Int64 LastNameContainerPtr {
+            get {
+                if (_lastNameContainerPtr == 0) {
+                    _lastNameContainerPtr = PropertyInvoker.Get<Int64>(ActualPersonOffsets.LastName, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _lastNameContainerPtr;
+            }
+        }
+
+        private Int64 _lastNamePtr;
+        public Int64 LastNamePtr {
+            get {
+                if (_lastNamePtr == 0) {
+                    _lastNamePtr = PropertyInvoker.Get<Int64>(0x0, OriginalBytes, LastNameContainerPtr, DatabaseMode);
+                }
+                return _lastNamePtr;
+            }
+            set {
+                if (_lastNamePtr != value) {
+                    _lastNamePtr = value;
+                }
+            }
+        }
+
+        private string _lastName;
         public string LastName {
             get {
-                return PropertyInvoker.GetString(ActualPersonOffsets.LastName, Version.MemoryAddresses.StringOffset, OriginalBytes, MemoryAddress, DatabaseMode);
+                if (String.IsNullOrEmpty(_lastName)) {
+                    _lastName = PropertyInvoker.GetString(ActualPersonOffsets.LastName, Version.MemoryAddresses.StringOffset, OriginalBytes, MemoryAddress, DatabaseMode);
+                }
+                return _lastName;
+            }
+            set {
+                if (_lastName != value) {
+                    _lastName = value;
+                    _hasChangedLastName = true;
+                    isDirty = true;
+                }
             }
         }
 
