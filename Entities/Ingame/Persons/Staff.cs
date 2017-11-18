@@ -155,7 +155,7 @@ namespace FMScoutFramework.Core.Entities.InGame
 
         public string ContractStatus {
             get {
-                string res = "-";
+                string res = "";
                 if (ActualPerson.IsFreeAgent) {
                     res = "Free Agent";
                 }

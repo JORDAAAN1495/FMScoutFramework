@@ -422,7 +422,7 @@ namespace FMScoutFramework.Core.Entities.InGame
         // Virtuals
         public string ContractStatus {
             get {
-                string res = "-";
+                string res = "";
                 if (ActualPerson.IsFreeAgent) {
                     res = "Free Agent";
                 }
