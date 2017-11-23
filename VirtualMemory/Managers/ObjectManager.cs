@@ -15,28 +15,29 @@ namespace FMScoutFramework.Core.Managers
     public static class ObjectManagerWrapper
     {
         public static Dictionary<DatabaseModeEnum, ObjectManager> ObjectManagers =
-            new Dictionary<DatabaseModeEnum, ObjectManager> ();
+            new Dictionary<DatabaseModeEnum, ObjectManager>();
     }
 
     public class ObjectManager
     {
-        public Dictionary<Type, object> ObjectStore = new Dictionary<Type, object> ();
+        public Dictionary<Type, object> ObjectStore = new Dictionary<Type, object>();
         public readonly DatabaseModeEnum DatabaseMode;
         public readonly GameManager GameManager;
 
-        public ObjectManager (GameManager gameManager, DatabaseModeEnum databaseMode = DatabaseModeEnum.Realtime)
+        public ObjectManager(GameManager gameManager, DatabaseModeEnum databaseMode = DatabaseModeEnum.Realtime)
         {
             DatabaseMode = databaseMode;
             GameManager = gameManager;
         }
 
-        public void ClearObjectStore() {
+        public void ClearObjectStore()
+        {
             ObjectStore.Clear();
         }
 
-        public void Load (bool refreshPersonCache)
+        public void Load(bool refreshPersonCache)
         {
-            ObjectStore.Clear ();
+            ObjectStore.Clear();
 
             PersonMemoryAddressesWrapper staffAddresses = SortPersonMemoryAddresses();
 
@@ -84,13 +85,14 @@ namespace FMScoutFramework.Core.Managers
             //RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Unknown9);
 
             //#region People
-            ObjectStore.Add (typeof (Player), RetrieveObjects<Player> (staffAddresses.PlayerAddresses));
-            ObjectStore.Add (typeof (Staff), RetrieveObjects<Staff> (staffAddresses.StaffAddresses));
+            ObjectStore.Add(typeof(Player), RetrieveObjects<Player>(staffAddresses.PlayerAddresses));
+            ObjectStore.Add(typeof(Staff), RetrieveObjects<Staff>(staffAddresses.StaffAddresses));
             //ObjectStore.Add (typeof (PlayerStaff), RetrieveObjects<PlayerStaff> (staffAddresses.PlayerStaffAddresses));
             //#endregion
         }
 
-        private PersonMemoryAddressesWrapper SortPersonMemoryAddresses() {
+        private PersonMemoryAddressesWrapper SortPersonMemoryAddresses()
+        {
             var memoryAddresses = new PersonMemoryAddressesWrapper();
             memoryAddresses.PlayerAddresses = new List<Int64>();
             memoryAddresses.StaffAddresses = new List<Int64>();
@@ -100,8 +102,13 @@ namespace FMScoutFramework.Core.Managers
             List<Int64> addresses = GetMemoryAddresses<Person>(GameManager.Version.MemoryAddresses.Person);
             List<Int64> unknownaddresses = new List<Int64>();
 
-            foreach(Int64 personAddress in addresses) {
+            foreach (Int64 personAddress in addresses)
+            {
+#if MAC
+                Int64 type = ProcessManager.ReadInt64(personAddress) - ProcessManager.fmProcess.BaseAddress;
+#else
                 Int64 type = ProcessManager.ReadInt64(personAddress);
+#endif
                 if (type == GameManager.Version.PersonEnum.Player) {
                     memoryAddresses.PlayerAddresses.Add(personAddress + GameManager.Version.PersonOffsets.Player);
                 }
@@ -144,14 +151,14 @@ namespace FMScoutFramework.Core.Managers
         {
             List<Int64> memoryAddresses = offset > -1 ? GetMemoryAddresses<T>(offset) : addressesCollection;
 
-            #region CreateConstructorDelegate
+#region CreateConstructorDelegate
             ConstructorInfo constructor = typeof(T).GetConstructor(new[] { typeof(Int64), typeof(IVersion) });
             ParameterExpression expPointer = Expression.Parameter(typeof(Int64), "memoryAddress");
             ParameterExpression vPointer = Expression.Parameter(typeof(IVersion), "version");
             Expression createNew = Expression.New(constructor, expPointer, vPointer);
             LambdaExpression lambda = Expression.Lambda(createNew, new[] { expPointer, vPointer });
             Func<Int64, IVersion, T> constructInvoker = (Func<Int64, IVersion, T>)lambda.Compile();
-            #endregion
+#endregion
 
             var outputList = new Dictionary<Int64, T>(memoryAddresses.Count);
             foreach(Int64 address in memoryAddresses) {

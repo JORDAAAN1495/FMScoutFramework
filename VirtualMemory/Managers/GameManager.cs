@@ -6,77 +6,73 @@ using System.Configuration;
 using System.IO;
 using FMScoutFramework.Core.Entities.GameVersions;
 
-namespace FMScoutFramework.Core.Managers
-{
-    public class GameManager
-    {
-        private bool fmLoaded;
-        private bool fmLoading;
-        public LogWriter logger { get; set; }
+namespace FMScoutFramework.Core.Managers {
+  public class GameManager {
+    private bool fmLoaded;
+    private bool fmLoading;
+    public LogWriter logger { get; set; }
 
-        public GameManager ()
-        {
-            this.fmLoaded = false;
-            this.fmLoading = false;
-        }
+    public GameManager() {
+      this.fmLoaded = false;
+      this.fmLoading = false;
+    }
 
-        public bool FMLoaded {
-            get { return fmLoaded; }
-        }
+    public bool FMLoaded {
+      get { return fmLoaded; }
+    }
 
-        public bool FMLoading {
-            get { return fmLoading; }
-            set { fmLoading = value; }
-        }
+    public bool FMLoading {
+      get { return fmLoading; }
+      set { fmLoading = value; }
+    }
 
-        public static string LastErrorMessage {
-            get; set;
-        }
+    public static string LastErrorMessage {
+      get; set;
+    }
 
-        public IVersion Version {
-            get;
-            private set;
-        }
+    public IVersion Version {
+      get;
+      private set;
+    }
 
-        #region MAC
+    #region MAC
 #if MAC
-        public bool findFMProcess ()
-        {
-            FMProcess fmProcess = new FMProcess ();
-            Process [] fmProcesses = Process.GetProcessesByName ("fm");
-            if (fmProcesses.Length > 0) {
-                logger.LogWrite("Found > 0 FM Processes");
-                Process activeProcess = fmProcesses [0];
-                // Try to get the pTask
-                uint ptask = ProcessMemoryAPI.GetProcessTaskForPID (activeProcess.Id);
-                fmProcess.Process = activeProcess;
-                fmProcess.ProcessTask = ptask;
-                fmProcess.BaseAddress = ProcessManager.GetASLROffset (fmProcess.ProcessTask);
-                // fmProcess.EndPoint = ProcessManager.GetProcessEndPoint (activeProcess.Id);
+    public bool findFMProcess() {
+      FMProcess fmProcess = new FMProcess();
+      Process[] fmProcesses = Process.GetProcessesByName("fm");
+      if (fmProcesses.Length > 0) {
+        logger.LogWrite("Found > 0 FM Processes");
+        Process activeProcess = fmProcesses[0];
+        // Try to get the pTask
+        uint ptask = ProcessMemoryAPI.GetProcessTaskForPID(activeProcess.Id);
+        fmProcess.Process = activeProcess;
+        fmProcess.ProcessTask = ptask;
+        fmProcess.BaseAddress = ProcessManager.GetASLROffset(fmProcess.ProcessTask);
+        // fmProcess.EndPoint = ProcessManager.GetProcessEndPoint (activeProcess.Id);
 
-                ProcessManager.fmProcess = fmProcess;
+        ProcessManager.fmProcess = fmProcess;
 
-                // Search for the current version
-                foreach (var versionType in Assembly.GetCallingAssembly ().GetTypes ().Where (t => typeof (IIVersion).IsAssignableFrom (t))) {
-                    if (versionType.IsInterface)
-                        continue;
-                    var instance = (IIVersion)Activator.CreateInstance (versionType, this);
+        // Search for the current version
+        foreach (var versionType in Assembly.GetCallingAssembly().GetTypes().Where(t => typeof(IIVersion).IsAssignableFrom(t))) {
+          if (versionType.IsInterface)
+            continue;
+          var instance = (IIVersion)Activator.CreateInstance(versionType, this);
 
-                    if (instance.SupportsProcess (fmProcess, null)) {
-                        Version = instance;
-                        fmProcess.Version = instance;
-                        break;
-                    }
-                }
-
-                fmLoaded = (Version != null);
-            }
-
-            return fmLoaded;
+          if (instance.SupportsProcess(fmProcess, null)) {
+            Version = instance;
+            fmProcess.Version = instance;
+            break;
+          }
         }
+
+        fmLoaded = (Version != null);
+      }
+
+      return fmLoaded;
+    }
 #endif
-        #endregion
-        #region WINDOWS
+    #endregion
+    #region WINDOWS
 #if WINDOWS
         public bool findFMProcess() {
             FMProcess fmProcess = new FMProcess ();
@@ -124,29 +120,29 @@ namespace FMScoutFramework.Core.Managers
             return fmLoaded;
         }
 #endif
-        #endregion
+    #endregion
 
-        public static int TryGetPointerObjects (Int64 address, Int64 offset, FMProcess fmProcess)
-        {
-            return GameManager.TryGetPointerObjects (address, offset, fmProcess);
-        }
-
-        public static int TryGetPointerObjects (Int64 address, Int64 offset, FMProcess fmProcess, Int64 xor)
-        {
-            Int64 memoryAddress = fmProcess.BaseAddress + address;
-            memoryAddress = ProcessManager.ReadInt64(memoryAddress + offset);
-            memoryAddress = ProcessManager.ReadInt64(memoryAddress + xor);
-            int numberOfObjects = ProcessManager.ReadArrayLength(memoryAddress);
-            return numberOfObjects;
-        }
-
-        #region Events
-        public delegate void ObjectEditedDelegate(object item);
-        public event ObjectEditedDelegate ObjectEdited;
-
-        internal void RaiseObjectEdited(object item) {
-            this.ObjectEdited(item);
-        }
-        #endregion
+    public static int TryGetPointerObjects(Int64 address, Int64 offset, FMProcess fmProcess) {
+      return GameManager.TryGetPointerObjects(address, offset, fmProcess);
     }
+
+    public static int TryGetPointerObjects(Int64 address, Int64 offset, FMProcess fmProcess, Int64 xor) {
+      Int64 memoryAddress = fmProcess.BaseAddress + address;
+      memoryAddress = ProcessManager.ReadInt64(memoryAddress + offset);
+      memoryAddress = ProcessManager.ReadInt64(memoryAddress + xor);
+      int numberOfObjects = ProcessManager.ReadArrayLength(memoryAddress);
+      return numberOfObjects;
+    }
+
+    #region Events
+    public delegate void ObjectEditedDelegate(object item);
+    public event ObjectEditedDelegate ObjectEdited;
+
+    internal void RaiseObjectEdited(object item) {
+      if (this.ObjectEdited != null) {
+        this.ObjectEdited(item);
+      }
+    }
+    #endregion
+  }
 }
