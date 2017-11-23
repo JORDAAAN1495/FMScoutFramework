@@ -14,10 +14,6 @@ namespace FMScoutFramework.Core.Entities
 
         private DateTime _inGameDate;
         public DateTime InGameDate {
-#if MAC
-            get { return ProcessManager.ReadDateTime (_version.MemoryAddresses.CurrentDateTime); }
-#endif
-#if WINDOWS
             get {
                 if (_inGameDate.Year <= 1900) {
                     _inGameDate = ProcessManager.ReadDateTime(ProcessManager.fmProcess.BaseAddress + _version.MemoryAddresses.CurrentDateTime);
@@ -30,7 +26,6 @@ namespace FMScoutFramework.Core.Entities
                     _inGameDate = value;
                 }
             }
-#endif
         }
 
         public int ActiveObjectID {
