@@ -92,6 +92,12 @@ namespace FMScoutFramework
 
         [DllImport ("libprocessmemoryapi.dylib")]
         public static extern uint GetProcessTaskForPID (int pid);
+
+        [DllImport("libprocessmemoryapi.dylib")]
+        public static extern IntPtr AllocateProcessBytes(uint ptask, int size);
+
+        [DllImport("libprocessmemoryapi.dylib")]
+        public static extern bool WriteProcessMemory(uint ptask, UInt64 address, [In, Out] byte[] buffer, uint size);
 #endif
 #if WINDOWS
 

@@ -154,6 +154,22 @@ namespace FMScoutFramework.Core.Managers
             }
             return buffer;
         }
+
+        public static Int64 AllocateProcessBytes(int memorySize) {
+            if (memorySize > 0) {
+                IntPtr alloc = ProcessMemoryAPI.AllocateProcessBytes(FMProcess.ProcessTask, memorySize);
+                if (alloc != null) {
+                    if (IntPtr.Size == 4) {
+                        return alloc.ToInt32();
+                    }
+                    else {
+                        return alloc.ToInt64();
+                    }
+                }
+            }
+
+            return 0;
+        }
 #endif
 
         public static byte ReadByte (int address)
@@ -477,9 +493,9 @@ namespace FMScoutFramework.Core.Managers
         }
 #endif
 #if MAC
-        public static int WriteProcessMemory (Int64 memoryaddress, byte [] buffer, uint bytesToWrite)
+        public static void WriteProcessMemory (Int64 memoryaddress, byte [] buffer, uint bytesToWrite)
         {
-            return 0;
+            ProcessMemoryAPI.WriteProcessMemory(FMProcess.ProcessTask, (UInt64)memoryaddress, buffer, bytesToWrite);
         }
 #endif
 
