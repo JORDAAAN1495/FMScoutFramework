@@ -252,6 +252,7 @@
     <Compile Include="Entities\Ingame\FirstName.cs" />
     <Compile Include="Entities\Ingame\LastName.cs" />
     <Compile Include="Entities\Ingame\CommonName.cs" />
+    <Compile Include="Defines\Versions\Steam_18_1_2_Mac.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
