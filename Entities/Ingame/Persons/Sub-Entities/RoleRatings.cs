@@ -2210,6 +2210,33 @@ namespace FMScoutFramework.Core.Entities.InGame {
                 return FinalRating(Weights, BestSCSide());
             }
         }
+
+        [Description("Carillero (Support)")]
+        public float CarilleroSupport {
+            get {
+                RoleRatingWeights Weights = new RoleRatingWeights() {
+                    // Primary
+                    Anticipation = 1.0f,
+                    Decisions = 1.0f,
+                    Positioning = 1.0f,
+                    WorkRate = 1.0f,
+                    Acceleration = 1.0f,
+                    Stamina = 1.0f,
+
+                    // Physical Secondaries
+                    Fitness = 0.7f,
+                    Pace = 0.7f,
+                    Strength = 0.7f,
+
+                    // Mental Secondaries
+
+                    // Technical Secondaries
+                    Tackling = 0.5f
+                };
+
+                return FinalRating(Weights, BestMidfielderCentre());
+            }
+        }
         #endregion
 
         private byte BestDefenderSide() {
