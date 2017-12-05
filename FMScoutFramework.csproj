@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="Defines\Offsets\AwardOffsets.cs" />
     <Compile Include="Defines\Offsets\CompetitionOffsets.cs" />
+    <Compile Include="Defines\Offsets\FutureTransferOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\ActualPersonOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\JobAttributesOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\PreferredMovesOffsets.cs" />

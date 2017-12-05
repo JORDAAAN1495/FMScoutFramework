@@ -62,12 +62,14 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
         }
 
         public class VersionMemoryAddresses : IVersionMemoryAddresses {
+            // Statics
             public Int64 MainAddress { get { return 0x5C438C0; } }
             public Int64 MainOffset { get { return 0x0; } }
             public Int64 XorDistance { get { return 0x80; } }
             public Int64 StringOffset { get { return 0x0; } }
             public Int64 CurrentDateTime { get { return 0x5AC1470; } } // At BaseAddress + offset
             public Int64 ActiveObject { get { return 0x5D1C808; } } // BaseAddress + offset (ID: 5640119)
+            public Int64 TransferManager { get { return 0x5C2F210; } }
 
             [MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x10)]
             public Int64 Award { get { return 0x10; } }
