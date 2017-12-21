@@ -100,6 +100,8 @@
     <Compile Include="Defines\Offsets\Sub-Entities\KitOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\RelationshipOffsets.cs" />
     <Compile Include="Defines\Versions\Steam_18_0_1_Beta_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_18_2_1_Touch_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_18_2_0_Touch_Window.cs" />
     <Compile Include="Defines\Versions\Steam_18_1_3_Touch_Window.cs" />
     <Compile Include="Defines\Versions\Steam_18_1_2_Touch_Window.cs" />
     <Compile Include="Defines\Versions\Steam_18_1_1_Touch_Windows.cs" />
@@ -107,6 +109,8 @@
     <Compile Include="Defines\Versions\Steam_18_0_3_Touch_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_18_0_2_Touch_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_18_0_1_Touch_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_18_2_1_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_18_2_0_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_18_1_3_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_18_1_2_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_18_1_1_Windows.cs" />
