@@ -163,7 +163,7 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
             public Int64 Player { get { return 0x1455CB398; } }         // UID: 510
             public Int64 Staff { get { return 0x1455C6448; } }          // UID: 52
             public Int64 PlayerStaff { get { return 0x1455E12A8; } }    // UID: 10090
-            public Int64 HumanManager { get { return 0x0; } }     // NSY
+            public Int64 HumanManager { get { return 0x1455C5BE0; } }     // UID: User Manager's
             public Int64 Official { get { return 0x0; } }         // NSY
             public Int64 NonPlayer { get { return 0x0; } }        // NSY
             public Int64 Retired { get { return 0x0; } }          // NSY
@@ -183,7 +183,7 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
             public Int64 Spokesperson { get { return 0x0; } }
             public Int64 Agent { get { return 0x0; } }
             public Int64 Journalist { get { return 0x0; } }
-            public Int64 HumanManager { get { return 0x0; } }
+            public Int64 HumanManager { get { return -0x458; } }
         }
     }
 }
