@@ -102,37 +102,9 @@
     <Compile Include="Defines\Offsets\Sub-Entities\KitOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\NationAgreement.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\RelationshipOffsets.cs" />
-    <Compile Include="Defines\Versions\Steam_18_0_1_Beta_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_2_2_Touch_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_18_3_4_Touch_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_3_3_Touch_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_3_0_Touch_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_2_1_Touch_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_2_0_Touch_Window.cs" />
-    <Compile Include="Defines\Versions\Steam_18_1_3_Touch_Window.cs" />
-    <Compile Include="Defines\Versions\Steam_18_1_2_Touch_Window.cs" />
-    <Compile Include="Defines\Versions\Steam_18_1_1_Touch_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_1_0_Touch_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_0_3_Touch_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_0_2_Touch_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_0_1_Touch_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_3_3_2_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_19_0_1_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_18_3_4_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_3_3_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_3_2_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_3_1_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_3_0_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_2_2_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_2_1_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_2_0_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_1_3_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_1_2_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_1_1_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_1_0_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_0_3_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_0_2_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_0_1_Windows.cs" />
-    <Compile Include="Defines\Versions\Steam_18_0_0_Windows.cs" />
     <Compile Include="Entities\Ingame\Competitions\ActualCompetition.cs" />
     <Compile Include="Entities\Ingame\Competitions\LeagueStage.cs" />
     <Compile Include="Entities\Ingame\Competitions\LeagueTableEntry.cs" />
@@ -276,7 +248,6 @@
     <Compile Include="Entities\Ingame\FirstName.cs" />
     <Compile Include="Entities\Ingame\LastName.cs" />
     <Compile Include="Entities\Ingame\CommonName.cs" />
-    <Compile Include="Defines\Versions\Steam_18_1_2_Mac.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
