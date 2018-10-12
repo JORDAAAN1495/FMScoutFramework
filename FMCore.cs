@@ -30,6 +30,7 @@ namespace FMScoutFramework.Core
 
         #region Objects
         public IEnumerable<Award> Awards { get { return GetListFromStore<Award>(); } }
+        public IEnumerable<Agreement> Agreements { get { return GetListFromStore<Agreement>(); } }
         public IEnumerable<Continent> Continents { get { return GetListFromStore<Continent> (); } }
         public IEnumerable<City> Cities { get { return GetListFromStore<City> (); } }
         public IEnumerable<Club> Clubs { get { return GetListFromStore<Club> (); } }
@@ -37,6 +38,7 @@ namespace FMScoutFramework.Core
         public IEnumerable<Player> Players { get { return GetListFromStore<Player> (); } }
         public IEnumerable<Staff> Staff { get { return GetListFromStore<Staff> (); } }
         public IEnumerable<PlayerStaff> PlayerStaff { get { return GetListFromStore<PlayerStaff> (); } }
+        public IEnumerable<HumanManager> HumanManagers { get { return GetListFromStore<HumanManager>(); } }
         public IEnumerable<Team> Teams { get { return GetListFromStore<Team>(); } }
         public IEnumerable<Competition> Competitions { get { return GetListFromStore<Competition>(); } }
 

@@ -85,9 +85,11 @@
     <Compile Include="Defines\Offsets\CompetitionOffsets.cs" />
     <Compile Include="Defines\Offsets\FutureTransferOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\ActualPersonOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\HumanManager.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\JobAttributesOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\PreferredMovesOffsets.cs" />
     <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\StaffAttributeOffsets.cs" />
+    <Compile Include="Defines\Offsets\AgreementOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\ClubDebtsOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\ClubInfoOneOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\ClubInfoTwoOffsets.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Defines\Offsets\Sub-Entities\Competitions\LeagueStageOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\Competitions\ActualCompetitionOffsets.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\KitOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\NationAgreement.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\RelationshipOffsets.cs" />
     <Compile Include="Defines\Versions\Steam_18_0_1_Beta_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_18_2_2_Touch_Windows.cs" />
@@ -147,11 +150,13 @@
     <Compile Include="Entities\Ingame\Interfaces\IClubSponsorshipDeal.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IJobAttributes.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IKit.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\INationAgreement.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IPreferredMoves.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IRelationship.cs" />
     <Compile Include="Entities\Ingame\Interfaces\IStaffAttributes.cs" />
     <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IActualPerson.cs" />
     <Compile Include="Entities\Ingame\Persons\ActualPerson.cs" />
+    <Compile Include="Entities\Ingame\Persons\HumanManager.cs" />
     <Compile Include="Entities\Ingame\Persons\Sub-Entities\JobAttributes.cs" />
     <Compile Include="Entities\Ingame\Persons\Sub-Entities\PreferredMoves.cs" />
     <Compile Include="Entities\Ingame\Persons\Sub-Entities\RoleRatings.cs" />
@@ -163,6 +168,7 @@
     <Compile Include="Entities\Ingame\Sub-Entities\ClubInfoTwo.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\ClubSponsorshipDeal.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\Kit.cs" />
+    <Compile Include="Entities\Ingame\Sub-Entities\NationAgreement.cs" />
     <Compile Include="Entities\Ingame\Sub-Entities\Relationship.cs" />
     <Compile Include="Extensions\DateTimeSpan.cs" />
     <Compile Include="Extensions\EnumBindingSourceExtension.cs" />
