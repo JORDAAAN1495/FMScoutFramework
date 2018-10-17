@@ -130,6 +130,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
       PropertyInvoker.Set<byte>(ActualPersonOffsets.U21InternationalGoals, OriginalBytes, MemoryAddress, DatabaseMode, U21InternationalGoals);
       PropertyInvoker.Set<Int64>(ActualPersonOffsets.Nation, OriginalBytes, MemoryAddress, DatabaseMode, NationAddress);
       PropertyInvoker.Set<Int64>(ActualPersonOffsets.Contract, OriginalBytes, MemoryAddress, DatabaseMode, ContractAddress.GetValueOrDefault(0x0));
+      PropertyInvoker.Set<byte>(ActualPersonOffsets.FreezeAttributes, OriginalBytes, MemoryAddress, DatabaseMode, (FreezeAttributes.GetValueOrDefault(false) ? (byte)0x20 : (byte)0x0));
       _isDirty = false;
     }
 
@@ -546,6 +547,23 @@ namespace FMScoutFramework.Core.Entities.InGame {
         if (_u21InternationalGoals != value) {
           isDirty = true;
           _u21InternationalGoals = value;
+        }
+      }
+    }
+
+    private bool? _freezeAttributes;
+    public bool? FreezeAttributes {
+      get {
+        if (_freezeAttributes == null) {
+          _freezeAttributes = PropertyInvoker.Get<byte>(ActualPersonOffsets.FreezeAttributes, OriginalBytes, MemoryAddress, DatabaseMode) == 0x20 ? true : false;
+        }
+
+        return _freezeAttributes;
+      }
+      set {
+        if (_freezeAttributes != value) {
+          isDirty = true;
+          _freezeAttributes = value;
         }
       }
     }
