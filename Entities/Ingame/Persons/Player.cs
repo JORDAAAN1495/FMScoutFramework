@@ -35,6 +35,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
       PropertyInvoker.Set<short>(PlayerOffsets.Weight, OriginalBytes, Address, DatabaseMode, Weight);
       PropertyInvoker.Set<short>(PlayerOffsets.Height, OriginalBytes, Address, DatabaseMode, Height);
       PropertyInvoker.Set<Int64>(PlayerOffsets.Team, OriginalBytes, Address, DatabaseMode, TeamAddress.GetValueOrDefault(0x0));
+      PropertyInvoker.Set<bool>(PlayerOffsets.DeclaredForNation, OriginalBytes, Address, DatabaseMode, DeclaredForNation.GetValueOrDefault(false));
       _isDirty = false;
     }
 
@@ -401,6 +402,23 @@ namespace FMScoutFramework.Core.Entities.InGame {
         if (_height != value) {
           isDirty = true;
           _height = value;
+        }
+      }
+    }
+
+    private bool? _declaredForNation;
+    public bool? DeclaredForNation {
+      get {
+        if (_declaredForNation == null) {
+          _declaredForNation = PropertyInvoker.Get<bool>(PlayerOffsets.DeclaredForNation, OriginalBytes, Address, DatabaseMode);
+        }
+
+        return _declaredForNation;
+      }
+      set {
+        if (_declaredForNation != value) {
+          isDirty = true;
+          _declaredForNation = value;
         }
       }
     }
