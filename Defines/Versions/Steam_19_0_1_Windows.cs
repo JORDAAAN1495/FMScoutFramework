@@ -44,12 +44,12 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
 
       FMCore.logger.LogWrite("In-game date correct! Version is a match.");
       if (!string.IsNullOrEmpty(process.VersionDescription)) {
-        if (process.VersionDescription != "19.0.1b1143557") {
+        if (process.VersionDescription != "19.0.1b1146340") {
           return false;
         }
       }
       else {
-        process.VersionDescription = "19.0.1b1143557";
+        process.VersionDescription = "19.0.1b1146340";
       }
       return true;
 #endif
@@ -63,11 +63,11 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
 
     public class VersionMemoryAddresses : IVersionMemoryAddresses {
       // Statics
-      public Int64 MainAddress { get { return 0x697B910; } }
+      public Int64 MainAddress { get { return 0x6995010; } }
       public Int64 MainOffset { get { return 0x0; } }
       public Int64 XorDistance { get { return 0x88; } }
       public Int64 StringOffset { get { return 0x0; } }
-      public Int64 CurrentDateTime { get { return 0x687E4A8; } } // At BaseAddress + offset
+      public Int64 CurrentDateTime { get { return 0x68984D8; } } // At BaseAddress + offset
       public Int64 ActiveObject { get { return 0x5D6C2F8; } } // BaseAddress + offset (ID: 5640119 / B7 0F 56 00)
       public Int64 TransferManager { get { return 0x5C2F210; } }
 
@@ -160,10 +160,10 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
     }
 
     public class VersionPersonEnumPointers : IVersionPersonEnumPointers {
-      public Int64 Player { get { return 0x62DDF68; } }         // UID: 510
-      public Int64 Staff { get { return 0x62CD680; } }          // UID: 45
-      public Int64 PlayerStaff { get { return 0x62E4800; } }    // UID: 103802
-      public Int64 HumanManager { get { return 0x62CCDE8; } }     // UID: User Manager's
+      public Int64 Player { get { return 0x62F6E90; } }         // UID: 510
+      public Int64 Staff { get { return 0x62E6C30; } }          // UID: 45
+      public Int64 PlayerStaff { get { return 0x62FD7C0; } }    // UID: 103802
+      public Int64 HumanManager { get { return 0x62E6220; } }     // UID: User Manager's
       public Int64 Official { get { return 0x0; } }         // NSY
       public Int64 NonPlayer { get { return 0x0; } }        // NSY
       public Int64 Retired { get { return 0x0; } }          // NSY
@@ -175,7 +175,7 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
     public class PersonVersionOffsets : IPersonVersionOffsets {
       public Int64 Person { get { return -0xC4; } }
       public Int64 Player { get { return -0x1C0; } }
-      public Int64 Staff { get { return -0xC0; } }
+      public Int64 Staff { get { return -0xC8; } }
       public Int64 NonPlayer { get { return 0x0; } }
       public Int64 PlayerStaff { get { return -0x3B8; } }
       public Int64 Official { get { return 0x0; } }
