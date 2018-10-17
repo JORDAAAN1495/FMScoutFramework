@@ -69,12 +69,12 @@ namespace FMScoutFramework.Core.Entities.InGame
                     if (readStagesAtTwo) {
                         Int64 startAddress = PropertyInvoker.Get<Int64>(Offsets.StagesTwo, OriginalBytes, MemoryAddress, DatabaseMode);
                         if (startAddress > 0x0) {
-                            for (Int64 i = 0; i < countOne; i++) {
-                                LeagueStage ls = PropertyInvoker.GetPointer<LeagueStage>((i * 0x8), OriginalBytes, startAddress, DatabaseMode, Version);
+                            // for (Int64 i = 0; i < countTwo; i++) {
+                                LeagueStage ls = PropertyInvoker.GetPointer<LeagueStage>(0x0, OriginalBytes, startAddress, DatabaseMode, Version);
                                 ls.Name = "Stage " + masterCount;
                                 _leagueStages.Add(ls);
                                 masterCount++;
-                            }
+                            // }
                         }
                     }
                 }
