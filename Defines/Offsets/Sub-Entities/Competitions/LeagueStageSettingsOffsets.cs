@@ -46,7 +46,7 @@ namespace FMScoutFramework.Defines.Offsets {
 
         public short PrizeMoney {
             get {
-                return 0x148;
+                return 0x150;
             }
         }
 

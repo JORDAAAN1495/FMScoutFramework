@@ -18,27 +18,27 @@ namespace FMScoutFramework.Core.Offsets
         }
 
         public short HomeReputation {
-            get { return 0xA4; }
-        }
-
-        public short CurrentReputation {
-            get { return 0xA6; }
-        }
-
-        public short WorldReputation {
-            get { return 0xA8; }
-        }
-
-        public short CurrentAbility {
-            get { return 0xAA; }
-        }
-
-        public short PotentialAbility {
             get { return 0xAC; }
         }
 
+        public short CurrentReputation {
+            get { return 0xAE; }
+        }
+
+        public short WorldReputation {
+            get { return 0xB0; }
+        }
+
+        public short CurrentAbility {
+            get { return 0xB2; }
+        }
+
+        public short PotentialAbility {
+            get { return 0xB4; }
+        }
+
         public short ActualPerson {
-            get { return 0xE8; }
+            get { return 0xF0; }
         }
     }
 }

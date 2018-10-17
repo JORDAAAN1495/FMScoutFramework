@@ -16,7 +16,7 @@ namespace FMScoutFramework.Defines.Offsets {
 
         public short StagesTwo {
             get {
-                return 0x118;
+                return 0x120;
             }
         }
     }

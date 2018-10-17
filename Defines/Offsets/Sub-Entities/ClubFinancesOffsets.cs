@@ -42,6 +42,6 @@ namespace FMScoutFramework.Core.Offsets
         public const short StadiumRentalPercentageOfGateReceipts = 0x4B1;
         public const short CorporateFacilitiesRevenueLevel = 0x4B2;
         public const short IncreaseStaffWages = 0x4B3;
-        public const short CorporateFacilities = 0x751;
+        public const short CorporateFacilities = 0x759;
     }
 }
