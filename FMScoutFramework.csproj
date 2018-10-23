@@ -101,6 +101,8 @@
     <Compile Include="Defines\Offsets\Sub-Entities\NationAgreement.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\RelationshipOffsets.cs" />
     <Compile Include="Defines\Versions\Steam_18_3_4_Touch_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_19_0_2_Touch_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_19_0_2_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_19_0_1_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_18_3_4_Windows.cs" />
     <Compile Include="Entities\Ingame\Competitions\ActualCompetition.cs" />
