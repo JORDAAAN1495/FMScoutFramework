@@ -16,7 +16,7 @@ namespace FMScoutFramework.Core.Offsets
         public const short Team = 0x10;
         public const short Wage = 0x18;
         public const short JobType = 0x1C;
-        public const short Unhappinesses = 0x20;
+        public const short Unhappinesses = 0x28;
         public const short StartDate = 0x3C;
         public const short EndDate = 0x40;
         public const short JoinDate = 0x44;
