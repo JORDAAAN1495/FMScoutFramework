@@ -148,7 +148,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
     public List<LeaguePrizeMoney> PrizeMoney {
       get {
         if (_prizeMoney.Count == 0) {
-          Int64 numberOfPrizes = ProcessManager.ReadArrayLength((Offsets.PrizeMoney + MemoryAddress), 0X4);
+          Int64 numberOfPrizes = ProcessManager.ReadArrayLength((Offsets.PrizeMoney + MemoryAddress), 0x4);
           if (numberOfPrizes > 0) {
             Int64 startAddress = PropertyInvoker.Get<Int64>(Offsets.PrizeMoney, OriginalBytes, MemoryAddress, DatabaseMode);
             for (Int64 i = 0; i < numberOfPrizes; i++) {

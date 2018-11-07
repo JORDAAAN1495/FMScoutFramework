@@ -19,7 +19,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
     }
 
     public void Save() {
-
+      PropertyInvoker.Set<Int64>(NationAgreementOffsets.AgreementAddress, OriginalBytes, MemoryAddress, DatabaseMode, this.AgreementAddress);
       isDirty = false;
     }
 
@@ -59,9 +59,53 @@ namespace FMScoutFramework.Core.Entities.InGame {
       }
     }
 
+    private Agreement _agreement;
     public Agreement Agreement {
       get {
-        return PropertyInvoker.GetPointer<Agreement>(0x0, OriginalBytes, AgreementAddress, DatabaseMode, this.Version);
+        if (_agreement == null) {
+          _agreement = PropertyInvoker.GetPointer<Agreement>(0x0, OriginalBytes, AgreementAddress, DatabaseMode, this.Version);
+        }
+
+        return _agreement;
+      }
+      set {
+        if (_agreement != value) {
+          _agreement = value;
+        }
+      }
+    }
+
+    private DateTime _startDate;
+    public DateTime StartDate {
+      get {
+        if (_startDate.Year < 1900) {
+          _startDate = PropertyInvoker.Get<DateTime>(NationAgreementOffsets.StartDate, OriginalBytes, MemoryAddress, DatabaseMode);
+        }
+
+        return _startDate;
+      }
+      set {
+        if (_startDate != value) {
+          _startDate = value;
+          isDirty = true;
+        }
+      }
+    }
+
+    private DateTime _endDate;
+    public DateTime EndDate {
+      get {
+        if (_endDate.Year < 1900) {
+          _endDate = PropertyInvoker.Get<DateTime>(NationAgreementOffsets.EndDate, OriginalBytes, MemoryAddress, DatabaseMode);
+        }
+
+        return _endDate;
+      }
+      set {
+        if (_endDate != value) {
+          _endDate = value;
+          isDirty = true;
+        }
       }
     }
   }

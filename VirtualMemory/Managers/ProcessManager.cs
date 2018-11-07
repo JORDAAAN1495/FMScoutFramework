@@ -286,7 +286,7 @@ namespace FMScoutFramework.Core.Managers
         {
             int days = (ReadInt16 (address) & 0x1FF);
             int years = ReadInt16 (address + 0x2);
-            if (days > 0 && days < 366 && years > 1900 && years < 2150) {
+            if (days > 0 && days <= 366 && years > 1900 && years < 2150) {
                 return FMScoutFramework.Core.Converters.DateConverter.FromFmDateTime ((days - 1), years);
             }
             return new DateTime (1900, 1, 1);

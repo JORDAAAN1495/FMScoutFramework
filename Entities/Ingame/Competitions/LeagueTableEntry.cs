@@ -24,7 +24,7 @@ namespace FMScoutFramework.Core.Entities.InGame
         public void Save() {
             PropertyInvoker.Set<byte>(Offsets.GoalsScored, OriginalBytes, MemoryAddress, DatabaseMode, GoalsScored.GetValueOrDefault(0));
             PropertyInvoker.Set<byte>(Offsets.GoalsAgainst, OriginalBytes, MemoryAddress, DatabaseMode, GoalsAgainst.GetValueOrDefault(0));
-            PropertyInvoker.Set<byte>(Offsets.Points, OriginalBytes, MemoryAddress, DatabaseMode, Points.GetValueOrDefault(0));
+            PropertyInvoker.Set<sbyte>(Offsets.Points, OriginalBytes, MemoryAddress, DatabaseMode, Points.GetValueOrDefault(0));
             PropertyInvoker.Set<byte>(Offsets.GamesPlayed, OriginalBytes, MemoryAddress, DatabaseMode, GamesPlayed.GetValueOrDefault(0));
             PropertyInvoker.Set<byte>(Offsets.GamesWon, OriginalBytes, MemoryAddress, DatabaseMode, GamesWon.GetValueOrDefault(0));
             PropertyInvoker.Set<byte>(Offsets.GamesDrawn, OriginalBytes, MemoryAddress, DatabaseMode, GamesDrawn.GetValueOrDefault(0));
@@ -77,11 +77,11 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
-        private byte? _points;
-        public byte? Points {
+        private sbyte? _points;
+        public sbyte? Points {
             get {
                 if (_points == null) {
-                    _points = PropertyInvoker.Get<byte>(Offsets.Points, OriginalBytes, MemoryAddress, DatabaseMode);
+                    _points = PropertyInvoker.Get<sbyte>(Offsets.Points, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _points;
             }
