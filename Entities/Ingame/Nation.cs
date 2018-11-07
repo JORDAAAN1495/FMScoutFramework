@@ -15,6 +15,30 @@ namespace FMScoutFramework.Core.Entities.InGame {
     GNTAccumulative   = 2
   }
 
+  public enum NationImportanceType {
+    [Description("Not Set")]
+    NINotSet          = 0,
+    [Description("Very Important")]
+    NIVeryImportant   = 1,
+    [Description("Important")]
+    NIImportant       = 2,
+    [Description("Unimportant")]
+    NIUnimportant     = 3,
+    [Description("Useless")]
+    NIUseless         = 4
+  }
+
+  public enum NationStateOfDevelopmentType {
+    [Description("Not Set")]
+    NSDTNotSet        = 0,
+    [Description("Developed")]
+    NSDTDeveloped     = 1,
+    [Description("Developing")]
+    NSDTDeveloping    = 2,
+    [Description("Third World")]
+    NSDTThirdWorld    = 3
+  }
+
   public class Nation : BaseObject, INation {
     public NationOffsets NationOffsets;
     public Nation(Int64 memoryAddress, IVersion version)
@@ -27,16 +51,42 @@ namespace FMScoutFramework.Core.Entities.InGame {
     }
 
     public void Save() {
+      if (_haveAgreementsResized) {
+        // Need to do some stuff to reallocate agreements in order to resize
+        // Length is 0x8 + 0x4 + 0x4 (Int64Ptr, Date, Date)
+        int totalLength = 0x10 * this.Agreements.Count;
+        Int64 newAddress = ProcessManager.AllocateProcessBytes(totalLength);
+        Int64 endAddress = newAddress + totalLength;
+
+        // Start writing at the new address
+        int offset = 0x0;
+        foreach (NationAgreement agreement in this.Agreements) {
+          PropertyInvoker.Set<Int64>((offset + NationAgreementOffsets.AgreementAddress), OriginalBytes, newAddress, DatabaseMode, agreement.AgreementAddress);
+          PropertyInvoker.Set<DateTime>((offset + NationAgreementOffsets.StartDate), OriginalBytes, newAddress, DatabaseMode, agreement.StartDate);
+          PropertyInvoker.Set<DateTime>((offset + NationAgreementOffsets.EndDate), OriginalBytes, newAddress, DatabaseMode, agreement.EndDate);
+
+          offset += 0x10;
+        }
+
+        // Write out the pointer to the new address as an array in the Nation object
+        PropertyInvoker.Set<Int64>(NationOffsets.Agreements, OriginalBytes, MemoryAddress, DatabaseMode, newAddress);
+        PropertyInvoker.Set<Int64>((NationOffsets.Agreements + 0x8), OriginalBytes, MemoryAddress, DatabaseMode, endAddress);
+        PropertyInvoker.Set<Int64>((NationOffsets.Agreements + 0x10), OriginalBytes, MemoryAddress, DatabaseMode, endAddress);
+      }
+
       PropertyInvoker.Set<Int64>(NationOffsets.Capital, OriginalBytes, MemoryAddress, DatabaseMode, CapitalAddress);
       PropertyInvoker.Set<short>(NationOffsets.FIFAPosition, OriginalBytes, MemoryAddress, DatabaseMode, FIFAPosition);
       PropertyInvoker.Set<short>(NationOffsets.FIFARankingPoints, OriginalBytes, MemoryAddress, DatabaseMode, FIFARankingPoints);
       PropertyInvoker.Set<bool>(NationOffsets.DoesNotAllowDualNationality, OriginalBytes, MemoryAddress, DatabaseMode, DoesNotAllowDualNationality.GetValueOrDefault(false));
       PropertyInvoker.Set<byte>(NationOffsets.YearsToGainNationality, OriginalBytes, MemoryAddress, DatabaseMode, YearsToGainNationality);
+      PropertyInvoker.Set<byte>(NationOffsets.GainNationalityType, OriginalBytes, MemoryAddress, DatabaseMode, GainNationalityType);
       PropertyInvoker.Set<byte>(NationOffsets.ForeignManagerLikelihood, OriginalBytes, MemoryAddress, DatabaseMode, ForeignManagerLikelihood);
       PropertyInvoker.Set<byte>(NationOffsets.EconomicFactor, OriginalBytes, MemoryAddress, DatabaseMode, EconomicFactor);
       PropertyInvoker.Set<byte>(NationOffsets.MaxYouthAge, OriginalBytes, MemoryAddress, DatabaseMode, MaxYouthAge);
       _isDirty = false;
     }
+
+    private bool _haveAgreementsResized = false;
 
     private bool _isDirty = false;
     public bool isDirty {
@@ -115,8 +165,20 @@ namespace FMScoutFramework.Core.Entities.InGame {
       set {
         if (_agreements != value) {
           _agreements = value;
+          _haveAgreementsResized = true;
           isDirty = true;
         }
+      }
+    }
+
+    private ClubInfoOne _clubInfoOne;
+    public ClubInfoOne ClubInfoOne {
+      get {
+        if (_clubInfoOne == null) {
+          _clubInfoOne = PropertyInvoker.GetPointer<ClubInfoOne>(NationOffsets.ClubInfoOne, OriginalBytes, MemoryAddress, DatabaseMode, this.Version);
+        }
+
+        return _clubInfoOne;
       }
     }
 
@@ -302,6 +364,40 @@ namespace FMScoutFramework.Core.Entities.InGame {
       set {
         if (_maxYouthAge != value) {
           _maxYouthAge = value;
+          isDirty = true;
+        }
+      }
+    }
+
+    private byte _importance = 0;
+    public byte Importance {
+      get {
+        if (_importance == 0) {
+          _importance = PropertyInvoker.Get<byte>(NationOffsets.Importance, OriginalBytes, MemoryAddress, DatabaseMode);
+        }
+
+        return _importance;
+      }
+      set {
+        if (_importance != value) {
+          _importance = value;
+          isDirty = true;
+        }
+      }
+    }
+
+    private byte _stateOfDevelopment = 0;
+    public byte StateOfDevelopment {
+      get {
+        if (_stateOfDevelopment == 0) {
+          _stateOfDevelopment = PropertyInvoker.Get<byte>(NationOffsets.StateOfDevelopment, OriginalBytes, MemoryAddress, DatabaseMode);
+        }
+
+        return _stateOfDevelopment;
+      }
+      set {
+        if (_stateOfDevelopment != value) {
+          _stateOfDevelopment = value;
           isDirty = true;
         }
       }
