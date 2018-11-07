@@ -7,6 +7,11 @@ using FMScoutFramework.Core.Entities.InGame.Interfaces;
 using FMScoutFramework.Core.Utilities;
 
 namespace FMScoutFramework.Core.Entities.InGame {
+  public enum SquadRegistrationOptions {
+    AllowSquadRegistrationAnytime = 0x1,
+    AllowSquadNumbersAnytime      = 0x2
+  }
+
   public class HumanManager : Person, IHumanManager {
     private HumanManagerOffsets Offsets;
     public Int64 Address;
@@ -24,6 +29,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
 
     public void Save() {
       PropertyInvoker.Set<byte>(HumanManagerOffsets.Unsackable, OriginalBytes, Address, DatabaseMode, (IsUnsackable == true ? (byte)0x2 : (byte)0x0));
+      PropertyInvoker.Set<byte>(HumanManagerOffsets.SquadRegistrationOptions, OriginalBytes, Address, DatabaseMode, SquadRegistrationFlags.GetValueOrDefault());
       _isDirty = false;
     }
 
@@ -60,6 +66,41 @@ namespace FMScoutFramework.Core.Entities.InGame {
           isDirty = true;
           _isUnsackable = value;
         }
+      }
+    }
+
+    private byte? _squadRegistrationFlags = null;
+    private byte? SquadRegistrationFlags {
+      get {
+        if (_squadRegistrationFlags == null) {
+          _squadRegistrationFlags = PropertyInvoker.Get<byte>(HumanManagerOffsets.SquadRegistrationOptions, OriginalBytes, Address, DatabaseMode);
+        }
+
+        return _squadRegistrationFlags;
+      }
+      set {
+        if (_squadRegistrationFlags != value) {
+          _squadRegistrationFlags = value;
+          isDirty = true;
+        }
+      }
+    }
+
+    public bool AllowSquadRegistrationAnytime {
+      get {
+        return (SquadRegistrationFlags.GetValueOrDefault() & (byte)SquadRegistrationOptions.AllowSquadRegistrationAnytime) > 0;
+      }
+      set {
+        SquadRegistrationFlags = (byte)(SquadRegistrationFlags.GetValueOrDefault() | (byte)SquadRegistrationOptions.AllowSquadRegistrationAnytime);
+      }
+    }
+
+    public bool AllowSquadNumbersAnytime {
+      get {
+        return (SquadRegistrationFlags.GetValueOrDefault() & (byte)SquadRegistrationOptions.AllowSquadNumbersAnytime) > 0;
+      }
+      set {
+        SquadRegistrationFlags = (byte)(SquadRegistrationFlags.GetValueOrDefault() | (byte)SquadRegistrationOptions.AllowSquadNumbersAnytime);
       }
     }
 
