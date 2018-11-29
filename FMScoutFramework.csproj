@@ -101,11 +101,16 @@
     <Compile Include="Defines\Offsets\Sub-Entities\NationAgreement.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\RelationshipOffsets.cs" />
     <Compile Include="Defines\Versions\Steam_18_3_4_Touch_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_19_1_5_Touch_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_19_1_4_Touch_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_19_1_2_Touch_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_19_1_1_Touch_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_19_1_0_Touch_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_19_0_3_Touch_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_19_0_2_Touch_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_19_1_5_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_19_1_4_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_19_1_3_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_19_1_2_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_19_1_1_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_19_1_0_Windows.cs" />
