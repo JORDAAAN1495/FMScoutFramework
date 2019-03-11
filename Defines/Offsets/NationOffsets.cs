@@ -61,7 +61,18 @@ namespace FMScoutFramework.Core.Offsets {
           || this.Version is Steam_19_1_4_Windows
           || this.Version is Steam_19_1_4_Touch_Windows
           || this.Version is Steam_19_1_5_Windows
-          || this.Version is Steam_19_1_5_Touch_Windows) {
+          || this.Version is Steam_19_1_5_Touch_Windows
+          || this.Version is Steam_19_2_0_Windows
+          || this.Version is Steam_19_2_0_Touch_Windows
+          || this.Version is Steam_19_2_1_Windows
+          || this.Version is Steam_19_2_1_Touch_Windows
+          || this.Version is Steam_19_2_2_Windows
+          || this.Version is Steam_19_2_2_Touch_Windows
+          || this.Version is Steam_19_2_3_Windows
+          || this.Version is Steam_19_2_3_Touch_Windows
+          || this.Version is Steam_19_3_0_Windows
+          || this.Version is Steam_19_3_1_Touch_Windows
+          || this.Version is Steam_19_3_2_Windows) {
           return 0x8A8;
         }
         else {
@@ -82,7 +93,18 @@ namespace FMScoutFramework.Core.Offsets {
           || this.Version is Steam_19_1_4_Windows
           || this.Version is Steam_19_1_4_Touch_Windows
           || this.Version is Steam_19_1_5_Windows
-          || this.Version is Steam_19_1_5_Touch_Windows) {
+          || this.Version is Steam_19_1_5_Touch_Windows
+          || this.Version is Steam_19_2_0_Windows
+          || this.Version is Steam_19_2_0_Touch_Windows
+          || this.Version is Steam_19_2_1_Windows
+          || this.Version is Steam_19_2_1_Touch_Windows
+          || this.Version is Steam_19_2_2_Windows
+          || this.Version is Steam_19_2_2_Touch_Windows
+          || this.Version is Steam_19_2_3_Windows
+          || this.Version is Steam_19_2_3_Touch_Windows
+          || this.Version is Steam_19_3_0_Windows
+          || this.Version is Steam_19_3_1_Touch_Windows
+          || this.Version is Steam_19_3_2_Windows) {
           return 0x8A9;
         }
         else {
@@ -103,7 +125,18 @@ namespace FMScoutFramework.Core.Offsets {
           || this.Version is Steam_19_1_4_Windows
           || this.Version is Steam_19_1_4_Touch_Windows
           || this.Version is Steam_19_1_5_Windows
-          || this.Version is Steam_19_1_5_Touch_Windows) {
+          || this.Version is Steam_19_1_5_Touch_Windows
+          || this.Version is Steam_19_2_0_Windows
+          || this.Version is Steam_19_2_0_Touch_Windows
+          || this.Version is Steam_19_2_1_Windows
+          || this.Version is Steam_19_2_1_Touch_Windows
+          || this.Version is Steam_19_2_2_Windows
+          || this.Version is Steam_19_2_2_Touch_Windows
+          || this.Version is Steam_19_2_3_Windows
+          || this.Version is Steam_19_2_3_Touch_Windows
+          || this.Version is Steam_19_3_0_Windows
+          || this.Version is Steam_19_3_1_Touch_Windows
+          || this.Version is Steam_19_3_2_Windows) {
           return 0x8AD;
         }
         else {
@@ -124,7 +157,18 @@ namespace FMScoutFramework.Core.Offsets {
           || this.Version is Steam_19_1_4_Windows
           || this.Version is Steam_19_1_4_Touch_Windows
           || this.Version is Steam_19_1_5_Windows
-          || this.Version is Steam_19_1_5_Touch_Windows) {
+          || this.Version is Steam_19_1_5_Touch_Windows
+          || this.Version is Steam_19_2_0_Windows
+          || this.Version is Steam_19_2_0_Touch_Windows
+          || this.Version is Steam_19_2_1_Windows
+          || this.Version is Steam_19_2_1_Touch_Windows
+          || this.Version is Steam_19_2_2_Windows
+          || this.Version is Steam_19_2_2_Touch_Windows
+          || this.Version is Steam_19_2_3_Windows
+          || this.Version is Steam_19_2_3_Touch_Windows
+          || this.Version is Steam_19_3_0_Windows
+          || this.Version is Steam_19_3_1_Touch_Windows
+          || this.Version is Steam_19_3_2_Windows) {
           return 0x8AE;
         }
         else {
@@ -145,7 +189,18 @@ namespace FMScoutFramework.Core.Offsets {
           || this.Version is Steam_19_1_4_Windows
           || this.Version is Steam_19_1_4_Touch_Windows
           || this.Version is Steam_19_1_5_Windows
-          || this.Version is Steam_19_1_5_Touch_Windows) {
+          || this.Version is Steam_19_1_5_Touch_Windows
+          || this.Version is Steam_19_2_0_Windows
+          || this.Version is Steam_19_2_0_Touch_Windows
+          || this.Version is Steam_19_2_1_Windows
+          || this.Version is Steam_19_2_1_Touch_Windows
+          || this.Version is Steam_19_2_2_Windows
+          || this.Version is Steam_19_2_2_Touch_Windows
+          || this.Version is Steam_19_2_3_Windows
+          || this.Version is Steam_19_2_3_Touch_Windows
+          || this.Version is Steam_19_3_0_Windows
+          || this.Version is Steam_19_3_1_Touch_Windows
+          || this.Version is Steam_19_3_2_Windows) {
           return 0x8AF;
         }
         else {
@@ -166,7 +221,18 @@ namespace FMScoutFramework.Core.Offsets {
           || this.Version is Steam_19_1_4_Windows
           || this.Version is Steam_19_1_4_Touch_Windows
           || this.Version is Steam_19_1_5_Windows
-          || this.Version is Steam_19_1_5_Touch_Windows) {
+          || this.Version is Steam_19_1_5_Touch_Windows
+          || this.Version is Steam_19_2_0_Windows
+          || this.Version is Steam_19_2_0_Touch_Windows
+          || this.Version is Steam_19_2_1_Windows
+          || this.Version is Steam_19_2_1_Touch_Windows
+          || this.Version is Steam_19_2_2_Windows
+          || this.Version is Steam_19_2_2_Touch_Windows
+          || this.Version is Steam_19_2_3_Windows
+          || this.Version is Steam_19_2_3_Touch_Windows
+          || this.Version is Steam_19_3_0_Windows
+          || this.Version is Steam_19_3_1_Touch_Windows
+          || this.Version is Steam_19_3_2_Windows) {
           return 0x8B0;
         }
         else {
@@ -187,7 +253,18 @@ namespace FMScoutFramework.Core.Offsets {
           || this.Version is Steam_19_1_4_Windows
           || this.Version is Steam_19_1_4_Touch_Windows
           || this.Version is Steam_19_1_5_Windows
-          || this.Version is Steam_19_1_5_Touch_Windows) {
+          || this.Version is Steam_19_1_5_Touch_Windows
+          || this.Version is Steam_19_2_0_Windows
+          || this.Version is Steam_19_2_0_Touch_Windows
+          || this.Version is Steam_19_2_1_Windows
+          || this.Version is Steam_19_2_1_Touch_Windows
+          || this.Version is Steam_19_2_2_Windows
+          || this.Version is Steam_19_2_2_Touch_Windows
+          || this.Version is Steam_19_2_3_Windows
+          || this.Version is Steam_19_2_3_Touch_Windows
+          || this.Version is Steam_19_3_0_Windows
+          || this.Version is Steam_19_3_1_Touch_Windows
+          || this.Version is Steam_19_3_2_Windows) {
           return 0x8B9;
         }
         else {
@@ -208,7 +285,18 @@ namespace FMScoutFramework.Core.Offsets {
           || this.Version is Steam_19_1_4_Windows
           || this.Version is Steam_19_1_4_Touch_Windows
           || this.Version is Steam_19_1_5_Windows
-          || this.Version is Steam_19_1_5_Touch_Windows) {
+          || this.Version is Steam_19_1_5_Touch_Windows
+          || this.Version is Steam_19_2_0_Windows
+          || this.Version is Steam_19_2_0_Touch_Windows
+          || this.Version is Steam_19_2_1_Windows
+          || this.Version is Steam_19_2_1_Touch_Windows
+          || this.Version is Steam_19_2_2_Windows
+          || this.Version is Steam_19_2_2_Touch_Windows
+          || this.Version is Steam_19_2_3_Windows
+          || this.Version is Steam_19_2_3_Touch_Windows
+          || this.Version is Steam_19_3_0_Windows
+          || this.Version is Steam_19_3_1_Touch_Windows
+          || this.Version is Steam_19_3_2_Windows) {
           return 0x8BA;
         }
         else {

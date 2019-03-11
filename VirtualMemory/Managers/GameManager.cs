@@ -122,6 +122,22 @@ namespace FMScoutFramework.Core.Managers {
 #endif
     #endregion
 
+    public static void detectNewMainAddress() {
+      // Find the FM process
+      FMProcess fmProcess = new FMProcess();
+      Process[] fmProcesses = Process.GetProcessesByName("fm");
+      Process activeProcess = fmProcesses[0];
+
+      fmProcess.Pointer = ProcessMemoryAPI.OpenProcess(0x001F0FF, 1, (uint)activeProcess.Id);
+      fmProcess.Process = activeProcess;
+      fmProcess.BaseAddress = activeProcess.MainModule.BaseAddress.ToInt64();
+
+      ProcessManager.fmProcess = fmProcess;
+      fmProcess.VersionDescription = fmProcess.Process.MainModule.FileVersionInfo.ProductVersion;
+
+      // Start searching for the main address in reverse. Find "Albpetrol Patos", the first club in the clubs table
+    }
+
     public static int TryGetPointerObjects(Int64 address, Int64 offset, FMProcess fmProcess) {
       return GameManager.TryGetPointerObjects(address, offset, fmProcess);
     }
