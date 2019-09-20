@@ -111,8 +111,16 @@
     <Compile Include="Defines\Versions\Steam_19_1_0_Touch_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_19_0_3_Touch_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_19_0_2_Touch_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_19_3_5_1_GamePass_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_19_3_5_Touch_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_19_3_4_Touch_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_19_3_1_Touch_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_19_2_3_Touch_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_19_3_5_GamePass_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_19_3_6_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_19_3_5_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_19_3_4_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_19_3_3_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_19_3_2_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_19_3_0_Windows.cs" />
     <Compile Include="Defines\Versions\Steam_19_2_3_Windows.cs" />

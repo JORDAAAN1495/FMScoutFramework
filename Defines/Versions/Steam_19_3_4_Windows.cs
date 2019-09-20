@@ -3,13 +3,13 @@ using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Core.Attributes;
 
 namespace FMScoutFramework.Core.Entities.GameVersions {
-  internal class Steam_19_3_2_Windows : IIVersion {
+  internal class Steam_19_3_4_Windows : IIVersion {
     public IVersionMemoryAddresses MemoryAddresses { get; private set; }
     public IVersionPersonEnumPointers PersonEnum { get; private set; }
     public IPersonVersionOffsets PersonOffsets { get; private set; }
     public GameManager gameManager { get; set; }
 
-    public Steam_19_3_2_Windows(GameManager gm) {
+    public Steam_19_3_4_Windows(GameManager gm) {
       MemoryAddresses = new VersionMemoryAddresses();
       PersonEnum = new VersionPersonEnumPointers();
       PersonOffsets = new PersonVersionOffsets();
@@ -18,7 +18,7 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
 
     public string Description {
       get {
-        return "19.3.2 Steam (Windows)";
+        return "19.3.4 Steam (Windows)";
       }
     }
 
@@ -44,12 +44,12 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
 
       FMCore.logger.LogWrite("In-game date correct! Version is a match.");
       if (!string.IsNullOrEmpty(process.VersionDescription)) {
-        if (process.VersionDescription != "19.3.2-1201536") {
+        if (process.VersionDescription != "19.3.4-1206437") {
           return false;
         }
       }
       else {
-        process.VersionDescription = "19.3.2-1201536";
+        process.VersionDescription = "19.3.4-1206437";
       }
       return true;
 #endif
@@ -63,12 +63,12 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
 
     public class VersionMemoryAddresses : IVersionMemoryAddresses {
       // Statics
-      public Int64 MainAddress { get { return 0x692F120; } }
+      public Int64 MainAddress { get { return 0x692E2A0; } }
       public Int64 MainOffset { get { return 0x0; } }
       public Int64 XorDistance { get { return 0x88; } }
       public Int64 StringOffset { get { return 0x0; } }
-      public Int64 CurrentDateTime { get { return 0x6832E08; } } // B0 ?? E2 07  At BaseAddress + offset // 68E93A8, 69D17A0, 69D22AC, 69D39F4
-      public Int64 ActiveObject { get { return 0x6A06668; } } // BaseAddress + offset (ID: 5640119 / B7 0F 56 00)
+      public Int64 CurrentDateTime { get { return 0x6831DF8; } } // B0 ?? E2 07  At BaseAddress + offset // 68E93A8, 69D17A0, 69D22AC, 69D39F4
+      public Int64 ActiveObject { get { return 0x6A05828; } } // BaseAddress + offset (ID: 5640119 / B7 0F 56 00)
       public Int64 TransferManager { get { return 0x5C2F210; } }
 
       [MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x10)]
@@ -160,10 +160,10 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
     }
 
     public class VersionPersonEnumPointers : IVersionPersonEnumPointers {
-      public Int64 Player { get { return 0x629ADD0; } }         // UID: 510
-      public Int64 Staff { get { return 0x628ABF0; } }          // UID: 45
-      public Int64 PlayerStaff { get { return 0x6297870; } }    // UID: 104022
-      public Int64 HumanManager { get { return 0x628A330; } }     // UID: User Manager's
+      public Int64 Player { get { return 0x6299D48; } }         // UID: 510
+      public Int64 Staff { get { return 0x6289CD0; } }          // UID: 45
+      public Int64 PlayerStaff { get { return 0x6296828; } }    // UID: 104022
+      public Int64 HumanManager { get { return 0x62892D8; } }     // UID: User Manager's
       public Int64 Official { get { return 0x0; } }         // NSY
       public Int64 NonPlayer { get { return 0x0; } }        // NSY
       public Int64 Retired { get { return 0x0; } }          // NSY
