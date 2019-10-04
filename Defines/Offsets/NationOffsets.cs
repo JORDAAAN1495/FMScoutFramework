@@ -78,7 +78,10 @@ namespace FMScoutFramework.Core.Offsets {
           || this.Version is Steam_19_3_4_Touch_Windows
           || this.Version is Steam_19_3_5_Windows
           || this.Version is Steam_19_3_5_Touch_Windows
-          || this.Version is Steam_19_3_6_Windows) {
+          || this.Version is Steam_19_3_6_Windows
+          || this.Version is Steam_19_3_5_GamePass_Windows
+          || this.Version is Steam_19_3_5_1_GamePass_Windows
+          || this.Version is Steam_19_3_5_2_GamePass_Windows) {
           return 0x8A8;
         }
         else {
@@ -116,7 +119,10 @@ namespace FMScoutFramework.Core.Offsets {
           || this.Version is Steam_19_3_4_Touch_Windows
           || this.Version is Steam_19_3_5_Windows
           || this.Version is Steam_19_3_5_Touch_Windows
-          || this.Version is Steam_19_3_6_Windows) {
+          || this.Version is Steam_19_3_6_Windows
+          || this.Version is Steam_19_3_5_GamePass_Windows
+          || this.Version is Steam_19_3_5_1_GamePass_Windows
+          || this.Version is Steam_19_3_5_2_GamePass_Windows) {
           return 0x8A9;
         }
         else {
@@ -154,7 +160,10 @@ namespace FMScoutFramework.Core.Offsets {
           || this.Version is Steam_19_3_4_Touch_Windows
           || this.Version is Steam_19_3_5_Windows
           || this.Version is Steam_19_3_5_Touch_Windows
-          || this.Version is Steam_19_3_6_Windows) {
+          || this.Version is Steam_19_3_6_Windows
+          || this.Version is Steam_19_3_5_GamePass_Windows
+          || this.Version is Steam_19_3_5_1_GamePass_Windows
+          || this.Version is Steam_19_3_5_2_GamePass_Windows) {
           return 0x8AD;
         }
         else {
@@ -192,7 +201,10 @@ namespace FMScoutFramework.Core.Offsets {
           || this.Version is Steam_19_3_4_Touch_Windows
           || this.Version is Steam_19_3_5_Windows
           || this.Version is Steam_19_3_5_Touch_Windows
-          || this.Version is Steam_19_3_6_Windows) {
+          || this.Version is Steam_19_3_6_Windows
+          || this.Version is Steam_19_3_5_GamePass_Windows
+          || this.Version is Steam_19_3_5_1_GamePass_Windows
+          || this.Version is Steam_19_3_5_2_GamePass_Windows) {
           return 0x8AE;
         }
         else {
@@ -230,7 +242,10 @@ namespace FMScoutFramework.Core.Offsets {
           || this.Version is Steam_19_3_4_Touch_Windows
           || this.Version is Steam_19_3_5_Windows
           || this.Version is Steam_19_3_5_Touch_Windows
-          || this.Version is Steam_19_3_6_Windows) {
+          || this.Version is Steam_19_3_6_Windows
+          || this.Version is Steam_19_3_5_GamePass_Windows
+          || this.Version is Steam_19_3_5_1_GamePass_Windows
+          || this.Version is Steam_19_3_5_2_GamePass_Windows) {
           return 0x8AF;
         }
         else {
@@ -268,7 +283,10 @@ namespace FMScoutFramework.Core.Offsets {
           || this.Version is Steam_19_3_4_Touch_Windows
           || this.Version is Steam_19_3_5_Windows
           || this.Version is Steam_19_3_5_Touch_Windows
-          || this.Version is Steam_19_3_6_Windows) {
+          || this.Version is Steam_19_3_6_Windows
+          || this.Version is Steam_19_3_5_GamePass_Windows
+          || this.Version is Steam_19_3_5_1_GamePass_Windows
+          || this.Version is Steam_19_3_5_2_GamePass_Windows) {
           return 0x8B0;
         }
         else {
@@ -306,7 +324,10 @@ namespace FMScoutFramework.Core.Offsets {
           || this.Version is Steam_19_3_4_Touch_Windows
           || this.Version is Steam_19_3_5_Windows
           || this.Version is Steam_19_3_5_Touch_Windows
-          || this.Version is Steam_19_3_6_Windows) {
+          || this.Version is Steam_19_3_6_Windows
+          || this.Version is Steam_19_3_5_GamePass_Windows
+          || this.Version is Steam_19_3_5_1_GamePass_Windows
+          || this.Version is Steam_19_3_5_2_GamePass_Windows) {
           return 0x8B9;
         }
         else {
@@ -344,7 +365,10 @@ namespace FMScoutFramework.Core.Offsets {
           || this.Version is Steam_19_3_4_Touch_Windows
           || this.Version is Steam_19_3_5_Windows
           || this.Version is Steam_19_3_5_Touch_Windows
-          || this.Version is Steam_19_3_6_Windows) {
+          || this.Version is Steam_19_3_6_Windows
+          || this.Version is Steam_19_3_5_GamePass_Windows
+          || this.Version is Steam_19_3_5_1_GamePass_Windows
+          || this.Version is Steam_19_3_5_2_GamePass_Windows) {
           return 0x8BA;
         }
         else {
