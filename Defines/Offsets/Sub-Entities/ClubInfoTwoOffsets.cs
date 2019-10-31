@@ -8,14 +8,14 @@ namespace FMScoutFramework.Core.Offsets {
         }
 
         public const short SixLetterName = 0x0;
-        public const short ClubDebts = 0x40;
-        public const short YearFounded = 0x98;
+        public const short ClubDebts = 0x48;
+        public const short YearFounded = 0xA8;
         public const short YouthImportance = 0xC6;
-        public const short TrainingFacilities = 0xBF;
+        public const short TrainingFacilities = 0xC7;
         public const short ChairmanStatus = 0xA0;
-        public const short YouthFacilities = 0xCB;
-        public const short JuniorCoaching = 0xCC;
-        public const short YouthRecruitment = 0xCD;
-        public const short Morale = 0xC0;
+        public const short YouthFacilities = 0xD2;
+        public const short JuniorCoaching = 0xD1;
+        public const short YouthRecruitment = 0xE0;
+        public const short Morale = 0xB0;
     }
 }

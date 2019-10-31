@@ -21,6 +21,6 @@ namespace FMScoutFramework.Core.Offsets {
       get { return 0x60; }
     }
     public const short Manager = 0x78;
-    public const short Reputation = 0xB0;
+    public const short Reputation = 0xA8;
   }
 }

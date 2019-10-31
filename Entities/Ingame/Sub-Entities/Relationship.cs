@@ -263,7 +263,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
                         case RelationshipRecordType.RTPerson:
                             // What kind of person? Switch known relationships and return the right type
                             Int64 PersonAddress = AssociatedObjectAddress;
-                            Int64 PersonType = PropertyInvoker.Get<Int64>(0x0, OriginalBytes, PersonAddress, DatabaseMode);
+                            Int64 PersonType = PropertyInvoker.Get<Int64>(0x0, OriginalBytes, PersonAddress, DatabaseMode) - ProcessManager.fmProcess.BaseAddress;
 
                             if (PersonType == Version.PersonEnum.Player) {
                                 _associatedObject = new Player((PersonAddress + Version.PersonOffsets.Player), Version);

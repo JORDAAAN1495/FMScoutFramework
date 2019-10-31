@@ -215,9 +215,9 @@ namespace FMScoutFramework.Core.Entities.InGame
                     if (playerCount > 0) {
                         foreach (Int64 pAddr in PlayersAddresses) {
                             // Before adding, make sure we support the player type!
-                            Int64 personType = ProcessManager.ReadInt64((pAddr + Math.Abs(Version.PersonOffsets.Player))) - ProcessManager.fmProcess.BaseAddress;
+                            Int64 personType = ProcessManager.ReadInt64((pAddr + Math.Abs(Version.PersonOffsets.Player) + 0x8)) - ProcessManager.fmProcess.BaseAddress;
                             if (personType == Version.PersonEnum.Player) {
-                                result.Add(new Player(pAddr, Version));
+                                result.Add(new Player((pAddr + 0x8), Version));
                             }
                         }
                     }

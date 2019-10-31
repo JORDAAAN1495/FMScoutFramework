@@ -51,329 +51,49 @@ namespace FMScoutFramework.Core.Offsets {
 
     public short StateOfDevelopment {
       get {
-        if (this.Version is Steam_19_1_0_Windows
-          || this.Version is Steam_19_1_0_Touch_Windows
-          || this.Version is Steam_19_1_1_Windows
-          || this.Version is Steam_19_1_1_Touch_Windows
-          || this.Version is Steam_19_1_2_Windows
-          || this.Version is Steam_19_1_2_Touch_Windows
-          || this.Version is Steam_19_1_3_Windows
-          || this.Version is Steam_19_1_4_Windows
-          || this.Version is Steam_19_1_4_Touch_Windows
-          || this.Version is Steam_19_1_5_Windows
-          || this.Version is Steam_19_1_5_Touch_Windows
-          || this.Version is Steam_19_2_0_Windows
-          || this.Version is Steam_19_2_0_Touch_Windows
-          || this.Version is Steam_19_2_1_Windows
-          || this.Version is Steam_19_2_1_Touch_Windows
-          || this.Version is Steam_19_2_2_Windows
-          || this.Version is Steam_19_2_2_Touch_Windows
-          || this.Version is Steam_19_2_3_Windows
-          || this.Version is Steam_19_2_3_Touch_Windows
-          || this.Version is Steam_19_3_0_Windows
-          || this.Version is Steam_19_3_1_Touch_Windows
-          || this.Version is Steam_19_3_2_Windows
-          || this.Version is Steam_19_3_3_Windows
-          || this.Version is Steam_19_3_4_Windows
-          || this.Version is Steam_19_3_4_Touch_Windows
-          || this.Version is Steam_19_3_5_Windows
-          || this.Version is Steam_19_3_5_Touch_Windows
-          || this.Version is Steam_19_3_6_Windows
-          || this.Version is Steam_19_3_5_GamePass_Windows
-          || this.Version is Steam_19_3_5_1_GamePass_Windows
-          || this.Version is Steam_19_3_5_2_GamePass_Windows) {
-          return 0x8A8;
-        }
-        else {
-          return 0x8C0;
-        }
+        return 0x8A8;
       }
     }
 
     public short Importance {
-      get {
-        if (this.Version is Steam_19_1_0_Windows
-          || this.Version is Steam_19_1_0_Touch_Windows
-          || this.Version is Steam_19_1_1_Windows
-          || this.Version is Steam_19_1_1_Touch_Windows
-          || this.Version is Steam_19_1_2_Windows
-          || this.Version is Steam_19_1_2_Touch_Windows
-          || this.Version is Steam_19_1_3_Windows
-          || this.Version is Steam_19_1_4_Windows
-          || this.Version is Steam_19_1_4_Touch_Windows
-          || this.Version is Steam_19_1_5_Windows
-          || this.Version is Steam_19_1_5_Touch_Windows
-          || this.Version is Steam_19_2_0_Windows
-          || this.Version is Steam_19_2_0_Touch_Windows
-          || this.Version is Steam_19_2_1_Windows
-          || this.Version is Steam_19_2_1_Touch_Windows
-          || this.Version is Steam_19_2_2_Windows
-          || this.Version is Steam_19_2_2_Touch_Windows
-          || this.Version is Steam_19_2_3_Windows
-          || this.Version is Steam_19_2_3_Touch_Windows
-          || this.Version is Steam_19_3_0_Windows
-          || this.Version is Steam_19_3_1_Touch_Windows
-          || this.Version is Steam_19_3_2_Windows
-          || this.Version is Steam_19_3_3_Windows
-          || this.Version is Steam_19_3_4_Windows
-          || this.Version is Steam_19_3_4_Touch_Windows
-          || this.Version is Steam_19_3_5_Windows
-          || this.Version is Steam_19_3_5_Touch_Windows
-          || this.Version is Steam_19_3_6_Windows
-          || this.Version is Steam_19_3_5_GamePass_Windows
-          || this.Version is Steam_19_3_5_1_GamePass_Windows
-          || this.Version is Steam_19_3_5_2_GamePass_Windows) {
-          return 0x8A9;
-        }
-        else {
-          return 0x8C1;
-        }
+    get {
+        return 0x8A9;
       }
     }
         
     public short EconomicFactor {
       get {
-        if (this.Version is Steam_19_1_0_Windows
-          || this.Version is Steam_19_1_0_Touch_Windows
-          || this.Version is Steam_19_1_1_Windows
-          || this.Version is Steam_19_1_1_Touch_Windows
-          || this.Version is Steam_19_1_2_Windows
-          || this.Version is Steam_19_1_2_Touch_Windows
-          || this.Version is Steam_19_1_3_Windows
-          || this.Version is Steam_19_1_4_Windows
-          || this.Version is Steam_19_1_4_Touch_Windows
-          || this.Version is Steam_19_1_5_Windows
-          || this.Version is Steam_19_1_5_Touch_Windows
-          || this.Version is Steam_19_2_0_Windows
-          || this.Version is Steam_19_2_0_Touch_Windows
-          || this.Version is Steam_19_2_1_Windows
-          || this.Version is Steam_19_2_1_Touch_Windows
-          || this.Version is Steam_19_2_2_Windows
-          || this.Version is Steam_19_2_2_Touch_Windows
-          || this.Version is Steam_19_2_3_Windows
-          || this.Version is Steam_19_2_3_Touch_Windows
-          || this.Version is Steam_19_3_0_Windows
-          || this.Version is Steam_19_3_1_Touch_Windows
-          || this.Version is Steam_19_3_2_Windows
-          || this.Version is Steam_19_3_3_Windows
-          || this.Version is Steam_19_3_4_Windows
-          || this.Version is Steam_19_3_4_Touch_Windows
-          || this.Version is Steam_19_3_5_Windows
-          || this.Version is Steam_19_3_5_Touch_Windows
-          || this.Version is Steam_19_3_6_Windows
-          || this.Version is Steam_19_3_5_GamePass_Windows
-          || this.Version is Steam_19_3_5_1_GamePass_Windows
-          || this.Version is Steam_19_3_5_2_GamePass_Windows) {
-          return 0x8AD;
-        }
-        else {
-          return 0x8C5;
-        }
+        return 0x8AD;
       }
     }
 
     public short FAFinancialPower {
       get {
-        if (this.Version is Steam_19_1_0_Windows
-          || this.Version is Steam_19_1_0_Touch_Windows
-          || this.Version is Steam_19_1_1_Windows
-          || this.Version is Steam_19_1_1_Touch_Windows
-          || this.Version is Steam_19_1_2_Windows
-          || this.Version is Steam_19_1_2_Touch_Windows
-          || this.Version is Steam_19_1_3_Windows
-          || this.Version is Steam_19_1_4_Windows
-          || this.Version is Steam_19_1_4_Touch_Windows
-          || this.Version is Steam_19_1_5_Windows
-          || this.Version is Steam_19_1_5_Touch_Windows
-          || this.Version is Steam_19_2_0_Windows
-          || this.Version is Steam_19_2_0_Touch_Windows
-          || this.Version is Steam_19_2_1_Windows
-          || this.Version is Steam_19_2_1_Touch_Windows
-          || this.Version is Steam_19_2_2_Windows
-          || this.Version is Steam_19_2_2_Touch_Windows
-          || this.Version is Steam_19_2_3_Windows
-          || this.Version is Steam_19_2_3_Touch_Windows
-          || this.Version is Steam_19_3_0_Windows
-          || this.Version is Steam_19_3_1_Touch_Windows
-          || this.Version is Steam_19_3_2_Windows
-          || this.Version is Steam_19_3_3_Windows
-          || this.Version is Steam_19_3_4_Windows
-          || this.Version is Steam_19_3_4_Touch_Windows
-          || this.Version is Steam_19_3_5_Windows
-          || this.Version is Steam_19_3_5_Touch_Windows
-          || this.Version is Steam_19_3_6_Windows
-          || this.Version is Steam_19_3_5_GamePass_Windows
-          || this.Version is Steam_19_3_5_1_GamePass_Windows
-          || this.Version is Steam_19_3_5_2_GamePass_Windows) {
-          return 0x8AE;
-        }
-        else {
-          return 0x8C6;
-        }
+        return 0x8AE;
       }
     } 
 
     public short YearsToGainNationality {
       get {
-        if (this.Version is Steam_19_1_0_Windows
-          || this.Version is Steam_19_1_0_Touch_Windows
-          || this.Version is Steam_19_1_1_Windows
-          || this.Version is Steam_19_1_1_Touch_Windows
-          || this.Version is Steam_19_1_2_Windows
-          || this.Version is Steam_19_1_2_Touch_Windows
-          || this.Version is Steam_19_1_3_Windows
-          || this.Version is Steam_19_1_4_Windows
-          || this.Version is Steam_19_1_4_Touch_Windows
-          || this.Version is Steam_19_1_5_Windows
-          || this.Version is Steam_19_1_5_Touch_Windows
-          || this.Version is Steam_19_2_0_Windows
-          || this.Version is Steam_19_2_0_Touch_Windows
-          || this.Version is Steam_19_2_1_Windows
-          || this.Version is Steam_19_2_1_Touch_Windows
-          || this.Version is Steam_19_2_2_Windows
-          || this.Version is Steam_19_2_2_Touch_Windows
-          || this.Version is Steam_19_2_3_Windows
-          || this.Version is Steam_19_2_3_Touch_Windows
-          || this.Version is Steam_19_3_0_Windows
-          || this.Version is Steam_19_3_1_Touch_Windows
-          || this.Version is Steam_19_3_2_Windows
-          || this.Version is Steam_19_3_3_Windows
-          || this.Version is Steam_19_3_4_Windows
-          || this.Version is Steam_19_3_4_Touch_Windows
-          || this.Version is Steam_19_3_5_Windows
-          || this.Version is Steam_19_3_5_Touch_Windows
-          || this.Version is Steam_19_3_6_Windows
-          || this.Version is Steam_19_3_5_GamePass_Windows
-          || this.Version is Steam_19_3_5_1_GamePass_Windows
-          || this.Version is Steam_19_3_5_2_GamePass_Windows) {
-          return 0x8AF;
-        }
-        else {
-          return 0x8C7;
-        }
+        return 0x8AF;
       }
     } 
 
     public short MaxYouthAge {
       get {
-        if (this.Version is Steam_19_1_0_Windows
-          || this.Version is Steam_19_1_0_Touch_Windows
-          || this.Version is Steam_19_1_1_Windows
-          || this.Version is Steam_19_1_1_Touch_Windows
-          || this.Version is Steam_19_1_2_Windows
-          || this.Version is Steam_19_1_2_Touch_Windows
-          || this.Version is Steam_19_1_3_Windows
-          || this.Version is Steam_19_1_4_Windows
-          || this.Version is Steam_19_1_4_Touch_Windows
-          || this.Version is Steam_19_1_5_Windows
-          || this.Version is Steam_19_1_5_Touch_Windows
-          || this.Version is Steam_19_2_0_Windows
-          || this.Version is Steam_19_2_0_Touch_Windows
-          || this.Version is Steam_19_2_1_Windows
-          || this.Version is Steam_19_2_1_Touch_Windows
-          || this.Version is Steam_19_2_2_Windows
-          || this.Version is Steam_19_2_2_Touch_Windows
-          || this.Version is Steam_19_2_3_Windows
-          || this.Version is Steam_19_2_3_Touch_Windows
-          || this.Version is Steam_19_3_0_Windows
-          || this.Version is Steam_19_3_1_Touch_Windows
-          || this.Version is Steam_19_3_2_Windows
-          || this.Version is Steam_19_3_3_Windows
-          || this.Version is Steam_19_3_4_Windows
-          || this.Version is Steam_19_3_4_Touch_Windows
-          || this.Version is Steam_19_3_5_Windows
-          || this.Version is Steam_19_3_5_Touch_Windows
-          || this.Version is Steam_19_3_6_Windows
-          || this.Version is Steam_19_3_5_GamePass_Windows
-          || this.Version is Steam_19_3_5_1_GamePass_Windows
-          || this.Version is Steam_19_3_5_2_GamePass_Windows) {
-          return 0x8B0;
-        }
-        else {
-          return 0x8C8;
-        }
+        return 0x8B0;
       }
     } 
 
     public short FAPatience {
       get {
-        if (this.Version is Steam_19_1_0_Windows
-          || this.Version is Steam_19_1_0_Touch_Windows
-          || this.Version is Steam_19_1_1_Windows
-          || this.Version is Steam_19_1_1_Touch_Windows
-          || this.Version is Steam_19_1_2_Windows
-          || this.Version is Steam_19_1_2_Touch_Windows
-          || this.Version is Steam_19_1_3_Windows
-          || this.Version is Steam_19_1_4_Windows
-          || this.Version is Steam_19_1_4_Touch_Windows
-          || this.Version is Steam_19_1_5_Windows
-          || this.Version is Steam_19_1_5_Touch_Windows
-          || this.Version is Steam_19_2_0_Windows
-          || this.Version is Steam_19_2_0_Touch_Windows
-          || this.Version is Steam_19_2_1_Windows
-          || this.Version is Steam_19_2_1_Touch_Windows
-          || this.Version is Steam_19_2_2_Windows
-          || this.Version is Steam_19_2_2_Touch_Windows
-          || this.Version is Steam_19_2_3_Windows
-          || this.Version is Steam_19_2_3_Touch_Windows
-          || this.Version is Steam_19_3_0_Windows
-          || this.Version is Steam_19_3_1_Touch_Windows
-          || this.Version is Steam_19_3_2_Windows
-          || this.Version is Steam_19_3_3_Windows
-          || this.Version is Steam_19_3_4_Windows
-          || this.Version is Steam_19_3_4_Touch_Windows
-          || this.Version is Steam_19_3_5_Windows
-          || this.Version is Steam_19_3_5_Touch_Windows
-          || this.Version is Steam_19_3_6_Windows
-          || this.Version is Steam_19_3_5_GamePass_Windows
-          || this.Version is Steam_19_3_5_1_GamePass_Windows
-          || this.Version is Steam_19_3_5_2_GamePass_Windows) {
-          return 0x8B9;
-        }
-        else {
-          return 0x8D1;
-        }
+        return 0x8B9;
       }
     }
 
     public short ForeignManagerLikelihood {
       get {
-        if (this.Version is Steam_19_1_0_Windows
-          || this.Version is Steam_19_1_0_Touch_Windows
-          || this.Version is Steam_19_1_1_Windows
-          || this.Version is Steam_19_1_1_Touch_Windows
-          || this.Version is Steam_19_1_2_Windows
-          || this.Version is Steam_19_1_2_Touch_Windows
-          || this.Version is Steam_19_1_3_Windows
-          || this.Version is Steam_19_1_4_Windows
-          || this.Version is Steam_19_1_4_Touch_Windows
-          || this.Version is Steam_19_1_5_Windows
-          || this.Version is Steam_19_1_5_Touch_Windows
-          || this.Version is Steam_19_2_0_Windows
-          || this.Version is Steam_19_2_0_Touch_Windows
-          || this.Version is Steam_19_2_1_Windows
-          || this.Version is Steam_19_2_1_Touch_Windows
-          || this.Version is Steam_19_2_2_Windows
-          || this.Version is Steam_19_2_2_Touch_Windows
-          || this.Version is Steam_19_2_3_Windows
-          || this.Version is Steam_19_2_3_Touch_Windows
-          || this.Version is Steam_19_3_0_Windows
-          || this.Version is Steam_19_3_1_Touch_Windows
-          || this.Version is Steam_19_3_2_Windows
-          || this.Version is Steam_19_3_3_Windows
-          || this.Version is Steam_19_3_4_Windows
-          || this.Version is Steam_19_3_4_Touch_Windows
-          || this.Version is Steam_19_3_5_Windows
-          || this.Version is Steam_19_3_5_Touch_Windows
-          || this.Version is Steam_19_3_6_Windows
-          || this.Version is Steam_19_3_5_GamePass_Windows
-          || this.Version is Steam_19_3_5_1_GamePass_Windows
-          || this.Version is Steam_19_3_5_2_GamePass_Windows) {
-          return 0x8BA;
-        }
-        else {
-          return 0x8D2;
-        }
+        return 0x8BA;
       }
     } 
   }
