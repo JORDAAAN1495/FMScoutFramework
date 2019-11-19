@@ -244,10 +244,11 @@ namespace FMScoutFramework.Core.Entities.InGame
 
         public void SwapPlayerAddresses(Int64 oldAddress, Int64 newAddress) {
             // Find the oldAddress in the team array
+            // In 2020 there's 0x8 bytes difference between the pointer and the actual person address
             List<Int64> newPlayerArray = new List<Int64>();
             for (int i = 0; i < PlayersAddresses.Count; i++) {
-                if (PlayersAddresses[i] == oldAddress) {
-                    PlayersAddresses[i] = newAddress;
+                if (PlayersAddresses[i] == (oldAddress - 0x8)) {
+                    PlayersAddresses[i] = (newAddress - 0x8);
                 }
                 newPlayerArray.Add(PlayersAddresses[i]);
             }

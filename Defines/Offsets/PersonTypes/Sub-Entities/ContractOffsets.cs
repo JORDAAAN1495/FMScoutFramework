@@ -23,9 +23,9 @@ namespace FMScoutFramework.Core.Offsets
         public const short SquadStatus = 0x4C;
         public const short TransferStatus = 0x4E;
         public const short SquadNumber = 0x53;
-        public const short Clauses = 0x58;
-        public const short Bonuses = 0x58;
+        public const short Clauses = 0x60;
+        public const short Bonuses = 0x60;
         public const short LoyaltyBonus = 0x90;
-        public const short Type = 0x9A;
+        public const short Type = 0xAC;
     }
 }
