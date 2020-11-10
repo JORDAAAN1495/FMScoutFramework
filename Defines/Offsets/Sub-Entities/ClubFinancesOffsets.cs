@@ -28,11 +28,11 @@ namespace FMScoutFramework.Core.Offsets
         public const short YouthGrantIncome = 0x690;
         public const short StadiumRentalPerYear = 0x6AC;
         public const short StartingLastYearsTurnover = 0x6B0;
-        public const short WeeklyWageBudget = 0x6B8;
-        public const short HighestWage = 0x6BC;
-        public const short WeeklyWageBudgetUsed = 0x6C4;
-        public const short HighestWagePaid = 0x6D8;
-        public const short HighestNonPlayerWagePaid = 0x6DC;
+        public const short WeeklyWageBudget = 0x6BC;
+        public const short HighestWage = 0x6C0;
+        public const short WeeklyWageBudgetUsed = 0x6C8;
+        public const short HighestWagePaid = 0x6DC;
+        public const short HighestNonPlayerWagePaid = 0x6E0;
         public const short LatestSeasonTicketSales = 0x70C;
         public const short FFPMaxWeeklyWageTotal = 0x6F4;
         public const short EnteredFSBankruptState = 0x498;

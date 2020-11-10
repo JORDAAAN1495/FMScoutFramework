@@ -91,7 +91,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
         return (SquadRegistrationFlags.GetValueOrDefault() & (byte)SquadRegistrationOptions.AllowSquadRegistrationAnytime) > 0;
       }
       set {
-        SquadRegistrationFlags = (byte)(SquadRegistrationFlags.GetValueOrDefault() | (byte)SquadRegistrationOptions.AllowSquadRegistrationAnytime);
+        SquadRegistrationFlags = (byte)(SquadRegistrationFlags.GetValueOrDefault() ^ (byte)SquadRegistrationOptions.AllowSquadRegistrationAnytime);
       }
     }
 
@@ -100,7 +100,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
         return (SquadRegistrationFlags.GetValueOrDefault() & (byte)SquadRegistrationOptions.AllowSquadNumbersAnytime) > 0;
       }
       set {
-        SquadRegistrationFlags = (byte)(SquadRegistrationFlags.GetValueOrDefault() | (byte)SquadRegistrationOptions.AllowSquadNumbersAnytime);
+        SquadRegistrationFlags = (byte)(SquadRegistrationFlags.GetValueOrDefault() ^ (byte)SquadRegistrationOptions.AllowSquadNumbersAnytime);
       }
     }
 
