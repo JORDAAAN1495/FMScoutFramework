@@ -35,7 +35,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
       PropertyInvoker.Set<short>(PlayerOffsets.Weight, OriginalBytes, Address, DatabaseMode, Weight);
       PropertyInvoker.Set<short>(PlayerOffsets.Height, OriginalBytes, Address, DatabaseMode, Height);
       PropertyInvoker.Set<Int64>(PlayerOffsets.Team, OriginalBytes, Address, DatabaseMode, TeamAddress.GetValueOrDefault(0x0));
-      PropertyInvoker.Set<bool>(PlayerOffsets.DeclaredForNation, OriginalBytes, Address, DatabaseMode, DeclaredForNation.GetValueOrDefault(false));
+      PropertyInvoker.Set<byte>(PlayerOffsets.DeclaredForNation, OriginalBytes, Address, DatabaseMode, DeclaredForNation.GetValueOrDefault(false) == true ? (byte)0x53 : (byte)0x0);
       _isDirty = false;
     }
 
@@ -74,7 +74,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
 
     public double PlayerGrowthPotential {
       get {
-        double DAP = ((Attributes.Determination / 5) * 0.05) + (ActualPerson.Attributes.Ambition * 0.09) + (ActualPerson.Attributes.Professionalism * 0.115);
+        double DAP = (Attributes.Determination / 5 * 0.05) + (ActualPerson.Attributes.Ambition * 0.09) + (ActualPerson.Attributes.Professionalism * 0.115);
         if (ActualPerson.Age < 24) {
           if (PA <= (CA + 10)) {
             DAP -= 0.5;
@@ -410,7 +410,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
     public bool? DeclaredForNation {
       get {
         if (_declaredForNation == null) {
-          _declaredForNation = PropertyInvoker.Get<bool>(PlayerOffsets.DeclaredForNation, OriginalBytes, Address, DatabaseMode);
+          _declaredForNation = PropertyInvoker.Get<byte>(PlayerOffsets.DeclaredForNation, OriginalBytes, Address, DatabaseMode) == 0x53;
         }
 
         return _declaredForNation;

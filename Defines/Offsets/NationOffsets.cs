@@ -23,16 +23,16 @@ namespace FMScoutFramework.Core.Offsets {
     public const short TaxRules = 0x118;      
     public const short NonForeignRules = 0x1A8;
     public const short EECForeignRules = 0x1C0;
-    public const short Agreements = 0x1D8;
-    public const short Capital = 0x1F0;         // done
+    public const short Agreements = 0x208;
+    public const short Capital = 0x220;         // done
     public const short Continent = 0x1F8;       // done
     public const short Region = 0x200;
-    public const short Currency = 0x208;
-    public const short GainNationalityType = 0x210; // done
+    //public const short Currency = 0x208;
+    public const short GainNationalityType = 0x248; // done
 
     public const short NationalStadium = 0x218;
-    public const short FIFAPosition = 0x2A8;
-    public const short FIFARankingPoints = 0x2AA;
+    public const short FIFAPosition = 0x2FC;
+    public const short FIFARankingPoints = 0x2FE;
     public const short FIFARankingMatches = 0x3A0;
     public const short ContCupCoefForNT = 0x3B8;
     public const short ContCupCoefForNTCycle1 = 0x3BC;
@@ -51,49 +51,81 @@ namespace FMScoutFramework.Core.Offsets {
 
     public short StateOfDevelopment {
       get {
-        return 0x8A8;
+        if (Version.isTouch) {
+          return 0x8C0;
+        }
+
+        return 0x908;
       }
     }
 
     public short Importance {
     get {
-        return 0x8A9;
+        if (Version.isTouch) {
+          return 0x8C1;
+        }
+
+        return 0x909;
       }
     }
         
     public short EconomicFactor {
       get {
-        return 0x8AD;
+        if (Version.isTouch) {
+          return 0x8C6;
+        }
+
+        return 0x90E;
       }
     }
 
     public short FAFinancialPower {
       get {
-        return 0x8AE;
+        if (Version.isTouch) {
+          return 0x8C7;
+        }
+
+        return 0x90F;
       }
     } 
 
     public short YearsToGainNationality {
       get {
-        return 0x8AF;
+        if (Version.isTouch) {
+          return 0x8C8;
+        }
+
+        return 0x916;
       }
     } 
 
     public short MaxYouthAge {
       get {
-        return 0x8B0;
+        if (Version.isTouch) {
+          return 0x8C9;
+        }
+
+        return 0x911;
       }
     } 
 
     public short FAPatience {
       get {
-        return 0x8B9;
+        if (Version.isTouch) {
+          return 0x8CA;
+        }
+
+        return 0x912;
       }
     }
 
     public short ForeignManagerLikelihood {
       get {
-        return 0x8BA;
+        if (Version.isTouch) {
+          return 0x8CB;
+        }
+
+        return 0x913;
       }
     } 
   }

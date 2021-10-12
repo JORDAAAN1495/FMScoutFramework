@@ -9,6 +9,7 @@ namespace FMScoutFramework.Core.Entities.GameVersions
         IVersionPersonEnumPointers PersonEnum { get; }
         IPersonVersionOffsets PersonOffsets { get; }
         GameManager gameManager { get; set; }
+        bool isTouch { get; set; }
     }
 
     internal interface IIVersion : IVersion

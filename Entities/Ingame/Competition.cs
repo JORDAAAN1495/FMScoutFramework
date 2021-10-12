@@ -575,7 +575,6 @@ namespace FMScoutFramework.Core.Entities.InGame {
       get {
         if (_divisionLevel == null) {
           _divisionLevel = PropertyInvoker.Get<byte>(CompetitionOffsets.DivisionLevel, OriginalBytes, MemoryAddress, DatabaseMode);
-          _divisionLevel = _divisionLevel = 1;
         }
         return _divisionLevel;
       }
@@ -711,7 +710,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
         if (this.HasStages) {
           foreach (LeagueStage stage in ActualCompetition.LeagueStages) {
             if (stage.Settings != null) {
-              result = stage.Settings.PrizeMoney.Count > 0 ? true : false;
+              result |= stage.Settings.PrizeMoney.Count > 0 ? true : false;
             }
           }
         }

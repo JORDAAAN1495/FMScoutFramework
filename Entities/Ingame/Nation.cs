@@ -83,6 +83,9 @@ namespace FMScoutFramework.Core.Entities.InGame {
       PropertyInvoker.Set<byte>(NationOffsets.ForeignManagerLikelihood, OriginalBytes, MemoryAddress, DatabaseMode, ForeignManagerLikelihood);
       PropertyInvoker.Set<byte>(NationOffsets.EconomicFactor, OriginalBytes, MemoryAddress, DatabaseMode, EconomicFactor);
       PropertyInvoker.Set<byte>(NationOffsets.MaxYouthAge, OriginalBytes, MemoryAddress, DatabaseMode, MaxYouthAge);
+      PropertyInvoker.Set<byte>(NationOffsets.Importance, OriginalBytes, MemoryAddress, DatabaseMode, Importance);
+      PropertyInvoker.Set<byte>(NationOffsets.StateOfDevelopment, OriginalBytes, MemoryAddress, DatabaseMode, StateOfDevelopment);
+
       _isDirty = false;
     }
 
@@ -125,7 +128,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
         Team[] result = new Team[teamCount];
 
         for (int i = 0; i < teamCount; i++) {
-          int teamAddress = PropertyInvoker.Get<Int32>(NationOffsets.Teams, OriginalBytes, MemoryAddress, DatabaseMode);
+          Int64 teamAddress = PropertyInvoker.Get<Int64>(NationOffsets.Teams, OriginalBytes, MemoryAddress, DatabaseMode);
           result[i] = PropertyInvoker.GetPointer<Team>(0x0, OriginalBytes, (teamAddress + (i * 0x8)), DatabaseMode, Version);
         }
 

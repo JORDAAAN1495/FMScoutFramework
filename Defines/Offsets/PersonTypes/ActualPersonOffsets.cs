@@ -40,25 +40,25 @@ namespace FMScoutFramework.Core.Offsets {
 
     public short CityOfBirth {
       get {
-        return 0x48;
+        return 0x68;
       }
     }
 
     public short Nation {
       get {
-        return 0x50;
+        return 0x48;
       }
     }
 
     public short Attributes {
       get {
-        return 0x58;
+        return 0x50;
       }
     }
 
     public short Relationships {
       get {
-        return 0x60;
+        return 0x58;
       }
     }
 
@@ -80,7 +80,7 @@ namespace FMScoutFramework.Core.Offsets {
       }
     }
 
-    public short Contract {
+    public short Contract { 
       get {
         return 0xA0;
       }
@@ -88,13 +88,13 @@ namespace FMScoutFramework.Core.Offsets {
 
     public short PreferredMoves {
       get {
-        return 0xE0;
+        return 0xC8;
       }
     }
 
     public short JobAttributes {
       get {
-        return 0x100;
+        return 0xD8;
       }
     }
 
