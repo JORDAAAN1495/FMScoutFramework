@@ -11,9 +11,9 @@ namespace FMScoutFramework.Core.Offsets {
 
     public const short RowID = 0x8;
     public const short UID = 0xC;
-    public const short Club = 0x18;
     public const short PreviousReputation = 0x2E;
-    public const short TeamType = 0x30;
+    public const short TeamType = 0x28;
+    public const short Club = 0x30;
     public short Players {
       get { return 0x38; }
     }

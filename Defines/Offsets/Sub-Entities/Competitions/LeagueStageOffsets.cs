@@ -10,7 +10,7 @@ namespace FMScoutFramework.Defines.Offsets {
 
         public short LeagueTable {
             get {
-                return 0x80;
+                return 0x88;
             }
         }
 
@@ -22,7 +22,7 @@ namespace FMScoutFramework.Defines.Offsets {
 
         public short StageSettings {
             get {
-                return 0xA0;
+                return 0xA8;
             }
         }
     }

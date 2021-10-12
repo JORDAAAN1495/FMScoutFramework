@@ -125,7 +125,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
         Team[] result = new Team[teamCount];
 
         for (int i = 0; i < teamCount; i++) {
-          int teamAddress = PropertyInvoker.Get<Int32>(NationOffsets.Teams, OriginalBytes, MemoryAddress, DatabaseMode);
+          Int64 teamAddress = PropertyInvoker.Get<Int64>(NationOffsets.Teams, OriginalBytes, MemoryAddress, DatabaseMode);
           result[i] = PropertyInvoker.GetPointer<Team>(0x0, OriginalBytes, (teamAddress + (i * 0x8)), DatabaseMode, Version);
         }
 

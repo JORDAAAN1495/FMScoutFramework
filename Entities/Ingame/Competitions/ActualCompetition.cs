@@ -50,9 +50,9 @@ namespace FMScoutFramework.Core.Entities.InGame
                     if (countOne > 0) {
                         readStagesAtOne = true;
                     }
-                    if (countTwo > 0) {
-                        readStagesAtTwo = true;
-                    }
+                    //if (countTwo > 0) {
+                    //    readStagesAtTwo = true;
+                    //}
 
                     int masterCount = 1;
                     if (readStagesAtOne) {

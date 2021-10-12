@@ -215,9 +215,9 @@ namespace FMScoutFramework.Core.Entities.InGame
                     if (playerCount > 0) {
                         foreach (Int64 pAddr in PlayersAddresses) {
                             // Before adding, make sure we support the player type!
-                            Int64 personType = ProcessManager.ReadInt64((pAddr + Math.Abs(Version.PersonOffsets.Player) + 0x8)) - ProcessManager.fmProcess.BaseAddress;
+                            Int64 personType = ProcessManager.ReadInt64(pAddr + Math.Abs(Version.PersonOffsets.Player)) - ProcessManager.fmProcess.BaseAddress;
                             if (personType == Version.PersonEnum.Player) {
-                                result.Add(new Player((pAddr + 0x8), Version));
+                                result.Add(new Player(pAddr, Version));
                             }
                         }
                     }
@@ -247,8 +247,8 @@ namespace FMScoutFramework.Core.Entities.InGame
             // In 2020 there's 0x8 bytes difference between the pointer and the actual person address
             List<Int64> newPlayerArray = new List<Int64>();
             for (int i = 0; i < PlayersAddresses.Count; i++) {
-                if (PlayersAddresses[i] == (oldAddress - 0x8)) {
-                    PlayersAddresses[i] = (newAddress - 0x8);
+                if (PlayersAddresses[i] == oldAddress) {
+                    PlayersAddresses[i] = newAddress;
                 }
                 newPlayerArray.Add(PlayersAddresses[i]);
             }

@@ -711,7 +711,7 @@ namespace FMScoutFramework.Core.Entities.InGame {
         if (this.HasStages) {
           foreach (LeagueStage stage in ActualCompetition.LeagueStages) {
             if (stage.Settings != null) {
-              result = stage.Settings.PrizeMoney.Count > 0 ? true : false;
+              result |= stage.Settings.PrizeMoney.Count > 0 ? true : false;
             }
           }
         }

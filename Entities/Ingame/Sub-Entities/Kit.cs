@@ -27,7 +27,9 @@ namespace FMScoutFramework.Core.Entities.InGame {
         [Description("Shorts")]
         KRTShorts   = 4,
         [Description("Socks")]
-        KRTSocks    = 5
+        KRTSocks    = 5,
+        [Description("Shirt")]
+        KRTShirtAlt = 33
     }
 
     public class Kit : BaseObject, IKit {

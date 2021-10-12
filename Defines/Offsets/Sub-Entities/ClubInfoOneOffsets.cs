@@ -35,7 +35,7 @@ namespace FMScoutFramework.Core.Offsets {
 
         public short Kits {
             get {
-                return 0x88;
+                return 0x78;
             }
         }
     }

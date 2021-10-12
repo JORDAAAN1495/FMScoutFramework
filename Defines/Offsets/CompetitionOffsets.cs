@@ -86,7 +86,7 @@ namespace FMScoutFramework.Defines.Offsets {
 
     public short ActualCompetition {
       get {
-        return 0xD0;
+        return 0xC8;
       }
     }
 
@@ -158,73 +158,73 @@ namespace FMScoutFramework.Defines.Offsets {
 
     public short Reputation {
       get {
-        return 0x172; // 0x13E;
+        return 0x198; // 0x13E;
       }
     }
 
     public short OriginalReputation {
       get {
-        return 0x174;
+        return 0x19A;
       }
     }
 
     public short LastReputationPos {
       get {
-        return 0x176;
+        return 0x19C;
       }
     }
 
     public short CurrentReputation {
       get {
-        return 0x178;
+        return 0x19E;
       }
     }
 
     public short PercentageOfTopDivisionReputation {
       get {
-        return 0x17A;
+        return 0x19F;
       }
     }
 
     public short NameType {
       get {
-        return 0x191;
+        return 0x1B7;
       }
     }
 
     public short Flags {
       get {
-        return 0x192;
+        return 0x1B8;
       }
     }
 
     public short DivisionLevel {
       get {
-        return 0x193;
+        return 0x1B9;
       }
     }
 
     public short Type {
       get {
-        return 0x194;
+        return 0x1BA;
       }
     }
 
     public short UsesExtraOfficials {
       get {
-        return 0x195;
+        return 0x1BB;
       }
     }
 
     public short UsesSeatedOnlyStadiums {
       get {
-        return 0x196;
+        return 0x1BC;
       }
     }
 
     public short WageBudgetTurnoverPercentage {
       get {
-        return 0x197;
+        return 0x1BD;
       }
     }
   }

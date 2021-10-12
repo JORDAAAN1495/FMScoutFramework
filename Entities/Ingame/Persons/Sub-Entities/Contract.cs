@@ -108,19 +108,19 @@ namespace FMScoutFramework.Core.Entities.InGame
 
     public enum TransferStatusType {
         [Description("Not Set")]
-        TSTNotSet                   = 4,
+        TSTNotSet                   = 0,
         [Description("Transfer Listed")]
-        TSTListed                   = 5,      
+        TSTListed                   = 1,      
         [Description("Listed for Loan")]
-        TSTListedForLoan            = 6,
+        TSTListedForLoan            = 2,
         [Description("Transfer and Loan Listed")]
-        TSTTransferAndLoanListed    = 7,
+        TSTTransferAndLoanListed    = 3,
         [Description("Transfer Lister by Request")]
         TSTListedByRequest          = 12,
         [Description("Listed by Request & Loan Listed")]
         TSTByRequestAndLoanListed   = 15,
         [Description("Not Available for Loan")]
-        TSTNotAvailableForLoan      = 68,
+        TSTNotAvailableForLoan      = 64,
         [Description("Transfer Listed / NA for Loan")]
         TSTTransferListedNotForLoan = 69,
         [Description("Listed by Request / NA for Loan")]

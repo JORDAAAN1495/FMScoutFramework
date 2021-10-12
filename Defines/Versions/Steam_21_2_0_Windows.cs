@@ -3,22 +3,24 @@ using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Core.Attributes;
 
 namespace FMScoutFramework.Core.Entities.GameVersions {
-  internal class Steam_20_2_1_Windows : IIVersion {
+  internal class Steam_21_2_0_Windows : IIVersion {
     public IVersionMemoryAddresses MemoryAddresses { get; private set; }
     public IVersionPersonEnumPointers PersonEnum { get; private set; }
     public IPersonVersionOffsets PersonOffsets { get; private set; }
     public GameManager gameManager { get; set; }
+    public bool isTouch { get; set; }
 
-    public Steam_20_2_1_Windows(GameManager gm) {
+    public Steam_21_2_0_Windows(GameManager gm) {
       MemoryAddresses = new VersionMemoryAddresses();
       PersonEnum = new VersionPersonEnumPointers();
       PersonOffsets = new PersonVersionOffsets();
       gameManager = gm;
+      isTouch = false;
     }
 
     public string Description {
       get {
-        return "20.2.1 Steam (Windows)";
+        return "21.2.0 (Windows)";
       }
     }
 
@@ -44,12 +46,12 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
 
       FMCore.logger.LogWrite("In-game date correct! Version is a match.");
       if (!string.IsNullOrEmpty(process.VersionDescription)) {
-        if (process.VersionDescription != "20.2.1-1326301") {
+        if (process.VersionDescription != "21.2.0-1499632") {
           return false;
         }
       }
       else {
-        process.VersionDescription = "20.2.1-1326301";
+        process.VersionDescription = "21.2.0-1499632";
       }
       return true;
 #endif
@@ -63,12 +65,12 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
 
     public class VersionMemoryAddresses : IVersionMemoryAddresses {
       // Statics
-      public Int64 MainAddress { get { return 0x747DB00; } }
+      public Int64 MainAddress { get { return 0x6FEE8B0; } }
       public Int64 MainOffset { get { return 0x0; } }
       public Int64 XorDistance { get { return 0x88; } }
       public Int64 StringOffset { get { return 0x0; } }
-      public Int64 CurrentDateTime { get { return 0x7377DB8; } } // AF ?? E3 07  At BaseAddress + offset // 68E93A8, 69D17A0, 69D22AC, 69D39F4
-      public Int64 ActiveObject { get { return 0x75EAC60; } } // BaseAddress + offset (ID: 5640119 / B7 0F 56 00)
+      public Int64 CurrentDateTime { get { return 0x6EE5548; } } // D1 ?? E4 07  At BaseAddress + offset // 68E93A8, 69D17A0, 69D22AC, 69D39F4
+      public Int64 ActiveObject { get { return 0x70B4620; } } // BaseAddress + offset (ID: 5640119 / B7 0F 56 00)
       public Int64 TransferManager { get { return 0x5C2F210; } }
 
       [MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x10)]
@@ -160,10 +162,10 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
     }
 
     public class VersionPersonEnumPointers : IVersionPersonEnumPointers {
-      public Int64 Player { get { return 0x6D95CB8; } }         // UID: 3796
-      public Int64 Staff { get { return 0x6D84ED8; } }          // UID: 40
-      public Int64 PlayerStaff { get { return 0x6DAD3E0; } }    // UID: 106066
-      public Int64 HumanManager { get { return 0x6D84630; } }     // UID: User Manager's
+      public Int64 Player { get { return 0x68D2720; } }         // UID: 3796
+      public Int64 Staff { get { return 0x68C0520; } }          // UID: 40
+      public Int64 PlayerStaff { get { return 0x68EA3B8; } }    // UID: 106066
+      public Int64 HumanManager { get { return 0x68BFA30; } }     // UID: User Manager's
       public Int64 Official { get { return 0x0; } }         // NSY
       public Int64 NonPlayer { get { return 0x0; } }        // NSY
       public Int64 Retired { get { return 0x0; } }          // NSY
@@ -174,7 +176,7 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
 
     public class PersonVersionOffsets : IPersonVersionOffsets {
       public Int64 Person { get { return -0xC4; } }
-      public Int64 Player { get { return -0x1C0; } }
+      public Int64 Player { get { return -0x270; } }
       public Int64 Staff { get { return -0xD8; } }
       public Int64 NonPlayer { get { return 0x0; } }
       public Int64 PlayerStaff { get { return -0x3B8; } }

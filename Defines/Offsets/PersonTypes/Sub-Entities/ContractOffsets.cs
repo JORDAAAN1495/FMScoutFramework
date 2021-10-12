@@ -26,6 +26,6 @@ namespace FMScoutFramework.Core.Offsets
         public const short Clauses = 0x60;
         public const short Bonuses = 0x60;
         public const short LoyaltyBonus = 0x90;
-        public const short Type = 0xAC;
+        public const short Type = 0xB2;
     }
 }
