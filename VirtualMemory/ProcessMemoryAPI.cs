@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 
 namespace FMScoutFramework
 {
@@ -101,7 +99,7 @@ namespace FMScoutFramework
 #endif
 #if WINDOWS
 
-        [DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll", SetLastError = true)]
         public static extern IntPtr OpenProcess(uint dwDesiredAccess, int bInheritHandle, uint dwProcessId);
 
         [DllImport("kernel32.dll")]

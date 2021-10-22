@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
 using FMScoutFramework.Core.Entities.GameVersions;
+using Windows.System.Diagnostics;
 
 namespace FMScoutFramework.Core
 {
@@ -11,7 +9,7 @@ namespace FMScoutFramework.Core
     /// </summary>
     public class FMProcess
     {
-        public Process Process { get; set; }
+        public ProcessDiagnosticInfo Process { get; set; }
         public IntPtr Pointer { get; set; }
         public Int64 EndPoint { get; set; }
         public Int64 BaseAddress { get; set; }

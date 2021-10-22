@@ -2,12 +2,15 @@
 using System.Reflection;
 using System.Diagnostics;
 using System.Linq;
-using System.Configuration;
-using System.IO;
 using FMScoutFramework.Core.Entities.GameVersions;
+using Windows.System;
+using System.Collections.Generic;
+using Windows.System.Diagnostics;
 
-namespace FMScoutFramework.Core.Managers {
-  public class GameManager {
+namespace FMScoutFramework.Core.Managers
+{
+  public class GameManager
+  {
     private bool fmLoaded;
     private bool fmLoading;
     public LogWriter logger { get; set; }
@@ -74,51 +77,53 @@ namespace FMScoutFramework.Core.Managers {
     #endregion
     #region WINDOWS
 #if WINDOWS
-        public bool findFMProcess() {
-            FMProcess fmProcess = new FMProcess ();
-            Process[] fmProcesses = Process.GetProcessesByName ("fm");
+    public bool findFMProcess() {
+      FMProcess fmProcess = new FMProcess();
+      //Process[] fmProcesses = Process.GetProcessesByName ("fm");
+      IReadOnlyList<ProcessDiagnosticInfo> processes = ProcessDiagnosticInfo.GetForProcesses();
+      var p = processes.Where(x => x.ExecutableFileName == "fm.exe").FirstOrDefault();
 
-            if (fmProcesses.Length > 0) {
-                logger.LogWrite("Found > 0 FM Processes.");
-                Process activeProcess = fmProcesses [0];
+      if (p != null) {
+        logger.LogWrite("Found > 0 FM Processes.");
+        //Process activeProcess = fmProcesses[0];
 
-                logger.LogWrite("Opening Process for r/w.");
-                fmProcess.Pointer = ProcessMemoryAPI.OpenProcess (0x001F0FFF, 1, (uint)activeProcess.Id);
-                // fmProcess.EndPoint = ProcessManager.GetProcessEndPoint (fmProcess.Pointer);
-                logger.LogWrite("Process is now open.");
-                fmProcess.Process = activeProcess;
-                fmProcess.BaseAddress = activeProcess.MainModule.BaseAddress.ToInt64();
+        logger.LogWrite("Opening Process for r/w.");
+        fmProcess.Pointer = ProcessMemoryAPI.OpenProcess(0x001F0FFF, 1, p.ProcessId);
+        // fmProcess.EndPoint = ProcessManager.GetProcessEndPoint (fmProcess.Pointer);
+        logger.LogWrite("Process is now open.");
+        fmProcess.Process = p;
+        //fmProcess.BaseAddress = activeProcess.MainModule.BaseAddress.ToInt64();
 
-                ProcessManager.fmProcess = fmProcess;
-                fmProcess.VersionDescription = fmProcess.Process.MainModule.FileVersionInfo.ProductVersion;
+        ProcessManager.fmProcess = fmProcess;
+        // fmProcess.VersionDescription = fmProcess.Process.MainModule.FileVersionInfo.ProductVersion;
 
-                // Search for the current version
-                logger.LogWrite("Searching for a suitable version definition...");
-                foreach (var versionType in Assembly.GetCallingAssembly().GetTypes().Where(t => typeof(IIVersion).IsAssignableFrom(t))) {
-                    if (versionType.IsInterface)
-                        continue;
-                    var instance = (IIVersion)Activator.CreateInstance (versionType, this);
+        // Search for the current version
+        logger.LogWrite("Searching for a suitable version definition...");
+        foreach (var versionType in Assembly.GetCallingAssembly().GetTypes().Where(t => typeof(IIVersion).IsAssignableFrom(t))) {
+          if (versionType.IsInterface)
+            continue;
+          var instance = (IIVersion)Activator.CreateInstance(versionType, this);
 
-                    logger.LogWrite("Trying " + instance.Description);
-                    if (instance.SupportsProcess (fmProcess, null)) {
-                        Version = instance;
-                        logger.LogWrite("Matched!");
-                        break;
-                    }
-                    else {
-                        logger.LogWrite("Not a match.");
-                    }
-                }
-
-                fmLoaded = (Version != null);
-            }
-
-            if (!fmLoaded) {
-                LastErrorMessage = "Could not find a compatible Football Manager version.";
-            }
-
-            return fmLoaded;
+          logger.LogWrite("Trying " + instance.Description);
+          if (instance.SupportsProcess(fmProcess, null)) {
+            Version = instance;
+            logger.LogWrite("Matched!");
+            break;
+          }
+          else {
+            logger.LogWrite("Not a match.");
+          }
         }
+
+        fmLoaded = (Version != null);
+      }
+
+      if (!fmLoaded) {
+        LastErrorMessage = "Could not find a compatible Football Manager version.";
+      }
+
+      return fmLoaded;
+    }
 #endif
     #endregion
 
@@ -129,11 +134,11 @@ namespace FMScoutFramework.Core.Managers {
       Process activeProcess = fmProcesses[0];
 
       fmProcess.Pointer = ProcessMemoryAPI.OpenProcess(0x001F0FF, 1, (uint)activeProcess.Id);
-      fmProcess.Process = activeProcess;
+      //fmProcess.Process = activeProcess;
       fmProcess.BaseAddress = activeProcess.MainModule.BaseAddress.ToInt64();
 
       ProcessManager.fmProcess = fmProcess;
-      fmProcess.VersionDescription = fmProcess.Process.MainModule.FileVersionInfo.ProductVersion;
+      //fmProcess.VersionDescription = fmProcess.Process.MainModule.FileVersionInfo.ProductVersion;
 
       // Start searching for the main address in reverse. Find "Albpetrol Patos", the first club in the clubs table
     }

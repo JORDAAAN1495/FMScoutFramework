@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0C2C1CD7-E3EC-43F7-9B40-04E72B818C87}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FMScoutFramework</RootNamespace>
+    <AssemblyName>FMScoutFramework</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.22000.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\MemoryAddressAttribute.cs" />
+    <Compile Include="Converters\DateConverter.cs" />
+    <Compile Include="Defines\FMProcess.cs" />
+    <Compile Include="Defines\Offsets\AgreementOffsets.cs" />
+    <Compile Include="Defines\Offsets\AwardOffsets.cs" />
+    <Compile Include="Defines\Offsets\CityOffsets.cs" />
+    <Compile Include="Defines\Offsets\ClubOffsets.cs" />
+    <Compile Include="Defines\Offsets\CompetitionOffsets.cs" />
+    <Compile Include="Defines\Offsets\FutureTransferOffsets.cs" />
+    <Compile Include="Defines\Offsets\InjuryOffsets.cs" />
+    <Compile Include="Defines\Offsets\NationOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\ActualPersonOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\HumanManager.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\PlayerOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\StaffOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\ContractBonusOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\ContractClausesOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\ContractOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\JobAttributesOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\PersonAttributeOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\PlayerAttributeOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\PreferredMovesOffsets.cs" />
+    <Compile Include="Defines\Offsets\PersonTypes\Sub-Entities\StaffAttributeOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\ClubDebtsOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\ClubFinancesOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\ClubInfoOneOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\ClubInfoTwoOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\ClubSponsorshipDealsOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\Competitions\ActualCompetitionOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\Competitions\LeaguePrizeMoneyOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\Competitions\LeagueStageOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\Competitions\LeagueStageSettingsOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\Competitions\LeagueTableEntryOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\KitOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\NationAgreement.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\NationTaxRulesOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\RelationshipOffsets.cs" />
+    <Compile Include="Defines\Offsets\Sub-Entities\RivalNationOffsets.cs" />
+    <Compile Include="Defines\Offsets\TeamOffsets.cs" />
+    <Compile Include="Defines\Versions\IPersonVersionOffsets.cs" />
+    <Compile Include="Defines\Versions\IVersion.cs" />
+    <Compile Include="Defines\Versions\IVersionMemoryAddresses.cs" />
+    <Compile Include="Defines\Versions\IVersionPersonEnumPointers.cs" />
+    <Compile Include="Defines\Versions\Steam_21_4_0_1_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_21_4_0_1_Windows_Touch.cs" />
+    <Compile Include="Defines\Versions\Steam_21_4_0_1_Windows_Xbox.cs" />
+    <Compile Include="Defines\Versions\Steam_21_4_0_2_Windows.cs" />
+    <Compile Include="Entities\Global.cs" />
+    <Compile Include="Entities\Ingame\Agreement.cs" />
+    <Compile Include="Entities\Ingame\Award.cs" />
+    <Compile Include="Entities\Ingame\BaseObject.cs" />
+    <Compile Include="Entities\Ingame\City.cs" />
+    <Compile Include="Entities\Ingame\Club.cs" />
+    <Compile Include="Entities\Ingame\CommonName.cs" />
+    <Compile Include="Entities\Ingame\Competition.cs" />
+    <Compile Include="Entities\Ingame\Competitions\ActualCompetition.cs" />
+    <Compile Include="Entities\Ingame\Competitions\LeaguePrizeMoney.cs" />
+    <Compile Include="Entities\Ingame\Competitions\LeagueStage.cs" />
+    <Compile Include="Entities\Ingame\Competitions\LeagueStageSettings.cs" />
+    <Compile Include="Entities\Ingame\Competitions\LeagueTableEntry.cs" />
+    <Compile Include="Entities\Ingame\Continent.cs" />
+    <Compile Include="Entities\Ingame\Currency.cs" />
+    <Compile Include="Entities\Ingame\Derby.cs" />
+    <Compile Include="Entities\Ingame\FirstName.cs" />
+    <Compile Include="Entities\Ingame\Injury.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\Competitions\IActualCompetition.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\Competitions\ILeaguePrizeMoney.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\Competitions\ILeagueStage.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\Competitions\ILeagueStageSettings.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\Competitions\ILeagueTableEntry.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IAgreement.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IAward.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\ICity.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IClub.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IClubDebt.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IClubFinanceRevenueRecord.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IClubFinances.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IClubInfoOne.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IClubInfoTwo.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IClubSponsorshipDeal.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\ICommonName.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\ICompetition.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IContinent.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IContract.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IContractBonus.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IContractClause.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\ICurrency.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IDerby.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IFirstName.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IInjury.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IJobAttributes.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IKit.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\ILanguage.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\ILastName.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\ILocalRegion.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IMediaSource.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\INation.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\INationAgreement.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\INationTaxRule.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IPerson.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IPersonAttributes.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IPlayerAttributes.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IPreferredMoves.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IRelationship.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IRivalNation.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IStadium.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IStaffAttributes.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\ITeam.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\IWeather.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IActualPerson.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IAgent.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IHumanManager.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IJournalist.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\INonPlayer.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IOfficial.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IPlayer.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IPlayerStaff.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IRetired.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\ISpokesperson.cs" />
+    <Compile Include="Entities\Ingame\Interfaces\PersonTypes\IStaff.cs" />
+    <Compile Include="Entities\Ingame\Language.cs" />
+    <Compile Include="Entities\Ingame\LastName.cs" />
+    <Compile Include="Entities\Ingame\LocalRegion.cs" />
+    <Compile Include="Entities\Ingame\MediaSource.cs" />
+    <Compile Include="Entities\Ingame\Nation.cs" />
+    <Compile Include="Entities\Ingame\Person.cs" />
+    <Compile Include="Entities\Ingame\Persons\ActualPerson.cs" />
+    <Compile Include="Entities\Ingame\Persons\HumanManager.cs" />
+    <Compile Include="Entities\Ingame\Persons\Player.cs" />
+    <Compile Include="Entities\Ingame\Persons\PlayerStaff.cs" />
+    <Compile Include="Entities\Ingame\Persons\Staff.cs" />
+    <Compile Include="Entities\Ingame\Persons\Sub-Entities\Contract.cs" />
+    <Compile Include="Entities\Ingame\Persons\Sub-Entities\ContractBonus.cs" />
+    <Compile Include="Entities\Ingame\Persons\Sub-Entities\ContractClause.cs" />
+    <Compile Include="Entities\Ingame\Persons\Sub-Entities\JobAttributes.cs" />
+    <Compile Include="Entities\Ingame\Persons\Sub-Entities\PersonAttributes.cs" />
+    <Compile Include="Entities\Ingame\Persons\Sub-Entities\PlayerAttributes.cs" />
+    <Compile Include="Entities\Ingame\Persons\Sub-Entities\PreferredMoves.cs" />
+    <Compile Include="Entities\Ingame\Persons\Sub-Entities\RoleRatings.cs" />
+    <Compile Include="Entities\Ingame\Persons\Sub-Entities\RoleRatingWeights.cs" />
+    <Compile Include="Entities\Ingame\Persons\Sub-Entities\StaffAttributes.cs" />
+    <Compile Include="Entities\Ingame\Stadium.cs" />
+    <Compile Include="Entities\Ingame\Sub-Entities\ClubDebt.cs" />
+    <Compile Include="Entities\Ingame\Sub-Entities\ClubFinanceRevenueRecord.cs" />
+    <Compile Include="Entities\Ingame\Sub-Entities\ClubFinances.cs" />
+    <Compile Include="Entities\Ingame\Sub-Entities\ClubInfoOne.cs" />
+    <Compile Include="Entities\Ingame\Sub-Entities\ClubInfoTwo.cs" />
+    <Compile Include="Entities\Ingame\Sub-Entities\ClubSponsorshipDeal.cs" />
+    <Compile Include="Entities\Ingame\Sub-Entities\Kit.cs" />
+    <Compile Include="Entities\Ingame\Sub-Entities\NationAgreement.cs" />
+    <Compile Include="Entities\Ingame\Sub-Entities\NationTaxRule.cs" />
+    <Compile Include="Entities\Ingame\Sub-Entities\Relationship.cs" />
+    <Compile Include="Entities\Ingame\Sub-Entities\RivalNation.cs" />
+    <Compile Include="Entities\Ingame\Team.cs" />
+    <Compile Include="Entities\Ingame\Weather.cs" />
+    <Compile Include="Extensions\DateTimeSpan.cs" />
+    <Compile Include="Extensions\FMSFExtensions.cs" />
+    <Compile Include="FMCore.cs" />
+    <Compile Include="LogWriter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\BitwiseOperations.cs" />
+    <Compile Include="VirtualMemory\Managers\GameManager.cs" />
+    <Compile Include="VirtualMemory\Managers\ObjectManager.cs" />
+    <Compile Include="VirtualMemory\Managers\ProcessManager.cs" />
+    <Compile Include="VirtualMemory\Managers\PropertyInvoker.cs" />
+    <Compile Include="VirtualMemory\ProcessMemoryAPI.cs" />
+    <EmbeddedResource Include="Properties\FMScoutFrameworkUniversal.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Collections">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.ComponentModel">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Configuration.ConfigurationManager">
+      <Version>5.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Drawing.Common">
+      <Version>6.0.0-rc.2.21480.5</Version>
+    </PackageReference>
+    <PackageReference Include="System.Linq">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Linq.Expressions">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime">
+      <Version>4.3.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
