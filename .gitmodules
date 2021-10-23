@@ -1,0 +1,3 @@
+[submodule "vendor/MacProcessMemoryAPI"]
+	path = vendor/MacProcessMemoryAPI
+url=git@github.com:ThanosSiopoudis/MacProcessMemoryAPI.git
