@@ -79,6 +79,7 @@
     <Reference Include="System.Xaml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Defines\Offsets\AwardOffsets.cs" />
     <Compile Include="Defines\Offsets\CompetitionOffsets.cs" />
     <Compile Include="Defines\Offsets\FutureTransferOffsets.cs" />
@@ -144,7 +145,6 @@
     <Compile Include="Extensions\FMSFExtensions.cs" />
     <Compile Include="FMCore.cs" />
     <Compile Include="LogWriter.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Attributes\MemoryAddressAttribute.cs" />
     <Compile Include="Converters\DateConverter.cs" />
     <Compile Include="Defines\FMProcess.cs" />
@@ -245,6 +245,9 @@
     <Compile Include="Entities\Ingame\FirstName.cs" />
     <Compile Include="Entities\Ingame\LastName.cs" />
     <Compile Include="Entities\Ingame\CommonName.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
