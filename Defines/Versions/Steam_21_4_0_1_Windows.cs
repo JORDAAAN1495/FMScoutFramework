@@ -3,91 +3,75 @@ using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Core.Attributes;
 
 namespace FMScoutFramework.Core.Entities.GameVersions {
-  internal class Steam_18_1_3_Mac : IIVersion {
+  internal class Steam_21_4_0_1_Windows : IIVersion {
     public IVersionMemoryAddresses MemoryAddresses { get; private set; }
     public IVersionPersonEnumPointers PersonEnum { get; private set; }
     public IPersonVersionOffsets PersonOffsets { get; private set; }
     public GameManager gameManager { get; set; }
+    public bool isTouch { get; set; }
 
-    public Steam_18_1_3_Mac(GameManager gm) {
+    public Steam_21_4_0_1_Windows(GameManager gm) {
       MemoryAddresses = new VersionMemoryAddresses();
       PersonEnum = new VersionPersonEnumPointers();
       PersonOffsets = new PersonVersionOffsets();
       gameManager = gm;
+      isTouch = false;
     }
 
     public string Description {
       get {
-        return "18.1.3 Steam (Mac)";
+        return "21.4.0 (Windows)";
       }
     }
 
     public bool SupportsProcess(FMProcess process, byte[] context) {
       #region WINDOWS
 #if WINDOWS
-            FMCore.logger.LogWrite("Getting Continents count...");
-            int numberOfObjects = GameManager.TryGetPointerObjects(MemoryAddresses.MainAddress, MemoryAddresses.Continent, ProcessManager.fmProcess, MemoryAddresses.XorDistance);
-            if (numberOfObjects != 7) {
-                FMCore.logger.LogWrite("Continents Count is wrong, returning false.");
-                GameManager.LastErrorMessage = "Could not find Base Object offsets.";
-                return false;
-            }
-            FMCore.logger.LogWrite("Continent Count Match!");
-
-            FMCore.logger.LogWrite("Getting in-game date...");
-            DateTime dt = ProcessManager.ReadDateTime(process.BaseAddress + MemoryAddresses.CurrentDateTime);
-            if (dt.Year < 2015 || dt.Year > 2150) {
-                FMCore.logger.LogWrite("In-game date is invalid.");
-                GameManager.LastErrorMessage = "Invalid main date at offset.";
-                return false;
-            }
-
-            FMCore.logger.LogWrite("In-game date correct! Version is a match.");
-            if (!string.IsNullOrEmpty(process.VersionDescription)) {
-                if (process.VersionDescription != "17.3.2f970983") {
-                    return false;
-                }
-            }
-            else {
-                process.VersionDescription = "17.3.2f970983";
-            }
-            return true;
-#endif
-      #endregion
-      #region MAC
-#if MAC
       FMCore.logger.LogWrite("Getting Continents count...");
       int numberOfObjects = GameManager.TryGetPointerObjects(MemoryAddresses.MainAddress, MemoryAddresses.Continent, ProcessManager.fmProcess, MemoryAddresses.XorDistance);
       if (numberOfObjects != 7) {
-        FMCore.logger.LogWrite("Continents count is wrong, returning false.");
-        GameManager.LastErrorMessage = "Could not find Base Object offsets";
+        FMCore.logger.LogWrite("Continents Count is wrong, returning false.");
+        GameManager.LastErrorMessage = "Could not find Base Object offsets.";
         return false;
       }
       FMCore.logger.LogWrite("Continent Count Match!");
 
       FMCore.logger.LogWrite("Getting in-game date...");
       DateTime dt = ProcessManager.ReadDateTime(process.BaseAddress + MemoryAddresses.CurrentDateTime);
-      if (dt.Year < 2015 || dt.Year > 2150) {
-        FMCore.logger.LogWrite("In-game date is invalid");
-        GameManager.LastErrorMessage = "Invalid main date at offset";
+      if (dt.Year < 2018 || dt.Year > 2300) {
+        FMCore.logger.LogWrite("In-game date is invalid.");
+        GameManager.LastErrorMessage = "Invalid main date at offset.";
         return false;
       }
 
       FMCore.logger.LogWrite("In-game date correct! Version is a match.");
-      process.VersionDescription = "18.1.3f1045024";
-
+      if (!string.IsNullOrEmpty(process.VersionDescription)) {
+        if (process.VersionDescription != "21.4.0-1528944") {
+          return false;
+        }
+      }
+      else {
+        process.VersionDescription = "21.4.0-1528944";
+      }
       return true;
+#endif
+      #endregion
+      #region MAC
+#if MAC
+            return false;
 #endif
       #endregion
     }
 
     public class VersionMemoryAddresses : IVersionMemoryAddresses {
-      public Int64 MainAddress { get { return 0x47EF9C8; } }
+      // Statics
+      public Int64 MainAddress { get { return 0x702CFB0; } }
       public Int64 MainOffset { get { return 0x0; } }
-      public Int64 XorDistance { get { return 0x80; } }
+      public Int64 XorDistance { get { return 0x88; } }
       public Int64 StringOffset { get { return 0x0; } }
-      public Int64 CurrentDateTime { get { return 0x47CC3A8; } } // At BaseAddress + offset
-      public Int64 ActiveObject { get { return 0x4860888; } } // BaseAddress + offset
+      public Int64 CurrentDateTime { get { return 0x6F206A8; } } // D1 ?? E4 07  At BaseAddress + offset // 68E93A8, 69D17A0, 69D22AC, 69D39F4
+      public Int64 ActiveObject { get { return 0x70F4620; } } // BaseAddress + offset (ID: 5640119 / B7 0F 56 00)
+      public Int64 TransferManager { get { return 0x5C2F210; } }
 
       [MemoryAddressAttribute(CountLength = 4, BytesToSkip = 0x10)]
       public Int64 Award { get { return 0x10; } }
@@ -178,10 +162,10 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
     }
 
     public class VersionPersonEnumPointers : IVersionPersonEnumPointers {
-      public Int64 Player { get { return 0x46CCB40; } }         // UID: 510
-      public Int64 Staff { get { return 0x46C43F8; } }          // UID: 1
-      public Int64 PlayerStaff { get { return 0x46D2E78; } }    // UID: 5025
-      public Int64 HumanManager { get { return 0x0; } }     // NSY
+      public Int64 Player { get { return 0x6909558; } }         // UID: 3796
+      public Int64 Staff { get { return 0x68F7AA8; } }          // UID: 40
+      public Int64 PlayerStaff { get { return 0x6921640; } }    // UID: 106066
+      public Int64 HumanManager { get { return 0x68F6F98; } }     // UID: User Manager's
       public Int64 Official { get { return 0x0; } }         // NSY
       public Int64 NonPlayer { get { return 0x0; } }        // NSY
       public Int64 Retired { get { return 0x0; } }          // NSY
@@ -192,8 +176,8 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
 
     public class PersonVersionOffsets : IPersonVersionOffsets {
       public Int64 Person { get { return -0xC4; } }
-      public Int64 Player { get { return -0x1C0; } }
-      public Int64 Staff { get { return -0xC0; } }
+      public Int64 Player { get { return -0x270; } }
+      public Int64 Staff { get { return -0xD8; } }
       public Int64 NonPlayer { get { return 0x0; } }
       public Int64 PlayerStaff { get { return -0x3B8; } }
       public Int64 Official { get { return 0x0; } }
@@ -201,7 +185,7 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
       public Int64 Spokesperson { get { return 0x0; } }
       public Int64 Agent { get { return 0x0; } }
       public Int64 Journalist { get { return 0x0; } }
-      public Int64 HumanManager { get { return 0x0; } }
+      public Int64 HumanManager { get { return -0x458; } }
     }
   }
 }

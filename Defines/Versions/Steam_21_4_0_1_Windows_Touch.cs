@@ -3,14 +3,22 @@ using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Core.Attributes;
 
 namespace FMScoutFramework.Core.Entities.GameVersions {
+<<<<<<< HEAD:Defines/Versions/Steam_21_2_0_Windows_Touch.cs
+  internal class Steam_21_2_0_Touch_Windows : IIVersion {
+=======
   internal class Steam_21_4_0_1_Touch_Windows : IIVersion {
+>>>>>>> 0bb266c7e4cdb4c8e198f014e2f66b5ebbcf0631:Defines/Versions/Steam_21_4_0_1_Windows_Touch.cs
     public IVersionMemoryAddresses MemoryAddresses { get; private set; }
     public IVersionPersonEnumPointers PersonEnum { get; private set; }
     public IPersonVersionOffsets PersonOffsets { get; private set; }
     public GameManager gameManager { get; set; }
     public bool isTouch { get; set; }
 
+<<<<<<< HEAD:Defines/Versions/Steam_21_2_0_Windows_Touch.cs
+    public Steam_21_2_0_Touch_Windows(GameManager gm) {
+=======
     public Steam_21_4_0_1_Touch_Windows(GameManager gm) {
+>>>>>>> 0bb266c7e4cdb4c8e198f014e2f66b5ebbcf0631:Defines/Versions/Steam_21_4_0_1_Windows_Touch.cs
       MemoryAddresses = new VersionMemoryAddresses();
       PersonEnum = new VersionPersonEnumPointers();
       PersonOffsets = new PersonVersionOffsets();
@@ -20,7 +28,11 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
 
     public string Description {
       get {
+<<<<<<< HEAD:Defines/Versions/Steam_21_2_0_Windows_Touch.cs
+        return "21.2.0 Touch (Windows)";
+=======
         return "21.4.0 Touch (Windows)";
+>>>>>>> 0bb266c7e4cdb4c8e198f014e2f66b5ebbcf0631:Defines/Versions/Steam_21_4_0_1_Windows_Touch.cs
       }
     }
 
@@ -46,12 +58,20 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
 
       FMCore.logger.LogWrite("In-game date correct! Version is a match.");
       if (!string.IsNullOrEmpty(process.VersionDescription)) {
+<<<<<<< HEAD:Defines/Versions/Steam_21_2_0_Windows_Touch.cs
+        if (process.VersionDescription != "21.2.0-1499634") {
+=======
         if (process.VersionDescription != "21.4.0-1540190") {
+>>>>>>> 0bb266c7e4cdb4c8e198f014e2f66b5ebbcf0631:Defines/Versions/Steam_21_4_0_1_Windows_Touch.cs
           return false;
         }
       }
       else {
+<<<<<<< HEAD:Defines/Versions/Steam_21_2_0_Windows_Touch.cs
+        process.VersionDescription = "21.2.0-1499634";
+=======
         process.VersionDescription = "21.4.0-1540190";
+>>>>>>> 0bb266c7e4cdb4c8e198f014e2f66b5ebbcf0631:Defines/Versions/Steam_21_4_0_1_Windows_Touch.cs
       }
       return true;
 #endif
@@ -65,11 +85,19 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
 
     public class VersionMemoryAddresses : IVersionMemoryAddresses {
       // Statics
+<<<<<<< HEAD:Defines/Versions/Steam_21_2_0_Windows_Touch.cs
+      public Int64 MainAddress { get { return 0x6FBAF30; } }
+      public Int64 MainOffset { get { return 0x0; } }
+      public Int64 XorDistance { get { return 0x88; } }
+      public Int64 StringOffset { get { return 0x0; } }
+      public Int64 CurrentDateTime { get { return 0x6EB0668; } } // E3 ?? E4 07  At BaseAddress + offset // 68E93A8, 69D17A0, 69D22AC, 69D39F4
+=======
       public Int64 MainAddress { get { return 0x6FFA680; } }
       public Int64 MainOffset { get { return 0x0; } }
       public Int64 XorDistance { get { return 0x88; } }
       public Int64 StringOffset { get { return 0x0; } }
       public Int64 CurrentDateTime { get { return 0x6EEC7A8; } } // E3 ?? E4 07 At BaseAddress + offset // 68E93A8, 69D17A0, 69D22AC, 69D39F4
+>>>>>>> 0bb266c7e4cdb4c8e198f014e2f66b5ebbcf0631:Defines/Versions/Steam_21_4_0_1_Windows_Touch.cs
       public Int64 ActiveObject { get { return 0x7048260; } } // BaseAddress + offset (ID: 5640119 / B7 0F 56 00)
       public Int64 TransferManager { get { return 0x5C2F210; } }
 
@@ -162,10 +190,17 @@ namespace FMScoutFramework.Core.Entities.GameVersions {
     }
 
     public class VersionPersonEnumPointers : IVersionPersonEnumPointers {
+<<<<<<< HEAD:Defines/Versions/Steam_21_2_0_Windows_Touch.cs
+      public Int64 Player { get { return 0x68A55C8; } }         // UID: 11133
+      public Int64 Staff { get { return 0x6893BD8; } }          // UID: 54
+      public Int64 PlayerStaff { get { return 0x68BD478; } }    // UID: 107527
+      public Int64 HumanManager { get { return 0x68930E8; } }     // UID: User Manager's
+=======
       public Int64 Player { get { return 0x68DEBA8; } }         // UID: 11133
       public Int64 Staff { get { return 0x68CD150; } }          // UID: 54
       public Int64 PlayerStaff { get { return 0x68F6C50; } }    // UID: 107527
       public Int64 HumanManager { get { return 0x68CC650; } }     // UID: User Manager's
+>>>>>>> 0bb266c7e4cdb4c8e198f014e2f66b5ebbcf0631:Defines/Versions/Steam_21_4_0_1_Windows_Touch.cs
       public Int64 Official { get { return 0x0; } }         // NSY
       public Int64 NonPlayer { get { return 0x0; } }        // NSY
       public Int64 Retired { get { return 0x0; } }          // NSY
