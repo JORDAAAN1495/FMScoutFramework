@@ -66,9 +66,8 @@ namespace FMScoutFramework.Core.Entities.InGame {
 
     public void RemoveBan() {
       // Wipe out the array pointer
-      PropertyInvoker.Set<Int64>(PlayerOffsets.BansPtr, OriginalBytes, InjuriesPtr, DatabaseMode, 0);
-      PropertyInvoker.Set<Int64>(PlayerOffsets.BansPtr + 0x8, OriginalBytes, InjuriesPtr, DatabaseMode, 0);
-      PropertyInvoker.Set<Int64>(PlayerOffsets.BansPtr + 0xF, OriginalBytes, InjuriesPtr, DatabaseMode, 0);
+      PropertyInvoker.Set<Int64>(PlayerOffsets.BansPtr, OriginalBytes, InjuriesPtr, DatabaseMode, BansPtr);
+      PropertyInvoker.Set<Int64>(PlayerOffsets.BansPtr + 0x8, OriginalBytes, InjuriesPtr, DatabaseMode, BansPtr);
       IsBanned = false;
     }
 
@@ -162,7 +161,8 @@ namespace FMScoutFramework.Core.Entities.InGame {
     public bool IsBanned {
       get {
         if (!_isBanned) {
-          _isBanned = BansPtr > 0;
+          Int64 BanCount = ProcessManager.ReadArrayLength(BansPtr, 0x8);
+          _isBanned = BanCount > 0;
         }
 
         return _isBanned;
