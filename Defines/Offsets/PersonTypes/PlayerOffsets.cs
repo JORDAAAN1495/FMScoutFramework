@@ -23,7 +23,7 @@ namespace FMScoutFramework.Core.Offsets
 
     public const short Weight = 0x14C;
     public const short Height = 0x14E;
-    public const short Injuries = 0x50;
+    public const short Injuries = 0xF8;
     public const short BansPtr = 0x18;
     public const short Team = 0x130;
     public const short Value = 0x1d0;
