@@ -102,7 +102,7 @@
     <Compile Include="Defines\Offsets\Sub-Entities\NationAgreement.cs" />
     <Compile Include="Defines\Offsets\Sub-Entities\RelationshipOffsets.cs" />
     <Compile Include="Defines\Versions\Steam_21_4_0_1_Windows_Touch.cs" />
-    <Compile Include="Defines\Versions\Steam_21_4_0_2_Windows.cs" />
+    <Compile Include="Defines\Versions\Steam_22_0_1_Windows.cs" />
     <Compile Include="Entities\Ingame\Competitions\ActualCompetition.cs" />
     <Compile Include="Entities\Ingame\Competitions\LeagueStage.cs" />
     <Compile Include="Entities\Ingame\Competitions\LeagueTableEntry.cs" />
