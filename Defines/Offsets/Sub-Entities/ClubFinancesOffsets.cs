@@ -18,9 +18,9 @@ namespace FMScoutFramework.Core.Offsets
         public const short MatchTicketPriceRatio = 0x20;
         public const short SeasonTicketPriceRatio = 0x24;
         public const short RatioForChangeInSeasonTicketHolders = 0x28;
-        public const short EmbargoStartDate = 0x28;
-        public const short EmbargoEndDate = 0x2C;
-        public const short EmbargoAppealDate = 0x30;
+        public const short EmbargoStartDate = 0x2C;
+        public const short EmbargoEndDate = 0x30;
+        public const short EmbargoAppealDate = 0x34;
         public const short SugarDaddy = 0x3C;
         public const short RemainingBudget = 0x7A4;
         public const short SeasonTransferFunds = 0x7A8;
