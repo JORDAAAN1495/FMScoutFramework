@@ -8,9 +8,9 @@ namespace FMScoutFramework.Core.Offsets {
       this.Version = version;
     }
 
-    public const short Unsackable = 0x308;
-    public const short SquadRegistrationOptions = 0x309;
-    public const short Characteristic = 0x305;
+    public const short Unsackable = 0x414;
+    public const short SquadRegistrationOptions = 0x415;
+    public const short Characteristic = 0x411;
 
     public short ActualPerson {
       get {

@@ -200,31 +200,31 @@ namespace FMScoutFramework.Defines.Offsets {
 
     public short DivisionLevel {
       get {
-        return 0x199;
+        return 0x19b;
       }
     }
 
     public short Type {
       get {
-        return 0x19A;
+        return 0x199;
       }
     }
 
     public short UsesExtraOfficials {
       get {
-        return 0x19B;
+        return 0xF6;
       }
     }
 
     public short UsesSeatedOnlyStadiums {
       get {
-        return 0x19C;
+        return 0xF7;
       }
     }
 
     public short WageBudgetTurnoverPercentage {
       get {
-        return 0x19D;
+        return 0x19a;
       }
     }
   }

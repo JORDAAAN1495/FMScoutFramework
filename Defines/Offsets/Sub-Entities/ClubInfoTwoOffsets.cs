@@ -8,53 +8,53 @@ namespace FMScoutFramework.Core.Offsets {
     }
 
     public const short SixLetterName = 0x0;
-    public const short ClubDebts = 0x58;
+    public const short ClubDebts = 0x50;
 
     public short YearFounded {
       get {
-        return 0xE0;
+        return 0xD8;
       }
     }
 
     public short YouthImportance {
       get {
-        return 0x101;
+        return 0xF9;
       }
     }
 
     public short TrainingFacilities {
       get {
-        return 0x108;
+        return 0x100;
       }
     }
 
     public short ChairmanStatus {
       get {
-        return 0xE6;
+        return 0xDE;
       }
     }
 
     public short YouthFacilities {
       get {
-        return 0x113;
+        return 0x103;
       }
     }
 
     public short JuniorCoaching {
       get {
-        return 0x114;
+        return 0x10C;
       }
     }
 
     public short YouthRecruitment {
       get {
-        return 0x115;
+        return 0x10D;
       }
     }
 
     public short Morale {
       get {
-        return 0x107;
+        return 0xFF;
       }
     }
   }

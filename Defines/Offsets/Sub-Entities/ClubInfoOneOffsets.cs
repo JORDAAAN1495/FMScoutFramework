@@ -43,13 +43,13 @@ namespace FMScoutFramework.Core.Offsets
 
     public short ForegroundColour {
       get {
-        return 0xA0;
+        return 0xA8;
       }
     }
 
     public short BackgroundColour {
       get {
-        return 0xA8;
+        return 0xB0;
       }
     }
   }
