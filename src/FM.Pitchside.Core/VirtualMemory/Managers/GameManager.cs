@@ -98,11 +98,16 @@ namespace FM.Pitchside.Core.VirtualMemory.Managers
 
                 // Search for the current version
                 logger.LogWrite("Searching for a suitable version definition...");
-                foreach (var versionType in Assembly.GetCallingAssembly().GetTypes()
-                             .Where(t => typeof(IIVersion).IsAssignableFrom(t)))
+                var types = Assembly.GetCallingAssembly().GetTypes()
+                    .Where(t => typeof(IIVersion).IsAssignableFrom(t));
+
+                foreach (var versionType in types)
                 {
                     if (versionType.IsInterface)
+                    {
                         continue;
+                    }
+
                     var instance = (IIVersion)Activator.CreateInstance(versionType, this);
 
                     logger.LogWrite("Trying " + instance.Description);
