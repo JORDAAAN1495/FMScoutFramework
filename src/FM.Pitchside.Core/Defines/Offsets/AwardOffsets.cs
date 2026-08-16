@@ -42,11 +42,11 @@ namespace FMScoutFramework.Defines.Offsets
 
 
         public const short UseSubsForTeamAward = 0x0;
-        
+
         public const short ContinentPtr = 0x0;
         public const short NationPtr = 0x0;
         public const short CompetitionPtr = 0x0;
-        
-        
+
+
     }
 }

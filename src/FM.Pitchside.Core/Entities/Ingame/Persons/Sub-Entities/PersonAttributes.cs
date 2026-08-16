@@ -1,21 +1,22 @@
-﻿using System;
-using FMScoutFramework.Core.Entities.GameVersions;
+﻿using FMScoutFramework.Core.Entities.GameVersions;
 using FMScoutFramework.Core.Entities.InGame.Interfaces;
 using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Core.Offsets;
+using System;
 
 namespace FMScoutFramework.Core.Entities.InGame
 {
     public class PersonAttributes : BaseObject, IPersonAttributes
     {
-        public PersonAttributes (Int64 memoryAddress, IVersion version)
-            : base (memoryAddress, version)
+        public PersonAttributes(Int64 memoryAddress, IVersion version)
+            : base(memoryAddress, version)
         { }
-        public PersonAttributes (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
-            : base (memoryAddress, originalBytes, version)
+        public PersonAttributes(Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+            : base(memoryAddress, originalBytes, version)
         { }
 
-        public void Save() {
+        public void Save()
+        {
             PropertyInvoker.Set<byte>(PersonAttributeOffsets.Adaptability, OriginalBytes, MemoryAddress, DatabaseMode, Adaptability);
             PropertyInvoker.Set<byte>(PersonAttributeOffsets.Ambition, OriginalBytes, MemoryAddress, DatabaseMode, Ambition);
             PropertyInvoker.Set<byte>(PersonAttributeOffsets.Loyalty, OriginalBytes, MemoryAddress, DatabaseMode, Loyalty);
@@ -29,12 +30,16 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private bool _isDirty = false;
-        public bool isDirty {
-            get {
+        public bool isDirty
+        {
+            get
+            {
                 return _isDirty;
             }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     Version.gameManager.RaiseObjectEdited(this);
                 }
                 _isDirty = value;
@@ -42,15 +47,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private byte _adaptability = 0;
-        public byte Adaptability {
-            get {
-                if (_adaptability == 0) {
+        public byte Adaptability
+        {
+            get
+            {
+                if (_adaptability == 0)
+                {
                     _adaptability = PropertyInvoker.Get<byte>(PersonAttributeOffsets.Adaptability, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _adaptability;
             }
-            set {
-                if (_adaptability != value) {
+            set
+            {
+                if (_adaptability != value)
+                {
                     isDirty = true;
                     _adaptability = value;
                 }
@@ -58,15 +68,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private byte _ambition = 0;
-        public byte Ambition {
-            get {
-                if (_ambition == 0) {
+        public byte Ambition
+        {
+            get
+            {
+                if (_ambition == 0)
+                {
                     _ambition = PropertyInvoker.Get<byte>(PersonAttributeOffsets.Ambition, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _ambition;
             }
-            set {
-                if (_ambition != value) {
+            set
+            {
+                if (_ambition != value)
+                {
                     isDirty = true;
                     _ambition = value;
                 }
@@ -74,15 +89,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private byte _loyalty = 0;
-        public byte Loyalty {
-            get {
-                if (_loyalty == 0) {
+        public byte Loyalty
+        {
+            get
+            {
+                if (_loyalty == 0)
+                {
                     _loyalty = PropertyInvoker.Get<byte>(PersonAttributeOffsets.Loyalty, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _loyalty;
             }
-            set {
-                if (_loyalty != value) {
+            set
+            {
+                if (_loyalty != value)
+                {
                     isDirty = true;
                     _loyalty = value;
                 }
@@ -90,15 +110,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private byte _pressure = 0;
-        public byte Pressure {
-            get {
-                if (_pressure == 0) {
+        public byte Pressure
+        {
+            get
+            {
+                if (_pressure == 0)
+                {
                     _pressure = PropertyInvoker.Get<byte>(PersonAttributeOffsets.Pressure, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _pressure;
             }
-            set {
-                if (_pressure != value) {
+            set
+            {
+                if (_pressure != value)
+                {
                     isDirty = true;
                     _pressure = value;
                 }
@@ -106,15 +131,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private byte _professionalism = 0;
-        public byte Professionalism {
-            get {
-                if (_professionalism == 0) {
+        public byte Professionalism
+        {
+            get
+            {
+                if (_professionalism == 0)
+                {
                     _professionalism = PropertyInvoker.Get<byte>(PersonAttributeOffsets.Professionalism, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _professionalism;
             }
-            set {
-                if (_professionalism != value) {
+            set
+            {
+                if (_professionalism != value)
+                {
                     isDirty = true;
                     _professionalism = value;
                 }
@@ -122,15 +152,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private byte _sportsmanship = 0;
-        public byte Sportsmanship {
-            get {
-                if (_sportsmanship == 0) {
+        public byte Sportsmanship
+        {
+            get
+            {
+                if (_sportsmanship == 0)
+                {
                     _sportsmanship = PropertyInvoker.Get<byte>(PersonAttributeOffsets.Sportsmanship, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _sportsmanship;
             }
-            set {
-                if (_sportsmanship != value) {
+            set
+            {
+                if (_sportsmanship != value)
+                {
                     isDirty = true;
                     _sportsmanship = value;
                 }
@@ -138,15 +173,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private byte _temperament = 0;
-        public byte Temperament {
-            get {
-                if (_temperament == 0) {
+        public byte Temperament
+        {
+            get
+            {
+                if (_temperament == 0)
+                {
                     _temperament = PropertyInvoker.Get<byte>(PersonAttributeOffsets.Temperament, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _temperament;
             }
-            set {
-                if (_temperament != value) {
+            set
+            {
+                if (_temperament != value)
+                {
                     isDirty = true;
                     _temperament = value;
                 }
@@ -154,15 +194,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private byte _controversy = 0;
-        public byte Controversy {
-            get {
-                if (_controversy == 0) {
+        public byte Controversy
+        {
+            get
+            {
+                if (_controversy == 0)
+                {
                     _controversy = PropertyInvoker.Get<byte>(PersonAttributeOffsets.Controversy, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _controversy;
             }
-            set {
-                if (_controversy != value) {
+            set
+            {
+                if (_controversy != value)
+                {
                     isDirty = true;
                     _controversy = value;
                 }

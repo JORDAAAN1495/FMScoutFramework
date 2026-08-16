@@ -1,4 +1,6 @@
-﻿namespace FMScoutFramework.Core.Entities.InGame.Interfaces {
-    public interface IKit {
+﻿namespace FMScoutFramework.Core.Entities.InGame.Interfaces
+{
+    public interface IKit
+    {
     }
 }

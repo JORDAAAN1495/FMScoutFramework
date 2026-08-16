@@ -7,7 +7,7 @@ namespace FMScoutFramework.Core.Offsets
     {
         public IVersion Version;
 
-        public ContractOffsets (IVersion Version)
+        public ContractOffsets(IVersion Version)
         {
             this.Version = Version;
         }

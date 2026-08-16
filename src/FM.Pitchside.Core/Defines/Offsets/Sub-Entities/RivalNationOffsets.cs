@@ -1,12 +1,12 @@
-﻿using System;
-using FMScoutFramework.Core.Entities.GameVersions;
+﻿using FMScoutFramework.Core.Entities.GameVersions;
+using System;
 
 namespace FMScoutFramework.Core.Offsets
 {
     public sealed class RivalNationOffsets
     {
         public IVersion Version;
-        public RivalNationOffsets (IVersion version)
+        public RivalNationOffsets(IVersion version)
         {
             this.Version = version;
         }

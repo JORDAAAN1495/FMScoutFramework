@@ -1,15 +1,16 @@
-﻿using System;
-using System.Globalization;
-using FMScoutFramework.Core.Entities.GameVersions;
+﻿using FMScoutFramework.Core.Entities.GameVersions;
 using FMScoutFramework.Core.Entities.InGame.Interfaces;
 using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Core.Offsets;
+using System;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace FMScoutFramework.Core.Entities.InGame
 {
 
-    public enum BonusType {
+    public enum BonusType
+    {
         [Description("Appearance Fee")]
         BTAppearanceFee = 0,
         [Description("Goal Fee")]
@@ -32,14 +33,15 @@ namespace FMScoutFramework.Core.Entities.InGame
 
     public class ContractBonus : BaseObject, IContractBonus
     {
-        public ContractBonus (Int64 memoryAddress, IVersion version)
-            : base (memoryAddress, version)
+        public ContractBonus(Int64 memoryAddress, IVersion version)
+            : base(memoryAddress, version)
         { }
-        public ContractBonus (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
-            : base (memoryAddress, originalBytes, version)
+        public ContractBonus(Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+            : base(memoryAddress, originalBytes, version)
         { }
 
-        public void Save() {
+        public void Save()
+        {
             PropertyInvoker.Set<byte>(ContractBonusOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode, Type);
             PropertyInvoker.Set<int>(ContractBonusOffsets.Value, OriginalBytes, MemoryAddress, DatabaseMode, Value);
             PropertyInvoker.Set<byte>(ContractBonusOffsets.Info, OriginalBytes, MemoryAddress, DatabaseMode, Info);
@@ -47,12 +49,16 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private bool _isDirty = false;
-        public bool isDirty {
-            get {
+        public bool isDirty
+        {
+            get
+            {
                 return _isDirty;
             }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     Version.gameManager.RaiseObjectEdited(this);
                 }
                 _isDirty = value;
@@ -60,15 +66,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private byte _type = 0;
-        public byte Type {
-            get {
-                if (_type == 0) {
+        public byte Type
+        {
+            get
+            {
+                if (_type == 0)
+                {
                     _type = PropertyInvoker.Get<byte>(ContractBonusOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _type;
             }
-            set {
-                if (_type != value) {
+            set
+            {
+                if (_type != value)
+                {
                     isDirty = true;
                     _type = value;
                 }
@@ -76,15 +87,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private int _value = 0;
-        public int Value {
-            get {
-                if (_value == 0) {
+        public int Value
+        {
+            get
+            {
+                if (_value == 0)
+                {
                     _value = PropertyInvoker.Get<Int32>(ContractBonusOffsets.Value, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _value;
             }
-            set {
-                if (_value != value) {
+            set
+            {
+                if (_value != value)
+                {
                     isDirty = true;
                     _value = value;
                 }
@@ -92,16 +108,21 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private byte _info = 0;
-        public byte Info {
-            get {
-                if (_info == 0) {
+        public byte Info
+        {
+            get
+            {
+                if (_info == 0)
+                {
                     _info = PropertyInvoker.Get<byte>(ContractBonusOffsets.Info, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
 
                 return _info;
             }
-            set {
-                if (_info != value) {
+            set
+            {
+                if (_info != value)
+                {
                     isDirty = true;
                     _info = value;
                 }

@@ -14,6 +14,6 @@ namespace FMScoutFramework.Core.Entities.GameVersions
 
     internal interface IIVersion : IVersion
     {
-        bool SupportsProcess (FMProcess process, byte [] context);
+        bool SupportsProcess(FMProcess process, byte[] context);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace FMScoutFramework.Entities.Ingame.Interfaces {
-    interface IRelationship {
+﻿namespace FMScoutFramework.Entities.Ingame.Interfaces
+{
+    interface IRelationship
+    {
     }
 }

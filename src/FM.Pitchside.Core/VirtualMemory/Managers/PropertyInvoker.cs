@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using FMScoutFramework.Core.Entities;
+﻿using FMScoutFramework.Core.Entities;
 using FMScoutFramework.Core.Entities.GameVersions;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq.Expressions;
 
 namespace FMScoutFramework.Core.Managers
 {
     internal static class PropertyInvoker
     {
-        public static T Get<T> (Int64 offset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode)
+        public static T Get<T>(Int64 offset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode)
         {
             Int64 offsetToFind = memoryAddress + offset;
 
@@ -41,7 +41,7 @@ namespace FMScoutFramework.Core.Managers
                 return default(T);
         }
 
-        public static void Set<T> (Int64 offset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode, T value)
+        public static void Set<T>(Int64 offset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode, T value)
         {
             Int64 offsetToFind = memoryAddress + offset;
 
@@ -69,7 +69,8 @@ namespace FMScoutFramework.Core.Managers
                 ProcessManager.WriteBool((bool)(object)value, offsetToFind);
         }
 
-        public static void SetPersonName(string newName, ArraySegment<byte> baseObject, Int64 memoryAddress) {
+        public static void SetPersonName(string newName, ArraySegment<byte> baseObject, Int64 memoryAddress)
+        {
             // Convert the name to byte[]
             byte[] newNameByte = ProcessManager.GetFMStringBytes(newName);
             Int64 newAddress = ProcessManager.AllocateProcessBytes(newNameByte.Length + 22);
@@ -108,49 +109,54 @@ namespace FMScoutFramework.Core.Managers
         }
 
 
-        public static string GetString (Int64 offset, Int64 additionalStringOffset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode)
+        public static string GetString(Int64 offset, Int64 additionalStringOffset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode)
         {
-            return ProcessManager.ReadString (memoryAddress + offset, additionalStringOffset);
+            return ProcessManager.ReadString(memoryAddress + offset, additionalStringOffset);
         }
 
-        private static Dictionary<Type, Func<Int64, IVersion, object>> pointerDelegateDictionary = new Dictionary<Type, Func<Int64, IVersion, object>> ();
-        public static T GetPointer<T> (int offset, ArraySegment<byte> baseObject, int memoryAddress, DatabaseModeEnum databaseMode, IVersion version)
+        private static Dictionary<Type, Func<Int64, IVersion, object>> pointerDelegateDictionary = new Dictionary<Type, Func<Int64, IVersion, object>>();
+        public static T GetPointer<T>(int offset, ArraySegment<byte> baseObject, int memoryAddress, DatabaseModeEnum databaseMode, IVersion version)
             where T : class
         {
-            return GetPointer<T> ((Int64)offset, baseObject, (Int64)memoryAddress, databaseMode, version);
+            return GetPointer<T>((Int64)offset, baseObject, (Int64)memoryAddress, databaseMode, version);
         }
-        public static T GetPointer<T> (Int64 offset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode, IVersion version)
+        public static T GetPointer<T>(Int64 offset, ArraySegment<byte> baseObject, Int64 memoryAddress, DatabaseModeEnum databaseMode, IVersion version)
             where T : class
         {
             Int64 memAddress = memoryAddress + offset;
 
-            if (!pointerDelegateDictionary.ContainsKey (typeof (T))) {
+            if (!pointerDelegateDictionary.ContainsKey(typeof(T)))
+            {
                 System.Reflection.ConstructorInfo ci =
-                    typeof (T).GetConstructor (new [] { typeof (int), typeof (IVersion) });
+                    typeof(T).GetConstructor(new[] { typeof(int), typeof(IVersion) });
 
-                ParameterExpression memAddressParam = Expression.Parameter (typeof (Int64), "memAdd");
-                ParameterExpression versionParam = Expression.Parameter (typeof (IVersion), "version");
+                ParameterExpression memAddressParam = Expression.Parameter(typeof(Int64), "memAdd");
+                ParameterExpression versionParam = Expression.Parameter(typeof(IVersion), "version");
 
-                LambdaExpression lambda = Expression.Lambda (
-                    Expression.Convert (Expression.New (ci, memAddressParam, versionParam), typeof (object))
+                LambdaExpression lambda = Expression.Lambda(
+                    Expression.Convert(Expression.New(ci, memAddressParam, versionParam), typeof(object))
                     , memAddressParam, versionParam);
 
-                lock (pointerDelegateLock) {
-                    if (!pointerDelegateDictionary.ContainsKey (typeof (T))) {
-                        pointerDelegateDictionary.Add (typeof (T),
-                            (Func<Int64, IVersion, object>)lambda.Compile ());
+                lock (pointerDelegateLock)
+                {
+                    if (!pointerDelegateDictionary.ContainsKey(typeof(T)))
+                    {
+                        pointerDelegateDictionary.Add(typeof(T),
+                            (Func<Int64, IVersion, object>)lambda.Compile());
                     }
                 }
             }
 
-            if (IntPtr.Size == 4) {
-                return (T)pointerDelegateDictionary [typeof (T)].Invoke (ProcessManager.ReadInt32 (memAddress), version);
-            } 
-            else {
-                return (T)pointerDelegateDictionary [typeof (T)].Invoke (ProcessManager.ReadInt64 (memAddress), version);
+            if (IntPtr.Size == 4)
+            {
+                return (T)pointerDelegateDictionary[typeof(T)].Invoke(ProcessManager.ReadInt32(memAddress), version);
+            }
+            else
+            {
+                return (T)pointerDelegateDictionary[typeof(T)].Invoke(ProcessManager.ReadInt64(memAddress), version);
             }
         }
 
-        private static object pointerDelegateLock = new object ();
+        private static object pointerDelegateLock = new object();
     }
 }

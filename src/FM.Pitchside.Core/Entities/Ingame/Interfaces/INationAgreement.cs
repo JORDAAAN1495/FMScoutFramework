@@ -1,5 +1,7 @@
-﻿namespace FMScoutFramework.Core.Entities.InGame.Interfaces {
-  public interface INationAgreement {
+﻿namespace FMScoutFramework.Core.Entities.InGame.Interfaces
+{
+    public interface INationAgreement
+    {
 
-  }
+    }
 }

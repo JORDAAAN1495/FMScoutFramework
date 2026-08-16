@@ -6,44 +6,51 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 
-namespace FMScoutFramework.Core.Entities.InGame {
+namespace FMScoutFramework.Core.Entities.InGame
+{
 
-    public enum KitType {
+    public enum KitType
+    {
         [Description("Home")]
-        KTHome  = 0,
+        KTHome = 0,
         [Description("Away")]
-        KTAway  = 1,
+        KTAway = 1,
         [Description("Third")]
         KTThird = 2
     }
 
-    public enum KitRecordType {
+    public enum KitRecordType
+    {
         [Description("Shirt")]
-        KRTShirt    = 1,
+        KRTShirt = 1,
         [Description("Icon")]
-        KRTIcon     = 2,
+        KRTIcon = 2,
         [Description("Text")]
-        KRTText     = 3,
+        KRTText = 3,
         [Description("Shorts")]
-        KRTShorts   = 4,
+        KRTShorts = 4,
         [Description("Socks")]
-        KRTSocks    = 5,
+        KRTSocks = 5,
         [Description("Shirt")]
         KRTShirtAlt = 33
     }
 
-    public class Kit : BaseObject, IKit {
+    public class Kit : BaseObject, IKit
+    {
         private KitOffsets KitOffsets;
         public Kit(Int64 memoryAddress, IVersion version)
-            : base(memoryAddress, version) {
+            : base(memoryAddress, version)
+        {
             KitOffsets = new KitOffsets(version);
         }
-        public Kit(Int64 memoryAddress, ArraySegment<byte>originalBytes, IVersion version)
-            : base(memoryAddress, originalBytes, version) {
+        public Kit(Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+            : base(memoryAddress, originalBytes, version)
+        {
             KitOffsets = new KitOffsets(version);
         }
 
-        public void Save() {
+        public void Save()
+        {
             PropertyInvoker.Set<Color>(KitOffsets.ForegroundColour, OriginalBytes, MemoryAddress, DatabaseMode, ForegroundColour);
             PropertyInvoker.Set<Color>(KitOffsets.BackgroundColour, OriginalBytes, MemoryAddress, DatabaseMode, BackgroundColour);
             PropertyInvoker.Set<Color>(KitOffsets.OutlineColour, OriginalBytes, MemoryAddress, DatabaseMode, OutlineColour);
@@ -57,12 +64,16 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         private bool _isDirty = false;
-        public bool isDirty {
-            get {
+        public bool isDirty
+        {
+            get
+            {
                 return _isDirty;
             }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     Version.gameManager.RaiseObjectEdited(this);
                 }
                 _isDirty = value;
@@ -70,15 +81,20 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         private Color _foregroundColour;
-        public Color ForegroundColour {
-            get {
-                if (_foregroundColour.IsEmpty) {
+        public Color ForegroundColour
+        {
+            get
+            {
+                if (_foregroundColour.IsEmpty)
+                {
                     _foregroundColour = PropertyInvoker.Get<Color>(KitOffsets.ForegroundColour, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _foregroundColour;
             }
-            set {
-                if (_foregroundColour != value) {
+            set
+            {
+                if (_foregroundColour != value)
+                {
                     _foregroundColour = value;
                     isDirty = true;
                 }
@@ -86,15 +102,20 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         private Color _backgroundColour;
-        public Color BackgroundColour {
-            get {
-                if (_backgroundColour.IsEmpty) {
+        public Color BackgroundColour
+        {
+            get
+            {
+                if (_backgroundColour.IsEmpty)
+                {
                     _backgroundColour = PropertyInvoker.Get<Color>(KitOffsets.BackgroundColour, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _backgroundColour;
             }
-            set {
-                if (_backgroundColour != value) {
+            set
+            {
+                if (_backgroundColour != value)
+                {
                     _backgroundColour = value;
                     isDirty = true;
                 }
@@ -102,30 +123,40 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         private Color _outlineColour;
-        public Color OutlineColour {
-            get {
-                if (_outlineColour.IsEmpty) {
+        public Color OutlineColour
+        {
+            get
+            {
+                if (_outlineColour.IsEmpty)
+                {
                     _outlineColour = PropertyInvoker.Get<Color>(KitOffsets.OutlineColour, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _outlineColour;
             }
-            set {
-                if (_outlineColour != value) {
+            set
+            {
+                if (_outlineColour != value)
+                {
                     _outlineColour = value;
                 }
             }
         }
 
         private Color _numberColour;
-        public Color NumberColour {
-            get {
-                if (_numberColour.IsEmpty) {
+        public Color NumberColour
+        {
+            get
+            {
+                if (_numberColour.IsEmpty)
+                {
                     _numberColour = PropertyInvoker.Get<Color>(KitOffsets.NumberColour, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _numberColour;
             }
-            set {
-                if (_numberColour != value) {
+            set
+            {
+                if (_numberColour != value)
+                {
                     _numberColour = value;
                     isDirty = true;
                 }
@@ -133,15 +164,20 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         private Color _outlineNumberColour;
-        public Color OutlineNumberColour {
-            get {
-                if (_outlineNumberColour.IsEmpty) {
+        public Color OutlineNumberColour
+        {
+            get
+            {
+                if (_outlineNumberColour.IsEmpty)
+                {
                     _outlineNumberColour = PropertyInvoker.Get<Color>(KitOffsets.OutlineNumberColour, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _outlineNumberColour;
             }
-            set {
-                if (_outlineNumberColour != value) {
+            set
+            {
+                if (_outlineNumberColour != value)
+                {
                     _outlineNumberColour = value;
                     isDirty = true;
                 }
@@ -149,15 +185,20 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         private byte _outfieldPlayer = 0;
-        public byte OutfieldPlayer {
-            get {
-                if (_outfieldPlayer == 0) {
+        public byte OutfieldPlayer
+        {
+            get
+            {
+                if (_outfieldPlayer == 0)
+                {
                     _outfieldPlayer = PropertyInvoker.Get<byte>(KitOffsets.Outfield, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _outfieldPlayer;
             }
-            set {
-                if (_outfieldPlayer != value) {
+            set
+            {
+                if (_outfieldPlayer != value)
+                {
                     _outfieldPlayer = value;
                     isDirty = true;
                 }
@@ -165,15 +206,20 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         private byte _style = 0;
-        public byte Style {
-            get {
-                if (_style == 0) {
+        public byte Style
+        {
+            get
+            {
+                if (_style == 0)
+                {
                     _style = PropertyInvoker.Get<byte>(KitOffsets.Style, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _style;
             }
-            set {
-                if (_style != value) {
+            set
+            {
+                if (_style != value)
+                {
                     _style = value;
                     isDirty = true;
                 }
@@ -181,15 +227,20 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         private byte _type = 0;
-        public byte Type {
-            get {
-                if (_type == 0) {
+        public byte Type
+        {
+            get
+            {
+                if (_type == 0)
+                {
                     _type = PropertyInvoker.Get<byte>(KitOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _type;
             }
-            set {
-                if (_type != value) {
+            set
+            {
+                if (_type != value)
+                {
                     _type = value;
                     isDirty = true;
                 }
@@ -197,15 +248,20 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         private byte _recordType = 0;
-        public byte RecordType {
-            get {
-                if (_recordType == 0) {
+        public byte RecordType
+        {
+            get
+            {
+                if (_recordType == 0)
+                {
                     _recordType = PropertyInvoker.Get<byte>(KitOffsets.RecordType, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _recordType;
             }
-            set {
-                if (_recordType != value) {
+            set
+            {
+                if (_recordType != value)
+                {
                     _recordType = value;
                     isDirty = true;
                 }

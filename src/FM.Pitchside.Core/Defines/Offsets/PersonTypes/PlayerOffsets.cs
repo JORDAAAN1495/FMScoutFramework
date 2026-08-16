@@ -2,132 +2,166 @@
 
 namespace FMScoutFramework.Core.Offsets
 {
-  public sealed class PlayerOffsets
-  {
+    public sealed class PlayerOffsets
+    {
 
-    public IVersion Version;
+        public IVersion Version;
 
-    public PlayerOffsets(IVersion version) {
-      this.Version = version;
-    }
-
-    public short ActualPerson {
-      get {
-        if (Version.isTouch) {
-          return 0x1F0;
+        public PlayerOffsets(IVersion version)
+        {
+            this.Version = version;
         }
 
-        return 0x298;
-      }
-    }
+        public short ActualPerson
+        {
+            get
+            {
+                if (Version.isTouch)
+                {
+                    return 0x1F0;
+                }
 
-    public const short Weight = 0x14C;
-    public const short Height = 0x14E;
-    public const short Injuries = 0xF8;
-    public const short BansPtr = 0x18;
-    public const short Team = 0x130;
-    public const short Value = 0x1d0;
-    public const short AskingPrice = 0x1d4;
-
-    public short Fitness {
-      get {
-        if (Version.isTouch) {
-          return 0x148;
+                return 0x298;
+            }
         }
 
-        return 0x1F0;
-      }
-    }
+        public const short Weight = 0x14C;
+        public const short Height = 0x14E;
+        public const short Injuries = 0xF8;
+        public const short BansPtr = 0x18;
+        public const short Team = 0x130;
+        public const short Value = 0x1d0;
+        public const short AskingPrice = 0x1d4;
 
-    public short Jadedness {
-      get {
-        if (Version.isTouch) {
-          return 0x14A;
+        public short Fitness
+        {
+            get
+            {
+                if (Version.isTouch)
+                {
+                    return 0x148;
+                }
+
+                return 0x1F0;
+            }
         }
 
-        return 0x1F2;
-      }
-    }
+        public short Jadedness
+        {
+            get
+            {
+                if (Version.isTouch)
+                {
+                    return 0x14A;
+                }
 
-    public short Condition {
-      get {
-        if (Version.isTouch) {
-          return 0x14C;
+                return 0x1F2;
+            }
         }
 
-        return 0x1F4;
-      }
-    }
+        public short Condition
+        {
+            get
+            {
+                if (Version.isTouch)
+                {
+                    return 0x14C;
+                }
 
-    public short HomeReputation {
-      get {
-        if (Version.isTouch) {
-          return 0x14E;
+                return 0x1F4;
+            }
         }
 
-        return 0x1F6;
-      }
-    }
+        public short HomeReputation
+        {
+            get
+            {
+                if (Version.isTouch)
+                {
+                    return 0x14E;
+                }
 
-    public short CurrentReputation {
-      get {
-        if (Version.isTouch) {
-          return 0x150;
+                return 0x1F6;
+            }
         }
 
-        return 0x1F8;
-      }
-    }
+        public short CurrentReputation
+        {
+            get
+            {
+                if (Version.isTouch)
+                {
+                    return 0x150;
+                }
 
-    public short WorldReputation {
-      get {
-        if (Version.isTouch) {
-          return 0x152;
+                return 0x1F8;
+            }
         }
 
-        return 0x1FA;
-      }
-    }
+        public short WorldReputation
+        {
+            get
+            {
+                if (Version.isTouch)
+                {
+                    return 0x152;
+                }
 
-    public short CA {
-      get {
-        if (Version.isTouch) {
-          return 0x154;
+                return 0x1FA;
+            }
         }
 
-        return 0x1FC;
-      }
-    }
+        public short CA
+        {
+            get
+            {
+                if (Version.isTouch)
+                {
+                    return 0x154;
+                }
 
-    public short PA {
-      get {
-        if (Version.isTouch) {
-          return 0x156;
+                return 0x1FC;
+            }
         }
 
-        return 0x1FE;
-      }
-    }
+        public short PA
+        {
+            get
+            {
+                if (Version.isTouch)
+                {
+                    return 0x156;
+                }
 
-
-    public short PlayerAttributes {
-      get {
-        if (Version.isTouch) {
-          return 0x15C;
+                return 0x1FE;
+            }
         }
 
-        return 0x204;
-      }
-    }
 
-    public short DeclaredForNation {
-      get {
-        if (Version.isTouch) {
-          return 0x15C;
+        public short PlayerAttributes
+        {
+            get
+            {
+                if (Version.isTouch)
+                {
+                    return 0x15C;
+                }
+
+                return 0x204;
+            }
         }
 
-        return 0x257;
-      }
+        public short DeclaredForNation
+        {
+            get
+            {
+                if (Version.isTouch)
+                {
+                    return 0x15C;
+                }
+
+                return 0x257;
+            }
+        }
     }
-  }
 }

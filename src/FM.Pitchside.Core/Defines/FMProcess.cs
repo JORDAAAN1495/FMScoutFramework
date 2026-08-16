@@ -1,8 +1,8 @@
-﻿using System;
+﻿using FMScoutFramework.Core.Entities.GameVersions;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
-using FMScoutFramework.Core.Entities.GameVersions;
+using System.Text;
 
 namespace FMScoutFramework.Core
 {

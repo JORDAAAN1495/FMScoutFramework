@@ -1,10 +1,13 @@
 ﻿using FMScoutFramework.Core.Entities.GameVersions;
 
-namespace FMScoutFramework.Core.Offsets {
-    public sealed class ClubDebtsOffsets {
+namespace FMScoutFramework.Core.Offsets
+{
+    public sealed class ClubDebtsOffsets
+    {
         public IVersion Version;
 
-        public ClubDebtsOffsets(IVersion version) {
+        public ClubDebtsOffsets(IVersion version)
+        {
             this.Version = version;
         }
 

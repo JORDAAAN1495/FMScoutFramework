@@ -1,11 +1,11 @@
-﻿using System;
-using FMScoutFramework.Core.Entities.GameVersions;
+﻿using FMScoutFramework.Core.Entities.GameVersions;
 using FMScoutFramework.Core.Entities.InGame.Interfaces;
-using FMScoutFramework.Defines.Offsets;
 using FMScoutFramework.Core.Managers;
+using FMScoutFramework.Defines.Offsets;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace FMScoutFramework.Core.Entities.InGame
 {
@@ -13,15 +13,18 @@ namespace FMScoutFramework.Core.Entities.InGame
     {
         public LeagueTableEntryOffsets Offsets;
         public LeagueTableEntry(Int64 memoryAddress, IVersion version)
-            : base(memoryAddress, version){
+            : base(memoryAddress, version)
+        {
             this.Offsets = new LeagueTableEntryOffsets(Version);
         }
         public LeagueTableEntry(Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
-            : base(memoryAddress, originalBytes, version){
+            : base(memoryAddress, originalBytes, version)
+        {
             this.Offsets = new LeagueTableEntryOffsets(Version);
         }
 
-        public void Save() {
+        public void Save()
+        {
             PropertyInvoker.Set<byte>(Offsets.GoalsScored, OriginalBytes, MemoryAddress, DatabaseMode, GoalsScored.GetValueOrDefault(0));
             PropertyInvoker.Set<byte>(Offsets.GoalsAgainst, OriginalBytes, MemoryAddress, DatabaseMode, GoalsAgainst.GetValueOrDefault(0));
             PropertyInvoker.Set<sbyte>(Offsets.Points, OriginalBytes, MemoryAddress, DatabaseMode, Points.GetValueOrDefault(0));
@@ -33,12 +36,16 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private bool _isDirty = false;
-        public bool isDirty {
-            get {
+        public bool isDirty
+        {
+            get
+            {
                 return _isDirty;
             }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     Version.gameManager.RaiseObjectEdited(this);
                 }
                 _isDirty = value;
@@ -46,15 +53,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private byte? _goalsScored;
-        public byte? GoalsScored {
-            get {
-                if (_goalsScored == null) {
+        public byte? GoalsScored
+        {
+            get
+            {
+                if (_goalsScored == null)
+                {
                     _goalsScored = PropertyInvoker.Get<byte>(Offsets.GoalsScored, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _goalsScored;
             }
-            set {
-                if (_goalsScored != value) {
+            set
+            {
+                if (_goalsScored != value)
+                {
                     _goalsScored = value;
                     isDirty = true;
                 }
@@ -62,15 +74,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private byte? _goalsAgainst;
-        public byte? GoalsAgainst {
-            get {
-                if (_goalsAgainst == null) {
+        public byte? GoalsAgainst
+        {
+            get
+            {
+                if (_goalsAgainst == null)
+                {
                     _goalsAgainst = PropertyInvoker.Get<byte>(Offsets.GoalsAgainst, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _goalsAgainst;
             }
-            set {
-                if (_goalsAgainst != value) {
+            set
+            {
+                if (_goalsAgainst != value)
+                {
                     _goalsAgainst = value;
                     isDirty = true;
                 }
@@ -78,15 +95,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private sbyte? _points;
-        public sbyte? Points {
-            get {
-                if (_points == null) {
+        public sbyte? Points
+        {
+            get
+            {
+                if (_points == null)
+                {
                     _points = PropertyInvoker.Get<sbyte>(Offsets.Points, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _points;
             }
-            set {
-                if (_points != value) {
+            set
+            {
+                if (_points != value)
+                {
                     _points = value;
                     isDirty = true;
                 }
@@ -94,15 +116,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private byte? _gamesPlayed;
-        public byte? GamesPlayed {
-            get {
-                if (_gamesPlayed == null) {
+        public byte? GamesPlayed
+        {
+            get
+            {
+                if (_gamesPlayed == null)
+                {
                     _gamesPlayed = PropertyInvoker.Get<byte>(Offsets.GamesPlayed, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _gamesPlayed;
             }
-            set {
-                if (_gamesPlayed != value) {
+            set
+            {
+                if (_gamesPlayed != value)
+                {
                     _gamesPlayed = value;
                     isDirty = true;
                 }
@@ -110,15 +137,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private byte? _gamesWon;
-        public byte? GamesWon {
-            get {
-                if (_gamesWon == null) {
+        public byte? GamesWon
+        {
+            get
+            {
+                if (_gamesWon == null)
+                {
                     _gamesWon = PropertyInvoker.Get<byte>(Offsets.GamesWon, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _gamesWon;
             }
-            set {
-                if (_gamesWon != value) {
+            set
+            {
+                if (_gamesWon != value)
+                {
                     _gamesWon = value;
                     isDirty = true;
                 }
@@ -126,15 +158,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private byte? _gamesDrawn;
-        public byte? GamesDrawn {
-            get {
-                if (_gamesDrawn == null) {
+        public byte? GamesDrawn
+        {
+            get
+            {
+                if (_gamesDrawn == null)
+                {
                     _gamesDrawn = PropertyInvoker.Get<byte>(Offsets.GamesDrawn, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _gamesDrawn;
             }
-            set {
-                if (_gamesDrawn != value) {
+            set
+            {
+                if (_gamesDrawn != value)
+                {
                     _gamesDrawn = value;
                     isDirty = true;
                 }
@@ -142,23 +179,30 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private byte? _gamesLost;
-        public byte? GamesLost {
-            get {
-                if (_gamesLost == null) {
+        public byte? GamesLost
+        {
+            get
+            {
+                if (_gamesLost == null)
+                {
                     _gamesLost = PropertyInvoker.Get<byte>(Offsets.GamesLost, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _gamesLost;
             }
-            set {
-                if (_gamesLost != value) {
+            set
+            {
+                if (_gamesLost != value)
+                {
                     _gamesLost = value;
                     isDirty = true;
                 }
             }
         }
 
-        public Team Team {
-            get {
+        public Team Team
+        {
+            get
+            {
                 return PropertyInvoker.GetPointer<Team>(Offsets.Team, OriginalBytes, MemoryAddress, DatabaseMode, Version);
             }
         }

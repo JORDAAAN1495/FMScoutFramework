@@ -1,5 +1,7 @@
-﻿namespace FMScoutFramework.Core.Entities.InGame {
-    class RoleRatingWeights {
+﻿namespace FMScoutFramework.Core.Entities.InGame
+{
+    class RoleRatingWeights
+    {
         public float Corners = 0.0f;
         public float Crossing = 0.0f;
         public float Dribbling = 0.0f;

@@ -6,43 +6,47 @@ using System.Text.RegularExpressions;
 namespace FMScoutFramework
 {
     [Flags]
-    public enum AllocationType {
-        Commit      = 0x1000,
-        Reserve     = 0x2000,
-        Decommit    = 0x4000,
-        Release     = 0x8000,
-        Reset       = 0x80000,
-        Physical    = 0x400000,
-        TopDown     = 0x100000,
-        WriteWatch  = 0x200000,
-        LargePages  = 0x20000000
+    public enum AllocationType
+    {
+        Commit = 0x1000,
+        Reserve = 0x2000,
+        Decommit = 0x4000,
+        Release = 0x8000,
+        Reset = 0x80000,
+        Physical = 0x400000,
+        TopDown = 0x100000,
+        WriteWatch = 0x200000,
+        LargePages = 0x20000000
     }
 
     [Flags]
-    public enum MemoryProtection {
-        Execute                     = 0x10,
-        ExecuteRead                 = 0x20,
-        ExecuteReadWrite            = 0x40,
-        ExecuteWriteCopy            = 0x80,
-        NoAccess                    = 0x01,
-        ReadOnly                    = 0x02,
-        ReadWrite                   = 0x04,
-        WriteCopy                   = 0x08,
-        GuardModifierFlag           = 0x100,
-        NoCacheModifierFlag         = 0x200,
-        WriteCombineModifierFlag    = 0x400
+    public enum MemoryProtection
+    {
+        Execute = 0x10,
+        ExecuteRead = 0x20,
+        ExecuteReadWrite = 0x40,
+        ExecuteWriteCopy = 0x80,
+        NoAccess = 0x01,
+        ReadOnly = 0x02,
+        ReadWrite = 0x04,
+        WriteCopy = 0x08,
+        GuardModifierFlag = 0x100,
+        NoCacheModifierFlag = 0x200,
+        WriteCombineModifierFlag = 0x400
     }
 
-    public enum ProcessorArchitecture {
-        X86     = 0,
-        x64     = 9,
-        @Arm    = -1,
+    public enum ProcessorArchitecture
+    {
+        X86 = 0,
+        x64 = 9,
+        @Arm = -1,
         Itanium = 6,
         Unknown = 0xFFFF
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct SystemInfo {
+    public struct SystemInfo
+    {
         public ProcessorArchitecture ProcessorArchitecture;  // WORD
         public uint PageSize; // DWORD
         public IntPtr MinimumApplicationAddress;
@@ -56,7 +60,8 @@ namespace FMScoutFramework
     }
 
     [StructLayout(LayoutKind.Explicit)]
-    public struct SYSTEM_INFO_UNION {
+    public struct SYSTEM_INFO_UNION
+    {
         [FieldOffset(0)]
         public UInt32 OemId;
         [FieldOffset(0)]
@@ -66,7 +71,8 @@ namespace FMScoutFramework
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct SYSTEM_INFO {
+    public struct SYSTEM_INFO
+    {
         public UInt32 PageSize;
         public UInt32 MinimumApplicationAddress;
         public UInt32 MaximumApplicationAddress;

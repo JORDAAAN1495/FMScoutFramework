@@ -1,8 +1,8 @@
-﻿using System;
-using FMScoutFramework.Core.Entities.GameVersions;
+﻿using FMScoutFramework.Core.Entities.GameVersions;
+using FMScoutFramework.Core.Entities.InGame.Interfaces;
 using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Core.Offsets;
-using FMScoutFramework.Core.Entities.InGame.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace FMScoutFramework.Core.Entities.InGame
@@ -10,18 +10,19 @@ namespace FMScoutFramework.Core.Entities.InGame
     public class Club : BaseObject, IClub
     {
         public ClubOffsets ClubOffsets;
-        public Club (Int64 memoryAddress, IVersion version)
-            : base (memoryAddress, version)
+        public Club(Int64 memoryAddress, IVersion version)
+            : base(memoryAddress, version)
         {
-            this.ClubOffsets = new ClubOffsets (Version);
+            this.ClubOffsets = new ClubOffsets(Version);
         }
-        public Club (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
-            : base (memoryAddress, originalBytes, version)
+        public Club(Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+            : base(memoryAddress, originalBytes, version)
         {
-            this.ClubOffsets = new ClubOffsets (Version);
+            this.ClubOffsets = new ClubOffsets(Version);
         }
 
-        public void Save() {
+        public void Save()
+        {
             #region String Save Experiments
 
             /*
@@ -78,45 +79,60 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private bool _isDirty = false;
-        public bool isDirty {
-            get {
+        public bool isDirty
+        {
+            get
+            {
                 return _isDirty;
             }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     Version.gameManager.RaiseObjectEdited(this);
                 }
                 _isDirty = value;
             }
         }
 
-        public string Offset {
-            get {
+        public string Offset
+        {
+            get
+            {
                 return "0x" + MemoryAddress.ToString("X");
             }
         }
 
-        public Int32 RowID {
-            get {
-                return PropertyInvoker.Get<Int32> (ClubOffsets.RowID, OriginalBytes, MemoryAddress, DatabaseMode);
+        public Int32 RowID
+        {
+            get
+            {
+                return PropertyInvoker.Get<Int32>(ClubOffsets.RowID, OriginalBytes, MemoryAddress, DatabaseMode);
             }
         }
 
-        public Int32 UID {
-            get {
-                return PropertyInvoker.Get<Int32> (ClubOffsets.UID, OriginalBytes, MemoryAddress, DatabaseMode);
+        public Int32 UID
+        {
+            get
+            {
+                return PropertyInvoker.Get<Int32>(ClubOffsets.UID, OriginalBytes, MemoryAddress, DatabaseMode);
             }
         }
 
         private List<Team> _teams = new List<Team>();
-        public List<Team> Teams {
-            get {
-                if (_teams.Count == 0) {
+        public List<Team> Teams
+        {
+            get
+            {
+                if (_teams.Count == 0)
+                {
                     // Try and get the teams if it's 0
                     int teamCount = ProcessManager.ReadArrayLength(MemoryAddress + ClubOffsets.Teams);
-                    if (teamCount > 0) {
+                    if (teamCount > 0)
+                    {
                         Int64 TeamArrayAddress = PropertyInvoker.Get<Int64>(ClubOffsets.Teams, OriginalBytes, MemoryAddress, DatabaseMode);
-                        for (int i = 0; i < teamCount; i++) {
+                        for (int i = 0; i < teamCount; i++)
+                        {
                             _teams.Add(PropertyInvoker.GetPointer<Team>(0x0, OriginalBytes, (TeamArrayAddress + (i * 0x8)), DatabaseMode, Version));
                         }
                     }
@@ -127,9 +143,12 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private ClubInfoOne _infoOne;
-        public ClubInfoOne InfoOne {
-            get {
-                if (_infoOne == null) {
+        public ClubInfoOne InfoOne
+        {
+            get
+            {
+                if (_infoOne == null)
+                {
                     _infoOne = PropertyInvoker.GetPointer<ClubInfoOne>(ClubOffsets.ClubInfoOne, OriginalBytes, MemoryAddress, DatabaseMode, Version);
                 }
                 return _infoOne;
@@ -137,9 +156,12 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private ClubInfoTwo _infoTwo;
-        public ClubInfoTwo InfoTwo {
-            get {
-                if (_infoTwo == null) {
+        public ClubInfoTwo InfoTwo
+        {
+            get
+            {
+                if (_infoTwo == null)
+                {
                     _infoTwo = PropertyInvoker.GetPointer<ClubInfoTwo>(ClubOffsets.ClubInfoTwo, OriginalBytes, MemoryAddress, DatabaseMode, Version);
                 }
 
@@ -148,15 +170,20 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private string _name;
-        public string Name {
-            get {
-                if (String.IsNullOrEmpty(_name)) {
+        public string Name
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(_name))
+                {
                     _name = PropertyInvoker.GetString(ClubOffsets.Name, -1, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _name;
             }
-            set {
-                if (_name != value) {
+            set
+            {
+                if (_name != value)
+                {
                     _name = value;
                     isDirty = true;
                 }
@@ -164,9 +191,12 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private Nation _basedNation;
-        public Nation BasedNation {
-            get {
-                if (_basedNation == null) {
+        public Nation BasedNation
+        {
+            get
+            {
+                if (_basedNation == null)
+                {
                     _basedNation = PropertyInvoker.GetPointer<Nation>(ClubOffsets.BasedNation, OriginalBytes, MemoryAddress, DatabaseMode, Version);
                 }
                 return _basedNation;
@@ -174,16 +204,21 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private Int64 _cityAddress = 0x0;
-        public Int64 CityAddress {
-            get {
-                if (_cityAddress == 0x0) {
+        public Int64 CityAddress
+        {
+            get
+            {
+                if (_cityAddress == 0x0)
+                {
                     _cityAddress = PropertyInvoker.Get<Int64>(ClubOffsets.City, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
 
                 return _cityAddress;
             }
-            set {
-                if (_cityAddress != value) {
+            set
+            {
+                if (_cityAddress != value)
+                {
                     isDirty = true;
                     _cityAddress = value;
                     _city = null;
@@ -192,9 +227,12 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private City _city;
-        public City City {
-            get {
-                if (_city == null) {
+        public City City
+        {
+            get
+            {
+                if (_city == null)
+                {
                     _city = new City(CityAddress, Version);
                 }
 
@@ -202,16 +240,21 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
-        public string ShortName {
-            get {
+        public string ShortName
+        {
+            get
+            {
                 return PropertyInvoker.GetString(ClubOffsets.ShortName, -1, OriginalBytes, MemoryAddress, DatabaseMode);
             }
         }
 
         private Nation _nation;
-        public Nation Nation {
-            get {
-                if (_nation == null) {
+        public Nation Nation
+        {
+            get
+            {
+                if (_nation == null)
+                {
                     _nation = PropertyInvoker.GetPointer<Nation>(ClubOffsets.Nation, OriginalBytes, MemoryAddress, DatabaseMode, Version);
                 }
                 return _nation;
@@ -219,9 +262,12 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private ClubFinances _clubFinances;
-        public ClubFinances ClubFinances {
-            get {
-                if (_clubFinances == null) {
+        public ClubFinances ClubFinances
+        {
+            get
+            {
+                if (_clubFinances == null)
+                {
                     _clubFinances = PropertyInvoker.GetPointer<ClubFinances>(ClubOffsets.ClubFinances, OriginalBytes, MemoryAddress, DatabaseMode, Version);
                 }
                 return _clubFinances;
@@ -229,15 +275,21 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private List<ClubSponsorshipDeal> _sponsorshipDeals = new List<ClubSponsorshipDeal>();
-        public List<ClubSponsorshipDeal> SponsorshipDeals {
-            get {
-                if (_sponsorshipDeals.Count == 0) {
+        public List<ClubSponsorshipDeal> SponsorshipDeals
+        {
+            get
+            {
+                if (_sponsorshipDeals.Count == 0)
+                {
                     Int64 sponsorshipArrayPtr = PropertyInvoker.Get<Int64>(ClubOffsets.ClubSponshorshipDeals, OriginalBytes, MemoryAddress, DatabaseMode);
-                    if (sponsorshipArrayPtr > 0x0) {
+                    if (sponsorshipArrayPtr > 0x0)
+                    {
                         int sponsorshipCount = ProcessManager.ReadArrayLength(sponsorshipArrayPtr);
-                        if (sponsorshipCount > 0) {
+                        if (sponsorshipCount > 0)
+                        {
                             Int64 sponsorshipsAddress = PropertyInvoker.Get<Int64>(0x0, OriginalBytes, sponsorshipArrayPtr, DatabaseMode);
-                            for (int i = 0; i < sponsorshipCount; i++) {
+                            for (int i = 0; i < sponsorshipCount; i++)
+                            {
                                 _sponsorshipDeals.Add(PropertyInvoker.GetPointer<ClubSponsorshipDeal>(0x0, OriginalBytes, (sponsorshipsAddress + (i * 0x8)), DatabaseMode, Version));
                             }
                         }
@@ -247,7 +299,7 @@ namespace FMScoutFramework.Core.Entities.InGame
             }
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return Name;
         }

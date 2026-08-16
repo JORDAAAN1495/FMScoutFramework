@@ -1,5 +1,5 @@
-﻿using System;
-using FMScoutFramework.Core.Entities.GameVersions;
+﻿using FMScoutFramework.Core.Entities.GameVersions;
+using System;
 
 namespace FMScoutFramework.Core.Offsets
 {
@@ -7,7 +7,7 @@ namespace FMScoutFramework.Core.Offsets
     {
         public IVersion Version;
 
-        public ClubOffsets (IVersion version)
+        public ClubOffsets(IVersion version)
         {
             this.Version = version;
         }
@@ -18,11 +18,13 @@ namespace FMScoutFramework.Core.Offsets
         public const short Teams = 0x18;
         public const short ClubInfoOne = 0xB0;
 
-        public short Name {
+        public short Name
+        {
             get { return 0xB8; }
         }
 
-        public short ShortName {
+        public short ShortName
+        {
             get { return 0xC0; }
         }
 
@@ -30,30 +32,38 @@ namespace FMScoutFramework.Core.Offsets
         //    get { return 0xB0; }
         //}
 
-        public short Nation {
+        public short Nation
+        {
             get { return 0xD0; }
         }
 
-        public short BasedNation {
+        public short BasedNation
+        {
             get { return 0xD8; }
         }
 
-        public short City {
+        public short City
+        {
             get { return 0xF0; }
         }
 
-        public short ClubInfoTwo {
+        public short ClubInfoTwo
+        {
             get { return 0xF8; }
         }
 
-        public short ClubSponshorshipDeals {
-            get {
+        public short ClubSponshorshipDeals
+        {
+            get
+            {
                 return 0x128;
             }
         }
 
-        public short ClubFinances {
-            get {
+        public short ClubFinances
+        {
+            get
+            {
                 return 0x148;
             }
         }

@@ -1,14 +1,16 @@
-﻿using System;
-using FMScoutFramework.Core.Entities.GameVersions;
+﻿using FMScoutFramework.Core.Entities.GameVersions;
 using FMScoutFramework.Core.Entities.InGame.Interfaces;
-using System.ComponentModel;
-using System.Drawing;
 using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Defines.Offsets;
+using System;
+using System.ComponentModel;
+using System.Drawing;
 
-namespace FMScoutFramework.Core.Entities.InGame {
+namespace FMScoutFramework.Core.Entities.InGame
+{
     #region Enums
-    public enum AwardVotingType {
+    public enum AwardVotingType
+    {
         [Description("No Voting")]
         AVTNoVoting = 1,
         [Description("Competition Club Manager")]
@@ -27,7 +29,8 @@ namespace FMScoutFramework.Core.Entities.InGame {
         AVTAnyManager = 8
     }
 
-    public enum AwardPeriod {
+    public enum AwardPeriod
+    {
         [Description("Invalid")]
         APInvalid = 0,
         [Description("of the Week")]
@@ -48,7 +51,8 @@ namespace FMScoutFramework.Core.Entities.InGame {
         APOfTheOpeningOrClosingSeason = 8
     }
 
-    public enum AwardRecipientType {
+    public enum AwardRecipientType
+    {
         [Description("Not Set")]
         ARTNotSet = 0,
         [Description("Player")]
@@ -67,7 +71,8 @@ namespace FMScoutFramework.Core.Entities.InGame {
         ARTClubOrNation = 7
     }
 
-    public enum AwardType {
+    public enum AwardType
+    {
         [Description("Ignore")]
         ATIgnore = -1,
         [Description("Not Set")]
@@ -122,7 +127,8 @@ namespace FMScoutFramework.Core.Entities.InGame {
         ATMostCleanSheets = 44
     }
 
-    public enum AwardNumberOfPlacings {
+    public enum AwardNumberOfPlacings
+    {
         [Description("Not Set")]
         ANPNotSet = 0,
         [Description("1st to 3rd Place")]
@@ -133,7 +139,8 @@ namespace FMScoutFramework.Core.Entities.InGame {
         ANP1stAnd2ndPlace = 3
     }
 
-    public enum AwardPosition {
+    public enum AwardPosition
+    {
         [Description("Not Set")]
         APNotSet = 0,
         [Description("Goalkeeper")]
@@ -158,7 +165,8 @@ namespace FMScoutFramework.Core.Entities.InGame {
         APStriker = 16384
     }
 
-    public enum AwardSide {
+    public enum AwardSide
+    {
         [Description("Any")]
         ASAny = 0,
         [Description("Left")]
@@ -171,7 +179,8 @@ namespace FMScoutFramework.Core.Entities.InGame {
         ASLeftOrRight = 4
     }
 
-    public enum AwardVotingFormat {
+    public enum AwardVotingFormat
+    {
         [Description("Not Set")]
         AVFNotSet = 0,
         [Description("One Vote Each")]
@@ -182,7 +191,8 @@ namespace FMScoutFramework.Core.Entities.InGame {
         AVF5VotesWeighted = 3
     }
 
-    public enum AwardRunBy {
+    public enum AwardRunBy
+    {
         [Description("Not Set")]
         ARBNotSet = 0,
         [Description("FA")]
@@ -193,7 +203,8 @@ namespace FMScoutFramework.Core.Entities.InGame {
         ARBPlayers = 3
     }
 
-    public enum AwardBased {
+    public enum AwardBased
+    {
         [Description("Not Set")]
         ABNotSet = 0,
         [Description("Foreign Based Nationals")]
@@ -214,7 +225,8 @@ namespace FMScoutFramework.Core.Entities.InGame {
         ABContinentAnyone = 8
     }
 
-    public enum AwardUseStatsFrom {
+    public enum AwardUseStatsFrom
+    {
         [Description("Not Set")]
         AUSNotSet = 0,
         [Description("Domestic League")]
@@ -233,7 +245,8 @@ namespace FMScoutFramework.Core.Entities.InGame {
         AUSOverall = 7
     }
 
-    public enum AwardAllowPreviousWinner {
+    public enum AwardAllowPreviousWinner
+    {
         [Description("Not Set")]
         APWNotSet = 0,
         [Description("Never")]
@@ -245,13 +258,15 @@ namespace FMScoutFramework.Core.Entities.InGame {
     }
     #endregion
 
-    public class Award : BaseObject, IAward {
+    public class Award : BaseObject, IAward
+    {
         public Award(Int64 memoryAddress, IVersion version)
             : base(memoryAddress, version) { }
         public Award(Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
             : base(memoryAddress, originalBytes, version) { }
 
-        public void Save() {
+        public void Save()
+        {
             PropertyInvoker.Set<DateTime>(AwardOffsets.AwardDate, OriginalBytes, MemoryAddress, DatabaseMode, AwardDate);
             PropertyInvoker.Set<DateTime>(AwardOffsets.AnnouncementDate, OriginalBytes, MemoryAddress, DatabaseMode, AnnouncementDate);
             PropertyInvoker.Set<short>(AwardOffsets.Position, OriginalBytes, MemoryAddress, DatabaseMode, Position);
@@ -280,40 +295,53 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         private bool _isDirty = false;
-        public bool isDirty {
-            get {
+        public bool isDirty
+        {
+            get
+            {
                 return _isDirty;
             }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     Version.gameManager.RaiseObjectEdited(this);
                 }
                 _isDirty = value;
             }
         }
 
-        public int RowID {
-            get {
+        public int RowID
+        {
+            get
+            {
                 return PropertyInvoker.Get<Int32>(AwardOffsets.RowID, OriginalBytes, MemoryAddress, DatabaseMode);
             }
         }
 
-        public int UID {
-            get {
+        public int UID
+        {
+            get
+            {
                 return PropertyInvoker.Get<Int32>(AwardOffsets.UID, OriginalBytes, MemoryAddress, DatabaseMode);
             }
         }
 
-        public string Offset {
-            get {
+        public string Offset
+        {
+            get
+            {
                 return "0x" + MemoryAddress.ToString("X");
             }
         }
 
-        public string Name {
-            get {
+        public string Name
+        {
+            get
+            {
                 string name = PropertyInvoker.GetString(AwardOffsets.Name, -1, OriginalBytes, MemoryAddress, DatabaseMode);
-                if (string.IsNullOrEmpty(name)) {
+                if (string.IsNullOrEmpty(name))
+                {
                     name = "-";
                 }
 
@@ -321,10 +349,13 @@ namespace FMScoutFramework.Core.Entities.InGame {
             }
         }
 
-        public string ShortName {
-            get {
+        public string ShortName
+        {
+            get
+            {
                 string shortname = PropertyInvoker.GetString(AwardOffsets.ShortName, -1, OriginalBytes, MemoryAddress, DatabaseMode);
-                if (string.IsNullOrEmpty(shortname)) {
+                if (string.IsNullOrEmpty(shortname))
+                {
                     shortname = "-";
                 }
 
@@ -333,15 +364,20 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         private DateTime _awardDate;
-        public DateTime AwardDate {
-            get {
-                if (_awardDate.Year < 1900) {
+        public DateTime AwardDate
+        {
+            get
+            {
+                if (_awardDate.Year < 1900)
+                {
                     _awardDate = PropertyInvoker.Get<DateTime>(AwardOffsets.AwardDate, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _awardDate;
             }
-            set {
-                if (_awardDate != value) {
+            set
+            {
+                if (_awardDate != value)
+                {
                     isDirty = true;
                     _awardDate = value;
                 }
@@ -349,141 +385,182 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         private DateTime _announcementDate;
-        public DateTime AnnouncementDate {
-            get {
-                if (_announcementDate.Year < 1900) {
+        public DateTime AnnouncementDate
+        {
+            get
+            {
+                if (_announcementDate.Year < 1900)
+                {
                     _announcementDate = PropertyInvoker.Get<DateTime>(AwardOffsets.AnnouncementDate, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _announcementDate;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _announcementDate = value;
             }
         }
 
         private short _position = -1;
-        public short Position {
-            get {
-                if (_position == -1) {
+        public short Position
+        {
+            get
+            {
+                if (_position == -1)
+                {
                     _position = PropertyInvoker.Get<short>(AwardOffsets.Position, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _position;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _position = value;
             }
         }
 
         private byte _runBy = 0;
-        public byte RunBy {
-            get {
-                if (_runBy == 0) {
+        public byte RunBy
+        {
+            get
+            {
+                if (_runBy == 0)
+                {
                     _runBy = PropertyInvoker.Get<byte>(AwardOffsets.RunBy, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _runBy;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _runBy = value;
             }
         }
 
         private byte _period = 0;
-        public byte Period {
-            get {
-                if (_period == 0) {
+        public byte Period
+        {
+            get
+            {
+                if (_period == 0)
+                {
                     _period = PropertyInvoker.Get<byte>(AwardOffsets.Period, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _period;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _period = value;
             }
         }
 
         private byte _voting = 0;
-        public byte Voting {
-            get {
-                if (_voting == 0) {
+        public byte Voting
+        {
+            get
+            {
+                if (_voting == 0)
+                {
                     _voting = PropertyInvoker.Get<byte>(AwardOffsets.Voting, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _voting;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _voting = value;
             }
         }
 
         private byte _based = 0;
-        public byte Based {
-            get {
-                if (_based == 0) {
+        public byte Based
+        {
+            get
+            {
+                if (_based == 0)
+                {
                     _based = PropertyInvoker.Get<byte>(AwardOffsets.Based, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _based;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _based = value;
             }
         }
 
         private byte _votingFormat = 0;
-        public byte VotingFormat {
-            get {
-                if (_votingFormat == 0) {
+        public byte VotingFormat
+        {
+            get
+            {
+                if (_votingFormat == 0)
+                {
                     _votingFormat = PropertyInvoker.Get<byte>(AwardOffsets.VotingFormat, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _votingFormat;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _votingFormat = value;
             }
         }
 
         private byte _recipientType = 0;
-        public byte RecipientType {
-            get {
-                if (_recipientType == 0) {
+        public byte RecipientType
+        {
+            get
+            {
+                if (_recipientType == 0)
+                {
                     _recipientType = PropertyInvoker.Get<byte>(AwardOffsets.RecipientType, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _recipientType;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _recipientType = value;
             }
         }
 
         private byte _formation = 0;
-        public byte Formation {
-            get {
-                if (_formation == 0) {
+        public byte Formation
+        {
+            get
+            {
+                if (_formation == 0)
+                {
                     _formation = PropertyInvoker.Get<byte>(AwardOffsets.Formation, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _formation;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _formation = value;
             }
         }
 
         private Color _foregroundColour;
-        public Color ForegroundColour {
-            get {
-                if (_foregroundColour == Color.Empty) {
+        public Color ForegroundColour
+        {
+            get
+            {
+                if (_foregroundColour == Color.Empty)
+                {
                     _foregroundColour = PropertyInvoker.Get<Color>(AwardOffsets.ForegroundColour, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _foregroundColour;
             }
-            set {
-                if (_foregroundColour != value) {
+            set
+            {
+                if (_foregroundColour != value)
+                {
                     isDirty = true;
                     _foregroundColour = value;
                 }
@@ -491,15 +568,20 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         private Color _backgroundColour;
-        public Color BackgroundColour {
-            get {
-                if (_backgroundColour == Color.Empty) {
+        public Color BackgroundColour
+        {
+            get
+            {
+                if (_backgroundColour == Color.Empty)
+                {
                     _backgroundColour = PropertyInvoker.Get<Color>(AwardOffsets.BackgroundColour, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _backgroundColour;
             }
-            set {
-                if (_backgroundColour != value) {
+            set
+            {
+                if (_backgroundColour != value)
+                {
                     isDirty = true;
                     _backgroundColour = value;
                 }
@@ -507,15 +589,20 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         private Color _trimColour;
-        public Color TrimColour {
-            get {
-                if (_trimColour == Color.Empty) {
+        public Color TrimColour
+        {
+            get
+            {
+                if (_trimColour == Color.Empty)
+                {
                     _trimColour = PropertyInvoker.Get<Color>(AwardOffsets.TrimColour, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _trimColour;
             }
-            set {
-                if (_trimColour != value) {
+            set
+            {
+                if (_trimColour != value)
+                {
                     isDirty = true;
                     _trimColour = value;
                 }
@@ -523,178 +610,229 @@ namespace FMScoutFramework.Core.Entities.InGame {
         }
 
         private byte _awardReputation = 0;
-        public byte AwardReputation {
-            get {
-                if (_awardReputation == 0) {
+        public byte AwardReputation
+        {
+            get
+            {
+                if (_awardReputation == 0)
+                {
                     _awardReputation = PropertyInvoker.Get<byte>(AwardOffsets.AwardReputation, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _awardReputation;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _awardReputation = value;
             }
         }
 
         private sbyte _type = -1;
-        public sbyte Type {
-            get {
-                if (_type == -1) {
+        public sbyte Type
+        {
+            get
+            {
+                if (_type == -1)
+                {
                     _type = PropertyInvoker.Get<sbyte>(AwardOffsets.Type, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _type;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _type = value;
             }
         }
 
         private byte _minimumAge = 0;
-        public byte MinimumAge {
-            get {
-                if (_minimumAge == 0) {
+        public byte MinimumAge
+        {
+            get
+            {
+                if (_minimumAge == 0)
+                {
                     _minimumAge = PropertyInvoker.Get<byte>(AwardOffsets.MinimumAge, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _minimumAge;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _minimumAge = value;
             }
         }
 
         private byte _maximumAge = 0;
-        public byte MaximumAge {
-            get {
-                if (_maximumAge == 0) {
+        public byte MaximumAge
+        {
+            get
+            {
+                if (_maximumAge == 0)
+                {
                     _maximumAge = PropertyInvoker.Get<byte>(AwardOffsets.MaximumAge, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _maximumAge;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _maximumAge = value;
             }
         }
 
         private byte _winnerHomeReputation = 0;
-        public byte WinnerHomeReputation {
-            get {
-                if (_winnerHomeReputation == 0) {
+        public byte WinnerHomeReputation
+        {
+            get
+            {
+                if (_winnerHomeReputation == 0)
+                {
                     _winnerHomeReputation = PropertyInvoker.Get<byte>(AwardOffsets.WinnerHomeReputation, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _winnerHomeReputation;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _winnerHomeReputation = value;
             }
         }
 
         private byte _winnerWorldReputation = 0;
-        public byte WinnerWorldReputation {
-            get {
-                if (_winnerWorldReputation == 0) {
+        public byte WinnerWorldReputation
+        {
+            get
+            {
+                if (_winnerWorldReputation == 0)
+                {
                     _winnerWorldReputation = PropertyInvoker.Get<byte>(AwardOffsets.WinnerWorldReputation, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _winnerWorldReputation;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _winnerWorldReputation = value;
             }
         }
 
         private byte _placings = 0;
-        public byte Placings {
-            get {
-                if (_placings == 0) {
+        public byte Placings
+        {
+            get
+            {
+                if (_placings == 0)
+                {
                     _placings = PropertyInvoker.Get<byte>(AwardOffsets.Placings, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _placings;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _placings = value;
             }
         }
 
         private byte _side = 0;
-        public byte Side {
-            get {
-                if (_side == 0) {
+        public byte Side
+        {
+            get
+            {
+                if (_side == 0)
+                {
                     _side = PropertyInvoker.Get<byte>(AwardOffsets.Side, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _side;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _side = value;
             }
         }
 
         private byte _useStatsFrom = 0;
-        public byte UseStatsFrom {
-            get {
-                if (_useStatsFrom == 0) {
+        public byte UseStatsFrom
+        {
+            get
+            {
+                if (_useStatsFrom == 0)
+                {
                     _useStatsFrom = PropertyInvoker.Get<byte>(AwardOffsets.UseStatsFrom, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _useStatsFrom;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _useStatsFrom = value;
             }
         }
 
         private byte _minimumPercentageOfGamesPlayed = 0;
-        public byte MinimumPercentageOfGamesPlayed {
-            get {
-                if (_minimumPercentageOfGamesPlayed == 0) {
+        public byte MinimumPercentageOfGamesPlayed
+        {
+            get
+            {
+                if (_minimumPercentageOfGamesPlayed == 0)
+                {
                     _minimumPercentageOfGamesPlayed = PropertyInvoker.Get<byte>(AwardOffsets.MinimumPercentageOfGamesPlayed, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _minimumPercentageOfGamesPlayed;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _minimumPercentageOfGamesPlayed = value;
             }
         }
 
         private byte _allowPreviousWinner = 0;
-        public byte AllowPreviousWinner {
-            get {
-                if (_allowPreviousWinner == 0) {
+        public byte AllowPreviousWinner
+        {
+            get
+            {
+                if (_allowPreviousWinner == 0)
+                {
                     _allowPreviousWinner = PropertyInvoker.Get<byte>(AwardOffsets.AllowPreviousWinner, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _allowPreviousWinner;
             }
-            set {
+            set
+            {
                 isDirty = true;
                 _allowPreviousWinner = value;
             }
         }
 
-        public int NationID {
-            get {
+        public int NationID
+        {
+            get
+            {
                 return 0;
             }
         }
 
-        public int CompetitionID {
-            get {
+        public int CompetitionID
+        {
+            get
+            {
                 return 0;
             }
         }
 
-        public int ContinentID {
-            get {
+        public int ContinentID
+        {
+            get
+            {
                 return 0;
             }
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return Name + " (0x" + MemoryAddress.ToString("X") + ")";
         }
     }

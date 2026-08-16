@@ -1,5 +1,5 @@
-﻿using System;
-using FMScoutFramework.Core.Entities.GameVersions;
+﻿using FMScoutFramework.Core.Entities.GameVersions;
+using System;
 
 namespace FMScoutFramework.Core.Offsets
 {
@@ -8,36 +8,43 @@ namespace FMScoutFramework.Core.Offsets
 
         public IVersion Version;
 
-        public StaffOffsets (IVersion version)
+        public StaffOffsets(IVersion version)
         {
             this.Version = version;
         }
 
-        public short StaffAttributes {
+        public short StaffAttributes
+        {
             get { return 0x8; }
         }
 
-        public short HomeReputation {
+        public short HomeReputation
+        {
             get { return 0xBC; }
         }
 
-        public short CurrentReputation {
+        public short CurrentReputation
+        {
             get { return 0xBE; }
         }
 
-        public short WorldReputation {
+        public short WorldReputation
+        {
             get { return 0xC0; }
         }
 
-        public short CurrentAbility {
+        public short CurrentAbility
+        {
             get { return 0xC2; }
         }
 
-        public short PotentialAbility {
+        public short PotentialAbility
+        {
             get { return 0xC4; }
         }
 
-        public short ActualPerson {
+        public short ActualPerson
+        {
             get { return 0x100; }
         }
     }

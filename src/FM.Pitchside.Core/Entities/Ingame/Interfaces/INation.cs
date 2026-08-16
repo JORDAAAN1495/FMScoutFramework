@@ -5,9 +5,9 @@
         int UID { get; }
         string Name { get; }
         string NationalityName { get; }
-        RivalNation [] RivalNations { get; }
+        RivalNation[] RivalNations { get; }
         string ShortName { get; }
-        Team [] Teams { get; }
+        Team[] Teams { get; }
         string ThreeLetterName { get; }
     }
 }

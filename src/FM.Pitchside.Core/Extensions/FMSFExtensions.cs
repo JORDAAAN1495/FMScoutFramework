@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
-using System.Reflection;
 
 namespace FMScoutFramework.Extensions
 {
@@ -30,7 +30,8 @@ namespace FMScoutFramework.Extensions
             return value.ToString();
         }
 
-        public static byte[] GetFMBytes<T>(this T value) {
+        public static byte[] GetFMBytes<T>(this T value)
+        {
             dynamic obj = value;
             return BitConverter.GetBytes(obj);
         }

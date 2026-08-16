@@ -1,4 +1,6 @@
-﻿namespace FMScoutFramework.Core.Entities.InGame.Interfaces {
-    interface IClubDebt {
+﻿namespace FMScoutFramework.Core.Entities.InGame.Interfaces
+{
+    interface IClubDebt
+    {
     }
 }

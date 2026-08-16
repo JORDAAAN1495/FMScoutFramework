@@ -35,12 +35,14 @@ namespace FMScoutFramework
 #if MAC
             return;
 #else
-            try {
+            try
+            {
                 txtWriter.Write("{0} {1}", DateTime.Now.ToLongTimeString(),
                     DateTime.Now.ToLongDateString());
                 txtWriter.WriteLine(":{0}", logMessage);
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
             }
 #endif
         }

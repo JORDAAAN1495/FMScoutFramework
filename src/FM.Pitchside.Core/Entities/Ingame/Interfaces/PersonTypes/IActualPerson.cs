@@ -1,7 +1,9 @@
 ﻿using System;
 
-namespace FMScoutFramework.Core.Entities.InGame.Interfaces {
-    public interface IActualPerson {
+namespace FMScoutFramework.Core.Entities.InGame.Interfaces
+{
+    public interface IActualPerson
+    {
         DateTime DateOfBirth { get; set; }
         string FirstName { get; }
         string LastName { get; }
@@ -9,7 +11,7 @@ namespace FMScoutFramework.Core.Entities.InGame.Interfaces {
         City CityOfBirth { get; }
         Nation Nation { get; }
         PersonAttributes Attributes { get; }
-        byte Ethnicity { get; set; }  
+        byte Ethnicity { get; set; }
         byte HairColour { get; set; }
         sbyte SkinTone { get; set; }
         Contract Contract { get; }

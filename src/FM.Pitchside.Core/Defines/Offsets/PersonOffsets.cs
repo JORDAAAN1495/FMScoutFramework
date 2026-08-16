@@ -1,5 +1,5 @@
-﻿using System;
-using FMScoutFramework.Core.Entities.GameVersions;
+﻿using FMScoutFramework.Core.Entities.GameVersions;
+using System;
 
 namespace FMScoutFramework.Core.Offsets
 {
@@ -7,19 +7,23 @@ namespace FMScoutFramework.Core.Offsets
     {
         public IVersion Version;
 
-        public PersonOffsets (IVersion version)
+        public PersonOffsets(IVersion version)
         {
             this.Version = version;
         }
 
-        public short RowID {
-            get {
+        public short RowID
+        {
+            get
+            {
                 return 0x8;
             }
         }
 
-        public short UID {
-            get {
+        public short UID
+        {
+            get
+            {
                 return 0xC;
             }
         }

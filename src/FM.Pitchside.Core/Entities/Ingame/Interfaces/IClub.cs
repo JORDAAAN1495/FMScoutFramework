@@ -1,6 +1,7 @@
 ﻿namespace FMScoutFramework.Core.Entities.InGame.Interfaces
 {
-    public interface IClub {
-        
+    public interface IClub
+    {
+
     }
 }

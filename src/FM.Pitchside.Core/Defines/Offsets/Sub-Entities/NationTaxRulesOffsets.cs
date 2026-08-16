@@ -1,5 +1,5 @@
-﻿using System;
-using FMScoutFramework.Core.Entities.GameVersions;
+﻿using FMScoutFramework.Core.Entities.GameVersions;
+using System;
 
 namespace FMScoutFramework.Core.Offsets
 {
@@ -7,7 +7,7 @@ namespace FMScoutFramework.Core.Offsets
     {
         public IVersion Version;
 
-        public NationTaxRulesOffsets (IVersion version)
+        public NationTaxRulesOffsets(IVersion version)
         {
             this.Version = version;
         }

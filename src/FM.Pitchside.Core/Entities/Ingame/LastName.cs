@@ -1,6 +1,6 @@
-﻿using System;
-using FMScoutFramework.Core.Entities.GameVersions;
+﻿using FMScoutFramework.Core.Entities.GameVersions;
 using FMScoutFramework.Core.Entities.InGame.Interfaces;
+using System;
 
 namespace FMScoutFramework.Core.Entities.InGame
 {

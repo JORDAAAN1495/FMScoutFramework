@@ -1,8 +1,8 @@
-﻿using System;
+﻿using FMScoutFramework.Core.Entities.GameVersions;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using FMScoutFramework.Core.Entities.GameVersions;
 using System.ComponentModel;
+using System.Text;
 
 namespace FMScoutFramework.Core.Entities.InGame
 {
@@ -41,14 +41,14 @@ namespace FMScoutFramework.Core.Entities.InGame
         public IVersion Version;
         public DatabaseModeEnum DatabaseMode;
 
-        public BaseObject (Int64 memoryAddress, IVersion version)
+        public BaseObject(Int64 memoryAddress, IVersion version)
         {
             MemoryAddress = memoryAddress;
             Version = version;
             DatabaseMode = DatabaseModeEnum.Realtime;
         }
 
-        public BaseObject (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+        public BaseObject(Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
         {
             MemoryAddress = memoryAddress;
             OriginalBytes = originalBytes;
@@ -56,9 +56,9 @@ namespace FMScoutFramework.Core.Entities.InGame
             Version = version;
         }
 
-        public static bool operator == (BaseObject a, BaseObject b)
+        public static bool operator ==(BaseObject a, BaseObject b)
         {
-            if (System.Object.ReferenceEquals (a, b))
+            if (System.Object.ReferenceEquals(a, b))
                 return true;
 
             if (((object)a == null) || ((object)b == null))
@@ -73,9 +73,9 @@ namespace FMScoutFramework.Core.Entities.InGame
                 return false;
         }
 
-        public static bool operator != (BaseObject a, BaseObject b)
+        public static bool operator !=(BaseObject a, BaseObject b)
         {
-            if (!System.Object.ReferenceEquals (a, b))
+            if (!System.Object.ReferenceEquals(a, b))
                 return true;
 
             if (((object)a == null) || ((object)b == null))
@@ -90,14 +90,14 @@ namespace FMScoutFramework.Core.Entities.InGame
                 return false;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return this.MemoryAddress.GetHashCode ();
+            return this.MemoryAddress.GetHashCode();
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
-            return base.GetHashCode ().Equals (obj.GetHashCode ());
+            return base.GetHashCode().Equals(obj.GetHashCode());
         }
     }
 }

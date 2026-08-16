@@ -1,5 +1,5 @@
-﻿using System;
-using FMScoutFramework.Core.Attributes;
+﻿using FMScoutFramework.Core.Attributes;
+using System;
 
 namespace FMScoutFramework.Core.Entities.GameVersions
 {

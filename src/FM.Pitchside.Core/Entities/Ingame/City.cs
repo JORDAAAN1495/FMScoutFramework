@@ -1,8 +1,8 @@
-﻿using System;
-using FMScoutFramework.Core.Entities.GameVersions;
+﻿using FMScoutFramework.Core.Entities.GameVersions;
 using FMScoutFramework.Core.Entities.InGame.Interfaces;
 using FMScoutFramework.Core.Managers;
 using FMScoutFramework.Defines.Offsets;
+using System;
 using System.ComponentModel;
 
 namespace FMScoutFramework.Core.Entities.InGame
@@ -45,14 +45,15 @@ namespace FMScoutFramework.Core.Entities.InGame
 
     public class City : BaseObject, ICity
     {
-        public City (Int64 memoryAddress, IVersion version)
-            : base (memoryAddress, version)
+        public City(Int64 memoryAddress, IVersion version)
+            : base(memoryAddress, version)
         { }
-        public City (Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
-            : base (memoryAddress, originalBytes, version)
+        public City(Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
+            : base(memoryAddress, originalBytes, version)
         { }
 
-        public void Save() {
+        public void Save()
+        {
             PropertyInvoker.Set<short>(CityOffsets.Attraction, OriginalBytes, MemoryAddress, DatabaseMode, Attraction);
             PropertyInvoker.Set<float>(CityOffsets.Latitude, OriginalBytes, MemoryAddress, DatabaseMode, Latitude);
             PropertyInvoker.Set<float>(CityOffsets.Longitude, OriginalBytes, MemoryAddress, DatabaseMode, Longitude);
@@ -62,137 +63,179 @@ namespace FMScoutFramework.Core.Entities.InGame
         }
 
         private bool _isDirty = false;
-        public bool isDirty {
-            get {
+        public bool isDirty
+        {
+            get
+            {
                 return _isDirty;
             }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     Version.gameManager.RaiseObjectEdited(this);
                 }
                 _isDirty = value;
             }
         }
 
-        public int UID {
-            get {
-                return PropertyInvoker.Get<Int32> (CityOffsets.ID, OriginalBytes, MemoryAddress, DatabaseMode);
+        public int UID
+        {
+            get
+            {
+                return PropertyInvoker.Get<Int32>(CityOffsets.ID, OriginalBytes, MemoryAddress, DatabaseMode);
             }
         }
 
-        public int RowID {
-            get {
-                return PropertyInvoker.Get<Int32> (CityOffsets.RowID, OriginalBytes, MemoryAddress, DatabaseMode);
+        public int RowID
+        {
+            get
+            {
+                return PropertyInvoker.Get<Int32>(CityOffsets.RowID, OriginalBytes, MemoryAddress, DatabaseMode);
             }
         }
 
-        public string Offset {
-            get {
+        public string Offset
+        {
+            get
+            {
                 return "0x" + MemoryAddress.ToString("X");
             }
         }
 
-        public string Name {
-            get {
-                return PropertyInvoker.GetString (CityOffsets.Name, -1, OriginalBytes, MemoryAddress, DatabaseMode);
+        public string Name
+        {
+            get
+            {
+                return PropertyInvoker.GetString(CityOffsets.Name, -1, OriginalBytes, MemoryAddress, DatabaseMode);
             }
         }
 
-        public string CitizenName {
-            get {
+        public string CitizenName
+        {
+            get
+            {
                 return "-";
             }
         }
 
-        public Int32 WeatherPtr {
-            get {
+        public Int32 WeatherPtr
+        {
+            get
+            {
                 return 0;
             }
         }
 
-        public Int32 NationPtr {
-            get {
+        public Int32 NationPtr
+        {
+            get
+            {
                 return 0;
             }
         }
 
-        public Int32 LanguagePtr {
-            get {
+        public Int32 LanguagePtr
+        {
+            get
+            {
                 return 0;
             }
         }
 
-        public Int32 LocalRegionPtr {
-            get {
+        public Int32 LocalRegionPtr
+        {
+            get
+            {
                 return 0;
             }
         }
 
         private short _attraction = 0;
-        public short Attraction {
-            get {
-                if (_attraction == 0) {
+        public short Attraction
+        {
+            get
+            {
+                if (_attraction == 0)
+                {
                     _attraction = PropertyInvoker.Get<short>(CityOffsets.Attraction, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _attraction;
             }
-            set {
+            set
+            {
                 _attraction = value;
                 isDirty = true;
             }
         }
 
         private float _latitude = 0.0f;
-        public float Latitude {
-            get {
-                if (_latitude == 0.0f) {
+        public float Latitude
+        {
+            get
+            {
+                if (_latitude == 0.0f)
+                {
                     _latitude = PropertyInvoker.Get<float>(CityOffsets.Latitude, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _latitude;
             }
-            set {
+            set
+            {
                 _latitude = value;
                 isDirty = true;
             }
         }
 
         private float _longitude = 0.0f;
-        public float Longitude {
-            get {
-                if (_longitude == 0.0f) {
-                   _longitude = PropertyInvoker.Get<float>(CityOffsets.Longitude, OriginalBytes, MemoryAddress, DatabaseMode);
+        public float Longitude
+        {
+            get
+            {
+                if (_longitude == 0.0f)
+                {
+                    _longitude = PropertyInvoker.Get<float>(CityOffsets.Longitude, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _longitude;
             }
-            set {
+            set
+            {
                 _longitude = value;
                 isDirty = true;
             }
         }
 
         private short _altitude = 0;
-        public short Altitude {
-            get {
-                if (_altitude == 0) {
+        public short Altitude
+        {
+            get
+            {
+                if (_altitude == 0)
+                {
                     _altitude = PropertyInvoker.Get<short>(CityOffsets.Altitude, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _altitude;
             }
-            set {
+            set
+            {
                 _altitude = value;
                 isDirty = true;
             }
         }
 
         private short _inhabitantsRange = 0;
-        public short InhabitantsRange {
-            get {
-                if (_inhabitantsRange == 0) {
+        public short InhabitantsRange
+        {
+            get
+            {
+                if (_inhabitantsRange == 0)
+                {
                     _inhabitantsRange = PropertyInvoker.Get<short>(CityOffsets.InhabitantsRange, OriginalBytes, MemoryAddress, DatabaseMode);
                 }
                 return _inhabitantsRange;
             }
-            set {
+            set
+            {
                 _inhabitantsRange = value;
                 isDirty = true;
             }

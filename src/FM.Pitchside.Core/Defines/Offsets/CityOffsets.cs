@@ -6,7 +6,7 @@ namespace FMScoutFramework.Defines.Offsets
     {
         public IVersion Version;
 
-        public CityOffsets (IVersion version)
+        public CityOffsets(IVersion version)
         {
             this.Version = version;
         }
