@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FMScoutFramework.Core.Offsets
+﻿namespace FM.Pitchside.Core.Defines.Offsets
 {
     public sealed class InjuryOffsets
     {

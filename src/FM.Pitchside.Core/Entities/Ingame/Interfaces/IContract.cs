@@ -1,7 +1,7 @@
-﻿using System;
+﻿using FM.Pitchside.Core.Entities.Ingame.Persons.Sub_Entities;
 using System.Collections.Generic;
 
-namespace FMScoutFramework.Core.Entities.InGame.Interfaces
+namespace FM.Pitchside.Core.Entities.Ingame.Interfaces
 {
     public interface IContract
     {

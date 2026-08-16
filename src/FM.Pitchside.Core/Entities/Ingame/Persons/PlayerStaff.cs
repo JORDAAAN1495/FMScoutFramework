@@ -1,8 +1,7 @@
-﻿using FMScoutFramework.Core.Entities.GameVersions;
-using FMScoutFramework.Core.Entities.InGame.Interfaces;
-using System;
+﻿using FM.Pitchside.Core.Defines.Versions;
+using FM.Pitchside.Core.Entities.Ingame.Interfaces.PersonTypes;
 
-namespace FMScoutFramework.Core.Entities.InGame
+namespace FM.Pitchside.Core.Entities.Ingame.Persons
 {
     public class PlayerStaff : BaseObject, IPlayerStaff
     {

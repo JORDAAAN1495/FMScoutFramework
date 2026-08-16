@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FMScoutFramework.Core.Entities.GameVersions
+﻿namespace FM.Pitchside.Core.Defines.Versions
 {
     public interface IPersonVersionOffsets
     {

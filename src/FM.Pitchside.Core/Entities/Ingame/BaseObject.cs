@@ -1,10 +1,7 @@
-﻿using FMScoutFramework.Core.Entities.GameVersions;
-using System;
-using System.Collections.Generic;
+﻿using FM.Pitchside.Core.Defines.Versions;
 using System.ComponentModel;
-using System.Text;
 
-namespace FMScoutFramework.Core.Entities.InGame
+namespace FM.Pitchside.Core.Entities.Ingame
 {
     public enum Formation
     {

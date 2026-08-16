@@ -1,10 +1,7 @@
-﻿using FMScoutFramework.Core.Entities.GameVersions;
-using System;
-using System.Collections.Generic;
+﻿using FM.Pitchside.Core.Defines.Versions;
 using System.Diagnostics;
-using System.Text;
 
-namespace FMScoutFramework.Core
+namespace FM.Pitchside.Core.Defines
 {
     /// <summary>
     /// Holder for the Football Manager process

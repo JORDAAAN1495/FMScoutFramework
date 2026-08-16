@@ -1,8 +1,7 @@
-﻿using FMScoutFramework.Core.Entities.GameVersions;
-using FMScoutFramework.Core.Managers;
-using System;
+﻿using FM.Pitchside.Core.Defines.Versions;
+using FM.Pitchside.Core.VirtualMemory.Managers;
 
-namespace FMScoutFramework.Core.Entities
+namespace FM.Pitchside.Core.Entities
 {
     public class Global
     {

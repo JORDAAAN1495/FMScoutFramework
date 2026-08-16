@@ -1,4 +1,4 @@
-﻿namespace FMScoutFramework.Core.Entities.InGame.Interfaces
+﻿namespace FM.Pitchside.Core.Entities.Ingame.Interfaces.Competitions
 {
     public interface ILeagueTableEntry
     {

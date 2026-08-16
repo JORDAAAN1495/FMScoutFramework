@@ -1,14 +1,11 @@
-﻿using FMScoutFramework.Extensions;
-using System;
+﻿using FM.Pitchside.Core.Converters;
+using FM.Pitchside.Core.Defines;
+using FM.Pitchside.Core.Extensions;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Runtime.InteropServices;
 using System.Text;
 
-namespace FMScoutFramework.Core.Managers
+namespace FM.Pitchside.Core.VirtualMemory.Managers
 {
     public static class ProcessManager
     {
@@ -301,7 +298,7 @@ namespace FMScoutFramework.Core.Managers
             int years = ReadInt16(address + 0x2);
             if (days > 0 && days <= 366 && years > 1900 && years < 2150)
             {
-                return FMScoutFramework.Core.Converters.DateConverter.FromFmDateTime((days - 1), years);
+                return DateConverter.FromFmDateTime((days - 1), years);
             }
             return new DateTime(1900, 1, 1);
         }

@@ -1,6 +1,6 @@
-﻿using FMScoutFramework.Core.Managers;
+﻿using FM.Pitchside.Core.VirtualMemory.Managers;
 
-namespace FMScoutFramework.Core.Entities.GameVersions
+namespace FM.Pitchside.Core.Defines.Versions
 {
     public interface IVersion
     {

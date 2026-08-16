@@ -1,6 +1,6 @@
-﻿using FMScoutFramework.Core.Entities.GameVersions;
+﻿using FM.Pitchside.Core.Defines.Versions;
 
-namespace FMScoutFramework.Core.Offsets
+namespace FM.Pitchside.Core.Defines.Offsets.PersonTypes.Sub_Entities
 {
 
     public sealed class JobAttributesOffsets

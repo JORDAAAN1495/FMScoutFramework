@@ -1,9 +1,6 @@
-﻿using System;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
+﻿using System.Runtime.InteropServices;
 
-namespace FMScoutFramework
+namespace FM.Pitchside.Core.VirtualMemory
 {
     [Flags]
     public enum AllocationType

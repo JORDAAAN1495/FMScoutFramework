@@ -1,14 +1,9 @@
-﻿using FMScoutFramework.Core.Entities.GameVersions;
-using FMScoutFramework.Core.Managers;
-using FMScoutFramework.Core.Offsets;
-using FMScoutFramework.Entities.Ingame.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FM.Pitchside.Core.Defines.Offsets.PersonTypes.Sub_Entities;
+using FM.Pitchside.Core.Defines.Versions;
+using FM.Pitchside.Core.Entities.Ingame.Interfaces;
+using FM.Pitchside.Core.VirtualMemory.Managers;
 
-namespace FMScoutFramework.Core.Entities.InGame
+namespace FM.Pitchside.Core.Entities.Ingame.Persons.Sub_Entities
 {
     public class PreferredMoves : BaseObject, IPreferredMoves
     {

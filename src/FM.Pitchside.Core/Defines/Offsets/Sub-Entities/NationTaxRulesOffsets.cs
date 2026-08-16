@@ -1,7 +1,6 @@
-﻿using FMScoutFramework.Core.Entities.GameVersions;
-using System;
+﻿using FM.Pitchside.Core.Defines.Versions;
 
-namespace FMScoutFramework.Core.Offsets
+namespace FM.Pitchside.Core.Defines.Offsets.Sub_Entities
 {
     public sealed class NationTaxRulesOffsets
     {

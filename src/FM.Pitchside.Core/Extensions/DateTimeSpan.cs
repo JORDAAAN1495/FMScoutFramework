@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FMScoutFramework.Extensions
+﻿namespace FM.Pitchside.Core.Extensions
 {
     public struct DateTimeSpan
     {

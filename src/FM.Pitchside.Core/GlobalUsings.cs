@@ -1,1 +1,7 @@
-﻿global using System;
+﻿global using FM.Pitchside.Core.Entities;
+global using FM.Pitchside.Core.Entities.Ingame;
+global using FM.Pitchside.Core.Entities.Ingame.Persons;
+global using FM.Pitchside.Core.VirtualMemory.Managers;
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;

@@ -1,13 +1,10 @@
-﻿using FMScoutFramework.Core.Entities.GameVersions;
-using FMScoutFramework.Core.Entities.InGame.Interfaces;
-using FMScoutFramework.Core.Managers;
-using FMScoutFramework.Defines.Offsets;
-using System;
+﻿using FM.Pitchside.Core.Defines.Offsets.Sub_Entities.Competitions;
+using FM.Pitchside.Core.Defines.Versions;
+using FM.Pitchside.Core.Entities.Ingame.Interfaces.Competitions;
+using FM.Pitchside.Core.VirtualMemory.Managers;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 
-namespace FMScoutFramework.Core.Entities.InGame
+namespace FM.Pitchside.Core.Entities.Ingame.Competitions
 {
     public class ActualCompetition : BaseObject, IActualCompetition
     {

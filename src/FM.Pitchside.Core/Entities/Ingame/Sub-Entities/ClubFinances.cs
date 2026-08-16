@@ -1,12 +1,10 @@
-﻿using FMScoutFramework.Core.Entities.GameVersions;
-using FMScoutFramework.Core.Entities.InGame.Interfaces;
-using FMScoutFramework.Core.Managers;
-using FMScoutFramework.Core.Offsets;
-using FMScoutFramework.Core.Utilities;
-using System;
+﻿using FM.Pitchside.Core.Defines.Offsets.Sub_Entities;
+using FM.Pitchside.Core.Defines.Versions;
+using FM.Pitchside.Core.Entities.Ingame.Interfaces;
+using FM.Pitchside.Core.VirtualMemory.Managers;
 using System.ComponentModel;
 
-namespace FMScoutFramework.Core.Entities.InGame
+namespace FM.Pitchside.Core.Entities.Ingame.Sub_Entities
 {
     public enum SugarDaddyType
     {

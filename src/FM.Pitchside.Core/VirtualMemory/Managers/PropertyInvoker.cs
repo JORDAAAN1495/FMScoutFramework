@@ -1,11 +1,10 @@
-﻿using FMScoutFramework.Core.Entities;
-using FMScoutFramework.Core.Entities.GameVersions;
-using System;
+﻿using FM.Pitchside.Core.Defines.Versions;
+using FM.Pitchside.Core.Entities;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq.Expressions;
 
-namespace FMScoutFramework.Core.Managers
+namespace FM.Pitchside.Core.VirtualMemory.Managers
 {
     internal static class PropertyInvoker
     {

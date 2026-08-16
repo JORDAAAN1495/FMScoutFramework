@@ -1,4 +1,4 @@
-﻿namespace FMScoutFramework.Core.Entities.InGame
+﻿namespace FM.Pitchside.Core.Entities.Ingame.Persons.Sub_Entities
 {
     class RoleRatingWeights
     {

@@ -1,4 +1,6 @@
-﻿namespace FMScoutFramework.Core.Entities.InGame.Interfaces
+﻿using FM.Pitchside.Core.Entities.Ingame.Sub_Entities;
+
+namespace FM.Pitchside.Core.Entities.Ingame.Interfaces
 {
     public interface INation
     {

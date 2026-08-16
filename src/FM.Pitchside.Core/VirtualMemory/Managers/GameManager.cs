@@ -1,9 +1,10 @@
-﻿using FMScoutFramework.Core.Entities.GameVersions;
+﻿using FM.Pitchside.Core.Defines;
+using FM.Pitchside.Core.Defines.Versions;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-namespace FMScoutFramework.Core.Managers
+namespace FM.Pitchside.Core.VirtualMemory.Managers
 {
     public class GameManager
     {

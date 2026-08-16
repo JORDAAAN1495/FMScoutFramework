@@ -1,6 +1,6 @@
-﻿using FMScoutFramework.Core.Entities.GameVersions;
+﻿using FM.Pitchside.Core.Defines.Versions;
 
-namespace FMScoutFramework.Defines.Offsets
+namespace FM.Pitchside.Core.Defines.Offsets.Sub_Entities.Competitions
 {
     public sealed class LeagueTableEntryOffsets
     {

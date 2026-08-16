@@ -1,8 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Reflection;
 
-namespace FMScoutFramework
+namespace FM.Pitchside.Core
 {
     public class LogWriter
     {

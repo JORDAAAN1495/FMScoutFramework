@@ -1,10 +1,10 @@
-﻿using FMScoutFramework.Core.Entities.GameVersions;
-using FMScoutFramework.Core.Entities.InGame.Interfaces;
-using FMScoutFramework.Core.Managers;
-using FMScoutFramework.Core.Offsets;
-using System;
+﻿using FM.Pitchside.Core.Defines.Offsets.PersonTypes;
+using FM.Pitchside.Core.Defines.Versions;
+using FM.Pitchside.Core.Entities.Ingame.Interfaces.PersonTypes;
+using FM.Pitchside.Core.Entities.Ingame.Persons.Sub_Entities;
+using FM.Pitchside.Core.VirtualMemory.Managers;
 
-namespace FMScoutFramework.Core.Entities.InGame
+namespace FM.Pitchside.Core.Entities.Ingame.Persons
 {
     public class Staff : Person, IStaff
     {

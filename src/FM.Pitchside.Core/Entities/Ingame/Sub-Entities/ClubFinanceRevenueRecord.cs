@@ -1,4 +1,4 @@
-﻿namespace FMScoutFramework.Core.Entities.InGame
+﻿namespace FM.Pitchside.Core.Entities.Ingame.Sub_Entities
 {
     public class ClubFinanceRevenueRecord
     {

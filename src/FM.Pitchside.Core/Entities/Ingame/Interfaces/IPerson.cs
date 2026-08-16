@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FMScoutFramework.Core.Entities.InGame.Interfaces
+﻿namespace FM.Pitchside.Core.Entities.Ingame.Interfaces
 {
     public interface IPerson
     {

@@ -1,4 +1,4 @@
-﻿namespace FMScoutFramework.Entities.Ingame.Interfaces
+﻿namespace FM.Pitchside.Core.Entities.Ingame.Interfaces
 {
     public interface IPreferredMoves
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FMScoutFramework.Core.Attributes
+﻿namespace FM.Pitchside.Core.Attributes
 {
     internal class MemoryAddressAttribute : Attribute
     {

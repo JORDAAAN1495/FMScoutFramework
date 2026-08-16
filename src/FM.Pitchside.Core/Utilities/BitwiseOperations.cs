@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FMScoutFramework.Core.Utilities
+﻿namespace FM.Pitchside.Core.Utilities
 {
     public class BitwiseOperations
     {

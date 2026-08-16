@@ -1,6 +1,6 @@
-﻿using FMScoutFramework.Core.Entities.GameVersions;
+﻿using FM.Pitchside.Core.Defines.Versions;
 
-namespace FMScoutFramework.Core.Offsets
+namespace FM.Pitchside.Core.Defines.Offsets.PersonTypes
 {
     public sealed class HumanManagerOffsets
     {

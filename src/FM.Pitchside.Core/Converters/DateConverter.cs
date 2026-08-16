@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FMScoutFramework.Core.Converters
+﻿namespace FM.Pitchside.Core.Converters
 {
     public static class DateConverter
     {

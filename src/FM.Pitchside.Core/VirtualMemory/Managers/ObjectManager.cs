@@ -1,16 +1,13 @@
-﻿using FMScoutFramework.Core.Attributes;
-using FMScoutFramework.Core.Entities;
-using FMScoutFramework.Core.Entities.GameVersions;
-using FMScoutFramework.Core.Entities.InGame;
-using System;
+﻿using FM.Pitchside.Core.Defines.Versions;
+using FM.Pitchside.Core.Entities;
+using FM.Pitchside.Core.Entities.Ingame;
+using FM.Pitchside.Core.Entities.Ingame.Persons;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Threading.Tasks;
 
-namespace FMScoutFramework.Core.Managers
+namespace FM.Pitchside.Core.VirtualMemory.Managers
 {
     public static class ObjectManagerWrapper
     {
