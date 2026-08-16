@@ -1,6 +1,16 @@
 <Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="Mac" />
+    <Platform Name="x64" />
+  </Configurations>
   <Folder Name="/Solution Items/">
     <File Path="CLAUDE.md" />
   </Folder>
-  <Project Path="FMScoutFramework.csproj" Id="1fc10484-cd3e-48d7-bb5f-161bfeb8a269" />
+  <Folder Name="/src/">
+    <Project Path="FMScoutFramework.csproj" Id="1fc10484-cd3e-48d7-bb5f-161bfeb8a269">
+      <Platform Solution="*|Mac" Project="Mac" />
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+  </Folder>
 </Solution>
