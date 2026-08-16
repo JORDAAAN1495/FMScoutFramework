@@ -642,7 +642,8 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
             }
         }
 
-        public override string ToString() => $"{ActualPerson.FirstName} {ActualPerson.LastName}";
+        public override string ToString() =>
+            $"{ActualPerson.FirstName} {ActualPerson.LastName} ({RoleRatings.PreferredPosition})";
 
         public void Dispose()
         {
