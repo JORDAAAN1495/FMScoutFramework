@@ -1,10 +1,7 @@
-﻿using System;
-using System.Reflection;
+﻿using FMScoutFramework.Core.Entities.GameVersions;
 using System.Diagnostics;
 using System.Linq;
-using System.Configuration;
-using System.IO;
-using FMScoutFramework.Core.Entities.GameVersions;
+using System.Reflection;
 
 namespace FMScoutFramework.Core.Managers
 {

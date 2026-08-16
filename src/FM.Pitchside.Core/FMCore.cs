@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FM.Pitchside.Core;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -104,10 +105,13 @@ namespace FMScoutFramework.Core
 
         public void LoadData(bool refreshPersonCache)
         {
-            if (CheckProcessAndGame())
+            if (!CheckProcessAndGame())
             {
-                LoadDataForCheckedGame(refreshPersonCache);
+                throw new FMProcessNotFoundException(
+                    GameManager.LastErrorMessage ?? "Could not find a running Football Manager process.");
             }
+
+            LoadDataForCheckedGame(refreshPersonCache);
 
             GameLoaded();
         }
