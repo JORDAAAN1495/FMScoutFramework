@@ -93,6 +93,17 @@ namespace FM.Pitchside.Core.VirtualMemory.Managers
                 fmProcess.Process = activeProcess;
                 fmProcess.BaseAddress = activeProcess.MainModule.BaseAddress.ToInt64();
 
+                // Newer (Unity/IL2CPP) builds keep the actual simulation state in a native
+                // plugin module rather than the main executable - address all offsets relative
+                // to that module when it's loaded. Older native builds have no such module, so
+                // this leaves fmProcess.BaseAddress pointing at the main exe as before.
+                var pluginModule = activeProcess.Modules.Cast<ProcessModule>()
+                    .FirstOrDefault(m => string.Equals(m.ModuleName, "game_plugin.dll", StringComparison.OrdinalIgnoreCase));
+                if (pluginModule != null)
+                {
+                    fmProcess.BaseAddress = pluginModule.BaseAddress.ToInt64();
+                }
+
                 ProcessManager.fmProcess = fmProcess;
                 fmProcess.VersionDescription = fmProcess.Process.MainModule.FileVersionInfo.ProductVersion;
 

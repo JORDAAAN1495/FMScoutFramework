@@ -11,4 +11,7 @@
   <Folder Name="/src/demos/">
     <Project Path="src/demos/FM.Pitchside.Demo/FM.Pitchside.Demo.csproj" Id="2c09f1f8-3c39-4f4a-b5f5-55b2b3e367bf" />
   </Folder>
+  <Folder Name="/src/tools/">
+    <Project Path="src/tools/FM.Pitchside.OffsetFinder/FM.Pitchside.OffsetFinder.csproj" />
+  </Folder>
 </Solution>
