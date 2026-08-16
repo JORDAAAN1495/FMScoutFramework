@@ -6,36 +6,37 @@ using System.Configuration;
 using System.IO;
 using FMScoutFramework.Core.Entities.GameVersions;
 
-namespace FMScoutFramework.Core.Managers {
-  public class GameManager {
-    private bool fmLoaded;
-    private bool fmLoading;
-    public LogWriter logger { get; set; }
+namespace FMScoutFramework.Core.Managers
+{
+    public class GameManager
+    {
+        private bool fmLoaded;
+        private bool fmLoading;
+        public LogWriter logger { get; set; }
 
-    public GameManager() {
-      this.fmLoaded = false;
-      this.fmLoading = false;
-    }
+        public GameManager()
+        {
+            this.fmLoaded = false;
+            this.fmLoading = false;
+        }
 
-    public bool FMLoaded {
-      get { return fmLoaded; }
-    }
+        public bool FMLoaded
+        {
+            get { return fmLoaded; }
+        }
 
-    public bool FMLoading {
-      get { return fmLoading; }
-      set { fmLoading = value; }
-    }
+        public bool FMLoading
+        {
+            get { return fmLoading; }
+            set { fmLoading = value; }
+        }
 
-    public static string LastErrorMessage {
-      get; set;
-    }
+        public static string LastErrorMessage { get; set; }
 
-    public IVersion Version {
-      get;
-      private set;
-    }
+        public IVersion Version { get; private set; }
 
-    #region MAC
+        #region MAC
+
 #if MAC
     public bool findFMProcess() {
       FMProcess fmProcess = new FMProcess();
@@ -71,19 +72,24 @@ namespace FMScoutFramework.Core.Managers {
       return fmLoaded;
     }
 #endif
-    #endregion
-    #region WINDOWS
-#if WINDOWS
-        public bool findFMProcess() {
-            FMProcess fmProcess = new FMProcess ();
-            Process[] fmProcesses = Process.GetProcessesByName ("fm");
 
-            if (fmProcesses.Length > 0) {
+        #endregion
+
+        #region WINDOWS
+
+#if WINDOWS
+        public bool findFMProcess()
+        {
+            FMProcess fmProcess = new FMProcess();
+            Process[] fmProcesses = Process.GetProcessesByName("fm");
+
+            if (fmProcesses.Length > 0)
+            {
                 logger.LogWrite("Found > 0 FM Processes.");
-                Process activeProcess = fmProcesses [0];
+                Process activeProcess = fmProcesses[0];
 
                 logger.LogWrite("Opening Process for r/w.");
-                fmProcess.Pointer = ProcessMemoryAPI.OpenProcess (0x001F0FFF, 1, (uint)activeProcess.Id);
+                fmProcess.Pointer = ProcessMemoryAPI.OpenProcess(0x001F0FFF, 1, (uint)activeProcess.Id);
                 // fmProcess.EndPoint = ProcessManager.GetProcessEndPoint (fmProcess.Pointer);
                 logger.LogWrite("Process is now open.");
                 fmProcess.Process = activeProcess;
@@ -94,18 +100,22 @@ namespace FMScoutFramework.Core.Managers {
 
                 // Search for the current version
                 logger.LogWrite("Searching for a suitable version definition...");
-                foreach (var versionType in Assembly.GetCallingAssembly().GetTypes().Where(t => typeof(IIVersion).IsAssignableFrom(t))) {
+                foreach (var versionType in Assembly.GetCallingAssembly().GetTypes()
+                             .Where(t => typeof(IIVersion).IsAssignableFrom(t)))
+                {
                     if (versionType.IsInterface)
                         continue;
-                    var instance = (IIVersion)Activator.CreateInstance (versionType, this);
+                    var instance = (IIVersion)Activator.CreateInstance(versionType, this);
 
                     logger.LogWrite("Trying " + instance.Description);
-                    if (instance.SupportsProcess (fmProcess, null)) {
+                    if (instance.SupportsProcess(fmProcess, null))
+                    {
                         Version = instance;
                         logger.LogWrite("Matched!");
                         break;
                     }
-                    else {
+                    else
+                    {
                         logger.LogWrite("Not a match.");
                     }
                 }
@@ -113,52 +123,62 @@ namespace FMScoutFramework.Core.Managers {
                 fmLoaded = (Version != null);
             }
 
-            if (!fmLoaded) {
+            if (!fmLoaded)
+            {
                 LastErrorMessage = "Could not find a compatible Football Manager version.";
             }
 
             return fmLoaded;
         }
 #endif
-    #endregion
 
-    public static void detectNewMainAddress() {
-      // Find the FM process
-      FMProcess fmProcess = new FMProcess();
-      Process[] fmProcesses = Process.GetProcessesByName("fm");
-      Process activeProcess = fmProcesses[0];
+        #endregion
 
-      fmProcess.Pointer = ProcessMemoryAPI.OpenProcess(0x001F0FF, 1, (uint)activeProcess.Id);
-      fmProcess.Process = activeProcess;
-      fmProcess.BaseAddress = activeProcess.MainModule.BaseAddress.ToInt64();
+        public static void detectNewMainAddress()
+        {
+            // Find the FM process
+            FMProcess fmProcess = new FMProcess();
+            Process[] fmProcesses = Process.GetProcessesByName("fm");
+            Process activeProcess = fmProcesses[0];
 
-      ProcessManager.fmProcess = fmProcess;
-      fmProcess.VersionDescription = fmProcess.Process.MainModule.FileVersionInfo.ProductVersion;
+            fmProcess.Pointer = ProcessMemoryAPI.OpenProcess(0x001F0FF, 1, (uint)activeProcess.Id);
+            fmProcess.Process = activeProcess;
+            fmProcess.BaseAddress = activeProcess.MainModule.BaseAddress.ToInt64();
 
-      // Start searching for the main address in reverse. Find "Albpetrol Patos", the first club in the clubs table
+            ProcessManager.fmProcess = fmProcess;
+            fmProcess.VersionDescription = fmProcess.Process.MainModule.FileVersionInfo.ProductVersion;
+
+            // Start searching for the main address in reverse. Find "Albpetrol Patos", the first club in the clubs table
+        }
+
+        public static int TryGetPointerObjects(Int64 address, Int64 offset, FMProcess fmProcess)
+        {
+            return GameManager.TryGetPointerObjects(address, offset, fmProcess);
+        }
+
+        public static int TryGetPointerObjects(Int64 address, Int64 offset, FMProcess fmProcess, Int64 xor)
+        {
+            Int64 memoryAddress = fmProcess.BaseAddress + address;
+            memoryAddress = ProcessManager.ReadInt64(memoryAddress + offset);
+            memoryAddress = ProcessManager.ReadInt64(memoryAddress + xor);
+            int numberOfObjects = ProcessManager.ReadArrayLength(memoryAddress);
+            return numberOfObjects;
+        }
+
+        #region Events
+
+        public delegate void ObjectEditedDelegate(object item);
+
+        public event ObjectEditedDelegate ObjectEdited;
+
+        internal void RaiseObjectEdited(object item)
+        {
+            if (this.ObjectEdited != null)
+            {
+                this.ObjectEdited(item);
+            }
+        }
+
+        #endregion
     }
-
-    public static int TryGetPointerObjects(Int64 address, Int64 offset, FMProcess fmProcess) {
-      return GameManager.TryGetPointerObjects(address, offset, fmProcess);
-    }
-
-    public static int TryGetPointerObjects(Int64 address, Int64 offset, FMProcess fmProcess, Int64 xor) {
-      Int64 memoryAddress = fmProcess.BaseAddress + address;
-      memoryAddress = ProcessManager.ReadInt64(memoryAddress + offset);
-      memoryAddress = ProcessManager.ReadInt64(memoryAddress + xor);
-      int numberOfObjects = ProcessManager.ReadArrayLength(memoryAddress);
-      return numberOfObjects;
-    }
-
-    #region Events
-    public delegate void ObjectEditedDelegate(object item);
-    public event ObjectEditedDelegate ObjectEdited;
-
-    internal void RaiseObjectEdited(object item) {
-      if (this.ObjectEdited != null) {
-        this.ObjectEdited(item);
-      }
-    }
-    #endregion
-  }
 }

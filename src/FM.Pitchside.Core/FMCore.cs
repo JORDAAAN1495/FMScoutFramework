@@ -18,54 +18,105 @@ namespace FMScoutFramework.Core
 
         public event Action GameLoaded = () => { };
 
-        public FMCore (DatabaseModeEnum databaseMode)
+        public FMCore(DatabaseModeEnum databaseMode)
         {
             DatabaseMode = databaseMode;
         }
 
-        public FMCore ()
+        public FMCore()
         {
             DatabaseMode = DatabaseModeEnum.Realtime;
         }
 
         #region Objects
-        public IEnumerable<Award> Awards { get { return GetListFromStore<Award>(); } }
-        public IEnumerable<Agreement> Agreements { get { return GetListFromStore<Agreement>(); } }
-        public IEnumerable<Continent> Continents { get { return GetListFromStore<Continent> (); } }
-        public IEnumerable<City> Cities { get { return GetListFromStore<City> (); } }
-        public IEnumerable<Club> Clubs { get { return GetListFromStore<Club> (); } }
-        public IEnumerable<Nation> Nations { get { return GetListFromStore<Nation> (); } }
-        public IEnumerable<Player> Players { get { return GetListFromStore<Player> (); } }
-        public IEnumerable<Staff> Staff { get { return GetListFromStore<Staff> (); } }
-        public IEnumerable<PlayerStaff> PlayerStaff { get { return GetListFromStore<PlayerStaff> (); } }
-        public IEnumerable<HumanManager> HumanManagers { get { return GetListFromStore<HumanManager>(); } }
-        public IEnumerable<Team> Teams { get { return GetListFromStore<Team>(); } }
-        public IEnumerable<Competition> Competitions { get { return GetListFromStore<Competition>(); } }
 
-        private IQueryable<T> GetListFromStore<T> ()
+        public IEnumerable<Award> Awards
         {
-            return ((Dictionary<Int64, T>)objectManager.ObjectStore [typeof (T)]).Values.AsQueryable ();
+            get { return GetListFromStore<Award>(); }
         }
+
+        public IEnumerable<Agreement> Agreements
+        {
+            get { return GetListFromStore<Agreement>(); }
+        }
+
+        public IEnumerable<Continent> Continents
+        {
+            get { return GetListFromStore<Continent>(); }
+        }
+
+        public IEnumerable<City> Cities
+        {
+            get { return GetListFromStore<City>(); }
+        }
+
+        public IEnumerable<Club> Clubs
+        {
+            get { return GetListFromStore<Club>(); }
+        }
+
+        public IEnumerable<Nation> Nations
+        {
+            get { return GetListFromStore<Nation>(); }
+        }
+
+        public IEnumerable<Player> Players
+        {
+            get { return GetListFromStore<Player>(); }
+        }
+
+        public IEnumerable<Staff> Staff
+        {
+            get { return GetListFromStore<Staff>(); }
+        }
+
+        public IEnumerable<PlayerStaff> PlayerStaff
+        {
+            get { return GetListFromStore<PlayerStaff>(); }
+        }
+
+        public IEnumerable<HumanManager> HumanManagers
+        {
+            get { return GetListFromStore<HumanManager>(); }
+        }
+
+        public IEnumerable<Team> Teams
+        {
+            get { return GetListFromStore<Team>(); }
+        }
+
+        public IEnumerable<Competition> Competitions
+        {
+            get { return GetListFromStore<Competition>(); }
+        }
+
+        private IQueryable<T> GetListFromStore<T>()
+        {
+            return ((Dictionary<Int64, T>)objectManager.ObjectStore[typeof(T)]).Values.AsQueryable();
+        }
+
         #endregion
 
-        public void LoadData ()
+        public void LoadData()
         {
-            LoadData (false);
+            LoadData(false);
         }
 
-        public void LoadData (bool refreshPersonCache)
+        public void LoadData(bool refreshPersonCache)
         {
-            if (CheckProcessAndGame ()) {
+            if (CheckProcessAndGame())
+            {
                 LoadDataForCheckedGame(refreshPersonCache);
             }
 
             GameLoaded();
         }
 
-        public bool CheckProcessAndGame ()
+        public bool CheckProcessAndGame()
         {
-            if (gameManager == null) { 
-                gameManager = new GameManager ();
+            if (gameManager == null)
+            {
+                gameManager = new GameManager();
                 gameManager.logger = logger;
                 gameManager.FMLoading = true;
                 logger.LogWrite("Searching for FM Process...");
@@ -79,15 +130,16 @@ namespace FMScoutFramework.Core
             return gameManager.FMLoaded;
         }
 
-        public void LoadDataForCheckedGame (bool refreshPersonCache)
+        public void LoadDataForCheckedGame(bool refreshPersonCache)
         {
             if (objectManager == null)
-                objectManager = new ObjectManager (gameManager, DatabaseMode);
+                objectManager = new ObjectManager(gameManager, DatabaseMode);
 
-            objectManager.Load (refreshPersonCache);
+            objectManager.Load(refreshPersonCache);
         }
 
-        public void ReloadGameData() {
+        public void ReloadGameData()
+        {
             // Clean up
             this.Dispose();
 
@@ -95,29 +147,38 @@ namespace FMScoutFramework.Core
         }
 
         private MetaDataCls _metaData;
-        public MetaDataCls MetaData {
-            get {
-                if (_metaData == null) {
+
+        public MetaDataCls MetaData
+        {
+            get
+            {
+                if (_metaData == null)
+                {
                     _metaData = new MetaDataCls(this, this.objectManager, gameManager);
                 }
 
                 return _metaData;
             }
-            set {
-                if (_metaData != value) {
+            set
+            {
+                if (_metaData != value)
+                {
                     _metaData = value;
                 }
             }
         }
 
         #region IDisposable Members
-        public void Dispose () {
+
+        public void Dispose()
+        {
             objectManager.ClearObjectStore();
 
             gameManager = null;
             objectManager = null;
             _metaData = null;
         }
+
         #endregion
     }
 
@@ -126,21 +187,24 @@ namespace FMScoutFramework.Core
         private readonly Global glob;
         private readonly GameManager gameManager;
 
-        internal MetaDataCls (FMCore fmCore, ObjectManager objectManager, GameManager gameManager)
+        internal MetaDataCls(FMCore fmCore, ObjectManager objectManager, GameManager gameManager)
         {
             this.gameManager = gameManager;
-            glob = new Global (gameManager.Version);
+            glob = new Global(gameManager.Version);
         }
 
-        public string CurrentVersion {
+        public string CurrentVersion
+        {
             get { return gameManager.Version.Description; }
         }
 
-        public DateTime InGameDate {
+        public DateTime InGameDate
+        {
             get { return glob.InGameDate; }
         }
 
-        public int ActiveObjectID {
+        public int ActiveObjectID
+        {
             get { return glob.ActiveObjectID; }
         }
     }
