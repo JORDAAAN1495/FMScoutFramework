@@ -5,6 +5,6 @@
     <File Path="README.md" />
   </Folder>
   <Folder Name="/src/">
-    <Project Path="src/FMScoutFramework.csproj" />
+    <Project Path="src/FM.Pitchside.Core/FM.Pitchside.Core.csproj" />
   </Folder>
 </Solution>
