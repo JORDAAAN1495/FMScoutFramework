@@ -10,12 +10,14 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
     {
         private PlayerOffsets PlayerOffsets;
         public Int64 Address;
+
         public Player(Int64 memoryAddress, IVersion version)
             : base(memoryAddress + Math.Abs(version.PersonOffsets.Player), version)
         {
             this.PlayerOffsets = new PlayerOffsets(version);
             this.Address = memoryAddress;
         }
+
         public Player(Int64 memoryAddress, ArraySegment<byte> originalBytes, IVersion version)
             : base(memoryAddress + Math.Abs(version.PersonOffsets.Player), originalBytes, version)
         {
@@ -30,15 +32,20 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
             PropertyInvoker.Set<short>(PlayerOffsets.Fitness, OriginalBytes, Address, DatabaseMode, Fitness);
             PropertyInvoker.Set<short>(PlayerOffsets.Jadedness, OriginalBytes, Address, DatabaseMode, Jadedness);
             PropertyInvoker.Set<short>(PlayerOffsets.Condition, OriginalBytes, Address, DatabaseMode, Condition);
-            PropertyInvoker.Set<short>(PlayerOffsets.HomeReputation, OriginalBytes, Address, DatabaseMode, HomeReputation);
-            PropertyInvoker.Set<short>(PlayerOffsets.CurrentReputation, OriginalBytes, Address, DatabaseMode, CurrentReputation);
-            PropertyInvoker.Set<short>(PlayerOffsets.WorldReputation, OriginalBytes, Address, DatabaseMode, WorldReputation);
+            PropertyInvoker.Set<short>(PlayerOffsets.HomeReputation, OriginalBytes, Address, DatabaseMode,
+                HomeReputation);
+            PropertyInvoker.Set<short>(PlayerOffsets.CurrentReputation, OriginalBytes, Address, DatabaseMode,
+                CurrentReputation);
+            PropertyInvoker.Set<short>(PlayerOffsets.WorldReputation, OriginalBytes, Address, DatabaseMode,
+                WorldReputation);
             PropertyInvoker.Set<short>(PlayerOffsets.CA, OriginalBytes, Address, DatabaseMode, CA);
             PropertyInvoker.Set<short>(PlayerOffsets.PA, OriginalBytes, Address, DatabaseMode, PA);
             PropertyInvoker.Set<short>(PlayerOffsets.Weight, OriginalBytes, Address, DatabaseMode, Weight);
             PropertyInvoker.Set<short>(PlayerOffsets.Height, OriginalBytes, Address, DatabaseMode, Height);
-            PropertyInvoker.Set<Int64>(PlayerOffsets.Team, OriginalBytes, Address, DatabaseMode, TeamAddress.GetValueOrDefault(0x0));
-            PropertyInvoker.Set<byte>(PlayerOffsets.DeclaredForNation, OriginalBytes, Address, DatabaseMode, DeclaredForNation.GetValueOrDefault(false) == true ? (byte)0x53 : (byte)0x0);
+            PropertyInvoker.Set<Int64>(PlayerOffsets.Team, OriginalBytes, Address, DatabaseMode,
+                TeamAddress.GetValueOrDefault(0x0));
+            PropertyInvoker.Set<byte>(PlayerOffsets.DeclaredForNation, OriginalBytes, Address, DatabaseMode,
+                DeclaredForNation.GetValueOrDefault(false) == true ? (byte)0x53 : (byte)0x0);
             _isDirty = false;
         }
 
@@ -82,7 +89,8 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         {
             get
             {
-                double DAP = (Attributes.Determination / 5 * 0.05) + (ActualPerson.Attributes.Ambition * 0.09) + (ActualPerson.Attributes.Professionalism * 0.115);
+                double DAP = (Attributes.Determination / 5 * 0.05) + (ActualPerson.Attributes.Ambition * 0.09) +
+                             (ActualPerson.Attributes.Professionalism * 0.115);
                 if (ActualPerson.Age < 24)
                 {
                     if (PA <= (CA + 10))
@@ -123,6 +131,7 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private bool _isDirty = false;
+
         public bool isDirty
         {
             get
@@ -135,11 +144,13 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
                 {
                     Version.gameManager.RaiseObjectEdited(this);
                 }
+
                 _isDirty = value;
             }
         }
 
         private ActualPerson _actualPerson = null;
+
         public ActualPerson ActualPerson
         {
             get
@@ -162,6 +173,7 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private bool? _isInjured;
+
         public bool? IsInjured
         {
             get
@@ -192,6 +204,7 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private bool _isBanned = false;
+
         public bool IsBanned
         {
             get
@@ -214,6 +227,7 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private Int64? _teamAddress = null;
+
         public Int64? TeamAddress
         {
             get
@@ -237,6 +251,7 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private Team _team;
+
         public Team Team
         {
             get
@@ -245,11 +260,13 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
                 {
                     _team = new Team(TeamAddress.Value, Version);
                 }
+
                 return _team;
             }
         }
 
         private int _value = 0;
+
         public int Value
         {
             get
@@ -272,13 +289,15 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private int _askingPrice = 0;
+
         public int AskingPrice
         {
             get
             {
                 if (_askingPrice == 0)
                 {
-                    _askingPrice = PropertyInvoker.Get<int>(PlayerOffsets.AskingPrice, OriginalBytes, Address, DatabaseMode);
+                    _askingPrice =
+                        PropertyInvoker.Get<int>(PlayerOffsets.AskingPrice, OriginalBytes, Address, DatabaseMode);
                 }
 
                 return _askingPrice;
@@ -294,6 +313,7 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private short _fitness = 0;
+
         public short Fitness
         {
             get
@@ -316,13 +336,15 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private short _jadedness = 0;
+
         public short Jadedness
         {
             get
             {
                 if (_jadedness == 0)
                 {
-                    _jadedness = PropertyInvoker.Get<short>(PlayerOffsets.Jadedness, OriginalBytes, Address, DatabaseMode);
+                    _jadedness =
+                        PropertyInvoker.Get<short>(PlayerOffsets.Jadedness, OriginalBytes, Address, DatabaseMode);
                 }
 
                 return _jadedness;
@@ -338,13 +360,15 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private short _condition = 0;
+
         public short Condition
         {
             get
             {
                 if (_condition == 0)
                 {
-                    _condition = PropertyInvoker.Get<short>(PlayerOffsets.Condition, OriginalBytes, Address, DatabaseMode);
+                    _condition =
+                        PropertyInvoker.Get<short>(PlayerOffsets.Condition, OriginalBytes, Address, DatabaseMode);
                 }
 
                 return _condition;
@@ -360,13 +384,15 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private short _homeReputation = 0;
+
         public short HomeReputation
         {
             get
             {
                 if (_homeReputation == 0)
                 {
-                    _homeReputation = PropertyInvoker.Get<short>(PlayerOffsets.HomeReputation, OriginalBytes, Address, DatabaseMode);
+                    _homeReputation = PropertyInvoker.Get<short>(PlayerOffsets.HomeReputation, OriginalBytes, Address,
+                        DatabaseMode);
                 }
 
                 return _homeReputation;
@@ -382,13 +408,15 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private short _currentReputation = 0;
+
         public short CurrentReputation
         {
             get
             {
                 if (_currentReputation == 0)
                 {
-                    _currentReputation = PropertyInvoker.Get<short>(PlayerOffsets.CurrentReputation, OriginalBytes, Address, DatabaseMode);
+                    _currentReputation = PropertyInvoker.Get<short>(PlayerOffsets.CurrentReputation, OriginalBytes,
+                        Address, DatabaseMode);
                 }
 
                 return _currentReputation;
@@ -404,13 +432,15 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private short _worldReputation = 0;
+
         public short WorldReputation
         {
             get
             {
                 if (_worldReputation == 0)
                 {
-                    _worldReputation = PropertyInvoker.Get<short>(PlayerOffsets.WorldReputation, OriginalBytes, Address, DatabaseMode);
+                    _worldReputation = PropertyInvoker.Get<short>(PlayerOffsets.WorldReputation, OriginalBytes, Address,
+                        DatabaseMode);
                 }
 
                 return _worldReputation;
@@ -426,6 +456,7 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private short _ca = 0;
+
         public short CA
         {
             get
@@ -448,6 +479,7 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private short _pa = 0;
+
         public short PA
         {
             get
@@ -470,6 +502,7 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private short _weight = 0;
+
         public short Weight
         {
             get
@@ -492,6 +525,7 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private short _height = 0;
+
         public short Height
         {
             get
@@ -514,13 +548,15 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private bool? _declaredForNation;
+
         public bool? DeclaredForNation
         {
             get
             {
                 if (_declaredForNation == null)
                 {
-                    _declaredForNation = PropertyInvoker.Get<byte>(PlayerOffsets.DeclaredForNation, OriginalBytes, Address, DatabaseMode) == 0x53;
+                    _declaredForNation = PropertyInvoker.Get<byte>(PlayerOffsets.DeclaredForNation, OriginalBytes,
+                        Address, DatabaseMode) == 0x53;
                 }
 
                 return _declaredForNation;
@@ -536,6 +572,7 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private PlayerAttributes _attributes;
+
         public PlayerAttributes Attributes
         {
             get
@@ -544,6 +581,7 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
                 {
                     _attributes = new PlayerAttributes((Address + PlayerOffsets.PlayerAttributes), Version);
                 }
+
                 return _attributes;
             }
         }
@@ -574,6 +612,7 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
         }
 
         private RoleRatings _roleRatings = null;
+
         public RoleRatings RoleRatings
         {
             get
@@ -603,10 +642,7 @@ namespace FM.Pitchside.Core.Entities.Ingame.Persons
             }
         }
 
-        public override string ToString()
-        {
-            return string.Format("{0} {1}", this.ActualPerson.FirstName, this.ActualPerson.LastName);
-        }
+        public override string ToString() => $"{ActualPerson.FirstName} {ActualPerson.LastName}";
 
         public void Dispose()
         {
