@@ -13,10 +13,10 @@ static string FullName(Int64 personAddress) => ProcessManager.ReadString(personA
 
 var players = core.Players
     .Select(x => new { Player = x, FullName = FullName(x.Address) })
-    .Where(x => x.FullName.Contains("Ritchie", StringComparison.OrdinalIgnoreCase))
+    .Where(x => x.FullName.Contains("Yoro", StringComparison.OrdinalIgnoreCase))
     .ToList();
 
-Console.WriteLine($"{core.Players.Count()} players loaded, {players.Count} matched \"Ritchie\":");
+Console.WriteLine($"{core.Players.Count()} players loaded, {players.Count} matched \"Yoro\":");
 foreach (var player in players)
 {
     Console.WriteLine(player.FullName);
