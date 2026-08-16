@@ -17,31 +17,43 @@ namespace FM.Pitchside.Core.Defines.Versions
     //   - ProductVersion string: confirmed from the live process (this is a Unity engine
     //     build string, not an FM version number like FM22's "22.4.1+1662587").
     //
+    //   - Person: confirmed at slot 0x78 (not FM22's 0x70 - the table shifted by one
+    //     slot). This is the same mechanism FM17-22 always used, not a new scheme as an
+    //     earlier version of this comment claimed - ObjectManager.SortPersonMemoryAddresses
+    //     already reads [personAddress] - BaseAddress and compares it against
+    //     PersonEnum.Player/Staff/etc, which is exactly the vtable-RVA check this file's
+    //     discovery process (find-continents/identify-slots) does by hand. FM17-22's
+    //     PersonEnum values (e.g. Steam_22_4_1_0_Windows: Player=0x4754718 "UID: 3796")
+    //     were themselves vtable RVAs all along, just mislabelled as UIDs. So: the existing
+    //     generic ObjectManager/RetrieveObjects pipeline works unmodified for FM26 once
+    //     Person/PersonEnum/PersonOffsets below are correct - confirmed via the demo app
+    //     populating core.Players/Staff/HumanManagers with real, named entries.
+    //   - PersonEnum: Player/Staff/HumanManager confirmed (see KnownVtables). PlayerStaff
+    //     and Official not captured yet - left at 0x0, which just means those two
+    //     categories won't match anything (safe no-op, not a wrong match).
+    //   - PersonOffsets: all 0x0 is correct here (not a placeholder) - unlike FM22, which
+    //     stored a raw pointer keyed off a different anchor and needed a negative
+    //     adjustment (e.g. Player=-0x270) to reach the real object start, FM26's master
+    //     Person list already holds each object's real base address directly.
+    //
     // NOT verified - placeholders only:
-    //   - Every table slot other than Continent. A full 0x10-0xC8 sweep at this
+    //   - Every table slot other than Continent and Person. A full 0x10-0xC8 sweep at this
     //     MainAddress/XorDistance returns plausible non-garbage counts for every slot
     //     (so the table shape/stride is intact), but FM22's slot order does not carry
     //     over cleanly - e.g. the old "Nation" slot (0x68) now reads 2527 (too high for
-    //     ~200 real nations) and the old "Person" slot (0x70) reads 502 (far too low for
-    //     a player+staff database). The slots below keep FM22's offsets/names as a
-    //     starting hypothesis only - confirm each against real in-game counts before
-    //     trusting it, and never write through one of these until it's confirmed.
+    //     ~200 real nations). The slots below keep FM22's offsets/names as a starting
+    //     hypothesis only - confirm each against real in-game counts (or, better, against
+    //     element[0]'s vtable via `identify-slots`) before trusting it, and never write
+    //     through one of these until it's confirmed.
     //   - ActiveObject: not located yet.
-    //   - PersonEnum / PersonOffsets: not located, and FM26 doesn't appear to use FM17-22's
-    //     scheme at all. ~135,000 players were confirmed in the live game, but that count
-    //     doesn't appear anywhere in the 0x10-0x1E0 table sweep, and a live capture (see
-    //     below) shows type discrimination now goes through vtable pointers, not
-    //     UID-tagged enum pointers. IVersionPersonEnumPointers/IPersonVersionOffsets below
-    //     are left as unused 0x0 placeholders to satisfy the interface until the library
-    //     grows a matching concept for the new scheme - see KnownVtables/KnownFieldOffsets.
     //
     // Live-captured facts (via a custom Cheat Engine injection at game_plugin.dll's
     // "select object" hook - byte pattern 89 D6 48 89 CF 49 8B 00 48 8D 54 - which puts the
     // selected object's pointer in r8; see KnownVtables/KnownFieldOffsets below for what
     // this has confirmed so far):
     //   - Concrete type is identified by comparing [object+0x0] (the object's vtable
-    //     pointer) against a per-class constant, e.g. vtbPlayer/vtbClub/vtbNation - not by
-    //     a UID-tagged pointer table like FM17-22.
+    //     pointer) against a per-class constant, e.g. vtbPlayer/vtbClub - the same
+    //     mechanism FM17-22 used (see the Person bullet above).
     //   - String fields are pointers to {Int32 length}{UTF8 bytes} buffers, same encoding
     //     FM17-22 used (see ProcessManager.ReadString) - the underlying native engine's
     //     data types are unchanged, only how you reach an object has changed.
@@ -160,10 +172,13 @@ namespace FM.Pitchside.Core.Defines.Versions
             public Int64 Nation { get { return 0x68; } } // sweep count: 2527 - too high for ~200 real nations, likely wrong slot.
 
             [MemoryAddress(CountLength = 4, BytesToSkip = 0x70)]
-            public Int64 Person { get { return 0x70; } } // sweep count: 502 - far too low for the ~135,000 players confirmed live, definitely wrong slot.
+            public Int64 Unknown2 { get { return 0x70; } } // sweep count: 502 - NOT Person (see below), likely wrong label.
 
+            // Verified: element[0]'s vtable matches KnownVtables.Staff, and further
+            // sampled elements matched KnownVtables.Player - this is the real, heterogeneous
+            // master Person list (~120k entries for players+staff+managers combined).
             [MemoryAddress(CountLength = 4, BytesToSkip = 0x78)]
-            public Int64 Unknown2 { get { return 0x78; } } // sweep count: 44868
+            public Int64 Person { get { return 0x78; } }
 
             [MemoryAddress(CountLength = 4, BytesToSkip = 0x80)]
             public Int64 Unknown3 { get { return 0x80; } } // sweep count: 924
@@ -213,23 +228,26 @@ namespace FM.Pitchside.Core.Defines.Versions
 
         public class VersionPersonEnumPointers : IVersionPersonEnumPointers
         {
-            // Not yet located - see class comment.
-            public Int64 Player { get { return 0x0; } } // TODO
-            public Int64 Staff { get { return 0x0; } } // TODO
-            public Int64 PlayerStaff { get { return 0x0; } } // TODO
-            public Int64 HumanManager { get { return 0x0; } } // TODO
-            public Int64 Official { get { return 0x0; } } // TODO
+            // Vtable RVAs (relative to game_plugin.dll) - see KnownVtables for how each was
+            // captured/verified. PlayerStaff/Official not captured yet; 0x0 is safe here,
+            // it just means those two categories currently match nothing.
+            public Int64 Player { get { return KnownVtables.Player; } }
+            public Int64 Staff { get { return KnownVtables.Staff; } }
+            public Int64 PlayerStaff { get { return 0x0; } } // TODO - not captured yet.
+            public Int64 HumanManager { get { return KnownVtables.HumanManager; } }
+            public Int64 Official { get { return 0x0; } } // TODO - not captured yet.
         }
 
         public class PersonVersionOffsets : IPersonVersionOffsets
         {
-            // Not yet located - see class comment.
-            public Int64 Person { get { return 0x0; } } // TODO
-            public Int64 Player { get { return 0x0; } } // TODO
-            public Int64 Staff { get { return 0x0; } } // TODO
-            public Int64 HumanManager { get { return 0x0; } } // TODO
-            public Int64 PlayerStaff { get { return 0x0; } } // TODO
-            public Int64 Official { get { return 0x0; } } // TODO
+            // All 0x0 is intentional here, not a placeholder - see class comment for why
+            // FM26's master Person list needs no adjustment, unlike FM22.
+            public Int64 Person { get { return 0x0; } }
+            public Int64 Player { get { return 0x0; } }
+            public Int64 Staff { get { return 0x0; } }
+            public Int64 HumanManager { get { return 0x0; } }
+            public Int64 PlayerStaff { get { return 0x0; } }
+            public Int64 Official { get { return 0x0; } }
         }
 
         // Raw facts captured live from a running FM26 process, ahead of there being a real
@@ -265,6 +283,16 @@ namespace FM.Pitchside.Core.Defines.Versions
             // (Int32 length + UTF8 bytes) holding the full name, e.g. "Leny Jean-Luc Yoro",
             // "Eduardo José Monteiro Rosalino".
             public const long PersonFullName = 0x40;
+
+            // FirstName/LastName are two hops each, not stored inline like FullName:
+            // [object+0x50]/[object+0x58] is a pointer to a small sub-object, and
+            // [subObject+0x0] is the FM-encoded string pointer itself (Int32 length + UTF8
+            // bytes at +0x4). Verified against a live Player - "Alejo" / "Rivas"
+            // (Alejo Benjamín Rivas). This matches ActualPerson.FirstName/LastName's
+            // existing two-dereference read shape (container ptr, then +0x0, then the
+            // string) - only the raw offsets differ from FM17-22's ActualPersonOffsets.
+            public const long PersonFirstNameContainer = 0x50;
+            public const long PersonLastNameContainer = 0x58;
 
             // Club's full name is two hops away: [club+0x30] is a pointer to a sub-object
             // (identity/purpose not yet confirmed - possibly the same "team" sub-object

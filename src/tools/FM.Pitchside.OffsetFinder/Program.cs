@@ -79,6 +79,10 @@ switch (command)
         RunScanArrays(rest, baseAddress, moduleSize);
         break;
 
+    case "identify-slots":
+        RunIdentifySlots(baseAddress, moduleSize, rest);
+        break;
+
     default:
         PrintUsage();
         break;
@@ -199,6 +203,43 @@ static void RunFindDate(long baseAddress, long moduleSize, string[] args)
 
     Console.WriteLine();
     Console.WriteLine($"Done. {hits} candidate(s) found. Compare against the in-game date shown in FM26 to pick the right one.");
+}
+
+static void RunIdentifySlots(long moduleBaseAddress, long moduleSize, string[] args)
+{
+    if (args.Length < 2)
+    {
+        Console.WriteLine("Usage: identify-slots <mainAddressHex> <xorHex> [--offsets 0x10,0x18,...]");
+        return;
+    }
+
+    long mainAddress = ParseHex(args[0], 0);
+    long xor = ParseHex(args[1], 0);
+    var offsets = ParseHexList(GetOption(args, "--offsets"), new long[]
+    {
+        0x10, 0x18, 0x20, 0x28, 0x30, 0x38, 0x40, 0x48, 0x50, 0x58, 0x60, 0x68, 0x70,
+        0x78, 0x80, 0x88, 0x90, 0x98, 0xA0, 0xA8, 0xB0, 0xB8, 0xC0, 0xC8
+    });
+
+    Console.WriteLine($"Identifying {offsets.Length} table slot(s) by element[0]'s vtable...");
+    Console.WriteLine();
+
+    foreach (var offset in offsets)
+    {
+        long p1 = ProcessManager.ReadInt64(moduleBaseAddress + mainAddress + offset);
+        long p2 = ProcessManager.ReadInt64(p1 + xor);
+        long startPtr = ProcessManager.ReadInt64(p2);
+        long endPtr = ProcessManager.ReadInt64(p2 + 8);
+        if (startPtr == 0 || endPtr < startPtr)
+        {
+            Console.WriteLine($"  offset 0x{offset:X}: (no valid array)");
+            continue;
+        }
+
+        long count = (endPtr - startPtr) / 8;
+        string verdict = DescribeAsPointerArray(startPtr, moduleBaseAddress, moduleSize);
+        Console.WriteLine($"  offset 0x{offset:X}: count={count}  {verdict}");
+    }
 }
 
 static void RunCheck(long baseAddress, string[] args)
@@ -512,5 +553,11 @@ static void PrintUsage()
               candidate array-bounds pointer (same {start,end}/8 check find-continents
               uses) and report any that resolve to a plausible entry count. Use on a
               captured object (e.g. a club) to find list fields like a squad array.
+
+          identify-slots <mainAddressHex> <xorHex> [--offsets 0x10,0x18,...]
+              Walk the master table (default: every FM22-era slot 0x10-0xC8) and, for
+              each slot that resolves to a real array, check element[0]'s vtable
+              against the known vtables - use this to find which slot (if any) really
+              is Club/Player/etc, instead of guessing from count magnitude alone.
         """);
 }
