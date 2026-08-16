@@ -7,4 +7,7 @@
   <Folder Name="/src/">
     <Project Path="src/FM.Pitchside.Core/FM.Pitchside.Core.csproj" />
   </Folder>
+  <Folder Name="/src/demos/">
+    <Project Path="src/demos/FM.Pitchside.Demo/FM.Pitchside.Demo.csproj" Id="2c09f1f8-3c39-4f4a-b5f5-55b2b3e367bf" />
+  </Folder>
 </Solution>
