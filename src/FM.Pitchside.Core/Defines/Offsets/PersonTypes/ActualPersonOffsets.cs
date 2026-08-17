@@ -23,6 +23,13 @@ namespace FM.Pitchside.Core.Defines.Offsets.PersonTypes
         {
             get
             {
+                // FM26's Person object has no separate ActualPerson sub-object (see
+                // PlayerOffsets.ActualPerson) - FullName sits directly on the object itself.
+                if (Version is Steam_26_0_0_0_Windows)
+                {
+                    return 0x40;
+                }
+
                 return 0x20;
             }
         }
@@ -31,6 +38,11 @@ namespace FM.Pitchside.Core.Defines.Offsets.PersonTypes
         {
             get
             {
+                if (Version is Steam_26_0_0_0_Windows)
+                {
+                    return 0x50;
+                }
+
                 return 0x30;
             }
         }
@@ -39,6 +51,11 @@ namespace FM.Pitchside.Core.Defines.Offsets.PersonTypes
         {
             get
             {
+                if (Version is Steam_26_0_0_0_Windows)
+                {
+                    return 0x58;
+                }
+
                 return 0x38;
             }
         }

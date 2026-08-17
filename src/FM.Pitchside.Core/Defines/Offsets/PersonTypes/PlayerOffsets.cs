@@ -16,6 +16,13 @@ namespace FM.Pitchside.Core.Defines.Offsets.PersonTypes
         {
             get
             {
+                // FM26 has no separate ActualPerson sub-object - name/identity fields sit
+                // directly on the Player/Person object, so this points back at itself.
+                if (Version is Steam_26_0_0_0_Windows)
+                {
+                    return 0x0;
+                }
+
                 if (Version.isTouch)
                 {
                     return 0x1F0;

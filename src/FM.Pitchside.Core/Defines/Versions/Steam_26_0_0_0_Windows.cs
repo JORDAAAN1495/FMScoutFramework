@@ -9,13 +9,16 @@ namespace FM.Pitchside.Core.Defines.Versions
     // fmProcess.BaseAddress instead of the main exe when present.
     //
     // Verified (via FM.Pitchside.OffsetFinder against a live FM26 process):
-    //   - MainAddress / XorDistance: confirmed - the Continent slot resolves to exactly 7.
-    //   - CurrentDateTime: confirmed - decodes to 2025-07-07, matching the live in-game
-    //     date, and sits 0x920 bytes from MainAddress (same nearby global game-state
-    //     struct). With this and Continent both verified, SupportsProcess() now succeeds
-    //     end-to-end against a live process (confirmed via the demo app).
+    //   - MainAddress / XorDistance: confirmed - the Continent slot resolves to exactly 7,
+    //     stable across multiple separate process launches.
     //   - ProductVersion string: confirmed from the live process (this is a Unity engine
-    //     build string, not an FM version number like FM22's "22.4.1+1662587").
+    //     build string, not an FM version number like FM22's "22.4.1+1662587"). Together
+    //     with Continent, this is enough for SupportsProcess() to succeed end-to-end against
+    //     a live process (confirmed via the demo app).
+    //   - CurrentDateTime: locates a plausible in-game date near MainAddress, but its exact
+    //     RVA has been observed to drift between launches of the same build - see
+    //     MemoryAddresses.CurrentDateTime. Not trustworthy enough to gate SupportsProcess()
+    //     on, so it isn't checked there.
     //
     //   - Person: confirmed at slot 0x78 (not FM22's 0x70 - the table shifted by one
     //     slot). This is the same mechanism FM17-22 always used, not a new scheme as an
@@ -94,16 +97,12 @@ namespace FM.Pitchside.Core.Defines.Versions
             }
             FMCore.logger.LogWrite("Continent Count Match!");
 
-            FMCore.logger.LogWrite("Getting in-game date...");
-            DateTime dt = ProcessManager.ReadDateTime(process.BaseAddress + MemoryAddresses.CurrentDateTime);
-            if (dt.Year < 2018 || dt.Year > 2300)
-            {
-                FMCore.logger.LogWrite("In-game date is invalid.");
-                GameManager.LastErrorMessage = "Invalid main date at offset.";
-                return false;
-            }
-
-            FMCore.logger.LogWrite("In-game date correct! Version is a match.");
+            // CurrentDateTime is deliberately NOT checked here (unlike FM17-22): its raw RVA
+            // has been observed to drift between FM26 process launches on the same build
+            // (see MemoryAddresses.CurrentDateTime), so gating on it would make an otherwise
+            // healthy process fail detection. Continent's count + the exact ProductVersion
+            // match below are both robust and sufficient to identify this version on their
+            // own.
             if (!string.IsNullOrEmpty(process.VersionDescription))
             {
                 if (process.VersionDescription != "6000.0.52f1-fm26-05f1 (87a0370e9917)")
@@ -129,10 +128,16 @@ namespace FM.Pitchside.Core.Defines.Versions
             [MemoryAddress(CountLength = 4, BytesToSkip = 0x30)]
             public Int64 Continent { get { return 0x30; } } // Verified - resolves to 7.
 
-            // Verified - decodes to 2025-07-07, matching the live in-game date, and sits
-            // 0x920 bytes from MainAddress (same nearby global game-state struct, matching
-            // the FM17-22 pattern of MainAddress/CurrentDateTime being close together).
-            public Int64 CurrentDateTime { get { return 0x4E49E88; } }
+            // NOT reliable - see class comment. Originally found at 0x4E49E88 (decoded to
+            // 2025-07-07, matching the live in-game date at the time), but on a later launch
+            // of the exact same build (buildid unchanged) the value had moved to 0x4E49C98
+            // (now decoding to 2025-10-15, also plausible). Both sit close to MainAddress in
+            // the same nearby global game-state struct, but the field's exact position isn't
+            // fixed across launches the way it is for FM17-22's native builds - re-run
+            // `find-date` (narrowed to a small --from/--to window around MainAddress) each
+            // session before trusting this value. Not wired into SupportsProcess() for this
+            // reason. Value below is the latest known-good reading, not a stable constant.
+            public Int64 CurrentDateTime { get { return 0x4E49C98; } }
 
             // Not yet located.
             public Int64 ActiveObject { get { return 0x0; } } // TODO
