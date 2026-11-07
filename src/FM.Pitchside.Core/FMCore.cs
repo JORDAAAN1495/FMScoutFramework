@@ -1,4 +1,6 @@
-﻿namespace FM.Pitchside.Core
+﻿using FM.Pitchside.Core.Defines.Versions;
+
+namespace FM.Pitchside.Core
 {
     public class FMCore : IDisposable
     {
@@ -80,6 +82,28 @@
         public IEnumerable<Competition> Competitions
         {
             get { return GetListFromStore<Competition>(); }
+        }
+
+        /// <summary>
+        /// The RTTI-located FM27 model, or null when the running game isn't an RTTI-based version
+        /// (or hasn't been loaded yet). FM27 exposes its data through this instead of the legacy lists.
+        /// </summary>
+        public Fm27Game Fm27
+        {
+            get { return (gameManager?.Version as IFm27Version)?.Game; }
+        }
+
+        /// <summary>The human-controlled managers in the loaded FM27 save (scans the process heap).</summary>
+        public IReadOnlyList<HumanManagerInfo> FindHumanManagers()
+        {
+            Fm27Game game = Fm27;
+            if (game == null)
+            {
+                throw new InvalidOperationException(
+                    "FindHumanManagers is only available for RTTI-based game versions (FM27). Call LoadData() first.");
+            }
+
+            return game.FindHumanManagers();
         }
 
         private IQueryable<T> GetListFromStore<T>()

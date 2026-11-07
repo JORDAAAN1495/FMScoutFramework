@@ -16,9 +16,9 @@ namespace FM.Pitchside.Core.Defines.Offsets.PersonTypes
         {
             get
             {
-                // FM26 has no separate ActualPerson sub-object - name/identity fields sit
+                // FM26/FM27 have no separate ActualPerson sub-object - name/identity fields sit
                 // directly on the Player/Person object, so this points back at itself.
-                if (Version is Steam_26_0_0_0_Windows)
+                if (VersionTraits.ActualPersonIsInline(Version))
                 {
                     return 0x0;
                 }

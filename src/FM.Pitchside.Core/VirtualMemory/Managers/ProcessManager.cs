@@ -38,6 +38,46 @@ namespace FM.Pitchside.Core.VirtualMemory.Managers
             }
             return memoryAddress;
         }
+
+        // Enumerates every committed, readable (non-guard) region of the target process'
+        // address space via VirtualQueryEx. Used by FM.Pitchside.OffsetFinder to search the
+        // live managed/native heap (not just a module's static image) for known strings -
+        // IL2CPP objects are heap-allocated, so a module-image-only scan can never find them.
+        // privateOnly skips MEM_IMAGE (loaded module images, e.g. every DLL) and MEM_MAPPED (file
+        // mappings) regions, leaving only MEM_PRIVATE (VirtualAlloc'd heap/arena memory). IL2CPP
+        // object instances live there, never inside a loaded module's own image or a file mapping,
+        // so this cuts the bytes a heap-wide object scan has to read without missing anything.
+        public static IEnumerable<(Int64 BaseAddress, Int64 Size)> EnumerateReadableRegions(bool privateOnly = false)
+        {
+            const uint MEM_COMMIT = 0x1000;
+            const uint MEM_PRIVATE = 0x20000;
+            const uint PAGE_NOACCESS = 0x01;
+            const uint PAGE_GUARD = 0x100;
+
+            IntPtr process = FMProcess.Pointer;
+            ulong address = 0;
+            ulong maxAddress = 0x7FFFFFFFFFFF;
+            uint mbiSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf<MEMORY_BASIC_INFORMATION64>();
+
+            while (address < maxAddress)
+            {
+                IntPtr result = ProcessMemoryAPI.VirtualQueryEx(process, (IntPtr)(long)address, out MEMORY_BASIC_INFORMATION64 mbi, mbiSize);
+                if (result == IntPtr.Zero || mbi.RegionSize == 0)
+                {
+                    break;
+                }
+
+                bool committed = mbi.State == MEM_COMMIT;
+                bool readable = (mbi.Protect & PAGE_NOACCESS) == 0 && (mbi.Protect & PAGE_GUARD) == 0 && mbi.Protect != 0;
+                bool typeOk = !privateOnly || mbi.Type == MEM_PRIVATE;
+                if (committed && readable && typeOk)
+                {
+                    yield return ((Int64)mbi.BaseAddress, (Int64)mbi.RegionSize);
+                }
+
+                address = mbi.BaseAddress + mbi.RegionSize;
+            }
+        }
 #endif
 #if MAC
         public static int GetProcessEndPoint (uint pid)
@@ -113,6 +153,23 @@ namespace FM.Pitchside.Core.VirtualMemory.Managers
             }
 
             return buffer;
+        }
+
+        // Reads into a caller-supplied buffer instead of allocating a new array - used by hot paths
+        // like ProcessHeap.ScanQwords that read many large chunks and want to reuse one buffer per
+        // thread (e.g. via ArrayPool<byte>) rather than allocate+discard one per read.
+        public static bool ReadProcessMemoryInto(Int64 memoryAddress, byte[] buffer, int length, out Int64 bytesRead)
+        {
+            bytesRead = 0;
+            if (memoryAddress <= 0 || length <= 0 || length > buffer.Length)
+            {
+                return false;
+            }
+
+            IntPtr ptr;
+            bool ok = ProcessMemoryAPI.ReadProcessMemory(FMProcess.Pointer, (IntPtr)memoryAddress, buffer, (uint)length, out ptr);
+            bytesRead = IntPtr.Size == 4 ? ptr.ToInt32() : ptr.ToInt64();
+            return ok && bytesRead >= length;
         }
 
         public static Int64 AllocateProcessBytes(int memorySize)

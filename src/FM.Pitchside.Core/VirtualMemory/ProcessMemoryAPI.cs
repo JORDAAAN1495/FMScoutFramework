@@ -67,6 +67,20 @@ namespace FM.Pitchside.Core.VirtualMemory
         public UInt16 Reserved;
     }
 
+    [StructLayout(LayoutKind.Sequential)]
+    public struct MEMORY_BASIC_INFORMATION64
+    {
+        public ulong BaseAddress;
+        public ulong AllocationBase;
+        public uint AllocationProtect;
+        public uint __alignment1;
+        public ulong RegionSize;
+        public uint State;
+        public uint Protect;
+        public uint Type;
+        public uint __alignment2;
+    }
+
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct SYSTEM_INFO
     {
@@ -121,6 +135,9 @@ namespace FM.Pitchside.Core.VirtualMemory
 
         [DllImport("kernel32.dll")]
         public static extern void GetSystemInfo(out SYSTEM_INFO Info);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern IntPtr VirtualQueryEx(IntPtr hProcess, IntPtr lpAddress, out MEMORY_BASIC_INFORMATION64 lpBuffer, uint dwLength);
 #endif
     }
 }

@@ -23,9 +23,9 @@ namespace FM.Pitchside.Core.Defines.Offsets.PersonTypes
         {
             get
             {
-                // FM26's Person object has no separate ActualPerson sub-object (see
+                // FM26/FM27's Person object has no separate ActualPerson sub-object (see
                 // PlayerOffsets.ActualPerson) - FullName sits directly on the object itself.
-                if (Version is Steam_26_0_0_0_Windows)
+                if (VersionTraits.ActualPersonIsInline(Version))
                 {
                     return 0x40;
                 }
@@ -38,7 +38,7 @@ namespace FM.Pitchside.Core.Defines.Offsets.PersonTypes
         {
             get
             {
-                if (Version is Steam_26_0_0_0_Windows)
+                if (VersionTraits.ActualPersonIsInline(Version))
                 {
                     return 0x50;
                 }
@@ -51,7 +51,7 @@ namespace FM.Pitchside.Core.Defines.Offsets.PersonTypes
         {
             get
             {
-                if (Version is Steam_26_0_0_0_Windows)
+                if (VersionTraits.ActualPersonIsInline(Version))
                 {
                     return 0x58;
                 }
@@ -64,6 +64,13 @@ namespace FM.Pitchside.Core.Defines.Offsets.PersonTypes
         {
             get
             {
+                // FM27: inline layout puts the common name after the second name (block+416, i.e.
+                // 0x60 from the entity base). FM26 still returns the FM22 value - untested there.
+                if (Version is IFm27Version)
+                {
+                    return 0x60;
+                }
+
                 return 0x40;
             }
         }
@@ -80,6 +87,12 @@ namespace FM.Pitchside.Core.Defines.Offsets.PersonTypes
         {
             get
             {
+                // FM27: block+424 (0x68 from the entity base). Same caveat as CommonName for FM26.
+                if (Version is IFm27Version)
+                {
+                    return 0x68;
+                }
+
                 return 0x48;
             }
         }

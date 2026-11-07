@@ -36,6 +36,22 @@ namespace FM.Pitchside.Core.VirtualMemory.Managers
         {
             ObjectStore.Clear();
 
+            if (GameManager.Version is IFm27Version)
+            {
+                // RTTI-located versions have no master tables to walk (MainAddress is meaningless
+                // for them); expose empty collections so the FMCore lists still work. The game
+                // data for these versions comes from Fm27Game instead.
+                FMCore.logger.LogWrite("RTTI-based version: skipping legacy master-table loading.");
+                AddEmptyTables();
+
+                // Players are found by RTTI + a heap scan. Only the identity fields (UID, names) are
+                // mapped onto the legacy Player entity; richer data comes from Fm27Game.FindPlayers().
+                Fm27Game game = ((IFm27Version)GameManager.Version).Game;
+                game.Refresh();
+                ObjectStore[typeof(Player)] = RetrieveObjects<Player>(game.FindPlayerAddresses().ToList());
+                return;
+            }
+
             PersonMemoryAddressesWrapper staffAddresses = SortPersonMemoryAddresses();
 
             ObjectStore.Add(typeof(Award), RetrieveObjects<Award>(GameManager.Version.MemoryAddresses.Award));
@@ -68,6 +84,35 @@ namespace FM.Pitchside.Core.VirtualMemory.Managers
             //ObjectStore.Add (typeof (PlayerStaff), RetrieveObjects<PlayerStaff> (staffAddresses.PlayerStaffAddresses));
             ObjectStore.Add(typeof(HumanManager), RetrieveObjects<HumanManager>(staffAddresses.HumanManagerAddresses));
             //#endregion
+        }
+
+        private void AddEmptyTables()
+        {
+            AddEmpty<Award>();
+            AddEmpty<City>();
+            AddEmpty<Club>();
+            AddEmpty<Competition>();
+            AddEmpty<Continent>();
+            AddEmpty<Currency>();
+            AddEmpty<Injury>();
+            AddEmpty<MediaSource>();
+            AddEmpty<Language>();
+            AddEmpty<LocalRegion>();
+            AddEmpty<Nation>();
+            AddEmpty<Stadium>();
+            AddEmpty<Team>();
+            AddEmpty<Weather>();
+            AddEmpty<Derby>();
+            AddEmpty<Agreement>();
+            AddEmpty<Player>();
+            AddEmpty<Staff>();
+            AddEmpty<PlayerStaff>();
+            AddEmpty<HumanManager>();
+        }
+
+        private void AddEmpty<T>()
+        {
+            ObjectStore.Add(typeof(T), new Dictionary<Int64, T>());
         }
 
         private PersonMemoryAddressesWrapper SortPersonMemoryAddresses()
